@@ -7,7 +7,7 @@ namespace GameEngine.Map
     public class GameMap
     {
         public Vector2Int Spawn => _fullPath[0];
-        
+
         private readonly MapConfig _config;
         private readonly Vector2Int[] _fullPath;
         private readonly CellType[,] _mapCellTypes;
@@ -19,9 +19,24 @@ namespace GameEngine.Map
             _mapCellTypes = ComputeCellTypes(config, _fullPath);
         }
 
-        public Vector2 GetGridCellPosition(Vector2Int cell)
+        public Vector2 GetWorldPosition(Vector2Int cell)
         {
             return cell + Vector2.one / 2;
+        }
+
+        public Vector2Int? GetGridCellPosition(Vector2 position)
+        {
+            Vector2Int result = new Vector2Int(Mathf.FloorToInt(position.x), Mathf.FloorToInt(position.y));
+
+            if (result.x < _config.topLeftCorner.x
+                || result.x > _config.topLeftCorner.x + _config.mapSize.x
+                || result.y < _config.topLeftCorner.y
+                || result.y > _config.topLeftCorner.y + _config.mapSize.y)
+            {
+                return null;
+            }
+
+            return result;
         }
 
         private static Vector2Int[] ComputeFullPath(MapConfig mapConfig)
@@ -73,7 +88,7 @@ namespace GameEngine.Map
                     result[arrayPosition.x, arrayPosition.y] = CellType.Wall;
                 }
             }
-            
+
             foreach (Vector2Int cell in fullPath)
             {
                 Vector2Int arrayPosition = GetArrayPosition(mapConfig, cell);

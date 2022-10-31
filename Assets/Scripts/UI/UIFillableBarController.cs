@@ -3,38 +3,41 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class UIFillableBarController : MonoBehaviour
+namespace UI
 {
-    public Image foreground;
-    public TextMeshProUGUI text;
-
-    private int _value;
-    private int _max;
-
-    public void SetValue(int value, int? max = null)
+    public class UIFillableBarController : MonoBehaviour
     {
-        _value = value;
-        if (max.HasValue)
+        public Image foreground;
+        public TextMeshProUGUI text;
+
+        private int _value;
+        private int _max;
+
+        public void SetValue(int value, int? max = null)
         {
-            _max = max.Value;
+            _value = value;
+            if (max.HasValue)
+            {
+                _max = max.Value;
+            }
+
+            UpdateComponents();
         }
 
-        UpdateComponents();
-    }
-
-    private void UpdateComponents()
-    {
-        if (foreground)
+        private void UpdateComponents()
         {
-            float ratio = _max == 0 ? 0 : Math.Clamp(_value / _max, 0, 1);
-            foreground.fillAmount = ratio;
-        }
+            if (foreground)
+            {
+                float ratio = _max == 0 ? 0 : Mathf.Clamp(_value / _max, 0, 1);
+                foreground.fillAmount = ratio;
+            }
 
-        if (text)
-        {
-            int actualMax = Math.Max(0, _max);
-            int actualValue = Math.Clamp(_value, 0, actualMax);
-            text.text = $"{actualValue} / {actualMax}";
+            if (text)
+            {
+                int actualMax = Mathf.Max(0, _max);
+                int actualValue = Mathf.Clamp(_value, 0, actualMax);
+                text.text = $"{actualValue} / {actualMax}";
+            }
         }
     }
 }

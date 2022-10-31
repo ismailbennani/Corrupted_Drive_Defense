@@ -1,12 +1,24 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GameEngine.State
 {
     [Serializable]
-    public struct GameState
+    public class GameState
     {
         public ProcessorState processorState;
-        public TowerState[] towerStates;
+        public List<TowerState> towerStates = new();
         public int currentWave;
+
+        public GameState Clone()
+        {
+            return new GameState
+            {
+                processorState = processorState,
+                towerStates = towerStates.ToList(),
+                currentWave = currentWave,
+            };
+        }
     }
 }

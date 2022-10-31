@@ -35,11 +35,13 @@ public class MapManager : MonoBehaviour
         _map = new GameMap(mapConfig);
     }
 
-    /// <summary>
-    /// Return the world position of the center of the given cell 
-    /// </summary>
     public Vector2 GridCellToWorldPosition(Vector2Int cell)
     {
-        return (Vector2)_tilemap.transform.position + _map.GetGridCellPosition(cell);
+        return (Vector2)_tilemap.transform.position + _map.GetWorldPosition(cell);
+    }
+
+    public Vector2Int? WorldPositionToGridCell(Vector2 position)
+    {
+        return _map.GetGridCellPosition(position - (Vector2)_tilemap.transform.position);
     }
 }

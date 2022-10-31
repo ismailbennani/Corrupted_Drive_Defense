@@ -1,22 +1,26 @@
 using System;
+using System.Collections.Generic;
 using GameEngine;
 using GameEngine.State;
+using GameEngine.Tower;
 using UnityEngine;
 using Utils.Extensions;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance { get; private set; }
-    
+
     public GameConfig gameConfig;
+
+    [Header("Set on start")]
     public GameState gameState;
-    
-    private MapManager _mapManager;
+
+    public MapManager mapManager;
 
     void Awake()
     {
         Instance = this;
-        
+
         if (!gameConfig)
         {
             throw new InvalidOperationException("game config not set");
@@ -33,9 +37,17 @@ public class GameManager : MonoBehaviour
         SpawnProcessor();
     }
 
-    void Update()
+    public void StartSpawning(TowerConfig tower)
     {
+        TowerSpawnPreviewManager.Instance.StartPreview(tower);
+    }
 
+    public void SpawnTower(TowerConfig tower, Vector2Int cell)
+    {
+        SpawnTowerInternal(tower, cell);
+        TowerState newTowerState = new() { position = cell, charge = 0, maxCharge = 0 };
+
+        gameState.towerStates.Add(newTowerState);
     }
 
     private void SpawnMap()
@@ -49,24 +61,27 @@ public class GameManager : MonoBehaviour
         Transform map = new GameObject("MapManager", typeof(MapManager)).transform;
         map.parent = transform;
 
-        _mapManager = map.GetComponent<MapManager>();
+        mapManager = map.GetComponent<MapManager>();
 
-        _mapManager.mapConfig = gameConfig.mapConfig;
-        _mapManager.Initialize();
+        mapManager.mapConfig = gameConfig.mapConfig;
+        mapManager.Initialize();
     }
 
     private void SpawnProcessor()
     {
-        if (!gameConfig.processor || !gameConfig.processor.prefab)
+        SpawnTowerInternal(gameConfig.processor, gameConfig.mapConfig.processorPosition);
+        gameState.processorState = new ProcessorState() { position = gameConfig.mapConfig.processorPosition };
+    }
+
+    private void SpawnTowerInternal(TowerConfig tower, Vector2Int cell)
+    {
+        if (!tower || !tower.prefab)
         {
-            throw new InvalidOperationException("processor prefab not set");
+            throw new InvalidOperationException("tower prefab not set");
         }
 
-        Vector2Int processorCell = gameConfig.mapConfig.processorPosition;
-        Vector3 position = _mapManager.GridCellToWorldPosition(processorCell);
+        Vector3 position = mapManager.GridCellToWorldPosition(cell);
 
-        Instantiate(gameConfig.processor.prefab, position, Quaternion.identity, transform);
-
-        gameState.processorState = new ProcessorState() { position = gameConfig.mapConfig.processorPosition };
+        Instantiate(tower.prefab, position, Quaternion.identity, transform);
     }
 }
