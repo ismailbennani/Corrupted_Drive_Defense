@@ -69,7 +69,10 @@ namespace GameEngine.Map
                 int start = xChange ? cell.x : cell.y;
                 int end = xChange ? nextCell.x : nextCell.y;
 
-                for (int j = start; j <= end; j++)
+                int realStart = Mathf.Min(start, end);
+                int realEnd = Mathf.Max(start, end);
+                
+                for (int j = realStart; j <= realEnd; j++)
                 {
                     Vector2Int pathCell = xChange ? new Vector2Int(j, cell.y) : new Vector2Int(cell.x, j);
 

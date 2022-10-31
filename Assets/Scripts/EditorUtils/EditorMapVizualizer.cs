@@ -64,6 +64,12 @@ namespace EditorUtils
                 Gizmos.color = Color.blue;
                 Gizmos.DrawLine(cell.worldPosition, nextCell.worldPosition);
             }
+
+            foreach (WorldCell cell in _mapManager.GameMap.Where(c => c.type == CellType.Path).Select(c => _mapManager.GetCellAt(c.gridPosition)))
+            {
+                Gizmos.color = Color.blue;
+                Gizmos.DrawWireSphere(cell.worldPosition, 0.25f);
+            }
         }
 
         private bool TryGetMapManager()

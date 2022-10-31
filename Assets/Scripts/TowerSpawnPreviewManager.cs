@@ -1,4 +1,5 @@
-﻿using GameEngine.Map;
+﻿using System;
+using GameEngine.Map;
 using GameEngine.Tower;
 using UnityEngine;
 using Utils;
@@ -10,13 +11,35 @@ public class TowerSpawnPreviewManager : MonoBehaviour, INeedsGameManager
     public static TowerSpawnPreviewManager Instance { get; private set; }
     public GameManager GameManager { get; set; }
 
-    private TowerConfig _tower;
-    private Transform _preview;
+    public Transform preview;
 
+    [Header("Preview cell")]
+    public SpriteRenderer previewCell;
+
+    public Color okColor = Color.white;
+    public Color errorColor = Color.red;
+
+    private TowerConfig _tower;
+    private Transform _previewTower;
 
     void Awake()
     {
         Instance = this;
+    }
+
+    void Start()
+    {
+        if (!preview)
+        {
+            throw new InvalidOperationException("preview root not found");
+        }
+
+        if (!previewCell)
+        {
+            throw new InvalidOperationException("preview cell not found");
+        }
+
+        StopPreview();
     }
 
     void Update()
@@ -26,14 +49,20 @@ public class TowerSpawnPreviewManager : MonoBehaviour, INeedsGameManager
             return;
         }
 
-        if (_preview)
+        WorldCell cell = Mouse.GetTargetCell();
+        preview.position = cell.worldPosition.WithDepth(GameConstants.UiLayer);
+
+        if (cell.type == CellType.Free)
         {
-            _preview.position = GetPreviewPosition();
+            previewCell.color = okColor;
+        }
+        else
+        {
+            previewCell.color = errorColor;
         }
 
         if (Input.GetMouseButtonUp(0))
         {
-            WorldCell cell = Mouse.GetTargetCell();
             SpawnAt(cell);
         }
 
@@ -46,37 +75,27 @@ public class TowerSpawnPreviewManager : MonoBehaviour, INeedsGameManager
     public void StartPreview(TowerConfig tower)
     {
         _tower = tower;
-
-        if (!_preview)
-        {
-            _preview = new GameObject("SpawnPreview").transform;
-            _preview.SetParent(transform);
-        }
-        
-        _preview.gameObject.SetActive(true);
-        _preview.position = GetPreviewPosition();
-
-        _preview.RemoveAllChildren();
-        Instantiate(tower.prefab, _preview);
-
         Debug.Log($"Start preview of {tower.name}");
+
+        preview.gameObject.SetActive(true);
+
+        if (_previewTower)
+        {
+            Destroy(_previewTower.gameObject);
+        }
+
+        _previewTower = Instantiate(tower.prefab, preview);
     }
 
     public void StopPreview()
     {
-        if (!_tower)
+        if (_tower)
         {
-            return;
+            Debug.Log($"Stop preview of {_tower.name}");
         }
-
-        Debug.Log($"Stop preview of {_tower.name}");
 
         _tower = null;
-
-        if (_preview)
-        {
-            _preview.gameObject.SetActive(false);
-        }
+        preview.gameObject.SetActive(false);
     }
 
     public void SpawnAt(WorldCell cell)
@@ -94,10 +113,5 @@ public class TowerSpawnPreviewManager : MonoBehaviour, INeedsGameManager
 
         GameManager.SpawnTower(_tower, cell);
         StopPreview();
-    }
-
-    private static Vector3 GetPreviewPosition()
-    {
-        return Mouse.GetTargetCell().worldPosition.WithDepth(GameConstants.UiLayer);
     }
 }
