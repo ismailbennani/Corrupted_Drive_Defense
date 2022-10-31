@@ -84,7 +84,7 @@ public class TowerSpawnPreviewManager : MonoBehaviour, INeedsGameManager
             Destroy(_previewTower.gameObject);
         }
 
-        _previewTower = Instantiate(tower.prefab, preview);
+        _previewTower = Instantiate(tower.prefab, preview).transform;
     }
 
     public void StopPreview()

@@ -1,4 +1,5 @@
 ﻿using System;
+using GameComponents;
 using GameEngine.Map;
 using GameEngine.Tower;
 using UnityEngine;
@@ -38,8 +39,9 @@ public class TowerSpawnManager : MonoBehaviour, INeedsGameManager
 
         Debug.Log($"Spawn {tower.name} at {cell.gridPosition}");
 
-        Transform newTower = Instantiate(tower.prefab, Vector3.zero, Quaternion.identity, root);
-        newTower.localPosition = cell.worldPosition.WithDepth(GameConstants.TowerLayer);
+        TowerController newTower = Instantiate(tower.prefab, Vector3.zero, Quaternion.identity, root);
+        newTower.transform.localPosition = cell.worldPosition.WithDepth(GameConstants.TowerLayer);
+        newTower.id = id;
 
         return true;
     }

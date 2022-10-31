@@ -1014,6 +1014,7 @@ MonoBehaviour:
   gameConfig: {fileID: 11400000, guid: 63878ef8794e7854ab4030ced9179086, type: 2}
   gameState:
     processorState:
+      id: 0
       cell:
         gridPosition: {x: 0, y: 0}
         worldPosition: {x: 0, y: 0}
@@ -2542,7 +2543,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &2142719216
 Transform:
   m_ObjectHideFlags: 0

@@ -115,6 +115,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2360848228744153528}
   - component: {fileID: 1435648508203522228}
+  - component: {fileID: 2366462122132164904}
   m_Layer: 0
   m_Name: Capacitor
   m_TagString: Untagged
@@ -153,3 +154,16 @@ MonoBehaviour:
   animator: {fileID: 4802541307279151345}
   charge: 0
   trigger: 0
+--- !u!114 &2366462122132164904
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3607859599370635571}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f1f50fd66fea4decb8e82088e4a7e627, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: 0

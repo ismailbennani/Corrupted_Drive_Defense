@@ -1,4 +1,5 @@
 ﻿using System;
+using GameComponents;
 using GameEngine.Map;
 using UnityEngine;
 
@@ -9,9 +10,8 @@ namespace GameEngine.State
     {
         public long id;
         public WorldCell cell;
-        
+
         [Header("Charge")]
-        public int charge;
-        public int maxCharge;
+        public GaugeState charge;
     }
 }

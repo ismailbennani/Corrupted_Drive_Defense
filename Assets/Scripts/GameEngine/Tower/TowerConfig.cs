@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using GameComponents;
+using UnityEngine;
 
 namespace GameEngine.Tower
 {
@@ -9,7 +10,7 @@ namespace GameEngine.Tower
         public int cost;
         
         [Space(10)]
-        public Transform prefab;
+        public TowerController prefab;
         public Sprite sprite;
     }
 }

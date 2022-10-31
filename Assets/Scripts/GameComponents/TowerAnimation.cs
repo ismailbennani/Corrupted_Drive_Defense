@@ -40,10 +40,10 @@ namespace GameComponents
 
         public void SetCharge(GaugeState state)
         {
-            if (state.Max.HasValue)
+            if (state.max > 0)
             {
-                float range = state.Max.Value - state.Min;
-                charge = range != 0 ? (state.Value - state.Min) / range : 1;
+                float range = state.max - state.min;
+                charge = range != 0 ? (state.value - state.min) / range : 1;
             }
             else
             {

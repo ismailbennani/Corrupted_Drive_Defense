@@ -53,7 +53,7 @@ public class GameManager : MonoBehaviour
             return;
         }
 
-        TowerState newTowerState = new() { id = id, cell = cell, charge = 0, maxCharge = 0 };
+        TowerState newTowerState = new() { id = id, cell = cell };
 
         gameState.towerStates.Add(newTowerState);
     }

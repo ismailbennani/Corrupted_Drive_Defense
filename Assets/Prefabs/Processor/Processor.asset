@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   name: Processor
   cost: 0
-  prefab: {fileID: 8327012217617293194, guid: 167aed16fb5ed2a409ac3c5a75f9256c, type: 3}
+  prefab: {fileID: 2185249853896145521, guid: 167aed16fb5ed2a409ac3c5a75f9256c, type: 3}
   sprite: {fileID: -1993935216, guid: d3ba32715e07d2e42b80871ba1c39b45, type: 3}

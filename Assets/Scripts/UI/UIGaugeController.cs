@@ -22,7 +22,7 @@ namespace UI
 
         public void Set(float value)
         {
-            _state.Value = value;
+            _state.value = value;
 
             UpdateComponents();
         }
@@ -32,10 +32,10 @@ namespace UI
             if (foreground)
             {
                 float ratio;
-                if (_state.Max.HasValue)
+                if (_state.max > 0)
                 {
-                    float range = _state.Max.Value - _state.Min;
-                    ratio = range != 0 ? Mathf.Clamp((_state.Value - _state.Min) / range, 0, 1) : 1;
+                    float range = _state.max - _state.min;
+                    ratio = range != 0 ? Mathf.Clamp((_state.value - _state.min) / range, 0, 1) : 1;
                 }
                 else
                 {
@@ -48,15 +48,15 @@ namespace UI
             if (text)
             {
                 string str;
-                if (_state.Max.HasValue && _state.Max.Value != 0)
+                if (_state.max > 0)
                 {
-                    int actualMax = Mathf.FloorToInt(Mathf.Max(0, _state.Max.Value));
-                    int value = Mathf.FloorToInt(Mathf.Clamp(_state.Value, _state.Min, _state.Max.Value));
-                    str = $"{value} / {actualMax}";
+                    int max = Mathf.FloorToInt(_state.max);
+                    int value = Mathf.FloorToInt(Mathf.Clamp(_state.value, _state.min, _state.max));
+                    str = $"{value} / {max}";
                 }
                 else
                 {
-                    int value = Mathf.FloorToInt(Mathf.Max(_state.Min, _state.Value));
+                    int value = Mathf.FloorToInt(Mathf.Max(_state.min, _state.value));
                     str = $"{value}";
                 }
 

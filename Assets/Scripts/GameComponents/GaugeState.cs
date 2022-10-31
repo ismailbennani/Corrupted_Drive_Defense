@@ -1,10 +1,13 @@
-﻿namespace GameComponents
+﻿using System;
+
+namespace GameComponents
 {
+    [Serializable]
     public struct GaugeState
     {
-        public float Min;
-        public float Value;
-        public float? Max;
+        public float min;
+        public float value;
+        public float max;
 
         public GaugeState(float value, float? max = null) : this(value, null, max)
         {
@@ -12,9 +15,9 @@
 
         public GaugeState(float value, float? min, float? max)
         {
-            Min = min ?? 0;
-            Max = max;
-            Value = value;
+            this.min = min ?? 0;
+            this.max = max ?? -1;
+            this.value = value;
         }
     }
 }
