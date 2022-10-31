@@ -19,7 +19,7 @@ namespace Utils.Extensions
             component = null;
             return false;
         }
-        
+
         public static bool TryGetComponentInChildren<T>(this Component c, out T component) where T: Component
         {
             try
@@ -31,6 +31,14 @@ namespace Utils.Extensions
             {
                 component = null;
                 return false;
+            }
+        }
+
+        public static void RemoveAllChildren(this Component c)
+        {
+            foreach (Transform child in c.transform)
+            {
+                Object.Destroy(child.gameObject);
             }
         }
     }

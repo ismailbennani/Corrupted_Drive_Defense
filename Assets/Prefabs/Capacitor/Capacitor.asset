@@ -12,4 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a377c46cf0eb419b84f55835924bbb27, type: 3}
   m_Name: Capacitor
   m_EditorClassIdentifier: 
+  name: Capacitor
+  cost: 200
   prefab: {fileID: 2360848228744153528, guid: 68bcd4bc9d46786408e4a092c3a70803, type: 3}
+  sprite: {fileID: -289229907, guid: d3ae99aa56494fe4fb3a814456dfb394, type: 3}

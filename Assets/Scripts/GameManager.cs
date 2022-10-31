@@ -1,22 +1,29 @@
 using System;
 using GameEngine;
-using Unity.VisualScripting;
 using UnityEngine;
+using Utils.Extensions;
 
 public class GameManager : MonoBehaviour
 {
+    public static GameManager Instance { get; private set; }
+    
     public GameConfig gameConfig;
 
     private MapManager _mapManager;
 
-    void Start()
+    void Awake()
     {
+        Instance = this;
+        
         if (!gameConfig)
         {
             throw new InvalidOperationException("game config not set");
         }
+    }
 
-        RemoveChildren();
+    void Start()
+    {
+        this.RemoveAllChildren();
 
         SpawnMap();
         SpawnProcessor();
@@ -55,13 +62,5 @@ public class GameManager : MonoBehaviour
         Vector3 position = _mapManager.GridCellToWorldPosition(processorCell);
 
         Instantiate(gameConfig.processor.prefab, position, Quaternion.identity, transform);
-    }
-
-    private void RemoveChildren()
-    {
-        foreach (Transform child in transform)
-        {
-            Destroy(child.gameObject);
-        }
     }
 }
