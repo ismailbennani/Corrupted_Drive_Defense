@@ -37,7 +37,7 @@ namespace Utils.CustomComponents
 
         protected bool TryGetGameManager()
         {
-            return this.TryGetComponent<GameManager>();
+            return this.TryGetNeededComponent<GameManager>();
         }
 
         protected void RequireGameManager()

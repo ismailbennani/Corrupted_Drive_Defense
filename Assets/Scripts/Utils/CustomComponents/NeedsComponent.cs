@@ -11,7 +11,7 @@ namespace Utils.CustomComponents
 
     public static class NeedsComponentExtensions
     {
-        public static bool TryGetComponent<T>(this INeedsComponent<T> @this) where T: Component
+        public static bool TryGetNeededComponent<T>(this INeedsComponent<T> @this) where T: Component
         {
             if (!@this.Component)
             {
@@ -23,7 +23,7 @@ namespace Utils.CustomComponents
 
         public static void RequireComponent<T>(this INeedsComponent<T> @this) where T: Component
         {
-            if (!TryGetComponent(@this))
+            if (!TryGetNeededComponent(@this))
             {
                 throw new InvalidOperationException($"could not get component {typeof(T).Name}");
             }

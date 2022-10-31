@@ -15,7 +15,7 @@ namespace UI
         
         public void SetTower(TowerConfig tower)
         {
-            nameText.text = tower.name;
+            nameText.text = tower.towerName;
             costText.text = $"$ {tower.cost.ToString()}";
             image.sprite = tower.sprite;
 

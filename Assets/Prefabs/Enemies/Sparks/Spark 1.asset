@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4a932b69af0449f087dc80e7e3591fe2, type: 3}
   m_Name: Spark 1
   m_EditorClassIdentifier: 
+  enemyName: Spark 1
   prefab: {fileID: 8970572309083875798, guid: 93d41bde6e7b49844902197c9c8f6e06, type: 3}
   sprite: {fileID: 0}
   child: {fileID: 0}

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a377c46cf0eb419b84f55835924bbb27, type: 3}
   m_Name: Processor
   m_EditorClassIdentifier: 
-  name: Processor
+  towerName: Processor
   cost: 0
   prefab: {fileID: 2185249853896145521, guid: 167aed16fb5ed2a409ac3c5a75f9256c, type: 3}
   sprite: {fileID: -1993935216, guid: d3ba32715e07d2e42b80871ba1c39b45, type: 3}

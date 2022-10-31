@@ -2,10 +2,12 @@ using System;
 using GameEngine;
 using GameEngine.Map;
 using GameEngine.Towers;
+using GameEngine.Waves;
 using UnityEngine;
+using Utils.CustomComponents;
 using Utils.Extensions;
 
-public class GameManager : MonoBehaviour
+public class GameManager : MonoBehaviour, INeedsComponent<TowerSpawnManager>, INeedsComponent<TowerSpawnPreviewManager>, INeedsComponent<EnemySpawnManager>
 {
     public static GameManager Instance { get; private set; }
 
@@ -13,6 +15,7 @@ public class GameManager : MonoBehaviour
 
     [Header("Created on start")]
     public GameState gameState;
+
     public MapManager mapManager;
 
     void Awake()
@@ -37,18 +40,36 @@ public class GameManager : MonoBehaviour
 
     public void StartSpawning(TowerConfig tower)
     {
-        TowerSpawnPreviewManager.Instance.StartPreview(tower);
+        if (!this.TryGetNeededComponent<TowerSpawnPreviewManager>())
+        {
+            return;
+        }
+
+        _towerSpawnPreviewManager.StartPreview(tower);
     }
 
     public void SpawnTower(TowerConfig tower, WorldCell cell)
     {
-        TowerSpawnManager spawner = TowerSpawnManager.Instance;
-        spawner.SpawnTower(tower, cell);
+        this.RequireComponent<TowerSpawnManager>();
+        _towerSpawnManager.SpawnTower(tower, cell);
     }
 
     public void StartWave()
     {
-        
+        if (!this.TryGetNeededComponent<EnemySpawnManager>())
+        {
+            return;
+        }
+
+        WaveConfig currentWave = gameConfig.waves[gameState.currentWave];
+        gameState.currentWave++;
+
+        _enemySpawnManager.SpawnWave(currentWave);
+    }
+
+    public void SetAutoWave(bool value)
+    {
+        // TODO
     }
 
     private void SpawnMap()
@@ -70,19 +91,107 @@ public class GameManager : MonoBehaviour
 
     private void SpawnProcessor()
     {
-        TowerSpawnManager spawner = TowerSpawnManager.Instance;
-        if (!spawner)
-        {
-            throw new InvalidOperationException("could not find tower spawn manager");
-        }
+        this.RequireComponent<TowerSpawnManager>();
 
         WorldCell processorCell = mapManager.GetCellAt(gameConfig.mapConfig.processorPosition);
 
-        if (!spawner.SpawnTower(gameConfig.processor, processorCell, out long id, force: true, register: false))
+        if (!_towerSpawnManager.SpawnTower(gameConfig.processor, processorCell, out long id, force: true, register: false))
         {
             throw new InvalidOperationException("could not spawn processor");
         }
-        
+
         gameState.processorState = new ProcessorState { id = id, cell = processorCell };
     }
+
+    #region Needed components
+
+    private TowerSpawnManager _towerSpawnManager;
+    private EnemySpawnManager _enemySpawnManager;
+    private TowerSpawnPreviewManager _towerSpawnPreviewManager;
+
+
+
+
+
+
+
+
+
+
+    TowerSpawnManager INeedsComponent<TowerSpawnManager>.Component {
+        get => _towerSpawnManager;
+        set => _towerSpawnManager = value;
+    }
+
+
+
+
+
+
+
+
+
+
+    EnemySpawnManager INeedsComponent<EnemySpawnManager>.GetInstance()
+    {
+        return EnemySpawnManager.Instance;
+    }
+
+
+
+
+
+
+
+
+
+
+    EnemySpawnManager INeedsComponent<EnemySpawnManager>.Component {
+        get => _enemySpawnManager;
+        set => _enemySpawnManager = value;
+    }
+
+
+
+
+
+
+
+
+
+
+    TowerSpawnPreviewManager INeedsComponent<TowerSpawnPreviewManager>.GetInstance()
+    {
+        return TowerSpawnPreviewManager.Instance;
+    }
+
+
+
+
+
+
+
+
+
+
+    TowerSpawnPreviewManager INeedsComponent<TowerSpawnPreviewManager>.Component {
+        get => _towerSpawnPreviewManager;
+        set => _towerSpawnPreviewManager = value;
+    }
+
+
+
+
+
+
+
+
+
+
+    TowerSpawnManager INeedsComponent<TowerSpawnManager>.GetInstance()
+    {
+        return TowerSpawnManager.Instance;
+    }
+
+    #endregion
 }

@@ -6,7 +6,7 @@ namespace GameEngine.Towers
     [CreateAssetMenu(menuName = "Objects/Tower config")]
     public class TowerConfig: ScriptableObject
     {
-        public string name;
+        public string towerName;
         public int cost;
         
         [Space(10)]

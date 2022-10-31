@@ -11,7 +11,7 @@ using Utils.Extensions;
 
 public class EnemySpawnManager : MyMonoBehaviour
 {
-    public EnemySpawnManager Instance { get; private set; }
+    public static EnemySpawnManager Instance { get; private set; }
     public bool Ongoing { get; private set; }
     public bool Ready => !Ongoing;
 
@@ -34,7 +34,7 @@ public class EnemySpawnManager : MyMonoBehaviour
         foreach (EnemyConfig enemy in wave.enemies)
         {
             SpawnEnemy(enemy);
-            yield return new WaitForSeconds(0.1f);
+            yield return new WaitForSeconds(1f);
         }
 
         Ongoing = false;
@@ -61,5 +61,7 @@ public class EnemySpawnManager : MyMonoBehaviour
         EnemyController newEnemy = Instantiate(enemy.prefab, Vector3.zero, Quaternion.identity, root);
         newEnemy.transform.localPosition = spawnCell.worldPosition.WithDepth(GameConstants.EntityLayer);
         newEnemy.id = Uid.Get();
+        
+        Debug.Log($"Spawn {enemy.enemyName} at {spawnCell.gridPosition}");
     }
 }

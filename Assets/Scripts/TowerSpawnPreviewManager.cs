@@ -74,7 +74,7 @@ public class TowerSpawnPreviewManager : MyMonoBehaviour
     public void StartPreview(TowerConfig tower)
     {
         _tower = tower;
-        Debug.Log($"Start preview of {tower.name}");
+        Debug.Log($"Start preview of {tower.towerName}");
 
         preview.gameObject.SetActive(true);
 
@@ -90,7 +90,7 @@ public class TowerSpawnPreviewManager : MyMonoBehaviour
     {
         if (_tower)
         {
-            Debug.Log($"Stop preview of {_tower.name}");
+            Debug.Log($"Stop preview of {_tower.towerName}");
         }
 
         _tower = null;

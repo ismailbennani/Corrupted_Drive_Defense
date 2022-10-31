@@ -43,7 +43,7 @@ public class TowerSpawnManager : MyMonoBehaviour
             }
         }
 
-        Debug.Log($"Spawn {tower.name} at {cell.gridPosition}");
+        Debug.Log($"Spawn {tower.towerName} at {cell.gridPosition}");
 
         id = Uid.Get();
 
