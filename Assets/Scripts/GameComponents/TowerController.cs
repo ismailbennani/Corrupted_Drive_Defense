@@ -1,19 +1,21 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using System.Linq;
+using GameEngine.Enemies;
 using GameEngine.Towers;
 using UnityEngine;
 using Utils.CustomComponents;
 
 namespace GameComponents
 {
-    public class TowerController: MyMonoBehaviour
+    public class TowerController : MyMonoBehaviour
     {
         public long id;
 
         private TowerState _state;
         private ProcessorState _processorState;
-        
+
         IEnumerator Start()
         {
             RequireGameManager();
@@ -22,7 +24,7 @@ namespace GameComponents
             {
                 yield return null;
             }
-            
+
             _state = GameManager.gameState.towerStates.SingleOrDefault(t => t.id == id);
             if (_state == null)
             {
@@ -35,7 +37,7 @@ namespace GameComponents
                 throw new InvalidOperationException($"could not find state of processor");
             }
         }
-        
+
         void Update()
         {
             if (_state == null)
@@ -49,13 +51,32 @@ namespace GameComponents
 
         private void TriggerIfPossible()
         {
+            if (!_state.ticks.Full)
+            {
+                return;
+            }
+            
+            IEnumerable<Vector2Int> targetCells = _state.config.targetArea.EvaluateAt(_state.cell.gridPosition);
+            int[] pathCells = targetCells.Select(c => Array.IndexOf(GameManager.mapManager.GameMap.GetPath(), c)).Where(i => i >= 0).ToArray();
+            EnemyState[] targets = GameManager.gameState.enemyStates.Where(e => pathCells.Contains(e.pathIndex)).ToArray();
+
+            if (targets.Length == 0)
+            {
+                return;
+            }
+
+            // TODO: pick target according to strategy
+            EnemyState target = targets.First();
+            
+            _state.ticks.Clear();
+            Debug.Log($"hit {target.config.enemyName} {target.id}");
         }
 
         private void UpdateCharge()
         {
             float requiredCharge = _state.ticks.GetRemaining();
             float maxCharge = Time.deltaTime * _state.config.frequency;
-            
+
             float consumed = _processorState.ticks.Consume(Mathf.Min(requiredCharge, maxCharge));
 
             _state.ticks.Add(consumed);

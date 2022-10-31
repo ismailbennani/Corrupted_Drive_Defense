@@ -56,7 +56,7 @@ public class VisibleShapeManager : MyMonoBehaviour
 
         for (int i = 0; i < worldCells.Length; i++)
         {
-            _previewCells[i].transform.localPosition = (worldCells[i].worldPosition - offset.worldPosition).WithDepth(0.1f);
+            _previewCells[i].transform.localPosition = worldCells[i].worldPosition - offset.worldPosition;
         }
 
         SetPosition(position);
@@ -80,8 +80,8 @@ public class VisibleShapeManager : MyMonoBehaviour
         }
     }
 
-    public void SetPosition(Vector2 position)
+    public void SetPosition(Vector2 position, bool aboveEntities = false)
     {
-        _root.position = position.WithDepth(GameConstants.UiLayer + 0.1f);
+        _root.position = position.WithDepth( aboveEntities ? GameConstants.UiLayer + 0.1f : GameConstants.EntityLayer + 0.1f);
     }
 }

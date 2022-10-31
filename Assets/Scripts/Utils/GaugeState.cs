@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace GameComponents
+namespace Utils
 {
     [Serializable]
     public struct GaugeState

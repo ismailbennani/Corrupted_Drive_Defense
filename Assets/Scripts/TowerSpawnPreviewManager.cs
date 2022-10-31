@@ -50,7 +50,7 @@ public class TowerSpawnPreviewManager : MyMonoBehaviour, INeedsComponent<Visible
 
         WorldCell cell = Mouse.GetTargetCell();
         preview.position = cell.worldPosition.WithDepth(GameConstants.UiLayer);
-        _visibleShapeManager.SetPosition(cell.worldPosition);
+        _visibleShapeManager.SetPosition(cell.worldPosition, true);
         _visibleShapeManager.SetColor(cell.type == CellType.Free ? okColor : errorColor);
 
         if (Input.GetMouseButtonUp(0))
