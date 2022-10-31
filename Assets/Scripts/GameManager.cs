@@ -4,6 +4,7 @@ using GameEngine.Map;
 using GameEngine.State;
 using GameEngine.Tower;
 using UnityEngine;
+using Utils;
 using Utils.Extensions;
 
 public class GameManager : MonoBehaviour
@@ -46,12 +47,13 @@ public class GameManager : MonoBehaviour
     {
         TowerSpawnManager spawner = TowerSpawnManager.Instance;
 
-        if (!spawner.SpawnTower(tower, cell))
+        long id = Uid.Get();
+        if (!spawner.SpawnTower(id, tower, cell))
         {
             return;
         }
 
-        TowerState newTowerState = new() { cell = cell, charge = 0, maxCharge = 0 };
+        TowerState newTowerState = new() { id = id, cell = cell, charge = 0, maxCharge = 0 };
 
         gameState.towerStates.Add(newTowerState);
     }
@@ -83,7 +85,8 @@ public class GameManager : MonoBehaviour
 
         WorldCell processorCell = mapManager.GetCellAt(gameConfig.mapConfig.processorPosition);
 
-        spawner.SpawnTower(gameConfig.processor, processorCell, force: true);
-        gameState.processorState = new ProcessorState() { cell = processorCell };
+        long id = Uid.Get();
+        spawner.SpawnTower(id, gameConfig.processor, processorCell, force: true);
+        gameState.processorState = new ProcessorState { id = id, cell = processorCell };
     }
 }

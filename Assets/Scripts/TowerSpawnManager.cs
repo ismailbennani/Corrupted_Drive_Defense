@@ -17,7 +17,7 @@ public class TowerSpawnManager : MonoBehaviour, INeedsGameManager
         Instance = this;
     }
 
-    public bool SpawnTower(TowerConfig tower, WorldCell cell, bool force = false)
+    public bool SpawnTower(long id, TowerConfig tower, WorldCell cell, bool force = false)
     {
         if (!tower || !tower.prefab)
         {
