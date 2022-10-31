@@ -61,28 +61,5 @@ namespace GameComponents
                 }
             }
         }
-
-        private void OnDrawGizmosSelected()
-        {
-            EnemyState state = GameManager.gameState.enemyStates.SingleOrDefault(t => t.id == id);
-            WorldCell[] path = GameManager.mapManager.GetPath();
-            
-            WorldCell previousCell = state.pathIndex == 0 ? path[state.pathIndex] : path[state.pathIndex - 1];
-            WorldCell currentCell = path[state.pathIndex];
-            WorldCell nextCell = path[state.pathIndex + 1];
-            
-            Vector2 startPos = currentCell.worldPosition - (currentCell.worldPosition - previousCell.worldPosition) / 2;
-            Vector2 middlePos = currentCell.worldPosition;
-            Vector2 targetPos = currentCell.worldPosition + (nextCell.worldPosition - currentCell.worldPosition) / 2;
-            
-            Vector2 position = state.pathCellCompletion < 0.5
-                ? Vector2.Lerp(startPos, middlePos, state.pathCellCompletion * 2).WithDepth(transform.position.z)
-                : Vector2.Lerp(middlePos, targetPos, state.pathCellCompletion * 2 - 1).WithDepth(transform.position.z);
-            
-            Gizmos.color = Color.cyan;
-            Gizmos.DrawLine(startPos, middlePos);
-            Gizmos.DrawLine(middlePos, targetPos);
-            Gizmos.DrawWireSphere(position, 0.1f);
-        }
     }
 }

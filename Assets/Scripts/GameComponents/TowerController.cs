@@ -12,6 +12,7 @@ namespace GameComponents
         public long id;
 
         private TowerState _state;
+        private ProcessorState _processorState;
         
         IEnumerator Start()
         {
@@ -26,6 +27,12 @@ namespace GameComponents
             if (_state == null)
             {
                 throw new InvalidOperationException($"could not find state of tower with id {id}");
+            }
+
+            _processorState = GameManager.gameState.processorState;
+            if (_state == null)
+            {
+                throw new InvalidOperationException($"could not find state of processor");
             }
         }
         
@@ -42,22 +49,19 @@ namespace GameComponents
 
         private void TriggerIfPossible()
         {
-            if (_state.ticks.Full)
-            {
-                Debug.Log("Trigger");
-                _state.ticks.Clear();
-            }
         }
 
         private void UpdateCharge()
         {
-            ProcessorState processorState = GameManager.gameState.processorState;
-
-            float charge = Time.deltaTime * _state.config.frequency;
-            float consumed = processorState.ticks.Consume(charge);
+            float requiredCharge = _state.ticks.GetRemaining();
+            float maxCharge = Time.deltaTime * _state.config.frequency;
+            
+            float consumed = _processorState.ticks.Consume(Mathf.Min(requiredCharge, maxCharge));
 
             _state.ticks.Add(consumed);
             SendMessage("SetCharge", _state.ticks);
+            
+            Debug.Log(consumed);
         }
     }
 }

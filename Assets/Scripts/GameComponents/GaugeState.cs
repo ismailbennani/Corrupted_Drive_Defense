@@ -25,6 +25,11 @@ namespace GameComponents
 
         public float Add(float charge)
         {
+            if (charge < 0)
+            {
+                return 0;
+            }
+            
             float newValue = max > 0 ? Mathf.Min(value + charge, max) : value + charge;
             float added = newValue - value;
             Set(newValue);
@@ -33,19 +38,34 @@ namespace GameComponents
 
         public float Consume(float charge)
         {
+            if (charge < 0)
+            {
+                return 0;
+            }
+            
             float actualConsumption = Mathf.Min(charge, value);
             Set(value - actualConsumption);
             return actualConsumption;
         }
 
-        public void Set(float newValue)
+        public float GetRemaining()
         {
-            value = max > 0 ? Mathf.Clamp(newValue, min, max) : Mathf.Max(newValue, min);
+            if (max > 0)
+            {
+                return max - value;
+            }
+            
+            return float.PositiveInfinity;
         }
 
         public void Clear()
         {
             Set(min);
+        }
+
+        private void Set(float newValue)
+        {
+            value = max > 0 ? Mathf.Clamp(newValue, min, max) : Mathf.Max(newValue, min);
         }
     }
 }
