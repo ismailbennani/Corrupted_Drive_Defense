@@ -1,4 +1,5 @@
 ﻿using System;
+using GameEngine.Map;
 using UnityEngine;
 
 namespace GameEngine.State
@@ -6,7 +7,7 @@ namespace GameEngine.State
     [Serializable]
     public struct TowerState
     {
-        public Vector2Int position;
+        public Cell cell;
         
         [Header("Charge")]
         public int charge;

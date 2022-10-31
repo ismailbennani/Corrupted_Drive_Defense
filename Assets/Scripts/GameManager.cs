@@ -1,6 +1,6 @@
 using System;
-using System.Collections.Generic;
 using GameEngine;
+using GameEngine.Map;
 using GameEngine.State;
 using GameEngine.Tower;
 using UnityEngine;
@@ -42,10 +42,16 @@ public class GameManager : MonoBehaviour
         TowerSpawnPreviewManager.Instance.StartPreview(tower);
     }
 
-    public void SpawnTower(TowerConfig tower, Vector2Int cell)
+    public void SpawnTower(TowerConfig tower, Cell cell)
     {
-        SpawnTowerInternal(tower, cell);
-        TowerState newTowerState = new() { position = cell, charge = 0, maxCharge = 0 };
+        TowerSpawnManager spawner = TowerSpawnManager.Instance;
+
+        if (!spawner.SpawnTower(tower, cell))
+        {
+            return;
+        }
+
+        TowerState newTowerState = new() { cell = cell, charge = 0, maxCharge = 0 };
 
         gameState.towerStates.Add(newTowerState);
     }
@@ -69,19 +75,15 @@ public class GameManager : MonoBehaviour
 
     private void SpawnProcessor()
     {
-        SpawnTowerInternal(gameConfig.processor, gameConfig.mapConfig.processorPosition);
-        gameState.processorState = new ProcessorState() { position = gameConfig.mapConfig.processorPosition };
-    }
-
-    private void SpawnTowerInternal(TowerConfig tower, Vector2Int cell)
-    {
-        if (!tower || !tower.prefab)
+        TowerSpawnManager spawner = TowerSpawnManager.Instance;
+        if (!spawner)
         {
-            throw new InvalidOperationException("tower prefab not set");
+            throw new InvalidOperationException("could not find tower spawn manager");
         }
 
-        Vector3 position = mapManager.GridCellToWorldPosition(cell);
+        Cell processorCell = mapManager.GetCellAt(gameConfig.mapConfig.processorPosition);
 
-        Instantiate(tower.prefab, position, Quaternion.identity, transform);
+        spawner.SpawnTower(gameConfig.processor, processorCell, force: true);
+        gameState.processorState = new ProcessorState() { cell = processorCell };
     }
 }

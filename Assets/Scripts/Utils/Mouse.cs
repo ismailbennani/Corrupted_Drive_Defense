@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using GameEngine.Map;
+using UnityEngine;
 
 namespace Utils
 {
@@ -19,12 +20,12 @@ namespace Utils
             return Vector2.zero;
         }
 
-        public static Vector2Int? GridPosition()
+        public static Cell GetTargetCell()
         {
             Vector2 worldPosition = WorldSpacePosition();
             MapManager mapManager = GameManager.Instance.mapManager;
 
-            return mapManager.WorldPositionToGridCell(worldPosition);
+            return mapManager.GetCellFromWorldPosition(worldPosition);
         }
 
         private static void GetCamera()

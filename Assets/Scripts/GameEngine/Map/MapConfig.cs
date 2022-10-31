@@ -9,7 +9,7 @@ namespace GameEngine.Map
         public Transform gameObject;
         
         [Space(10)]
-        public Vector2Int topLeftCorner;
+        public Vector2Int bottomLeftCorner;
         public Vector2Int mapSize;
         
         [Space(10)]

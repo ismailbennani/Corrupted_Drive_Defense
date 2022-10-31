@@ -8,9 +8,11 @@ using Utils.Extensions;
 public class MapManager : MonoBehaviour
 {
     public MapConfig mapConfig;
+    public GameMap GameMap;
+    public Tilemap tilemap;
+    public Transform towersRoot;
 
-    private GameMap _map;
-    private Tilemap _tilemap;
+    public Vector2 MapOffset => tilemap.transform.position;
 
     public void Initialize()
     {
@@ -21,27 +23,36 @@ public class MapManager : MonoBehaviour
 
         Vector2Int mapHalfSize = mapConfig.mapSize / 2;
         Transform map = Instantiate(mapConfig.gameObject,
-                                    new Vector3(-mapHalfSize.x - mapConfig.topLeftCorner.x, mapHalfSize.y - mapConfig.topLeftCorner.y - 1, 1),
+                                    new Vector3(-mapHalfSize.x - mapConfig.bottomLeftCorner.x, -mapHalfSize.y - mapConfig.bottomLeftCorner.y, 1),
                                     Quaternion.identity,
                                     transform);
-        
-        if (!map.TryGetComponentInSelfOrChildren(out _tilemap))
+
+        if (!map.TryGetComponentInSelfOrChildren(out tilemap))
         {
             throw new InvalidOperationException("could not find grid in map prefab");
         }
 
         Debug.Log($"Instantiated map with path: {string.Join(", ", mapConfig.path.Select(p => p.ToString()))}");
 
-        _map = new GameMap(mapConfig);
+        towersRoot = new GameObject("TowersRoot").transform;
+        towersRoot.SetParent(transform);
+        towersRoot.position = ((Vector2)map.position).WithDepth(GameConstants.TowerLayer);
+
+        GameMap = new GameMap(mapConfig);
     }
 
-    public Vector2 GridCellToWorldPosition(Vector2Int cell)
+    public Vector2 GetWorldPositionOfCell(Vector2Int cell)
     {
-        return (Vector2)_tilemap.transform.position + _map.GetWorldPosition(cell);
+        return (Vector2)tilemap.transform.position + GameMap.GetCellAt(cell).worldPosition;
     }
 
-    public Vector2Int? WorldPositionToGridCell(Vector2 position)
+    public Cell GetCellFromWorldPosition(Vector2 position)
     {
-        return _map.GetGridCellPosition(position - (Vector2)_tilemap.transform.position);
+        return GameMap.GetCellFromWorldPosition(position - (Vector2)tilemap.transform.position);
+    }
+
+    public Cell GetCellAt(Vector2Int cell)
+    {
+        return GameMap.GetCellAt(cell);
     }
 }

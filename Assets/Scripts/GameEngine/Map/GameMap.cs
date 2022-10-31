@@ -1,42 +1,41 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace GameEngine.Map
 {
-    public class GameMap
+    public class GameMap: IEnumerable<Cell>
     {
         public Vector2Int Spawn => _fullPath[0];
 
         private readonly MapConfig _config;
         private readonly Vector2Int[] _fullPath;
-        private readonly CellType[,] _mapCellTypes;
+        private readonly Cell[,] _cells;
 
         public GameMap(MapConfig config)
         {
             _config = config;
             _fullPath = ComputeFullPath(config);
-            _mapCellTypes = ComputeCellTypes(config, _fullPath);
+            _cells = ComputeCells(config, _fullPath);
         }
 
-        public Vector2 GetWorldPosition(Vector2Int cell)
+        public Cell GetCellAt(Vector2Int cell)
         {
-            return cell + Vector2.one / 2;
-        }
-
-        public Vector2Int? GetGridCellPosition(Vector2 position)
-        {
-            Vector2Int result = new Vector2Int(Mathf.FloorToInt(position.x), Mathf.FloorToInt(position.y));
-
-            if (result.x < _config.topLeftCorner.x
-                || result.x > _config.topLeftCorner.x + _config.mapSize.x
-                || result.y < _config.topLeftCorner.y
-                || result.y > _config.topLeftCorner.y + _config.mapSize.y)
+            if (IsInBounds(_config, cell))
             {
-                return null;
+                Vector2Int arrayPosition = GetArrayPosition(_config, cell);
+                return _cells[arrayPosition.x, arrayPosition.y];
             }
 
-            return result;
+            return new Cell { type = CellType.Wall, gridPosition = cell, worldPosition = GetWorldPosition(_config, cell) };
+        }
+
+        public Cell GetCellFromWorldPosition(Vector2 worldPosition)
+        {
+            Vector2Int cell = GetGridCellPosition(_config, worldPosition);
+            return GetCellAt(cell);
         }
 
         private static Vector2Int[] ComputeFullPath(MapConfig mapConfig)
@@ -76,31 +75,72 @@ namespace GameEngine.Map
             return result.ToArray();
         }
 
-        private static CellType[,] ComputeCellTypes(MapConfig mapConfig, IEnumerable<Vector2Int> fullPath)
+        private static Cell[,] ComputeCells(MapConfig mapConfig, IEnumerable<Vector2Int> fullPath)
         {
-            CellType[,] result = new CellType[mapConfig.mapSize.y, mapConfig.mapSize.x];
+            Cell[,] result = new Cell[mapConfig.mapSize.y, mapConfig.mapSize.x];
+
+            for (int x = 0; x < mapConfig.mapSize.x; x++)
+            {
+                for (int y = 0; y < mapConfig.mapSize.y; y++)
+                {
+                    Vector2Int cell = new(mapConfig.bottomLeftCorner.x + x, mapConfig.bottomLeftCorner.y + y);
+                    Vector2 worldPosition = GetWorldPosition(mapConfig, cell);
+
+                    result[y, x].gridPosition = cell;
+                    result[y, x].worldPosition = worldPosition;
+                    result[y, x].type = CellType.Free;
+                }
+            }
 
             foreach (BoundsInt area in mapConfig.walls)
             {
                 foreach (Vector3Int cell in area.allPositionsWithin)
                 {
                     Vector2Int arrayPosition = GetArrayPosition(mapConfig, (Vector2Int)cell);
-                    result[arrayPosition.x, arrayPosition.y] = CellType.Wall;
+                    result[arrayPosition.x, arrayPosition.y].type = CellType.Wall;
                 }
             }
 
             foreach (Vector2Int cell in fullPath)
             {
                 Vector2Int arrayPosition = GetArrayPosition(mapConfig, cell);
-                result[arrayPosition.x, arrayPosition.y] = CellType.Path;
+                result[arrayPosition.x, arrayPosition.y].type = CellType.Path;
             }
 
             return result;
         }
 
+        private static bool IsInBounds(MapConfig mapConfig, Vector2Int result)
+        {
+            return result.x >= mapConfig.bottomLeftCorner.x
+                   && result.x < mapConfig.bottomLeftCorner.x + mapConfig.mapSize.x
+                   && result.y >= mapConfig.bottomLeftCorner.y
+                   && result.y < mapConfig.bottomLeftCorner.y + mapConfig.mapSize.y;
+        }
+
         private static Vector2Int GetArrayPosition(MapConfig mapConfig, Vector2Int position)
         {
-            return new Vector2Int(mapConfig.topLeftCorner.y - position.y, position.x - mapConfig.topLeftCorner.x);
+            return new Vector2Int(position.y - mapConfig.bottomLeftCorner.y, position.x - mapConfig.bottomLeftCorner.x);
+        }
+
+        private static Vector2 GetWorldPosition(MapConfig mapConfig, Vector2Int cell)
+        {
+            return cell + Vector2.one / 2;
+        }
+
+        private static Vector2Int GetGridCellPosition(MapConfig mapConfig, Vector2 position)
+        {
+            return new Vector2Int(Mathf.FloorToInt(position.x), Mathf.FloorToInt(position.y));
+        }
+
+        public IEnumerator<Cell> GetEnumerator()
+        {
+            return _cells.Cast<Cell>().GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }

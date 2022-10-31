@@ -1,6 +1,6 @@
 ﻿namespace GameEngine.Map
 {
-    internal enum CellType
+    public enum CellType
     {
         Free,
         Wall,

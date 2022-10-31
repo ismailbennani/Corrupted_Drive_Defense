@@ -1,24 +1,22 @@
-﻿using GameEngine.Tower;
+﻿using GameEngine.Map;
+using GameEngine.Tower;
 using UnityEngine;
 using Utils;
 using Utils.Extensions;
+using Utils.Interfaces;
 
-public class TowerSpawnPreviewManager : MonoBehaviour
+public class TowerSpawnPreviewManager : MonoBehaviour, INeedsGameManager
 {
     public static TowerSpawnPreviewManager Instance { get; private set; }
+    public GameManager GameManager { get; set; }
 
     private TowerConfig _tower;
     private Transform _preview;
-    private GameManager _gameManager;
+
 
     void Awake()
     {
         Instance = this;
-    }
-    
-    void Start()
-    {
-        _gameManager = GameManager.Instance;
     }
 
     void Update()
@@ -35,11 +33,8 @@ public class TowerSpawnPreviewManager : MonoBehaviour
 
         if (Input.GetMouseButtonUp(0))
         {
-            Vector2Int? cell = Mouse.GridPosition();
-            if (cell.HasValue)
-            {
-                SpawnAt(cell.Value);
-            }
+            Cell cell = Mouse.GetTargetCell();
+            SpawnAt(cell);
         }
 
         if (Input.GetMouseButtonUp(1))
@@ -84,21 +79,25 @@ public class TowerSpawnPreviewManager : MonoBehaviour
         }
     }
 
-    public void SpawnAt(Vector2Int cell)
+    public void SpawnAt(Cell cell)
     {
-        if (!_tower)
+        if (!_tower || !this.TryGetGameManager())
         {
             return;
         }
 
-        Debug.Log($"Spawn {_tower.name} at {cell}");
+        if (cell.type != CellType.Free)
+        {
+            Debug.LogWarning($"Cannot build tower at {cell.gridPosition} because it is not free: {cell.type}");
+            return;
+        }
 
-        _gameManager.SpawnTower(_tower, cell);
+        GameManager.SpawnTower(_tower, cell);
         StopPreview();
     }
 
     private static Vector3 GetPreviewPosition()
     {
-        return Mouse.WorldSpacePosition().WithDepth(-2);
+        return Mouse.WorldSpacePosition().WithDepth(GameConstants.UiLayer);
     }
 }
