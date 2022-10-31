@@ -157,10 +157,10 @@ RectTransform:
   m_Father: {fileID: 544837993}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 295, y: -110.001}
+  m_SizeDelta: {x: 590, y: 159.99802}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &62532102
 MonoBehaviour:
@@ -937,6 +937,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameConfig: {fileID: 11400000, guid: 63878ef8794e7854ab4030ced9179086, type: 2}
+  gameState:
+    processorState:
+      position: {x: 0, y: 0}
+      health: 0
+      maxHealth: 0
+      ticks: 0
+      maxTicks: 0
+    towerStates: []
+    currentWave: 0
 --- !u!1 &519420028
 GameObject:
   m_ObjectHideFlags: 0
@@ -1281,7 +1290,7 @@ GameObject:
   m_Component:
   - component: {fileID: 721279097}
   m_Layer: 5
-  m_Name: Charge
+  m_Name: Health
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1438,6 +1447,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4502569039536243960, guid: 7ac51834029e4164ba7cb72630a34691, type: 3}
   m_PrefabInstance: {fileID: 4502569039813254716}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &814176965 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4502569039536243961, guid: 7ac51834029e4164ba7cb72630a34691, type: 3}
+  m_PrefabInstance: {fileID: 4502569039813254716}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d7b5fc121109aa468c4ad8e996da050, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1294339577
 GameObject:
   m_ObjectHideFlags: 0
@@ -1472,10 +1492,10 @@ RectTransform:
   m_Father: {fileID: 544837993}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 295, y: 0}
+  m_SizeDelta: {x: 590, y: 25}
   m_Pivot: {x: 0.5, y: 1}
 --- !u!114 &1294339579
 MonoBehaviour:
@@ -1643,6 +1663,7 @@ GameObject:
   - component: {fileID: 1607343019}
   - component: {fileID: 1607343020}
   - component: {fileID: 1607343022}
+  - component: {fileID: 1607343023}
   m_Layer: 5
   m_Name: CPU
   m_TagString: Untagged
@@ -1707,6 +1728,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1607343018}
   m_CullTransparentMesh: 1
+--- !u!114 &1607343023
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1607343018}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 749487ea204669942a71950fefbe4a29, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  healthBar: {fileID: 814176965}
+  ticksBar: {fileID: 1964087257}
 --- !u!1 &1770353983
 GameObject:
   m_ObjectHideFlags: 0
@@ -1973,7 +2008,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4502569039536243967, guid: 7ac51834029e4164ba7cb72630a34691, type: 3}
       propertyPath: m_Name
-      value: Slider
+      value: Ticks bar
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7ac51834029e4164ba7cb72630a34691, type: 3}
@@ -1982,6 +2017,17 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4502569039536243960, guid: 7ac51834029e4164ba7cb72630a34691, type: 3}
   m_PrefabInstance: {fileID: 1964087255}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1964087257 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4502569039536243961, guid: 7ac51834029e4164ba7cb72630a34691, type: 3}
+  m_PrefabInstance: {fileID: 1964087255}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d7b5fc121109aa468c4ad8e996da050, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1982700439
 GameObject:
   m_ObjectHideFlags: 0
@@ -2219,7 +2265,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4502569039536243967, guid: 7ac51834029e4164ba7cb72630a34691, type: 3}
       propertyPath: m_Name
-      value: Slider
+      value: Health bar
       objectReference: {fileID: 0}
     - target: {fileID: 4502569041164975217, guid: 7ac51834029e4164ba7cb72630a34691, type: 3}
       propertyPath: m_fontColor.b

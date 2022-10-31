@@ -1,5 +1,6 @@
 using System;
 using GameEngine;
+using GameEngine.State;
 using UnityEngine;
 using Utils.Extensions;
 
@@ -8,7 +9,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance { get; private set; }
     
     public GameConfig gameConfig;
-
+    public GameState gameState;
+    
     private MapManager _mapManager;
 
     void Awake()
@@ -19,6 +21,8 @@ public class GameManager : MonoBehaviour
         {
             throw new InvalidOperationException("game config not set");
         }
+
+        gameState = new GameState();
     }
 
     void Start()
@@ -62,5 +66,7 @@ public class GameManager : MonoBehaviour
         Vector3 position = _mapManager.GridCellToWorldPosition(processorCell);
 
         Instantiate(gameConfig.processor.prefab, position, Quaternion.identity, transform);
+
+        gameState.processorState = new ProcessorState() { position = gameConfig.mapConfig.processorPosition };
     }
 }
