@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using GameEngine.Tower;
 
-namespace GameEngine.State
+namespace GameEngine
 {
     [Serializable]
     public class GameState
