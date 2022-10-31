@@ -1,5 +1,5 @@
 using GameComponents;
-using GameEngine.Tower;
+using GameEngine.Towers;
 using UnityEngine;
 
 namespace UI

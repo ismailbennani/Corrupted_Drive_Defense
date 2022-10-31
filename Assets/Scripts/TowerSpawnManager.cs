@@ -1,7 +1,7 @@
 ﻿using System;
 using GameComponents;
 using GameEngine.Map;
-using GameEngine.Tower;
+using GameEngine.Towers;
 using UnityEngine;
 using Utils.Extensions;
 using Utils.Interfaces;

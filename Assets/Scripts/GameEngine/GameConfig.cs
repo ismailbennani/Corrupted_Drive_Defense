@@ -1,5 +1,6 @@
 using GameEngine.Map;
-using GameEngine.Tower;
+using GameEngine.Towers;
+using GameEngine.Waves;
 using UnityEngine;
 
 namespace GameEngine
@@ -12,5 +13,8 @@ namespace GameEngine
         [Header("Towers")]
         public TowerConfig processor;
         public TowerConfig capacitor;
+
+        [Header("Waves")]
+        public WaveConfig[] waves;
     }
 }

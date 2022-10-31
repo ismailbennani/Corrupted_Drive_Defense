@@ -1,7 +1,7 @@
 ﻿using GameComponents;
 using UnityEngine;
 
-namespace GameEngine.Tower
+namespace GameEngine.Towers
 {
     [CreateAssetMenu(menuName = "Objects/Tower config")]
     public class TowerConfig: ScriptableObject

@@ -3,7 +3,7 @@ using GameComponents;
 using GameEngine.Map;
 using UnityEngine;
 
-namespace GameEngine.Tower
+namespace GameEngine.Towers
 {
     [Serializable]
     public struct TowerState
@@ -13,5 +13,8 @@ namespace GameEngine.Tower
 
         [Header("Charge")]
         public GaugeState charge;
+
+        [Space(10)]
+        public TowerConfig config;
     }
 }

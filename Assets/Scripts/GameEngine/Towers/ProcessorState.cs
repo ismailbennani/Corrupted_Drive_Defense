@@ -2,7 +2,7 @@
 using GameEngine.Map;
 using UnityEngine;
 
-namespace GameEngine.Tower
+namespace GameEngine.Towers
 {
     [Serializable]
     public struct ProcessorState

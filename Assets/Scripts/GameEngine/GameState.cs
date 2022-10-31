@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using GameEngine.Tower;
+using GameEngine.Enemies;
+using GameEngine.Towers;
 
 namespace GameEngine
 {
@@ -10,6 +11,7 @@ namespace GameEngine
     {
         public ProcessorState processorState;
         public List<TowerState> towerStates = new();
+        public List<EnemyState> enemyStates = new();
         public int currentWave;
 
         public GameState Clone()

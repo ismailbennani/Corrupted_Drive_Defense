@@ -1,16 +1,235 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="18cc6ff9-a968-46c1-8e5b-b5cbc6aa7b26" name="Changes" comment="refactor">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Enemies/EnemyState.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Enemies/EnemyState.cs.meta" afterDir="false" />
+    <list default="true" id="18cc6ff9-a968-46c1-8e5b-b5cbc6aa7b26" name="Changes" comment="minor">
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Enemies.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Enemies/Sparks.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Enemies/Sparks/Animation.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Enemies/Sparks/Animation/Spark 1.anim" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Enemies/Sparks/Animation/Spark 1.anim.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Enemies/Sparks/Animation/Spark 1.controller" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Enemies/Sparks/Animation/Spark 1.controller.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Enemies/Sparks/Animation/Spark 2.anim" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Enemies/Sparks/Animation/Spark 2.anim.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Enemies/Sparks/Animation/Spark 2.controller" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Enemies/Sparks/Animation/Spark 2.controller.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Enemies/Sparks/Spark 1.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Enemies/Sparks/Spark 1.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Enemies/Sparks/Spark 1.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Enemies/Sparks/Spark 1.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Enemies/Sparks/Spark 2.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Enemies/Sparks/Spark 2.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Enemies/Sparks/Spark 2.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Enemies/Sparks/Spark 2.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Maps.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Maps/Sample map.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Maps/Sample map/Map.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Maps/Sample map/Map.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Maps/Sample map/Sample sheet.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Maps/Sample map/Sample sheet.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Maps/Sample map/SampleMap.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Maps/Sample map/SampleMap.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Maps/Sample map/Tiles.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Maps/Sample map/Tiles/sample_sheet_0.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Maps/Sample map/Tiles/sample_sheet_0.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Maps/Sample map/Tiles/sample_sheet_1.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Maps/Sample map/Tiles/sample_sheet_1.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Maps/Sample map/Tiles/sample_sheet_10.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Maps/Sample map/Tiles/sample_sheet_10.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Maps/Sample map/Tiles/sample_sheet_2.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Maps/Sample map/Tiles/sample_sheet_2.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Maps/Sample map/Tiles/sample_sheet_3.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Maps/Sample map/Tiles/sample_sheet_3.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Maps/Sample map/Tiles/sample_sheet_4.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Maps/Sample map/Tiles/sample_sheet_4.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Maps/Sample map/Tiles/sample_sheet_5.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Maps/Sample map/Tiles/sample_sheet_5.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Maps/Sample map/Tiles/sample_sheet_6.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Maps/Sample map/Tiles/sample_sheet_6.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Maps/Sample map/Tiles/sample_sheet_7.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Maps/Sample map/Tiles/sample_sheet_7.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Maps/Sample map/Tiles/sample_sheet_8.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Maps/Sample map/Tiles/sample_sheet_8.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Maps/Sample map/Tiles/sample_sheet_9.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Maps/Sample map/Tiles/sample_sheet_9.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Maps/Sample map/sample_sheet.aseprite" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Maps/Sample map/sample_sheet.aseprite.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Maps/Sample map/sample_sheet.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Maps/Sample map/sample_sheet.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Capacitor.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Capacitor/Animation.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Capacitor/Animation/capacitor.controller" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Capacitor/Animation/capacitor.controller.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Capacitor/Animation/capacitor_1.anim" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Capacitor/Animation/capacitor_1.anim.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Capacitor/Animation/capacitor_2.anim" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Capacitor/Animation/capacitor_2.anim.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Capacitor/Animation/capacitor_3.anim" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Capacitor/Animation/capacitor_3.anim.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Capacitor/Animation/capacitor_4.anim" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Capacitor/Animation/capacitor_4.anim.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Capacitor/Animation/capacitor_5.anim" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Capacitor/Animation/capacitor_5.anim.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Capacitor/Animation/capacitor_6.anim" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Capacitor/Animation/capacitor_6.anim.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Capacitor/Animation/capacitor_7.anim" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Capacitor/Animation/capacitor_7.anim.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Capacitor/Animation/capacitor_8.anim" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Capacitor/Animation/capacitor_8.anim.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Capacitor/Animation/capacitor_empty.anim" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Capacitor/Animation/capacitor_empty.anim.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Capacitor/Animation/capacitor_full.anim" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Capacitor/Animation/capacitor_full.anim.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Capacitor/Animation/capacitor_trigger.anim" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Capacitor/Animation/capacitor_trigger.anim.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Capacitor/Capacitor.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Capacitor/Capacitor.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Capacitor/Capacitor.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Capacitor/Capacitor.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Capacitor/Sprites.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Capacitor/Sprites/capacitor.aseprite" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Capacitor/Sprites/capacitor.aseprite.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Capacitor/Sprites/capacitor.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Capacitor/Sprites/capacitor.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Processor.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Processor/Animation.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Processor/Animation/circlewipe-ccw.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Processor/Animation/circlewipe-ccw.jpg.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Processor/Animation/cw-top.jpg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Processor/Animation/cw-top.jpg.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Processor/Animation/processor.controller" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Processor/Animation/processor.controller.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Processor/Animation/processor_empty.anim" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Processor/Animation/processor_empty.anim.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Processor/Animation/processor_full.anim" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Processor/Animation/processor_full.anim.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Processor/Processor.asset" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Processor/Processor.asset.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Processor/Processor.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Processor/Processor.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Processor/Sprites.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Processor/Sprites/processor.aseprite" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Processor/Sprites/processor.aseprite.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Processor/Sprites/processor.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Processor/Sprites/processor.png.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameComponents/EnemyController.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameComponents/EnemyController.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Enemies/EnemyConfig.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Enemies/EnemyConfig.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Waves.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Waves/WaveConfig.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Waves/WaveConfig.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.Corrupted Drive - Defense/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Corrupted Drive - Defense/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Capacitor.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Capacitor/Animation.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Capacitor/Animation/capacitor.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Capacitor/Animation/capacitor.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Capacitor/Animation/capacitor_1.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Capacitor/Animation/capacitor_1.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Capacitor/Animation/capacitor_2.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Capacitor/Animation/capacitor_2.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Capacitor/Animation/capacitor_3.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Capacitor/Animation/capacitor_3.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Capacitor/Animation/capacitor_4.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Capacitor/Animation/capacitor_4.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Capacitor/Animation/capacitor_5.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Capacitor/Animation/capacitor_5.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Capacitor/Animation/capacitor_6.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Capacitor/Animation/capacitor_6.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Capacitor/Animation/capacitor_7.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Capacitor/Animation/capacitor_7.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Capacitor/Animation/capacitor_8.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Capacitor/Animation/capacitor_8.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Capacitor/Animation/capacitor_empty.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Capacitor/Animation/capacitor_empty.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Capacitor/Animation/capacitor_full.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Capacitor/Animation/capacitor_full.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Capacitor/Animation/capacitor_trigger.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Capacitor/Animation/capacitor_trigger.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Capacitor/Capacitor.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Capacitor/Capacitor.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Capacitor/Capacitor.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Capacitor/Capacitor.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Capacitor/Sprites.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Capacitor/Sprites/capacitor.aseprite" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Capacitor/Sprites/capacitor.aseprite.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Capacitor/Sprites/capacitor.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Capacitor/Sprites/capacitor.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Processor.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Processor/Animation.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Processor/Animation/circlewipe-ccw.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Processor/Animation/circlewipe-ccw.jpg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Processor/Animation/cw-top.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Processor/Animation/cw-top.jpg.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Processor/Animation/processor.controller" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Processor/Animation/processor.controller.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Processor/Animation/processor_empty.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Processor/Animation/processor_empty.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Processor/Animation/processor_full.anim" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Processor/Animation/processor_full.anim.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Processor/Processor.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Processor/Processor.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Processor/Processor.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Processor/Processor.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Processor/Sprites.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Processor/Sprites/processor.aseprite" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Processor/Sprites/processor.aseprite.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Processor/Sprites/processor.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Processor/Sprites/processor.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Sample map.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Sample map/Map.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Sample map/Map.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Sample map/Sample sheet.prefab" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Sample map/Sample sheet.prefab.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Sample map/SampleMap.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Sample map/SampleMap.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Sample map/Tiles.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Sample map/Tiles/sample_sheet_0.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Sample map/Tiles/sample_sheet_0.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Sample map/Tiles/sample_sheet_1.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Sample map/Tiles/sample_sheet_1.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Sample map/Tiles/sample_sheet_10.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Sample map/Tiles/sample_sheet_10.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Sample map/Tiles/sample_sheet_2.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Sample map/Tiles/sample_sheet_2.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Sample map/Tiles/sample_sheet_3.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Sample map/Tiles/sample_sheet_3.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Sample map/Tiles/sample_sheet_4.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Sample map/Tiles/sample_sheet_4.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Sample map/Tiles/sample_sheet_5.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Sample map/Tiles/sample_sheet_5.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Sample map/Tiles/sample_sheet_6.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Sample map/Tiles/sample_sheet_6.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Sample map/Tiles/sample_sheet_7.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Sample map/Tiles/sample_sheet_7.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Sample map/Tiles/sample_sheet_8.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Sample map/Tiles/sample_sheet_8.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Sample map/Tiles/sample_sheet_9.asset" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Sample map/Tiles/sample_sheet_9.asset.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Sample map/sample_sheet.aseprite" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Sample map/sample_sheet.aseprite.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Sample map/sample_sheet.png" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Sample map/sample_sheet.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Sample/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Sample/SampleScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameComponents/ProcessorController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameComponents/ProcessorController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameComponents/TowerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameComponents/TowerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Enemies/EnemyState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Enemies/EnemyState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameEngine/GameConfig.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/GameConfig.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameEngine/GameState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/GameState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Tower/ProcessorState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Tower/ProcessorState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Tower/TowerState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Tower/TowerState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Tower.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Towers.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Tower/ProcessorState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Towers/ProcessorState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Tower/ProcessorState.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Towers/ProcessorState.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Tower/TowerConfig.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Towers/TowerConfig.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Tower/TowerConfig.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Towers/TowerConfig.cs.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Tower/TowerState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Towers/TowerState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Tower/TowerState.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Towers/TowerState.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/TowerSpawnManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/TowerSpawnManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/TowerSpawnPreviewManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/TowerSpawnPreviewManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/UICpuPanelController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/UICpuPanelController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/UITowerMenuButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/UITowerMenuButton.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/UITowerMenuController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/UITowerMenuController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +326,7 @@
       <updated>1667141826869</updated>
       <workItem from="1667141835735" duration="112000" />
       <workItem from="1667141960624" duration="19332000" />
-      <workItem from="1667210169814" duration="9404000" />
+      <workItem from="1667210169814" duration="10610000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1667171876274</created>
@@ -214,7 +433,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667220006542</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="minor">
+      <created>1667220030730</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1667220030730</updated>
+    </task>
+    <option name="localTasksCounter" value="17" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -262,6 +488,7 @@
     <MESSAGE value="add ids to towers" />
     <MESSAGE value="add tower controller" />
     <MESSAGE value="refactor" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor" />
+    <MESSAGE value="minor" />
+    <option name="LAST_COMMIT_MESSAGE" value="minor" />
   </component>
 </project>
