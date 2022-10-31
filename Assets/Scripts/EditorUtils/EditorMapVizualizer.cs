@@ -5,7 +5,6 @@ using Utils.Interfaces;
 
 namespace EditorUtils
 {
-    [ExecuteInEditMode]
     public class EditorMapVizualizer: MonoBehaviour, INeedsGameManager
     {
         public GameManager GameManager { get; set; }
@@ -25,6 +24,7 @@ namespace EditorUtils
             
             DrawMapBoundaries();
             DrawWalls();
+            DrawPath();
 
             Gizmos.color = initialColor;
         }
@@ -41,7 +41,6 @@ namespace EditorUtils
 
             Gizmos.color = Color.white;
             Gizmos.DrawWireCube(center, size);
-            Gizmos.color = Color.clear;
         }
 
         private void DrawWalls()
@@ -49,8 +48,21 @@ namespace EditorUtils
             foreach (WorldCell cell in _mapManager.GameMap.Where(c => c.type == CellType.Wall).Select(c => _mapManager.GetCellAt(c.gridPosition)))
             {
                 Gizmos.color = Color.red;
-                Gizmos.DrawWireSphere(cell.worldPosition, 0.5f);
-                Gizmos.color = Color.clear;
+                Gizmos.DrawWireSphere(cell.worldPosition, 0.25f);
+            }
+        }
+
+        private void DrawPath()
+        {
+            Vector2Int[] path = _mapManager.mapConfig.path;
+
+            for (int i = 0; i < path.Length - 1; i++)
+            {
+                WorldCell cell = _mapManager.GetCellAt(path[i]);
+                WorldCell nextCell = _mapManager.GetCellAt(path[i + 1]);
+                
+                Gizmos.color = Color.blue;
+                Gizmos.DrawLine(cell.worldPosition, nextCell.worldPosition);
             }
         }
 
