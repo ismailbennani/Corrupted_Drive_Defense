@@ -33,7 +33,7 @@ public class TowerSpawnPreviewManager : MonoBehaviour, INeedsGameManager
 
         if (Input.GetMouseButtonUp(0))
         {
-            Cell cell = Mouse.GetTargetCell();
+            WorldCell cell = Mouse.GetTargetCell();
             SpawnAt(cell);
         }
 
@@ -79,7 +79,7 @@ public class TowerSpawnPreviewManager : MonoBehaviour, INeedsGameManager
         }
     }
 
-    public void SpawnAt(Cell cell)
+    public void SpawnAt(WorldCell cell)
     {
         if (!_tower || !this.TryGetGameManager())
         {
@@ -98,6 +98,6 @@ public class TowerSpawnPreviewManager : MonoBehaviour, INeedsGameManager
 
     private static Vector3 GetPreviewPosition()
     {
-        return Mouse.WorldSpacePosition().WithDepth(GameConstants.UiLayer);
+        return Mouse.GetTargetCell().worldPosition.WithDepth(GameConstants.UiLayer);
     }
 }

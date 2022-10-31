@@ -7,7 +7,7 @@ namespace GameEngine.State
     [Serializable]
     public struct ProcessorState
     {
-        public Cell cell;
+        public WorldCell cell;
         
         [Header("Health")]
         public int health;

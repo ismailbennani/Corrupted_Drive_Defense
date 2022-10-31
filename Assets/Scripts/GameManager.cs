@@ -42,7 +42,7 @@ public class GameManager : MonoBehaviour
         TowerSpawnPreviewManager.Instance.StartPreview(tower);
     }
 
-    public void SpawnTower(TowerConfig tower, Cell cell)
+    public void SpawnTower(TowerConfig tower, WorldCell cell)
     {
         TowerSpawnManager spawner = TowerSpawnManager.Instance;
 
@@ -81,7 +81,7 @@ public class GameManager : MonoBehaviour
             throw new InvalidOperationException("could not find tower spawn manager");
         }
 
-        Cell processorCell = mapManager.GetCellAt(gameConfig.mapConfig.processorPosition);
+        WorldCell processorCell = mapManager.GetCellAt(gameConfig.mapConfig.processorPosition);
 
         spawner.SpawnTower(gameConfig.processor, processorCell, force: true);
         gameState.processorState = new ProcessorState() { cell = processorCell };

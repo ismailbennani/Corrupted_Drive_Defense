@@ -20,7 +20,7 @@ namespace Utils
             return Vector2.zero;
         }
 
-        public static Cell GetTargetCell()
+        public static WorldCell GetTargetCell()
         {
             Vector2 worldPosition = WorldSpacePosition();
             MapManager mapManager = GameManager.Instance.mapManager;

@@ -29,13 +29,18 @@ namespace GameEngine.Map
                 return _cells[arrayPosition.x, arrayPosition.y];
             }
 
-            return new Cell { type = CellType.Wall, gridPosition = cell, worldPosition = GetWorldPosition(_config, cell) };
+            return new Cell { type = CellType.Wall, gridPosition = cell };
         }
 
-        public Cell GetCellFromWorldPosition(Vector2 worldPosition)
+        public Cell GetCellFromLocalWorldPosition(Vector2 worldPosition)
         {
             Vector2Int cell = GetGridCellPosition(_config, worldPosition);
             return GetCellAt(cell);
+        }
+
+        public Vector2 GetLocalWorldPosition(Cell cell)
+        {
+            return cell.gridPosition + Vector2.one / 2;
         }
 
         private static Vector2Int[] ComputeFullPath(MapConfig mapConfig)
@@ -84,10 +89,8 @@ namespace GameEngine.Map
                 for (int y = 0; y < mapConfig.mapSize.y; y++)
                 {
                     Vector2Int cell = new(mapConfig.bottomLeftCorner.x + x, mapConfig.bottomLeftCorner.y + y);
-                    Vector2 worldPosition = GetWorldPosition(mapConfig, cell);
 
                     result[y, x].gridPosition = cell;
-                    result[y, x].worldPosition = worldPosition;
                     result[y, x].type = CellType.Free;
                 }
             }
@@ -121,11 +124,6 @@ namespace GameEngine.Map
         private static Vector2Int GetArrayPosition(MapConfig mapConfig, Vector2Int position)
         {
             return new Vector2Int(position.y - mapConfig.bottomLeftCorner.y, position.x - mapConfig.bottomLeftCorner.x);
-        }
-
-        private static Vector2 GetWorldPosition(MapConfig mapConfig, Vector2Int cell)
-        {
-            return cell + Vector2.one / 2;
         }
 
         private static Vector2Int GetGridCellPosition(MapConfig mapConfig, Vector2 position)

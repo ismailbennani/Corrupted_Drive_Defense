@@ -7,7 +7,7 @@ namespace GameEngine.State
     [Serializable]
     public struct TowerState
     {
-        public Cell cell;
+        public WorldCell cell;
         
         [Header("Charge")]
         public int charge;

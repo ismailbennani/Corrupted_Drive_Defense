@@ -3,7 +3,7 @@ using GameEngine.Map;
 using UnityEngine;
 using Utils.Interfaces;
 
-namespace UnityUtils
+namespace EditorUtils
 {
     [ExecuteInEditMode]
     public class EditorMapVizualizer: MonoBehaviour, INeedsGameManager
@@ -32,27 +32,24 @@ namespace UnityUtils
         private void DrawMapBoundaries()
         {
             MapConfig mapConfig = _mapManager.mapConfig;
-            Vector2 offset = _mapManager.MapOffset;
             
-            Cell bottomLeftCorner = _mapManager.GetCellAt(mapConfig.bottomLeftCorner);
-            Cell topRightCorner = _mapManager.GetCellAt(mapConfig.bottomLeftCorner + mapConfig.mapSize);
+            WorldCell bottomLeftCorner = _mapManager.GetCellAt(mapConfig.bottomLeftCorner);
+            WorldCell topRightCorner = _mapManager.GetCellAt(mapConfig.bottomLeftCorner + mapConfig.mapSize);
 
             Vector2 center = (topRightCorner.worldPosition + bottomLeftCorner.worldPosition) / 2;
             Vector2 size = topRightCorner.worldPosition - bottomLeftCorner.worldPosition;
 
             Gizmos.color = Color.white;
-            Gizmos.DrawWireCube(center - offset, size);
+            Gizmos.DrawWireCube(center, size);
             Gizmos.color = Color.clear;
         }
 
         private void DrawWalls()
         {
-            Vector2 offset = _mapManager.MapOffset;
-            
-            foreach (Cell cell in _mapManager.GameMap.Where(c => c.type == CellType.Wall))
+            foreach (WorldCell cell in _mapManager.GameMap.Where(c => c.type == CellType.Wall).Select(c => _mapManager.GetCellAt(c.gridPosition)))
             {
                 Gizmos.color = Color.red;
-                Gizmos.DrawWireSphere(cell.worldPosition - offset, 0.5f);
+                Gizmos.DrawWireSphere(cell.worldPosition, 0.5f);
                 Gizmos.color = Color.clear;
             }
         }

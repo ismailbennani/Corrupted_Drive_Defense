@@ -36,23 +36,31 @@ public class MapManager : MonoBehaviour
 
         towersRoot = new GameObject("TowersRoot").transform;
         towersRoot.SetParent(transform);
-        towersRoot.position = ((Vector2)map.position).WithDepth(GameConstants.TowerLayer);
+        towersRoot.position = Vector2.zero.WithDepth(GameConstants.TowerLayer);
 
         GameMap = new GameMap(mapConfig);
     }
 
     public Vector2 GetWorldPositionOfCell(Vector2Int cell)
     {
-        return (Vector2)tilemap.transform.position + GameMap.GetCellAt(cell).worldPosition;
+        return GetCellAt(cell).worldPosition;
     }
 
-    public Cell GetCellFromWorldPosition(Vector2 position)
+    public WorldCell GetCellFromWorldPosition(Vector2 position)
     {
-        return GameMap.GetCellFromWorldPosition(position - (Vector2)tilemap.transform.position);
+        Cell result = GameMap.GetCellFromLocalWorldPosition(position - (Vector2)tilemap.transform.position);
+        return OfCell(result);
     }
 
-    public Cell GetCellAt(Vector2Int cell)
+    public WorldCell GetCellAt(Vector2Int cell)
     {
-        return GameMap.GetCellAt(cell);
+        Cell result = GameMap.GetCellAt(cell);
+        return OfCell(result);
+    }
+
+    private WorldCell OfCell(Cell cell)
+    {
+        Vector2 localWorldPosition = GameMap.GetLocalWorldPosition(cell);
+        return cell.WithWorldPosition(localWorldPosition + (Vector2)tilemap.transform.position);
     }
 }
