@@ -15,3 +15,5 @@ MonoBehaviour:
   mapConfig: {fileID: 11400000, guid: 0bdbdcc4e783a2d49b60fdcb39991518, type: 2}
   processor: {fileID: 11400000, guid: b7111795023b1f64b93dc7e4a8544979, type: 2}
   capacitor: {fileID: 11400000, guid: 13cf6272dd0843440bde1af03638844d, type: 2}
+  waves:
+  - {fileID: 11400000, guid: 9b69db2051ecb814ab83dda5387f3506, type: 2}

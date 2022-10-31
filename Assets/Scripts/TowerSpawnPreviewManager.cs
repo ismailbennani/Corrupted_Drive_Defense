@@ -3,13 +3,12 @@ using GameEngine.Map;
 using GameEngine.Towers;
 using UnityEngine;
 using Utils;
+using Utils.CustomComponents;
 using Utils.Extensions;
-using Utils.Interfaces;
 
-public class TowerSpawnPreviewManager : MonoBehaviour, INeedsGameManager
+public class TowerSpawnPreviewManager : MyMonoBehaviour
 {
     public static TowerSpawnPreviewManager Instance { get; private set; }
-    public GameManager GameManager { get; set; }
 
     public Transform preview;
 
@@ -100,7 +99,7 @@ public class TowerSpawnPreviewManager : MonoBehaviour, INeedsGameManager
 
     public void SpawnAt(WorldCell cell)
     {
-        if (!_tower || !this.TryGetGameManager())
+        if (!_tower || !TryGetGameManager())
         {
             return;
         }

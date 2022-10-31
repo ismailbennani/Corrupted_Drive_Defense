@@ -11,8 +11,9 @@ public class MapManager : MonoBehaviour
     public GameMap GameMap;
     public Tilemap tilemap;
     public Transform towersRoot;
+    public Transform enemiesRoot;
 
-    public Vector2 MapOffset => tilemap.transform.position;
+    public WorldCell Spawn => GetCellAt(GameMap.Spawn);
 
     public void Initialize()
     {
@@ -36,7 +37,11 @@ public class MapManager : MonoBehaviour
 
         towersRoot = new GameObject("TowersRoot").transform;
         towersRoot.SetParent(transform);
-        towersRoot.position = Vector2.zero.WithDepth(GameConstants.TowerLayer);
+        towersRoot.position = Vector2.zero.WithDepth(GameConstants.EntityLayer);
+        
+        enemiesRoot = new GameObject("EnemiesRoot").transform;
+        enemiesRoot.SetParent(transform);
+        enemiesRoot.position = Vector2.zero.WithDepth(GameConstants.EntityLayer);
 
         GameMap = new GameMap(mapConfig);
     }

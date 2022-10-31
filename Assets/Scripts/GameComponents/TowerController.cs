@@ -1,14 +1,11 @@
 ﻿using System.Linq;
 using GameEngine.Towers;
-using UnityEngine;
-using Utils.Interfaces;
+using Utils.CustomComponents;
 
 namespace GameComponents
 {
-    public class TowerController: MonoBehaviour, INeedsGameManager
+    public class TowerController: MyMonoBehaviour
     {
-        public GameManager GameManager { get; set; }
-
         public long id;
 
         void Update()
@@ -18,7 +15,7 @@ namespace GameComponents
                 return;
             }
             
-            this.RequireGameManager();
+            RequireGameManager();
 
             if (GameManager.gameState.towerStates.All(t => t.id != id))
             {

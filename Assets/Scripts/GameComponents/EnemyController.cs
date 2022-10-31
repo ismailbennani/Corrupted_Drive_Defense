@@ -1,14 +1,11 @@
 ﻿using System.Linq;
 using GameEngine.Enemies;
-using UnityEngine;
-using Utils.Interfaces;
+using Utils.CustomComponents;
 
 namespace GameComponents
 {
-    public class EnemyController: MonoBehaviour, INeedsGameManager
+    public class EnemyController: MyMonoBehaviour
     {
-        public GameManager GameManager { get; set; }
-
         public long id;
         
         void Update()
@@ -18,7 +15,7 @@ namespace GameComponents
                 return;
             }
             
-            this.RequireGameManager();
+            RequireGameManager();
 
             if (GameManager.gameState.enemyStates.All(t => t.id != id))
             {

@@ -3,7 +3,6 @@ using GameEngine;
 using GameEngine.Map;
 using GameEngine.Towers;
 using UnityEngine;
-using Utils;
 using Utils.Extensions;
 
 public class GameManager : MonoBehaviour
@@ -12,9 +11,8 @@ public class GameManager : MonoBehaviour
 
     public GameConfig gameConfig;
 
-    [Header("Set on start")]
+    [Header("Created on start")]
     public GameState gameState;
-
     public MapManager mapManager;
 
     void Awake()
@@ -45,16 +43,12 @@ public class GameManager : MonoBehaviour
     public void SpawnTower(TowerConfig tower, WorldCell cell)
     {
         TowerSpawnManager spawner = TowerSpawnManager.Instance;
+        spawner.SpawnTower(tower, cell);
+    }
 
-        long id = Uid.Get();
-        if (!spawner.SpawnTower(id, tower, cell))
-        {
-            return;
-        }
-
-        TowerState newTowerState = new() { id = id, cell = cell };
-
-        gameState.towerStates.Add(newTowerState);
+    public void StartWave()
+    {
+        
     }
 
     private void SpawnMap()
@@ -84,8 +78,11 @@ public class GameManager : MonoBehaviour
 
         WorldCell processorCell = mapManager.GetCellAt(gameConfig.mapConfig.processorPosition);
 
-        long id = Uid.Get();
-        spawner.SpawnTower(id, gameConfig.processor, processorCell, force: true);
+        if (!spawner.SpawnTower(gameConfig.processor, processorCell, out long id, force: true, register: false))
+        {
+            throw new InvalidOperationException("could not spawn processor");
+        }
+        
         gameState.processorState = new ProcessorState { id = id, cell = processorCell };
     }
 }

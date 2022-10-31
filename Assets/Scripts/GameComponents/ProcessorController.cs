@@ -1,32 +1,17 @@
 using GameEngine.Towers;
-using UnityEngine;
+using Utils.CustomComponents;
 
 namespace GameComponents
 {
-    public class ProcessorController : MonoBehaviour
+    public class ProcessorController : MyMonoBehaviour
     {
-        public GameManager gameManager;
-
         void Update()
         {
-            if (!GetGameManager())
-            {
-                return;
-            }
+            RequireGameManager();
 
-            ProcessorState processorState = gameManager.gameState.processorState;
+            ProcessorState processorState = GameManager.gameState.processorState;
         
             gameObject.SendMessage("SetCharge", new GaugeState(processorState.health, processorState.maxHealth));
-        }
-
-        private bool GetGameManager()
-        {
-            if (!gameManager)
-            {
-                gameManager = GameManager.Instance;
-            }
-
-            return gameManager;
         }
     }
 }
