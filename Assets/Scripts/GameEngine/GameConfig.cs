@@ -10,8 +10,10 @@ namespace GameEngine
     {
         public MapConfig mapConfig;
 
+        [Header("Processor")]
+        public ProcessorConfig processor;
+        
         [Header("Towers")]
-        public TowerConfig processor;
         public TowerConfig capacitor;
 
         [Header("Waves")]

@@ -9,10 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a377c46cf0eb419b84f55835924bbb27, type: 3}
+  m_Script: {fileID: 11500000, guid: 8245c514496142479786b3996f33ab2d, type: 3}
   m_Name: Processor
   m_EditorClassIdentifier: 
-  towerName: Processor
-  cost: 0
-  prefab: {fileID: 2185249853896145521, guid: 167aed16fb5ed2a409ac3c5a75f9256c, type: 3}
-  sprite: {fileID: -1993935216, guid: d3ba32715e07d2e42b80871ba1c39b45, type: 3}
+  maxHealth: 100
+  frequency: 10
+  maxTicks: 1000
+  prefab: {fileID: 5824694017469984989, guid: 167aed16fb5ed2a409ac3c5a75f9256c, type: 3}
+  sprite: {fileID: 0}

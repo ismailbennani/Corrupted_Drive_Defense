@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Linq;
 using GameEngine.Towers;
+using UnityEngine;
 using Utils.CustomComponents;
 
 namespace GameComponents
@@ -20,12 +21,6 @@ namespace GameComponents
             {
                 yield return null;
             }
-
-            if (id == GameManager.gameState.processorState.id)
-            {
-                Destroy(this);
-                yield break;
-            }
             
             _state = GameManager.gameState.towerStates.SingleOrDefault(t => t.id == id);
             if (_state == null)
@@ -40,8 +35,29 @@ namespace GameComponents
             {
                 return;
             }
-            
-            SendMessage("SetCharge", _state.charge);   
+
+            TriggerIfPossible();
+            UpdateCharge();
+        }
+
+        private void TriggerIfPossible()
+        {
+            if (_state.ticks.Full)
+            {
+                Debug.Log("Trigger");
+                _state.ticks.Clear();
+            }
+        }
+
+        private void UpdateCharge()
+        {
+            ProcessorState processorState = GameManager.gameState.processorState;
+
+            float charge = Time.deltaTime * _state.config.frequency;
+            float consumed = processorState.ticks.Consume(charge);
+
+            _state.ticks.Add(consumed);
+            SendMessage("SetCharge", _state.ticks);
         }
     }
 }

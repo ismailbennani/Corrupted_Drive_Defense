@@ -19,8 +19,8 @@ namespace UI
 
             ProcessorState processorState = gameManager.gameState.processorState;
 
-            healthBar.Set(new GaugeState(processorState.health, processorState.maxHealth));
-            ticksBar.Set(new GaugeState(processorState.ticks, processorState.maxTicks));
+            healthBar.Set(processorState.health);
+            ticksBar.Set(processorState.ticks);
         }
     }
 }

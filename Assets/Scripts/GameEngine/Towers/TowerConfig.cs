@@ -8,6 +8,10 @@ namespace GameEngine.Towers
     {
         public string towerName;
         public int cost;
+
+        [Header("Ticks")]
+        public float frequency;
+        public int maxTicks;
         
         [Space(10)]
         public TowerController prefab;

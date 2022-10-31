@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using GameComponents;
 using GameEngine;
 using GameEngine.Map;
 using GameEngine.Towers;
@@ -96,12 +97,12 @@ public class GameManager : MonoBehaviour, INeedsComponent<TowerSpawnManager>, IN
 
         WorldCell processorCell = mapManager.GetCellAt(gameConfig.mapConfig.processorPosition);
 
-        if (!_towerSpawnManager.SpawnTower(gameConfig.processor, processorCell, out long id, force: true, register: false))
-        {
-            throw new InvalidOperationException("could not spawn processor");
-        }
+        ProcessorConfig processorConfig = gameConfig.processor;
 
-        gameState.processorState = new ProcessorState(id, processorCell);
+        ProcessorController processor = Instantiate(processorConfig.prefab, Vector3.zero, Quaternion.identity, mapManager.towersRoot);
+        processor.transform.localPosition = processorCell.worldPosition.WithDepth(GameConstants.EntityLayer);
+
+        gameState.processorState = new ProcessorState(processorCell, processorConfig);
     }
 
     #region Needed components
