@@ -53,7 +53,7 @@ public class TowerSpawnManager : MyMonoBehaviour
 
         if (register)
         {
-            TowerState newTowerState = new() { id = id, cell = cell };
+            TowerState newTowerState = new(id, cell, tower);
             GameManager.gameState.towerStates.Add(newTowerState);
         }
 

@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using GameEngine;
 using GameEngine.Map;
 using GameEngine.Towers;
@@ -100,13 +101,15 @@ public class GameManager : MonoBehaviour, INeedsComponent<TowerSpawnManager>, IN
             throw new InvalidOperationException("could not spawn processor");
         }
 
-        gameState.processorState = new ProcessorState { id = id, cell = processorCell };
+        gameState.processorState = new ProcessorState(id, processorCell);
     }
 
     #region Needed components
 
     private TowerSpawnManager _towerSpawnManager;
+
     private EnemySpawnManager _enemySpawnManager;
+
     private TowerSpawnPreviewManager _towerSpawnPreviewManager;
 
 

@@ -5,7 +5,7 @@ using UnityEngine;
 namespace GameEngine.Towers
 {
     [Serializable]
-    public struct ProcessorState
+    public class ProcessorState
     {
         public long id;
         public WorldCell cell;
@@ -17,5 +17,11 @@ namespace GameEngine.Towers
         [Header("Ticks")]
         public int ticks;
         public int maxTicks;
+
+        public ProcessorState(long id, WorldCell cell)
+        {
+            this.id = id;
+            this.cell = cell;
+        }
     }
 }

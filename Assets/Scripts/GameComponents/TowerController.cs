@@ -1,4 +1,6 @@
-﻿using System.Linq;
+﻿using System;
+using System.Collections;
+using System.Linq;
 using GameEngine.Towers;
 using Utils.CustomComponents;
 
@@ -8,23 +10,38 @@ namespace GameComponents
     {
         public long id;
 
-        void Update()
+        private TowerState _state;
+        
+        IEnumerator Start()
         {
-            if (id <= 0)
-            {
-                return;
-            }
-            
             RequireGameManager();
 
-            if (GameManager.gameState.towerStates.All(t => t.id != id))
+            while (id <= 0)
+            {
+                yield return null;
+            }
+
+            if (id == GameManager.gameState.processorState.id)
+            {
+                Destroy(this);
+                yield break;
+            }
+            
+            _state = GameManager.gameState.towerStates.SingleOrDefault(t => t.id == id);
+            if (_state == null)
+            {
+                throw new InvalidOperationException($"could not find state of tower with id {id}");
+            }
+        }
+        
+        void Update()
+        {
+            if (_state == null)
             {
                 return;
             }
             
-            TowerState state = GameManager.gameState.towerStates.Single(t => t.id == id);
-            
-            SendMessage("SetCharge", state.charge);   
+            SendMessage("SetCharge", _state.charge);   
         }
     }
 }

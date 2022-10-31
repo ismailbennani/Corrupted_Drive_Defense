@@ -63,6 +63,11 @@ public class MapManager : MonoBehaviour
         return OfCell(result);
     }
 
+    public WorldCell[] GetPath()
+    {
+        return GameMap.GetPath().Select(GetCellAt).ToArray();
+    }
+    
     private WorldCell OfCell(Cell cell)
     {
         Vector2 localWorldPosition = GameMap.GetLocalWorldPosition(cell);

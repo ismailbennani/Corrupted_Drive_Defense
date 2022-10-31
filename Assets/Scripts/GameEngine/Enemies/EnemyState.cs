@@ -4,7 +4,7 @@ using UnityEngine;
 namespace GameEngine.Enemies
 {
     [Serializable]
-    public struct EnemyState
+    public class EnemyState
     {
         public long id;
         public int hp;
@@ -13,5 +13,11 @@ namespace GameEngine.Enemies
 
         [Space(10)]
         public EnemyConfig config;
+
+        public EnemyState(long id, EnemyConfig config)
+        {
+            this.id = id;
+            this.config = config;
+        }
     }
 }

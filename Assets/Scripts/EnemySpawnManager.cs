@@ -56,11 +56,14 @@ public class EnemySpawnManager : MyMonoBehaviour
             throw new InvalidOperationException("could not find enemies root");
         }
 
-        WorldCell spawnCell = GameManager.mapManager.Spawn;
+        long id = Uid.Get();
+        EnemyState newEnemyState = new(id, enemy);
+        GameManager.gameState.enemyStates.Add(newEnemyState);
 
+        WorldCell spawnCell = GameManager.mapManager.Spawn;
         EnemyController newEnemy = Instantiate(enemy.prefab, Vector3.zero, Quaternion.identity, root);
         newEnemy.transform.localPosition = spawnCell.worldPosition.WithDepth(GameConstants.EntityLayer);
-        newEnemy.id = Uid.Get();
+        newEnemy.id = id;
         
         Debug.Log($"Spawn {enemy.enemyName} at {spawnCell.gridPosition}");
     }

@@ -43,6 +43,11 @@ namespace GameEngine.Map
             return cell.gridPosition + Vector2.one / 2;
         }
 
+        public Vector2Int[] GetPath()
+        {
+            return _fullPath;
+        }
+
         private static Vector2Int[] ComputeFullPath(MapConfig mapConfig)
         {
             List<Vector2Int> result = new();
