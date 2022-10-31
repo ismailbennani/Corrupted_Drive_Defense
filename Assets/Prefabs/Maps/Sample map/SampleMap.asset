@@ -16,7 +16,7 @@ MonoBehaviour:
   bottomLeftCorner: {x: 10, y: -24}
   mapSize: {x: 38, y: 22}
   path:
-  - {x: 11, y: -6}
+  - {x: 10, y: -6}
   - {x: 20, y: -6}
   - {x: 20, y: -14}
   - {x: 29, y: -14}

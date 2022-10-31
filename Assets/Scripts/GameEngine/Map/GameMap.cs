@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace GameEngine.Map
 {
-    public class GameMap: IEnumerable<Cell>
+    public class GameMap : IEnumerable<Cell>
     {
         public Vector2Int Spawn => _fullPath[0];
 
@@ -52,6 +52,7 @@ namespace GameEngine.Map
         {
             List<Vector2Int> result = new();
 
+            Vector2 last = Vector2.negativeInfinity;
             for (int i = 0; i < mapConfig.path.Length - 1; i++)
             {
                 Vector2Int cell = mapConfig.path[i];
@@ -74,14 +75,16 @@ namespace GameEngine.Map
                 int start = xChange ? cell.x : cell.y;
                 int end = xChange ? nextCell.x : nextCell.y;
 
-                int realStart = Mathf.Min(start, end);
-                int realEnd = Mathf.Max(start, end);
-                
-                for (int j = realStart; j <= realEnd; j++)
+                for (int j = start; start < end ? j < end : j > end; j = start < end ? j + 1 : j - 1)
                 {
                     Vector2Int pathCell = xChange ? new Vector2Int(j, cell.y) : new Vector2Int(cell.x, j);
+                    if (pathCell == last)
+                    {
+                        continue;
+                    }
 
                     result.Add(pathCell);
+                    last = pathCell;
                 }
             }
 
