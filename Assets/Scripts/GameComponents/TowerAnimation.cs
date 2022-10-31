@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 namespace GameComponents
@@ -39,14 +38,19 @@ namespace GameComponents
             }
         }
 
-        public void SetCharge(float newCharge)
+        public void SetCharge(GaugeState state)
         {
-            charge = newCharge;
-
-            if (charge is < 0 or > 1)
+            if (state.Max.HasValue)
             {
-                charge = Mathf.Clamp(charge, 0, 1);
+                float range = state.Max.Value - state.Min;
+                charge = range != 0 ? (state.Value - state.Min) / range : 1;
             }
+            else
+            {
+                charge = 1;
+            }
+
+            charge = Mathf.Clamp(charge, 0, 1);
         }
 
         public void Trigger()

@@ -1,3 +1,4 @@
+using GameComponents;
 using GameEngine.State;
 using UnityEngine;
 
@@ -5,9 +6,9 @@ namespace UI
 {
     public class UICpuPanelController : MonoBehaviour
     {
-        public UIFillableBarController healthBar;
-        public UIFillableBarController ticksBar;
-    
+        public UIGaugeController healthBar;
+        public UIGaugeController ticksBar;
+
         void Update()
         {
             GameManager gameManager = GameManager.Instance;
@@ -17,9 +18,9 @@ namespace UI
             }
 
             ProcessorState processorState = gameManager.gameState.processorState;
-        
-            healthBar.SetValue(processorState.health, processorState.maxHealth);
-            ticksBar.SetValue(processorState.ticks, processorState.maxTicks);
+
+            healthBar.Set(new GaugeState(processorState.health, processorState.maxHealth));
+            ticksBar.Set(new GaugeState(processorState.ticks, processorState.maxTicks));
         }
     }
 }
