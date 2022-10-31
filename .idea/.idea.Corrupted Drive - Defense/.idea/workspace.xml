@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="18cc6ff9-a968-46c1-8e5b-b5cbc6aa7b26" name="Changes" comment="add tower charge">
+    <list default="true" id="18cc6ff9-a968-46c1-8e5b-b5cbc6aa7b26" name="Changes" comment="minor">
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/PreviewCell.prefab" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/PreviewCell.prefab.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Shapes.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Shapes/Shape.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Shapes/Shape.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Shapes/ShapeType.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Shapes/ShapeType.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/MouseInputManager.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/MouseInputManager.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/SelectedTowerManager.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/SelectedTowerManager.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/VisibleShapeManager.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/VisibleShapeManager.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Corrupted Drive - Defense/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Corrupted Drive - Defense/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Maps/Sample map/sample_sheet.aseprite" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Maps/Sample map/sample_sheet.aseprite" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Maps/Sample map/sample_sheet.png" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Maps/Sample map/sample_sheet.png" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Towers/Capacitor/Capacitor.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Capacitor/Capacitor.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameComponents/EnemyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameComponents/EnemyController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameComponents/GaugeState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameComponents/GaugeState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Sample/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Sample/SampleScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameComponents/TowerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameComponents/TowerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Towers/TowerConfig.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Towers/TowerConfig.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/TowerSpawnPreviewManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/TowerSpawnPreviewManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/UITowerMenuButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/UITowerMenuButton.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -28,13 +42,17 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ee2599e9648643c4aca5e05b96a4b4fe7400/6b/f22061db/Input.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3ea01e77be99618395f448b16bd7cc2bd4248bd9e5d8474964b2d97f39c5d74/System.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/lahki/unity/Corrupted Drive - Defense/Assets/Prefabs/Capacitor/Capacitor.asset" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/lahki/unity/Corrupted Drive - Defense/Assets/Prefabs/Towers/Capacitor/Capacitor.asset" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/lahki/unity/Corrupted Drive - Defense/Assets/Scenes/Sample/Sample.asset" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/lahki/unity/Corrupted Drive - Defense/Assets/Scenes/Sample/Sample.asset" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/lahki/unity/Corrupted Drive - Defense/Assets/Scripts/EditorUtils/EditorMapVizualizer.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/lahki/unity/Corrupted Drive - Defense/Assets/Scripts/EditorUtils/EditorMapVizualizer.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/lahki/unity/Corrupted Drive - Defense/Assets/Scripts/EditorUtils/EditorMapVizualizer.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/lahki/unity/Corrupted Drive - Defense/Assets/Scripts/GameComponents/EnemyController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/lahki/unity/Corrupted Drive - Defense/Assets/Scripts/GameComponents/EnemyController.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/lahki/unity/Corrupted Drive - Defense/Assets/Scripts/GameComponents/GaugeState.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameComponents/TowerAnimation.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/lahki/unity/Corrupted Drive - Defense/Assets/Scripts/GameComponents/TowerController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/lahki/unity/Corrupted Drive - Defense/Assets/Scripts/GameEngine/GameConfig.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameEngine/GameConfig.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock://C:/Users/lahki/unity/Corrupted Drive - Defense/Assets/Scripts/GameEngine/Map/Cell.cs" root0="SKIP_HIGHLIGHTING" />
@@ -111,7 +129,7 @@
       <updated>1667141826869</updated>
       <workItem from="1667141835735" duration="112000" />
       <workItem from="1667141960624" duration="19332000" />
-      <workItem from="1667210169814" duration="23115000" />
+      <workItem from="1667210169814" duration="28786000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1667171876274</created>
@@ -267,7 +285,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667243580172</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="minor">
+      <created>1667244587802</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1667244587802</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -315,13 +340,13 @@
     <MESSAGE value="add ids to towers" />
     <MESSAGE value="add tower controller" />
     <MESSAGE value="refactor" />
-    <MESSAGE value="minor" />
     <MESSAGE value="add waves" />
     <MESSAGE value="add base mono behaviour" />
     <MESSAGE value="spawn enemies" />
     <MESSAGE value="make enemies move" />
     <MESSAGE value="fix enemy movement" />
     <MESSAGE value="add tower charge" />
-    <option name="LAST_COMMIT_MESSAGE" value="add tower charge" />
+    <MESSAGE value="minor" />
+    <option name="LAST_COMMIT_MESSAGE" value="minor" />
   </component>
 </project>

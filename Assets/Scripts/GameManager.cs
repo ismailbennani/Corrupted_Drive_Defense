@@ -9,7 +9,9 @@ using UnityEngine;
 using Utils.CustomComponents;
 using Utils.Extensions;
 
-public class GameManager : MonoBehaviour, INeedsComponent<TowerSpawnManager>, INeedsComponent<TowerSpawnPreviewManager>, INeedsComponent<EnemySpawnManager>
+public class GameManager
+    : MonoBehaviour, INeedsComponent<TowerSpawnManager>, INeedsComponent<TowerSpawnPreviewManager>, INeedsComponent<EnemySpawnManager>,
+        INeedsComponent<SelectedTowerManager>
 {
     public static GameManager Instance { get; private set; }
 
@@ -74,6 +76,18 @@ public class GameManager : MonoBehaviour, INeedsComponent<TowerSpawnManager>, IN
         // TODO
     }
 
+    public void SelectTower(TowerState state)
+    {
+        this.RequireComponent<SelectedTowerManager>();
+        _selectedTowerManager.Select(state);
+    }
+    
+    public void UnselectTower()
+    {
+        this.RequireComponent<SelectedTowerManager>();
+        _selectedTowerManager.Unselect();
+    }
+
     private void SpawnMap()
     {
         if (!gameConfig.mapConfig)
@@ -108,10 +122,9 @@ public class GameManager : MonoBehaviour, INeedsComponent<TowerSpawnManager>, IN
     #region Needed components
 
     private TowerSpawnManager _towerSpawnManager;
-
     private EnemySpawnManager _enemySpawnManager;
-
     private TowerSpawnPreviewManager _towerSpawnPreviewManager;
+    private SelectedTowerManager _selectedTowerManager;
 
 
 
@@ -134,6 +147,26 @@ public class GameManager : MonoBehaviour, INeedsComponent<TowerSpawnManager>, IN
 
 
 
+
+
+    SelectedTowerManager INeedsComponent<SelectedTowerManager>.Component {
+        get => _selectedTowerManager;
+        set => _selectedTowerManager = value;
+    }
+
+
+
+
+
+
+
+
+
+
+    public SelectedTowerManager GetInstance()
+    {
+        return SelectedTowerManager.Instance;
+    }
 
 
     EnemySpawnManager INeedsComponent<EnemySpawnManager>.GetInstance()

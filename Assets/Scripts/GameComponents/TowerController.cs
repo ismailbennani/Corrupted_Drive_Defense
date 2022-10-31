@@ -60,8 +60,6 @@ namespace GameComponents
 
             _state.ticks.Add(consumed);
             SendMessage("SetCharge", _state.ticks);
-            
-            Debug.Log(consumed);
         }
     }
 }

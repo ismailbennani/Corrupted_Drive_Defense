@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using GameEngine.Map;
 using GameEngine.Towers;
 using UnityEngine;
@@ -6,20 +7,21 @@ using Utils;
 using Utils.CustomComponents;
 using Utils.Extensions;
 
-public class TowerSpawnPreviewManager : MyMonoBehaviour
+public class TowerSpawnPreviewManager : MyMonoBehaviour, INeedsComponent<VisibleShapeManager>
 {
     public static TowerSpawnPreviewManager Instance { get; private set; }
 
     public Transform preview;
 
     [Header("Preview cell")]
-    public SpriteRenderer previewCell;
+    public SpriteRenderer cellPrefab;
 
     public Color okColor = Color.white;
     public Color errorColor = Color.red;
 
     private TowerConfig _tower;
     private Transform _previewTower;
+    private List<SpriteRenderer> _previewCells = new();
 
     void Awake()
     {
@@ -32,12 +34,10 @@ public class TowerSpawnPreviewManager : MyMonoBehaviour
         {
             throw new InvalidOperationException("preview root not found");
         }
-
-        if (!previewCell)
-        {
-            throw new InvalidOperationException("preview cell not found");
-        }
-
+        
+        RequireGameManager();
+        this.RequireComponent<VisibleShapeManager>();
+        
         StopPreview();
     }
 
@@ -50,15 +50,8 @@ public class TowerSpawnPreviewManager : MyMonoBehaviour
 
         WorldCell cell = Mouse.GetTargetCell();
         preview.position = cell.worldPosition.WithDepth(GameConstants.UiLayer);
-
-        if (cell.type == CellType.Free)
-        {
-            previewCell.color = okColor;
-        }
-        else
-        {
-            previewCell.color = errorColor;
-        }
+        _visibleShapeManager.SetPosition(cell.worldPosition);
+        _visibleShapeManager.SetColor(cell.type == CellType.Free ? okColor : errorColor);
 
         if (Input.GetMouseButtonUp(0))
         {
@@ -84,6 +77,7 @@ public class TowerSpawnPreviewManager : MyMonoBehaviour
         }
 
         _previewTower = Instantiate(tower.prefab, preview).transform;
+        _visibleShapeManager.Show(tower.targetArea, _previewTower.position);
     }
 
     public void StopPreview()
@@ -95,15 +89,11 @@ public class TowerSpawnPreviewManager : MyMonoBehaviour
 
         _tower = null;
         preview.gameObject.SetActive(false);
+        _visibleShapeManager.Hide();
     }
 
     public void SpawnAt(WorldCell cell)
     {
-        if (!_tower || !TryGetGameManager())
-        {
-            return;
-        }
-
         if (cell.type != CellType.Free)
         {
             Debug.LogWarning($"Cannot build tower at {cell.gridPosition} because it is not free: {cell.type}");
@@ -113,4 +103,39 @@ public class TowerSpawnPreviewManager : MyMonoBehaviour
         GameManager.SpawnTower(_tower, cell);
         StopPreview();
     }
+
+
+    #region Needed components
+    
+    private VisibleShapeManager _visibleShapeManager;
+
+
+
+
+
+
+
+
+
+
+    VisibleShapeManager INeedsComponent<VisibleShapeManager>.Component {
+        get => _visibleShapeManager;
+        set => _visibleShapeManager = value;
+    }
+
+
+
+
+
+
+
+
+
+
+    public VisibleShapeManager GetInstance()
+    {
+        return VisibleShapeManager.Instance;
+    }
+    
+    #endregion
 }

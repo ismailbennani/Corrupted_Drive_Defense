@@ -1,4 +1,5 @@
 ﻿using GameComponents;
+using GameEngine.Shapes;
 using UnityEngine;
 
 namespace GameEngine.Towers
@@ -7,12 +8,12 @@ namespace GameEngine.Towers
     public class TowerConfig: ScriptableObject
     {
         public string towerName;
-        public int cost;
-
+        public Shape targetArea;
+        
         [Header("Ticks")]
         public float frequency;
         public int maxTicks;
-        
+
         [Space(10)]
         public TowerController prefab;
         public Sprite sprite;
