@@ -23,7 +23,7 @@ namespace Utils
         public static WorldCell GetTargetCell()
         {
             Vector2 worldPosition = WorldSpacePosition();
-            return Map.GetCellFromWorldPosition(worldPosition);
+            return GameManager.Instance.Map.GetCellFromWorldPosition(worldPosition);
         }
 
         private static void GetCamera()

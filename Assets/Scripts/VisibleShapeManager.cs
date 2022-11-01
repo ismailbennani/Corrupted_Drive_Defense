@@ -41,8 +41,8 @@ public class VisibleShapeManager : MyMonoBehaviour
 
         IEnumerable<Vector2Int> cells = shape != null ? shape.EvaluateAt(Vector2Int.zero) : new[] { Vector2Int.zero };
 
-        WorldCell offset = Map.GetCellAt(Vector2Int.zero);
-        WorldCell[] worldCells = cells.Select(Map.GetCellAt).ToArray();
+        WorldCell offset = GameManager.Map.GetCellAt(Vector2Int.zero);
+        WorldCell[] worldCells = cells.Select(GameManager.Map.GetCellAt).ToArray();
 
         for (int i = _previewCells.Count; i < worldCells.Length; i++)
         {

@@ -59,7 +59,7 @@ public class EnemySpawnManager : MyMonoBehaviour
         EnemyState newEnemyState = new(id, enemy);
         GameManager.gameState.enemyStates.Add(newEnemyState);
 
-        WorldCell spawnCell = Map.GetCellAt(spawn);
+        WorldCell spawnCell = GameManager.Map.GetCellAt(spawn);
         EnemyController newEnemy = Instantiate(enemy.prefab, Vector3.zero, Quaternion.identity, root);
         newEnemy.transform.localPosition = spawnCell.worldPosition.WithDepth(GameConstants.EntityLayer);
         newEnemy.id = id;

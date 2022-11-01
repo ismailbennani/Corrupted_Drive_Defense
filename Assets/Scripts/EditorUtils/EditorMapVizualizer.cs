@@ -28,10 +28,10 @@ namespace EditorUtils
 
         private void DrawMapBoundaries()
         {
-            MapConfig mapConfig = Map.GetConfig();
+            MapConfig mapConfig = GameManager.Map.GetConfig();
 
-            WorldCell bottomLeftCorner = Map.GetCellAt(mapConfig.bottomLeftCorner);
-            WorldCell topRightCorner = Map.GetCellAt(mapConfig.bottomLeftCorner + mapConfig.mapSize);
+            WorldCell bottomLeftCorner = GameManager.Map.GetCellAt(mapConfig.bottomLeftCorner);
+            WorldCell topRightCorner = GameManager.Map.GetCellAt(mapConfig.bottomLeftCorner + mapConfig.mapSize);
 
             Vector2 center = (topRightCorner.worldPosition + bottomLeftCorner.worldPosition) / 2;
             Vector2 size = topRightCorner.worldPosition - bottomLeftCorner.worldPosition;
@@ -42,7 +42,7 @@ namespace EditorUtils
 
         private void DrawWalls()
         {
-            foreach (WorldCell cell in Map.GetCellsOfType(CellType.Wall))
+            foreach (WorldCell cell in GameManager.Map.GetCellsOfType(CellType.Wall))
             {
                 Gizmos.color = Color.red;
                 Gizmos.DrawWireSphere(cell.worldPosition, 0.25f);
@@ -51,7 +51,7 @@ namespace EditorUtils
 
         private void DrawPath()
         {
-            WorldCell[] path = Map.GetPath().ToArray();
+            WorldCell[] path = GameManager.Map.GetPath().ToArray();
 
             for (int i = 0; i < path.Length - 1; i++)
             {
@@ -62,7 +62,7 @@ namespace EditorUtils
                 Gizmos.DrawLine(cell.worldPosition, nextCell.worldPosition);
             }
 
-            foreach (WorldCell cell in Map.GetCellsOfType(CellType.Path))
+            foreach (WorldCell cell in GameManager.Map.GetCellsOfType(CellType.Path))
             {
                 Gizmos.color = Color.blue;
                 Gizmos.DrawWireSphere(cell.worldPosition, 0.25f);

@@ -16,12 +16,16 @@ public class GameManager : MonoBehaviour
 
     [Header("Created on start")]
     public GameState gameState;
-    
-    public MapManager mapManager;
+
+    public MapApi Map { get; private set; }
+
+    private MapManager _mapManager;
+    private Transform _towersRoot;
     private TowerSpawnPreviewManager _towerSpawnPreviewManager;
     private TowerSpawnManager _towerSpawnManager;
-    private EnemySpawnManager _enemySpawnManager;
     private SelectedTowerManager _selectedTowerManager;
+    private Transform _enemiesRoot;
+    private EnemySpawnManager _enemySpawnManager;
 
     void Awake()
     {
@@ -42,6 +46,7 @@ public class GameManager : MonoBehaviour
         yield return null;
         
         SpawnMap();
+        Map = new MapApi(_mapManager);
 
         yield return null;
         
@@ -92,41 +97,41 @@ public class GameManager : MonoBehaviour
 
         Transform map = new GameObject("MapManager", typeof(MapManager)).transform;
         map.SetParent(transform);
-        mapManager = map.GetComponent<MapManager>();
-        mapManager.mapConfig = gameConfig.mapConfig;
+        _mapManager = map.GetComponent<MapManager>();
+        _mapManager.mapConfig = gameConfig.mapConfig;
     }
 
     private void SpawnTowerManagers()
     {
-        Transform towersRoot = new GameObject("TowersRoot", typeof(TowerSpawnManager), typeof(SelectedTowerManager), typeof(TowerSpawnPreviewManager))
+        _towersRoot = new GameObject("TowersRoot", typeof(TowerSpawnManager), typeof(SelectedTowerManager), typeof(TowerSpawnPreviewManager))
             .transform;
-        towersRoot.SetParent(transform);
-        towersRoot.position = Vector2.zero.WithDepth(GameConstants.EntityLayer);
+        _towersRoot.SetParent(transform);
+        _towersRoot.position = Vector2.zero.WithDepth(GameConstants.EntityLayer);
 
-        _towerSpawnPreviewManager = towersRoot.GetComponent<TowerSpawnPreviewManager>();
-        _selectedTowerManager = towersRoot.GetComponent<SelectedTowerManager>();
+        _towerSpawnPreviewManager = _towersRoot.GetComponent<TowerSpawnPreviewManager>();
+        _selectedTowerManager = _towersRoot.GetComponent<SelectedTowerManager>();
 
-        _towerSpawnManager = towersRoot.GetComponent<TowerSpawnManager>();
-        _towerSpawnManager.root = towersRoot;
+        _towerSpawnManager = _towersRoot.GetComponent<TowerSpawnManager>();
+        _towerSpawnManager.root = _towersRoot;
     }
 
     private void SpawnEnemyManagers()
     {
-        Transform enemiesRoot = new GameObject("EnemiesRoot", typeof(EnemySpawnManager)).transform;
-        enemiesRoot.SetParent(transform);
-        enemiesRoot.position = Vector2.zero.WithDepth(GameConstants.EntityLayer);
+        _enemiesRoot = new GameObject("EnemiesRoot", typeof(EnemySpawnManager)).transform;
+        _enemiesRoot.SetParent(transform);
+        _enemiesRoot.position = Vector2.zero.WithDepth(GameConstants.EntityLayer);
 
-        _enemySpawnManager = enemiesRoot.GetComponent<EnemySpawnManager>();
-        _enemySpawnManager.root = enemiesRoot;
+        _enemySpawnManager = _enemiesRoot.GetComponent<EnemySpawnManager>();
+        _enemySpawnManager.root = _enemiesRoot;
     }
 
     private void SpawnProcessor()
     {
-        WorldCell processorCell = mapManager.GetCellAt(gameConfig.mapConfig.processorPosition);
+        WorldCell processorCell = Map.GetCellAt(gameConfig.mapConfig.processorPosition);
 
         ProcessorConfig processorConfig = gameConfig.processor;
 
-        ProcessorController processor = Instantiate(processorConfig.prefab, Vector3.zero, Quaternion.identity, mapManager.towersRoot);
+        ProcessorController processor = Instantiate(processorConfig.prefab, Vector3.zero, Quaternion.identity, _towersRoot);
         processor.transform.localPosition = processorCell.worldPosition.WithDepth(GameConstants.EntityLayer);
 
         gameState.processorState = new ProcessorState(processorCell, processorConfig);

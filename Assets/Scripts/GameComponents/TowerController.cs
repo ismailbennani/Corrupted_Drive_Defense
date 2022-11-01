@@ -40,7 +40,7 @@ namespace GameComponents
                 throw new InvalidOperationException($"could not find state of processor");
             }
 
-            _path = Map.GetPath().ToArray();
+            _path = GameManager.Map.GetPath().ToArray();
         }
 
         void Update()
@@ -74,7 +74,7 @@ namespace GameComponents
             EnemyState target = targets.First();
 
             _state.ticks.Clear();
-            Debug.Log($"hit {target.config.enemyName} {target.id}");
+            Debug.Log($"hit {target.config.enemyName} ({target.id})");
         }
 
         private void UpdateCharge()

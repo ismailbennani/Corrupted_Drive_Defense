@@ -36,7 +36,7 @@ namespace GameComponents
                 throw new InvalidOperationException($"could not find enemy state with id {id}");
             }
             
-            _path = Map.GetPath().ToArray();
+            _path = GameManager.Map.GetPath().ToArray();
             
             UpdateTargetPositions();
         }
