@@ -1,23 +1,31 @@
-﻿using GameEngine.Map;
+﻿using System;
+using GameEngine;
+using GameEngine.Map;
 using GameEngine.Towers;
 using Managers.Utils;
 using UnityEngine;
+using UnityEngine.Assertions;
 using Utils;
-using Utils.CustomComponents;
 using Utils.Extensions;
 
 namespace Managers.Tower
 {
-    public class TowerSpawnPreviewManager : MyMonoBehaviour
+    public class TowerSpawnPreviewManager : MonoBehaviour
     {
+        [NonSerialized]
+        public GameConfig GameConfig;
+        public TowerSpawnerApi TowerSpawner;
+        public VisibleShapeApi VisibleShape;
+        
         private Transform _root;
         private TowerConfig _tower;
         private Transform _previewTower;
 
         void Start()
         {
-            RequireGameManager();
-     
+            Assert.IsNotNull(GameConfig);
+            Assert.IsNotNull(VisibleShape);
+            
             _root = new GameObject("Root").transform;
             _root.SetParent(transform);   
         
@@ -33,8 +41,8 @@ namespace Managers.Tower
 
             WorldCell cell = Mouse.GetTargetCell();
             _root.position = cell.worldPosition.WithDepth(GameConstants.UiLayer);
-            GameManager.VisibleShapeManager.SetPosition(cell.gridPosition, true);
-            GameManager.VisibleShapeManager.SetColor(cell.type == CellType.Free ? GameManager.gameConfig.shapePreviewOkColor : GameManager.gameConfig.shapePreviewErrorColor);
+            VisibleShape.SetPosition(cell.gridPosition, true);
+            VisibleShape.SetColor(cell.type == CellType.Free ? GameConfig.shapePreviewOkColor : GameConfig.shapePreviewErrorColor);
 
             if (Input.GetMouseButtonUp(0))
             {
@@ -60,7 +68,7 @@ namespace Managers.Tower
             }
 
             _previewTower = Instantiate(tower.prefab, _root).transform;
-            GameManager.VisibleShapeManager.Show(tower.targetArea, Vector2Int.zero);
+            VisibleShape.Show(tower.targetArea, Vector2Int.zero);
         }
 
         public void StopPreview()
@@ -72,7 +80,7 @@ namespace Managers.Tower
 
             _tower = null;
             _root.gameObject.SetActive(false);
-            GameManager.VisibleShapeManager.Hide();
+            VisibleShape.Hide();
         }
 
         public void SpawnAt(WorldCell cell)
@@ -83,7 +91,7 @@ namespace Managers.Tower
                 return;
             }
 
-            GameManager.SpawnTower(_tower, cell);
+            TowerSpawner.SpawnTower(_tower, cell);
             StopPreview();
         }
     }

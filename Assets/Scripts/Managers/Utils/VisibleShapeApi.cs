@@ -3,11 +3,11 @@ using UnityEngine;
 
 namespace Managers.Utils
 {
-    public class VisibleShapeManagerApi
+    public class VisibleShapeApi
     {
         private readonly VisibleShapeManager _visibleShapeManager;
 
-        public VisibleShapeManagerApi(VisibleShapeManager visibleShapeManager)
+        public VisibleShapeApi(VisibleShapeManager visibleShapeManager)
         {
             _visibleShapeManager = visibleShapeManager;
         }

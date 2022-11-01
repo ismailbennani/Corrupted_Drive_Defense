@@ -22,13 +22,13 @@ namespace Managers
 
         public GameStateApi GameState { get; private set; }
         public MapApi Map { get; private set; }
-        public VisibleShapeManagerApi VisibleShapeManager { get; private set; }
+        public VisibleShapeApi VisibleShape { get; private set; }
+        public TowerSpawnerApi TowerSpawner { get; private set; }
         public SelectedTowerApi SelectedTower { get; private set; }
         public EnemySpawnApi EnemySpawn { get; private set; }
 
         private Transform _towersRoot;
         private TowerSpawnPreviewManager _towerSpawnPreviewManager;
-        private TowerSpawnManager _towerSpawnManager;
         private Transform _enemiesRoot;
 
         void Awake()
@@ -67,11 +67,6 @@ namespace Managers
         public void StartSpawning(TowerConfig tower)
         {
             _towerSpawnPreviewManager.StartPreview(tower);
-        }
-
-        public void SpawnTower(TowerConfig tower, WorldCell cell)
-        {
-            _towerSpawnManager.SpawnTower(tower, cell);
         }
 
         public void StartWave()
@@ -120,25 +115,30 @@ namespace Managers
             utilsRoot.SetParent(transform);
             
             VisibleShapeManager visibleShapeManager = utilsRoot.GetComponent<VisibleShapeManager>();
+            visibleShapeManager.Map = Map;
             visibleShapeManager.cellPrefab = gameConfig.cellPrefab;
-            VisibleShapeManager = new VisibleShapeManagerApi(visibleShapeManager);
+            VisibleShape = new VisibleShapeApi(visibleShapeManager);
         }
 
         private void SpawnTowerManagers()
         {
-            _towersRoot = new GameObject("TowersRoot", typeof(TowerSpawnManager), typeof(SelectedTowerManager), typeof(TowerSpawnPreviewManager))
+            _towersRoot = new GameObject("TowersRoot", typeof(TowerSpawnerManager), typeof(SelectedTowerManager), typeof(TowerSpawnPreviewManager))
                 .transform;
             _towersRoot.SetParent(transform);
             _towersRoot.position = Vector2.zero.WithDepth(GameConstants.EntityLayer);
 
+            TowerSpawnerManager towerSpawnerManager = _towersRoot.GetComponent<TowerSpawnerManager>();
+            towerSpawnerManager.root = _towersRoot;
+            TowerSpawner = new TowerSpawnerApi(towerSpawnerManager, GameState);
+            
             _towerSpawnPreviewManager = _towersRoot.GetComponent<TowerSpawnPreviewManager>();
+            _towerSpawnPreviewManager.GameConfig = gameConfig;
+            _towerSpawnPreviewManager.TowerSpawner = TowerSpawner;
+            _towerSpawnPreviewManager.VisibleShape = VisibleShape;
             
             SelectedTowerManager selectedTowerManager = _towersRoot.GetComponent<SelectedTowerManager>();
-            selectedTowerManager.VisibleShapeManager = VisibleShapeManager;
+            selectedTowerManager.VisibleShape = VisibleShape;
             SelectedTower = new SelectedTowerApi(selectedTowerManager);
-
-            _towerSpawnManager = _towersRoot.GetComponent<TowerSpawnManager>();
-            _towerSpawnManager.root = _towersRoot;
         }
 
         private void SpawnEnemyManagers()

@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using GameEngine.Map;
 using GameEngine.Shapes;
+using Managers.Map;
 using UnityEngine;
-using Utils.CustomComponents;
 using Utils.Extensions;
 
 namespace Managers.Utils
 {
-    public class VisibleShapeManager : MyMonoBehaviour
+    public class VisibleShapeManager : MonoBehaviour
     {
+        public MapApi Map;
+        
         public SpriteRenderer cellPrefab;
 
         private Transform _root;
@@ -18,8 +20,6 @@ namespace Managers.Utils
 
         void Start()
         {
-            RequireGameManager();
-
             if (!cellPrefab)
             {
                 throw new InvalidOperationException("preview cell not found");
@@ -35,8 +35,8 @@ namespace Managers.Utils
 
             IEnumerable<Vector2Int> cells = shape != null ? shape.EvaluateAt(Vector2Int.zero) : new[] { Vector2Int.zero };
 
-            WorldCell offset = GameManager.Map.GetCellAt(Vector2Int.zero);
-            WorldCell[] worldCells = cells.Select(GameManager.Map.GetCellAt).ToArray();
+            WorldCell offset = Map.GetCellAt(Vector2Int.zero);
+            WorldCell[] worldCells = cells.Select(Map.GetCellAt).ToArray();
 
             for (int i = _previewCells.Count; i < worldCells.Length; i++)
             {
@@ -77,7 +77,7 @@ namespace Managers.Utils
 
         public void SetPosition(Vector2Int position, bool aboveEntities = false)
         {
-            _root.position = GameManager.Map.GetCellAt(position)
+            _root.position = Map.GetCellAt(position)
                 .worldPosition.WithDepth(aboveEntities ? GameConstants.UiLayer + 0.1f : GameConstants.EntityLayer + 0.1f);
         }
     }
