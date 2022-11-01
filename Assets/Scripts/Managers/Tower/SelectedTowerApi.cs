@@ -11,6 +11,11 @@ namespace Managers.Tower
             _selectedTowerManager = selectedTowerManager;
         }
 
+        public TowerState Get()
+        {
+            return _selectedTowerManager.selectedTower;
+        }
+
         public void Select(TowerState tower)
         {
             _selectedTowerManager.Select(tower);

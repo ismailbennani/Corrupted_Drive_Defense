@@ -1,5 +1,6 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace Utils.CustomComponents
 {
@@ -23,10 +24,7 @@ namespace Utils.CustomComponents
 
         public static void RequireComponent<T>(this INeedsComponent<T> @this) where T: Component
         {
-            if (!TryGetNeededComponent(@this))
-            {
-                throw new InvalidOperationException($"could not get component {typeof(T).Name}");
-            }
+            Assert.IsTrue(TryGetNeededComponent(@this));
         }
     }
 }

@@ -12,6 +12,7 @@ namespace GameEngine.Towers
         public WorldCell cell;
 
         public GaugeState ticks;
+        public int kills;
 
         [Space(10)]
         public TowerConfig config;
