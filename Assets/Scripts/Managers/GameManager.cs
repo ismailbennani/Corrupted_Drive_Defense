@@ -73,21 +73,6 @@ namespace Managers
             Ready = true;
         }
 
-        public void StartSpawning(TowerConfig tower)
-        {
-            TowerSpawnPreview.StartPreview(tower);
-        }
-
-        public void StartWave()
-        {
-            EnemyWave.SpawnNextWave();
-        }
-
-        public void SetAutoWave(bool auto)
-        {
-            EnemyWave.SetAutoWave(auto);
-        }
-
         private void SpawnMap()
         {
             if (!gameConfig.mapConfig)
@@ -168,5 +153,24 @@ namespace Managers
         {
             MouseInput = new MouseInputApi(GameState, SelectedTower);
         }
+
+        #region Exposed APIs to inspector
+        
+        public void StartSpawning(TowerConfig tower)
+        {
+            TowerSpawnPreview.StartPreview(tower);
+        }
+
+        public void StartWave()
+        {
+            EnemyWave.SpawnNextWave();
+        }
+
+        public void SetAutoWave(bool auto)
+        {
+            EnemyWave.SetAutoWave(auto);
+        }
+        
+        #endregion
     }
 }
