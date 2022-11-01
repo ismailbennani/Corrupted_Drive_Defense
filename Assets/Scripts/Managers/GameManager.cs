@@ -23,6 +23,7 @@ namespace Managers
         public bool Ready { get; private set; }
         public GameStateApi GameState { get; private set; }
         public MapApi Map { get; private set; }
+        public GameSpeedApi GameSpeed { get; private set; }
         public VisibleShapeApi VisibleShape { get; private set; }
         public MouseInputApi MouseInput { get; private set; }
         public TowerSpawnerApi TowerSpawner { get; private set; }
@@ -92,6 +93,8 @@ namespace Managers
 
         private void SpawnUtils()
         {
+            GameSpeed = new GameSpeedApi();
+            
             Transform utilsRoot = new GameObject("Utils", typeof(VisibleShapeManager)).transform;
             utilsRoot.SetParent(transform);
 
@@ -172,6 +175,11 @@ namespace Managers
         public void SetAutoWave(bool auto)
         {
             EnemyWave.SetAutoWave(auto);
+        }
+
+        public void CycleSpeed()
+        {
+            GameSpeed.CycleSpeed();
         }
         
         #endregion

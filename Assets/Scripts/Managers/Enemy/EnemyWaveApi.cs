@@ -41,5 +41,10 @@ namespace Managers.Enemy
         {
 
         }
+
+        public bool GetAutoWave()
+        {
+            return false;
+        }
     }
 }
