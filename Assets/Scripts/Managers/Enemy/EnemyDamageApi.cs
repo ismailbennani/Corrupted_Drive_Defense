@@ -1,5 +1,6 @@
 ﻿using GameEngine.Enemies;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace Managers.Enemy
 {
@@ -10,6 +11,9 @@ namespace Managers.Enemy
 
         public EnemyDamageApi(GameStateApi gameStateApi, EnemySpawnApi enemySpawnApi)
         {
+            Assert.IsNotNull(gameStateApi);
+            Assert.IsNotNull(enemySpawnApi);
+            
             _gameStateApi = gameStateApi;
             _enemySpawnApi = enemySpawnApi;
         }

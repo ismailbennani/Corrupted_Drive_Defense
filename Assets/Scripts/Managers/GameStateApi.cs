@@ -8,6 +8,7 @@ using GameEngine.Towers;
 using GameEngine.Waves;
 using Managers.Map;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace Managers
 {
@@ -18,6 +19,9 @@ namespace Managers
 
         public GameStateApi(GameState state, MapApi map)
         {
+            Assert.IsNotNull(state);
+            Assert.IsNotNull(map);
+            
             _state = state;
             _map = map;
         }

@@ -2,6 +2,7 @@
 using GameEngine.Towers;
 using Managers.Map;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace Managers.Tower
 {
@@ -13,6 +14,10 @@ namespace Managers.Tower
 
         public TowerSpawnerApi(TowerSpawnerManager towerSpawnerManager, GameStateApi gameState, MapApi map)
         {
+            Assert.IsNotNull(towerSpawnerManager);
+            Assert.IsNotNull(gameState);
+            Assert.IsNotNull(map);
+            
             _towerSpawnerManager = towerSpawnerManager;
             _gameState = gameState;
             _map = map;

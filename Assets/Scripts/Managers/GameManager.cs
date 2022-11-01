@@ -125,7 +125,7 @@ namespace Managers
 
         private void SpawnTowerManagers()
         {
-            _towersRoot = new GameObject("Towers", typeof(TowerSpawnerManager), typeof(SelectedTowerManager), typeof(TowerSpawnPreviewManager)).transform;
+            _towersRoot = new GameObject("Towers", typeof(TowerSpawnerManager), typeof(TowerSpawnPreviewManager)).transform;
             _towersRoot.SetParent(transform);
             _towersRoot.position = Vector2.zero.WithDepth(GameConstants.EntityLayer);
 
@@ -138,9 +138,7 @@ namespace Managers
             towerSpawnPreviewManager.VisibleShape = VisibleShape;
             TowerSpawnPreview = new TowerSpawnPreviewApi(towerSpawnPreviewManager);
 
-            SelectedTowerManager selectedTowerManager = _towersRoot.GetComponent<SelectedTowerManager>();
-            selectedTowerManager.VisibleShape = VisibleShape;
-            SelectedTower = new SelectedTowerApi(selectedTowerManager);
+            SelectedTower = new SelectedTowerApi(VisibleShape);
         }
 
         private void SpawnProcessor()

@@ -1,4 +1,5 @@
 ﻿using GameEngine.Towers;
+using UnityEngine.Assertions;
 
 namespace Managers.Tower
 {
@@ -8,6 +9,8 @@ namespace Managers.Tower
 
         public TowerSpawnPreviewApi(TowerSpawnPreviewManager towerSpawnPreviewManager)
         {
+            Assert.IsNotNull(towerSpawnPreviewManager);
+            
             _towerSpawnPreviewManager = towerSpawnPreviewManager;
         }
 

@@ -1,6 +1,7 @@
 ﻿using GameEngine;
 using GameEngine.Waves;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace Managers.Enemy
 {
@@ -12,6 +13,10 @@ namespace Managers.Enemy
 
         public EnemyWaveApi(GameConfig gameConfig, GameStateApi gameStateApi, EnemyWaveManager enemyWaveManager)
         {
+            Assert.IsNotNull(gameConfig);
+            Assert.IsNotNull(gameStateApi);
+            Assert.IsNotNull(enemyWaveManager);
+            
             _gameConfig = gameConfig;
             _gameStateApi = gameStateApi;
             _enemyWaveManager = enemyWaveManager;

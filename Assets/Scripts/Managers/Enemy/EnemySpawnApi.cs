@@ -1,5 +1,6 @@
 ﻿using GameEngine.Enemies;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace Managers.Enemy
 {
@@ -9,6 +10,8 @@ namespace Managers.Enemy
 
         public EnemySpawnApi(EnemySpawnManager enemySpawnManager)
         {
+            Assert.IsNotNull(enemySpawnManager);
+            
             _enemySpawnManager = enemySpawnManager;
         }
 

@@ -1,6 +1,7 @@
 ﻿using GameEngine.Map;
 using GameEngine.Towers;
 using Managers.Tower;
+using UnityEngine.Assertions;
 using Utils;
 
 namespace Managers.Utils
@@ -12,6 +13,9 @@ namespace Managers.Utils
 
     public MouseInputApi(GameStateApi gameStateApi, SelectedTowerApi selectedTowerApi)
     {
+      Assert.IsNotNull(gameStateApi);
+      Assert.IsNotNull(selectedTowerApi);
+      
       _gameStateApi = gameStateApi;
       _selectedTowerApi = selectedTowerApi;
     }

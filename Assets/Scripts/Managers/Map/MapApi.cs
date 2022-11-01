@@ -2,6 +2,7 @@
 using System.Linq;
 using GameEngine.Map;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace Managers.Map
 {
@@ -11,6 +12,8 @@ namespace Managers.Map
 
         public MapApi(MapManager mapManager)
         {
+            Assert.IsNotNull(mapManager);
+            
             _mapManager = mapManager;
         }
 

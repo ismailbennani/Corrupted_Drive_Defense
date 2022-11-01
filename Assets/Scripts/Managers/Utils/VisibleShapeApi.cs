@@ -1,5 +1,6 @@
 ﻿using GameEngine.Shapes;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace Managers.Utils
 {
@@ -9,6 +10,8 @@ namespace Managers.Utils
 
         public VisibleShapeApi(VisibleShapeManager visibleShapeManager)
         {
+            Assert.IsNotNull(visibleShapeManager);
+            
             _visibleShapeManager = visibleShapeManager;
         }
 

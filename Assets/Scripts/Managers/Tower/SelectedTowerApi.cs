@@ -1,34 +1,44 @@
 ﻿using GameEngine.Towers;
+using Managers.Utils;
+using UnityEngine.Assertions;
 
 namespace Managers.Tower
 {
     public class SelectedTowerApi
     {
-        private readonly SelectedTowerManager _selectedTowerManager;
+        private readonly VisibleShapeApi _visibleShape;
+        private TowerState _selectedTower;
 
-        public SelectedTowerApi(SelectedTowerManager selectedTowerManager)
+        public SelectedTowerApi(VisibleShapeApi visibleShape)
         {
-            _selectedTowerManager = selectedTowerManager;
+            Assert.IsNotNull(visibleShape);
+            
+            _visibleShape = visibleShape;
         }
 
         public TowerState Get()
         {
-            return _selectedTowerManager.selectedTower;
+            return _selectedTower;
         }
 
         public void Select(TowerState tower)
         {
-            _selectedTowerManager.Select(tower);
+            _selectedTower = tower;
+            _visibleShape.Show(tower.config.targetArea, tower.cell.gridPosition);
         }
 
         public void Unselect(TowerState tower)
         {
-            _selectedTowerManager.Unselect(tower);
+            if (_selectedTower.id == tower.id)
+            {
+                Clear();
+            }
         }
 
         public void Clear()
         {
-            _selectedTowerManager.Clear();
+            _selectedTower = null;
+            _visibleShape.Hide();
         }
     }
 }
