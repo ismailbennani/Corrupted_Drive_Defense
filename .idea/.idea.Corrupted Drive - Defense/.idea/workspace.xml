@@ -1,16 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="18cc6ff9-a968-46c1-8e5b-b5cbc6aa7b26" name="Changes" comment="add kills">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/GameSpeedApi.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/GameSpeedApi.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/UI/UIAutoWave.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/UI/UIAutoWave.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/UI/UISpeed.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/UI/UISpeed.cs.meta" afterDir="false" />
+    <list default="true" id="18cc6ff9-a968-46c1-8e5b-b5cbc6aa7b26" name="Changes" comment="add speed">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Corrupted Drive - Defense/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Corrupted Drive - Defense/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Sample/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Sample/SampleScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/Enemy/EnemyWaveApi.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Enemy/EnemyWaveApi.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/GameManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/Enemy/EnemyWaveManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Enemy/EnemyWaveManager.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -48,6 +43,7 @@
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.6.4/Editor/Manipulators/Utils/EditModeRippleUtils.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.6.4/Editor/inspectors/MarkerInspector.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.timeline@1.6.4/Editor/inspectors/TrackAssetInspector.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.ugui@1.0.0/Runtime/UI/Core/Toggle.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
@@ -112,7 +108,7 @@
       <workItem from="1667141835735" duration="112000" />
       <workItem from="1667141960624" duration="19332000" />
       <workItem from="1667210169814" duration="30271000" />
-      <workItem from="1667299014331" duration="14391000" />
+      <workItem from="1667299014331" duration="15078000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1667171876274</created>
@@ -401,7 +397,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667317371142</updated>
     </task>
-    <option name="localTasksCounter" value="42" />
+    <task id="LOCAL-00042" summary="add speed">
+      <created>1667317969184</created>
+      <option name="number" value="00042" />
+      <option name="presentableId" value="LOCAL-00042" />
+      <option name="project" value="LOCAL" />
+      <updated>1667317969184</updated>
+    </task>
+    <option name="localTasksCounter" value="43" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -436,7 +439,6 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="add text mesh pro" />
     <MESSAGE value="add ui" />
     <MESSAGE value="add preview" />
     <MESSAGE value="improve gauges" />
@@ -461,7 +463,8 @@
     <MESSAGE value="add wave" />
     <MESSAGE value="add selected tower ui" />
     <MESSAGE value="add kills" />
-    <option name="LAST_COMMIT_MESSAGE" value="add kills" />
+    <MESSAGE value="add speed" />
+    <option name="LAST_COMMIT_MESSAGE" value="add speed" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

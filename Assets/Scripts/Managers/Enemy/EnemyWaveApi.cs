@@ -15,6 +15,8 @@ namespace Managers.Enemy
             _gameConfig = gameConfig;
             _gameStateApi = gameStateApi;
             _enemyWaveManager = enemyWaveManager;
+
+            _enemyWaveManager.EnemyWaveApi = this;
         }
 
         public void SpawnNextWave()
@@ -39,12 +41,12 @@ namespace Managers.Enemy
 
         public void SetAutoWave(bool auto)
         {
-
+            _enemyWaveManager.SetAutoWave(auto);
         }
 
         public bool GetAutoWave()
         {
-            return false;
+            return _enemyWaveManager.AutoWave;
         }
     }
 }

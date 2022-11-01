@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections;
-using GameEngine;
 using GameEngine.Enemies;
 using GameEngine.Waves;
 using UnityEngine;
@@ -12,20 +11,43 @@ namespace Managers.Enemy
     {
         public bool Spawning { get; private set; }
         public bool Ready => !Spawning && EnemySpawn.GetRemaining() == 0;
+        public bool AutoWave { get; private set; }
+
 
         [NonSerialized]
         public Vector2Int? Spawn;
         public EnemySpawnApi EnemySpawn;
+        public EnemyWaveApi EnemyWaveApi;
+
+        private Coroutine _autoWaveCoroutine;
 
         void Start()
         {
             Assert.IsFalse(Spawn == null);
             Assert.IsNotNull(EnemySpawn);
+            Assert.IsNotNull(EnemyWaveApi);
         }
 
         public void SpawnWave(WaveConfig wave)
         {
             StartCoroutine(SpawnWaveCoroutine(wave));
+        }
+
+        public void SetAutoWave(bool auto)
+        {
+            AutoWave = auto;
+            
+            if (AutoWave)
+            {
+                _autoWaveCoroutine = StartCoroutine(AutoTriggerWave());
+            }
+            else
+            {
+                if (_autoWaveCoroutine != null)
+                {
+                    StopCoroutine(_autoWaveCoroutine);
+                }
+            }
         }
         
         private IEnumerator SpawnWaveCoroutine(WaveConfig wave)
@@ -41,6 +63,24 @@ namespace Managers.Enemy
             }
 
             Spawning = false;
+
+            if (AutoWave)
+            {
+                StartCoroutine(AutoTriggerWave());
+            }
+        }
+
+        private IEnumerator AutoTriggerWave()
+        {
+            while (!Ready)
+            {
+                yield return null;
+            }
+
+            if (AutoWave)
+            {
+                EnemyWaveApi.SpawnNextWave();
+            }
         }
     }
 }
