@@ -16,5 +16,15 @@ namespace Managers.Enemy
         {
             _enemySpawnManager.SpawnEnemy(enemy, cell);
         }
+
+        public void SpawnEnemy(EnemyState state)
+        {
+            _enemySpawnManager.SpawnEnemy(state);
+        }
+
+        public void DestroyEnemy(long id)
+        {
+            _enemySpawnManager.DestroyEnemy(id);
+        }
     }
 }

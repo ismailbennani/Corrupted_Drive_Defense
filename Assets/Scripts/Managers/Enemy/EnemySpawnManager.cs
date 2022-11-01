@@ -1,8 +1,11 @@
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using Controllers;
 using GameEngine.Enemies;
 using GameEngine.Map;
 using Managers.Map;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Assertions;
 using Utils;
@@ -15,7 +18,8 @@ namespace Managers.Enemy
         public GameStateApi GameState;
         public MapApi Map;
 
-        private Transform _root; 
+        private Transform _root;
+        private readonly List<EnemyController> _enemies = new();
         
         void Start()
         {
@@ -27,21 +31,39 @@ namespace Managers.Enemy
 
         public void SpawnEnemy(EnemyConfig enemy, Vector2Int cell)
         {
-            if (!enemy || !enemy.prefab)
+            long id = Uid.Get();
+            EnemyState newEnemyState = new(id, enemy);
+            
+            SpawnEnemy(newEnemyState);
+
+            Debug.Log($"Spawn {enemy.enemyName} at spawn");
+        }
+
+        public void SpawnEnemy(EnemyState state)
+        {
+            if (!state.config || !state.config.prefab)
             {
                 throw new InvalidOperationException("could not find enemy prefab");
             }
 
-            long id = Uid.Get();
-            EnemyState newEnemyState = new(id, enemy);
-            GameState.AddEnemy(newEnemyState);
+            GameState.AddEnemy(state);
+            
+            EnemyController newEnemy = Instantiate(state.config.prefab, Vector3.zero, Quaternion.identity, _root);
+            newEnemy.id = state.id;
+            _enemies.Add(newEnemy);
+        }
 
-            WorldCell spawnCell = Map.GetCellAt(cell);
-            EnemyController newEnemy = Instantiate(enemy.prefab, Vector3.zero, Quaternion.identity, _root);
-            newEnemy.transform.localPosition = spawnCell.worldPosition.WithDepth(GameConstants.EntityLayer);
-            newEnemy.id = id;
+        public void DestroyEnemy(long id)
+        {
+            EnemyController controller = _enemies.SingleOrDefault(c => c.id == id);
+            if (controller == null)
+            {
+                Debug.LogWarning($"Could not find enemy controller with id {id}");
+            }
 
-            Debug.Log($"Spawn {enemy.enemyName} at {spawnCell.gridPosition}");
+            _enemies.Remove(controller);
+            
+            Destroy(controller.GameObject());
         }
     }
 }

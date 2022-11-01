@@ -72,7 +72,7 @@ namespace Controllers
             EnemyState target = targets.First();
 
             _state.ticks.Clear();
-            Debug.Log($"hit {target.config.enemyName} ({target.id})");
+            GameManager.EnemyDamage.Hit(target.id, 1);
         }
 
         private void UpdateCharge()

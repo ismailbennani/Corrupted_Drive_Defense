@@ -72,6 +72,18 @@ namespace Managers
             _state.enemyStates.Add(enemy);
         }
 
+        public void RemoveEnemy(long id)
+        {
+            EnemyState enemyState = GetEnemyState(id);
+            if (enemyState == null)
+            {
+                Debug.LogWarning($"Cannot find enemy state with id {id}");
+                return;
+            }
+            
+            _state.enemyStates.Remove(enemyState);
+        }
+
         public IEnumerable<EnemyState> GetEnemiesAt(IEnumerable<Vector2Int> targetCells)
         {
             WorldCell[] path = _map.GetPath().ToArray(); 
@@ -80,7 +92,7 @@ namespace Managers
         }
 
         #endregion
-        
+
         #region Wave
 
         public int GetCurrentWave()
