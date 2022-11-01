@@ -83,7 +83,7 @@ namespace Managers.Tower
             VisibleShape.Hide();
         }
 
-        public void SpawnAt(WorldCell cell)
+        private void SpawnAt(WorldCell cell)
         {
             if (cell.type != CellType.Free)
             {

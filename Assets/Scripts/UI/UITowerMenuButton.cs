@@ -1,18 +1,23 @@
 ﻿using GameEngine.Towers;
 using Managers;
 using TMPro;
-using UnityEngine;
 using UnityEngine.UI;
+using Utils.CustomComponents;
 
 namespace UI
 {
-    public class UITowerMenuButton: MonoBehaviour
+    public class UITowerMenuButton: MyMonoBehaviour
     {
         public Image image;
         public TextMeshProUGUI nameText;
         public TextMeshProUGUI costText;
 
         private TowerConfig _tower;
+
+        void Start()
+        {
+            RequireGameManager();
+        }
         
         public void SetTower(TowerConfig tower)
         {
@@ -29,13 +34,12 @@ namespace UI
                 return;
             }
 
-            GameManager gameManager = GameManager.Instance;
-            if (!gameManager)
+            if (!GameManager.Ready)
             {
                 return;
             }
 
-            gameManager.StartSpawning(_tower);
+            GameManager.StartSpawning(_tower);
         }
     }
 }

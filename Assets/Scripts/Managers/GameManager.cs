@@ -20,15 +20,16 @@ namespace Managers
 
         public GameConfig gameConfig;
 
+        public bool Ready { get; private set; }
         public GameStateApi GameState { get; private set; }
         public MapApi Map { get; private set; }
         public VisibleShapeApi VisibleShape { get; private set; }
         public TowerSpawnerApi TowerSpawner { get; private set; }
+        public TowerSpawnPreviewApi TowerSpawnPreview { get; private set; }
         public SelectedTowerApi SelectedTower { get; private set; }
         public EnemySpawnApi EnemySpawn { get; private set; }
 
         private Transform _towersRoot;
-        private TowerSpawnPreviewManager _towerSpawnPreviewManager;
         private Transform _enemiesRoot;
 
         void Awake()
@@ -50,30 +51,32 @@ namespace Managers
             SpawnMap();
 
             yield return null;
-            
+
             GameState = new GameStateApi(new GameState(), Map);
 
             yield return null;
-        
+
             SpawnUtils();
-            
+
             yield return null;
-            
+
             SpawnTowerManagers();
             SpawnEnemyManagers();
             SpawnProcessor();
+
+            Ready = true;
         }
 
         public void StartSpawning(TowerConfig tower)
         {
-            _towerSpawnPreviewManager.StartPreview(tower);
+            TowerSpawnPreview.StartPreview(tower);
         }
 
         public void StartWave()
         {
             WaveConfig currentWave = gameConfig.waves[GameState.GetCurrentWave()];
             GameState.IncrementWave();
-            
+
 
             EnemySpawn.SpawnWave(currentWave);
         }
@@ -102,10 +105,10 @@ namespace Managers
 
             Transform map = new GameObject("MapManager", typeof(MapManager)).transform;
             map.SetParent(transform);
-            
+
             MapManager mapManager = map.GetComponent<MapManager>();
             mapManager.mapConfig = gameConfig.mapConfig;
-            
+
             Map = new MapApi(mapManager);
         }
 
@@ -113,7 +116,7 @@ namespace Managers
         {
             Transform utilsRoot = new GameObject("Utils", typeof(VisibleShapeManager)).transform;
             utilsRoot.SetParent(transform);
-            
+
             VisibleShapeManager visibleShapeManager = utilsRoot.GetComponent<VisibleShapeManager>();
             visibleShapeManager.Map = Map;
             visibleShapeManager.cellPrefab = gameConfig.cellPrefab;
@@ -122,20 +125,20 @@ namespace Managers
 
         private void SpawnTowerManagers()
         {
-            _towersRoot = new GameObject("TowersRoot", typeof(TowerSpawnerManager), typeof(SelectedTowerManager), typeof(TowerSpawnPreviewManager))
-                .transform;
+            _towersRoot = new GameObject("TowersRoot", typeof(TowerSpawnerManager), typeof(SelectedTowerManager), typeof(TowerSpawnPreviewManager)).transform;
             _towersRoot.SetParent(transform);
             _towersRoot.position = Vector2.zero.WithDepth(GameConstants.EntityLayer);
 
             TowerSpawnerManager towerSpawnerManager = _towersRoot.GetComponent<TowerSpawnerManager>();
             towerSpawnerManager.root = _towersRoot;
             TowerSpawner = new TowerSpawnerApi(towerSpawnerManager, GameState);
-            
-            _towerSpawnPreviewManager = _towersRoot.GetComponent<TowerSpawnPreviewManager>();
-            _towerSpawnPreviewManager.GameConfig = gameConfig;
-            _towerSpawnPreviewManager.TowerSpawner = TowerSpawner;
-            _towerSpawnPreviewManager.VisibleShape = VisibleShape;
-            
+
+            TowerSpawnPreviewManager towerSpawnPreviewManager = _towersRoot.GetComponent<TowerSpawnPreviewManager>();
+            towerSpawnPreviewManager.GameConfig = gameConfig;
+            towerSpawnPreviewManager.TowerSpawner = TowerSpawner;
+            towerSpawnPreviewManager.VisibleShape = VisibleShape;
+            TowerSpawnPreview = new TowerSpawnPreviewApi(towerSpawnPreviewManager);
+
             SelectedTowerManager selectedTowerManager = _towersRoot.GetComponent<SelectedTowerManager>();
             selectedTowerManager.VisibleShape = VisibleShape;
             SelectedTower = new SelectedTowerApi(selectedTowerManager);
