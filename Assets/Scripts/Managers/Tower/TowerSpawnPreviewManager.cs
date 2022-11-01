@@ -85,14 +85,10 @@ namespace Managers.Tower
 
         private void SpawnAt(WorldCell cell)
         {
-            if (cell.type != CellType.Free)
+            if (TowerSpawner.TrySpawnTower(_tower, cell.gridPosition))
             {
-                Debug.LogWarning($"Cannot build tower at {cell.gridPosition} because it is not free: {cell.type}");
-                return;
+                StopPreview();
             }
-
-            TowerSpawner.SpawnTower(_tower, cell);
-            StopPreview();
         }
     }
 }

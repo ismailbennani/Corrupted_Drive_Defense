@@ -1,5 +1,7 @@
 ﻿using GameEngine.Map;
 using GameEngine.Towers;
+using Managers.Map;
+using UnityEngine;
 
 namespace Managers.Tower
 {
@@ -7,16 +9,29 @@ namespace Managers.Tower
     {
         private readonly TowerSpawnerManager _towerSpawnerManager;
         private readonly GameStateApi _gameState;
+        private readonly MapApi _map;
 
-        public TowerSpawnerApi(TowerSpawnerManager towerSpawnerManager, GameStateApi gameState)
+        public TowerSpawnerApi(TowerSpawnerManager towerSpawnerManager, GameStateApi gameState, MapApi map)
         {
             _towerSpawnerManager = towerSpawnerManager;
             _gameState = gameState;
+            _map = map;
         }
 
-        public bool SpawnTower(TowerConfig tower, WorldCell cell, out TowerState state, bool force = false, bool register = true)
+        public bool TrySpawnTower(TowerConfig tower, Vector2Int cell, out TowerState state, bool force = false, bool register = true)
         {
-            bool result = _towerSpawnerManager.SpawnTower(tower, cell, out state, force);
+            WorldCell worldCell = _map.GetCellAt(cell);
+            
+            if (!force)
+            {
+                if (worldCell.type != CellType.Free)
+                {
+                    state = null;
+                    return false;
+                }
+            }
+            
+            bool result = _towerSpawnerManager.SpawnTower(tower, worldCell, out state);
 
             if (!result)
             {
@@ -34,9 +49,9 @@ namespace Managers.Tower
     
     public static class TowerSpawnerApiExtensions
     {
-        public static bool SpawnTower(this TowerSpawnerApi @this, TowerConfig tower, WorldCell cell, bool force = false, bool register = true)
+        public static bool TrySpawnTower(this TowerSpawnerApi @this, TowerConfig tower, Vector2Int cell, bool force = false, bool register = true)
         {
-            return @this.SpawnTower(tower, cell, out _, force, register);
+            return @this.TrySpawnTower(tower, cell, out _, force, register);
         }
     }
 }

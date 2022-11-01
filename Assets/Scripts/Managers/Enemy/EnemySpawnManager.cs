@@ -2,16 +2,28 @@ using System;
 using Controllers;
 using GameEngine.Enemies;
 using GameEngine.Map;
+using Managers.Map;
 using UnityEngine;
+using UnityEngine.Assertions;
 using Utils;
-using Utils.CustomComponents;
 using Utils.Extensions;
 
 namespace Managers.Enemy
 {
-    public class EnemySpawnManager : MyMonoBehaviour
+    public class EnemySpawnManager : MonoBehaviour
     {
-        public Transform root;
+        public GameStateApi GameState;
+        public MapApi Map;
+
+        private Transform _root; 
+        
+        void Start()
+        {
+            Assert.IsNotNull(GameState);
+            Assert.IsNotNull(Map);
+
+            _root = new GameObject("SpawnRoot").transform;
+        }
 
         public void SpawnEnemy(EnemyConfig enemy, Vector2Int cell)
         {
@@ -20,19 +32,12 @@ namespace Managers.Enemy
                 throw new InvalidOperationException("could not find enemy prefab");
             }
 
-            RequireGameManager();
-
-            if (!root)
-            {
-                throw new InvalidOperationException("enemies root not set");
-            }
-
             long id = Uid.Get();
             EnemyState newEnemyState = new(id, enemy);
-            GameManager.GameState.AddEnemy(newEnemyState);
+            GameState.AddEnemy(newEnemyState);
 
-            WorldCell spawnCell = GameManager.Map.GetCellAt(cell);
-            EnemyController newEnemy = Instantiate(enemy.prefab, Vector3.zero, Quaternion.identity, root);
+            WorldCell spawnCell = Map.GetCellAt(cell);
+            EnemyController newEnemy = Instantiate(enemy.prefab, Vector3.zero, Quaternion.identity, _root);
             newEnemy.transform.localPosition = spawnCell.worldPosition.WithDepth(GameConstants.EntityLayer);
             newEnemy.id = id;
 

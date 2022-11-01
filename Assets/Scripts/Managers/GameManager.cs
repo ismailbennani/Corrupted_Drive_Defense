@@ -117,13 +117,12 @@ namespace Managers
 
         private void SpawnTowerManagers()
         {
-            _towersRoot = new GameObject("TowersRoot", typeof(TowerSpawnerManager), typeof(SelectedTowerManager), typeof(TowerSpawnPreviewManager)).transform;
+            _towersRoot = new GameObject("Towers", typeof(TowerSpawnerManager), typeof(SelectedTowerManager), typeof(TowerSpawnPreviewManager)).transform;
             _towersRoot.SetParent(transform);
             _towersRoot.position = Vector2.zero.WithDepth(GameConstants.EntityLayer);
 
             TowerSpawnerManager towerSpawnerManager = _towersRoot.GetComponent<TowerSpawnerManager>();
-            towerSpawnerManager.root = _towersRoot;
-            TowerSpawner = new TowerSpawnerApi(towerSpawnerManager, GameState);
+            TowerSpawner = new TowerSpawnerApi(towerSpawnerManager, GameState, Map);
 
             TowerSpawnPreviewManager towerSpawnPreviewManager = _towersRoot.GetComponent<TowerSpawnPreviewManager>();
             towerSpawnPreviewManager.GameConfig = gameConfig;
@@ -138,12 +137,13 @@ namespace Managers
 
         private void SpawnEnemyManagers()
         {
-            _enemiesRoot = new GameObject("EnemiesRoot", typeof(EnemySpawnManager), typeof(EnemyWaveManager)).transform;
+            _enemiesRoot = new GameObject("Enemies", typeof(EnemySpawnManager), typeof(EnemyWaveManager)).transform;
             _enemiesRoot.SetParent(transform);
             _enemiesRoot.position = Vector2.zero.WithDepth(GameConstants.EntityLayer);
 
             EnemySpawnManager enemySpawnManager = _enemiesRoot.GetComponent<EnemySpawnManager>();
-            enemySpawnManager.root = _enemiesRoot;
+            enemySpawnManager.GameState = GameState;
+            enemySpawnManager.Map = Map;
             EnemySpawn = new EnemySpawnApi(enemySpawnManager);
 
             EnemyWaveManager enemyWaveManager = _enemiesRoot.GetComponent<EnemyWaveManager>();
