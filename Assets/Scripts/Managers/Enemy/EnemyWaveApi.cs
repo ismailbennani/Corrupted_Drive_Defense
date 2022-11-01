@@ -1,5 +1,6 @@
 ﻿using GameEngine;
 using GameEngine.Waves;
+using UnityEngine;
 
 namespace Managers.Enemy
 {
@@ -20,6 +21,7 @@ namespace Managers.Enemy
         {
             if (!_enemyWaveManager.Ready)
             {
+                Debug.LogWarning("Next wave not ready");
                 return;
             }
             

@@ -10,8 +10,8 @@ namespace Managers.Enemy
 {
     public class EnemyWaveManager: MonoBehaviour
     {
-        public bool Ongoing { get; private set; }
-        public bool Ready => !Ongoing;
+        public bool Spawning { get; private set; }
+        public bool Ready => !Spawning && EnemySpawn.GetRemaining() == 0;
 
         [NonSerialized]
         public Vector2Int? Spawn;
@@ -30,15 +30,17 @@ namespace Managers.Enemy
         
         private IEnumerator SpawnWaveCoroutine(WaveConfig wave)
         {
-            Ongoing = true;
+            Spawning = true;
+
+            float delay = wave.frequency == 0 ? 1 : 1 / wave.frequency;
 
             foreach (EnemyConfig enemy in wave.enemies)
             {
                 EnemySpawn.SpawnEnemy(enemy, Spawn.Value);
-                yield return new WaitForSeconds(1f);
+                yield return new WaitForSeconds(delay);
             }
 
-            Ongoing = false;
+            Spawning = false;
         }
     }
 }

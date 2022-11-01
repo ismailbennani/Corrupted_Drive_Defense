@@ -18,3 +18,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a1cf2dc0e63ccef47a9aaa94735324fd, type: 2}
   - {fileID: 11400000, guid: a1cf2dc0e63ccef47a9aaa94735324fd, type: 2}
   - {fileID: 11400000, guid: a1cf2dc0e63ccef47a9aaa94735324fd, type: 2}
+  frequency: 0.5

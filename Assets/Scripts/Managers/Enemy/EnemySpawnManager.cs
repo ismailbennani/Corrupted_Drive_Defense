@@ -3,13 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using Controllers;
 using GameEngine.Enemies;
-using GameEngine.Map;
 using Managers.Map;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Assertions;
 using Utils;
-using Utils.Extensions;
 
 namespace Managers.Enemy
 {
@@ -17,6 +15,8 @@ namespace Managers.Enemy
     {
         public GameStateApi GameState;
         public MapApi Map;
+
+        public int Remaining => _enemies.Count;
 
         private Transform _root;
         private readonly List<EnemyController> _enemies = new();

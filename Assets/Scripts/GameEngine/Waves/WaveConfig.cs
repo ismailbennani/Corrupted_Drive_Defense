@@ -7,5 +7,6 @@ namespace GameEngine.Waves
     public class WaveConfig: ScriptableObject
     {
         public EnemyConfig[] enemies;
+        public float frequency;
     }
 }

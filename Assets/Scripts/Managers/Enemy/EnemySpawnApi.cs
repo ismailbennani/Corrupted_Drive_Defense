@@ -12,6 +12,11 @@ namespace Managers.Enemy
             _enemySpawnManager = enemySpawnManager;
         }
 
+        public int GetRemaining()
+        {
+            return _enemySpawnManager.Remaining;
+        }
+        
         public void SpawnEnemy(EnemyConfig enemy, Vector2Int cell)
         {
             _enemySpawnManager.SpawnEnemy(enemy, cell);
