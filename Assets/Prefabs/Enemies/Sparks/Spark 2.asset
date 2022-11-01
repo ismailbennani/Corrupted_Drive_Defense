@@ -17,4 +17,4 @@ MonoBehaviour:
   sprite: {fileID: 0}
   child: {fileID: 11400000, guid: a1cf2dc0e63ccef47a9aaa94735324fd, type: 2}
   hp: 1
-  speed: 1
+  speed: 2

@@ -35,6 +35,9 @@ namespace UI
                 GameSpeed.Normal => "Speed x1",
                 GameSpeed.Fast => "Speed x2",
                 GameSpeed.VeryFast => "Speed x4",
+                #if DEBUG
+                GameSpeed.Debug => "DEBUG x20",
+                #endif
                 _ => throw new ArgumentOutOfRangeException(nameof(speed), speed, null)
             };
         }

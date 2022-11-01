@@ -24,7 +24,7 @@ MonoBehaviour:
   - {x: 14, y: -9}
   - {x: 14, y: -17}
   - {x: 42, y: -17}
-  - {x: 42, y: -9}
+  - {x: 42, y: -8}
   walls:
   - m_Position: {x: 10, y: -4, z: 0}
     m_Size: {x: 38, y: 2, z: 1}

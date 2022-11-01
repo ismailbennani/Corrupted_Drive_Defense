@@ -11,6 +11,7 @@ namespace Utils
         public float max;
         
         public bool Full => value >= max;
+        public bool Empty => value <= min;
 
         public GaugeState(float value, float? max = null) : this(value, null, max)
         {

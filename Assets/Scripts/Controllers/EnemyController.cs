@@ -44,6 +44,13 @@ namespace Controllers
             if (_state.pathCellCompletion > 1)
             {
                 _state.pathIndex++;
+
+                if (_state.pathIndex >= _path.Length)
+                {
+                    GameManager.EnemyDamage.Kill(_state.id);
+                    GameManager.ProcessorDamage.Hit(_state);
+                }
+                
                 _state.pathCellCompletion -= 1;
                 
                 UpdateTargetPositions();
@@ -58,9 +65,9 @@ namespace Controllers
 
         private void UpdateTargetPositions()
         {
-            WorldCell previousCell = _state.pathIndex == 0 ? _path[_state.pathIndex] : _path[_state.pathIndex - 1];
-            WorldCell currentCell = _path[_state.pathIndex];
-            WorldCell nextCell = _path[_state.pathIndex + 1];
+            WorldCell previousCell = _state.pathIndex <= 0 ? _path[_state.pathIndex] : _path[_state.pathIndex - 1];
+            WorldCell currentCell = _state.pathIndex >= _path.Length ? _path[^1] : _path[_state.pathIndex];
+            WorldCell nextCell = _state.pathIndex >= _path.Length - 1 ? _path[^1] : _path[_state.pathIndex + 1];
 
             _startPos = currentCell.worldPosition - (currentCell.worldPosition - previousCell.worldPosition) / 2;
             _middlePos = currentCell.worldPosition;

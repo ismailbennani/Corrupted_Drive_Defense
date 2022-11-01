@@ -12,7 +12,7 @@ namespace Managers
         {
             return _speed;
         }
-        
+
         public void CycleSpeed()
         {
             GameSpeed newSpeed;
@@ -25,12 +25,20 @@ namespace Managers
                     newSpeed = GameSpeed.VeryFast;
                     break;
                 case GameSpeed.VeryFast:
+                #if DEBUG
+                    newSpeed = GameSpeed.Debug;
+                    break;
+                case GameSpeed.Debug:
                     newSpeed = GameSpeed.Normal;
                     break;
+                #else
+                    newSpeed = GameSpeed.Normal;
+                    break;
+                #endif
                 default:
                     throw new ArgumentOutOfRangeException();
             }
-            
+
             SetSpeed(newSpeed);
         }
 
@@ -47,6 +55,9 @@ namespace Managers
                 GameSpeed.Normal => 1,
                 GameSpeed.Fast => 2,
                 GameSpeed.VeryFast => 4,
+                #if DEBUG
+                GameSpeed.Debug => 20,
+                #endif
                 _ => throw new ArgumentOutOfRangeException(nameof(speed), speed, null)
             };
         }
@@ -58,5 +69,8 @@ namespace Managers
         Normal,
         Fast,
         VeryFast,
+        #if DEBUG
+        Debug
+        #endif
     }
 }

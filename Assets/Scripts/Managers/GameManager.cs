@@ -8,9 +8,11 @@ using GameEngine.Towers;
 using GameEngine.Waves;
 using Managers.Enemy;
 using Managers.Map;
+using Managers.Processor;
 using Managers.Tower;
 using Managers.Utils;
 using UnityEngine;
+using UnityEngine.Events;
 using Utils.Extensions;
 
 namespace Managers
@@ -33,6 +35,7 @@ namespace Managers
         public EnemySpawnApi EnemySpawn { get; private set; }
         public EnemyDamageApi EnemyDamage { get; private set; }
         public EnemyWaveApi EnemyWave { get; private set; }
+        public ProcessorDamageApi ProcessorDamage { get; private set; }
 
         private Transform _towersRoot;
         private Transform _enemiesRoot;
@@ -152,6 +155,9 @@ namespace Managers
             processor.transform.localPosition = processorCell.worldPosition.WithDepth(GameConstants.EntityLayer);
 
             GameState.SetProcessorState(new ProcessorState(gameConfig.mapConfig.processorPosition, processorConfig));
+
+            ProcessorDamage = new ProcessorDamageApi(GameState);
+            ProcessorDamage.Lose.AddListener(Lose);
         }
 
         private void SpawnOtherUtils()
@@ -159,28 +165,38 @@ namespace Managers
             MouseInput = new MouseInputApi(GameState, SelectedEntity);
         }
 
+        private void Lose()
+        {
+            Debug.Log("Lose");
+        }
+
         #region Exposed APIs to inspector
-        
+
         public void StartSpawning(TowerConfig tower)
         {
-            TowerSpawnPreview.StartPreview(tower);
+            TowerSpawnPreview?.StartPreview(tower);
+        }
+        
+        public void StopPreview()
+        {
+            TowerSpawnPreview?.StopPreview();
         }
 
         public void StartWave()
         {
-            EnemyWave.SpawnNextWave();
+            EnemyWave?.SpawnNextWave();
         }
 
         public void SetAutoWave(bool auto)
         {
-            EnemyWave.SetAutoWave(auto);
+            EnemyWave?.SetAutoWave(auto);
         }
 
         public void CycleSpeed()
         {
-            GameSpeed.CycleSpeed();
+            GameSpeed?.CycleSpeed();
         }
-        
+
         #endregion
     }
 }

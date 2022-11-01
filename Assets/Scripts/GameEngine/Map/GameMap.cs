@@ -75,7 +75,7 @@ namespace GameEngine.Map
                 int start = xChange ? cell.x : cell.y;
                 int end = xChange ? nextCell.x : nextCell.y;
 
-                for (int j = start; start < end ? j < end : j > end; j = start < end ? j + 1 : j - 1)
+                for (int j = start; start < end ? j <= end : j >= end; j = start < end ? j + 1 : j - 1)
                 {
                     Vector2Int pathCell = xChange ? new Vector2Int(j, cell.y) : new Vector2Int(cell.x, j);
                     if (pathCell == last)
