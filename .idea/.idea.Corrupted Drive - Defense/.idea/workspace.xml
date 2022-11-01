@@ -1,70 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="18cc6ff9-a968-46c1-8e5b-b5cbc6aa7b26" name="Changes" comment="implement auto wave">
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Processor.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Processor/Animation.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Processor/Animation/CPU_wipe.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Processor/Animation/CPU_wipe.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Processor/Animation/Ring_wipe.mat" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Processor/Animation/Ring_wipe.mat.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Processor/Animation/processor.controller" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Processor/Animation/processor.controller.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Processor/Animation/processor_health_empty.anim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Processor/Animation/processor_health_empty.anim.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Processor/Animation/processor_health_full.anim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Processor/Animation/processor_health_full.anim.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Processor/Animation/processor_ticks_empty.anim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Processor/Animation/processor_ticks_empty.anim.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Processor/Animation/processor_ticks_full.anim" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Processor/Animation/processor_ticks_full.anim.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Processor/Processor.asset" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Processor/Processor.asset.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Processor/Processor.prefab" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Processor/Processor.prefab.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Processor/Sprites.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Processor/Sprites/circlewipe-ccw.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Processor/Sprites/circlewipe-ccw.jpg.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Processor/Sprites/processor.aseprite" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Processor/Sprites/processor.aseprite.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Processor/Sprites/processor_base.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Processor/Sprites/processor_base.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Processor/Sprites/processor_cpu_full.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Processor/Sprites/processor_cpu_full.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Processor/Sprites/processor_ring_full.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Processor/Sprites/processor_ring_full.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Processor/Sprites/vertical.jpg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/Processor/Sprites/vertical.jpg.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Controllers/ProcessorAnimation.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Controllers/ProcessorAnimation.cs.meta" afterDir="false" />
+    <list default="true" id="18cc6ff9-a968-46c1-8e5b-b5cbc6aa7b26" name="Changes" comment="add ticks gauge to processor sprite">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Corrupted Drive - Defense/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Corrupted Drive - Defense/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Towers/Processor.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Towers/Processor/Animation.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Towers/Processor/Animation/circlewipe-ccw.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Towers/Processor/Animation/circlewipe-ccw.jpg.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Towers/Processor/Animation/cw-top.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Towers/Processor/Animation/cw-top.jpg.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Towers/Processor/Animation/processor.controller" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Towers/Processor/Animation/processor.controller.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Towers/Processor/Animation/processor_empty.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Towers/Processor/Animation/processor_empty.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Towers/Processor/Animation/processor_full.anim" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Towers/Processor/Animation/processor_full.anim.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Towers/Processor/Processor.asset" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Towers/Processor/Processor.asset.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Towers/Processor/Processor.prefab" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Towers/Processor/Processor.prefab.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Towers/Processor/Sprites.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Towers/Processor/Sprites/processor.aseprite" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Towers/Processor/Sprites/processor.aseprite.meta" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Towers/Processor/Sprites/processor.png" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Towers/Processor/Sprites/processor.png.meta" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Processor/Processor.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Processor/Processor.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/UI/FillableBar.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/FillableBar.prefab" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Sample/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Sample/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controllers/ProcessorController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controllers/ProcessorController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/Enemy/EnemyWaveManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Enemy/EnemyWaveManager.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/UISelectedTowerDescription.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/UISelectedTowerDescription.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Utils/Wipes/WipeMaterial.mat" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Utils/Wipes/WipeMaterial.mat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Utils/Wipes/WipeShader.shadergraph" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Utils/Wipes/WipeShader.shadergraph" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/UIGaugeController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/UIGaugeController.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,6 +30,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameEngine/GameConfig.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock://C:/Users/lahki/unity/Corrupted Drive - Defense/Assets/Scripts/Managers/Enemy/EnemySpawnApi.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/lahki/unity/Corrupted Drive - Defense/Assets/Scripts/Managers/Enemy/EnemySpawnApi.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/lahki/unity/Corrupted Drive - Defense/Assets/Scripts/Managers/Enemy/EnemyWaveManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/lahki/unity/Corrupted Drive - Defense/Assets/Scripts/Managers/Enemy/EnemyWaveManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Managers/GameManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock://C:/Users/lahki/unity/Corrupted Drive - Defense/Assets/Scripts/Managers/GameManager.cs" root0="SKIP_HIGHLIGHTING" />
@@ -168,7 +111,7 @@
       <workItem from="1667141835735" duration="112000" />
       <workItem from="1667141960624" duration="19332000" />
       <workItem from="1667210169814" duration="30271000" />
-      <workItem from="1667299014331" duration="16977000" />
+      <workItem from="1667299014331" duration="17883000" />
     </task>
     <task id="LOCAL-00001" summary="initial commit">
       <created>1667171876274</created>
@@ -471,7 +414,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667318615119</updated>
     </task>
-    <option name="localTasksCounter" value="44" />
+    <task id="LOCAL-00044" summary="add ticks gauge to processor sprite">
+      <created>1667330067498</created>
+      <option name="number" value="00044" />
+      <option name="presentableId" value="LOCAL-00044" />
+      <option name="project" value="LOCAL" />
+      <updated>1667330067498</updated>
+    </task>
+    <option name="localTasksCounter" value="45" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -506,7 +456,6 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="add preview" />
     <MESSAGE value="improve gauges" />
     <MESSAGE value="add tower spawning" />
     <MESSAGE value="add world cell" />
@@ -531,7 +480,8 @@
     <MESSAGE value="add kills" />
     <MESSAGE value="add speed" />
     <MESSAGE value="implement auto wave" />
-    <option name="LAST_COMMIT_MESSAGE" value="implement auto wave" />
+    <MESSAGE value="add ticks gauge to processor sprite" />
+    <option name="LAST_COMMIT_MESSAGE" value="add ticks gauge to processor sprite" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -548,19 +498,6 @@
             </endOffsets>
           </properties>
           <option name="timeStamp" value="2" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="DotNet Breakpoints">
-          <url>file://$PROJECT_DIR$/Assets/Scripts/Controllers/ProcessorAnimation.cs</url>
-          <line>53</line>
-          <properties documentPath="C:\Users\lahki\unity\Corrupted Drive - Defense\Assets\Scripts\Controllers\ProcessorAnimation.cs" initialLine="53" containingFunctionPresentation="method 'SetTicks'">
-            <startOffsets>
-              <option value="1288" />
-            </startOffsets>
-            <endOffsets>
-              <option value="1306" />
-            </endOffsets>
-          </properties>
-          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

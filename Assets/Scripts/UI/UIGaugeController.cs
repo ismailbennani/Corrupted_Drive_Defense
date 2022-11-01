@@ -1,4 +1,3 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -9,7 +8,8 @@ namespace UI
     public class UIGaugeController : MonoBehaviour
     {
         public Image foreground;
-        public TextMeshProUGUI text;
+        public TextMeshProUGUI topText;
+        public TextMeshProUGUI bottomText;
 
         private GaugeState _state;
 
@@ -45,7 +45,7 @@ namespace UI
                 foreground.fillAmount = ratio;
             }
 
-            if (text)
+            if (topText || bottomText)
             {
                 string str;
                 if (_state.max > 0)
@@ -60,7 +60,15 @@ namespace UI
                     str = $"{value}";
                 }
 
-                text.text = str;
+                if (topText)
+                {
+                    topText.text = str;
+                }
+                
+                if (bottomText)
+                {
+                    bottomText.text = str;
+                }
             }
         }
     }
