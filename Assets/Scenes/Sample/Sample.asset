@@ -17,3 +17,6 @@ MonoBehaviour:
   capacitor: {fileID: 11400000, guid: 13cf6272dd0843440bde1af03638844d, type: 2}
   waves:
   - {fileID: 11400000, guid: 9b69db2051ecb814ab83dda5387f3506, type: 2}
+  cellPrefab: {fileID: 4645986010926168295, guid: 8f4eaa8b59de0f141bb2e6f3283fcd52, type: 3}
+  shapePreviewOkColor: {r: 1, g: 1, b: 1, a: 0.39215687}
+  shapePreviewErrorColor: {r: 1, g: 0, b: 0, a: 0.39215687}

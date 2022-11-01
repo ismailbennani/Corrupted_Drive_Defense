@@ -21,6 +21,7 @@ namespace GameEngine
 
         [Space(10)]
         [Header("UI: shape preview")]
+        public SpriteRenderer cellPrefab;
         public Color shapePreviewOkColor;
         public Color shapePreviewErrorColor;
     }

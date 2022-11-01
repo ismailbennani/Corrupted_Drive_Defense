@@ -8,7 +8,7 @@ using Utils.Extensions;
 
 namespace Managers.Tower
 {
-    public class TowerSpawnPreviewManager : MyMonoBehaviour, INeedsComponent<VisibleShapeManager>
+    public class TowerSpawnPreviewManager : MyMonoBehaviour
     {
         private Transform _root;
         private TowerConfig _tower;
@@ -17,7 +17,6 @@ namespace Managers.Tower
         void Start()
         {
             RequireGameManager();
-            this.RequireComponent<VisibleShapeManager>();
      
             _root = new GameObject("Root").transform;
             _root.SetParent(transform);   
@@ -34,8 +33,8 @@ namespace Managers.Tower
 
             WorldCell cell = Mouse.GetTargetCell();
             _root.position = cell.worldPosition.WithDepth(GameConstants.UiLayer);
-            _visibleShapeManager.SetPosition(cell.worldPosition, true);
-            _visibleShapeManager.SetColor(cell.type == CellType.Free ? GameManager.gameConfig.shapePreviewOkColor : GameManager.gameConfig.shapePreviewErrorColor);
+            GameManager.VisibleShapeManager.SetPosition(cell.gridPosition, true);
+            GameManager.VisibleShapeManager.SetColor(cell.type == CellType.Free ? GameManager.gameConfig.shapePreviewOkColor : GameManager.gameConfig.shapePreviewErrorColor);
 
             if (Input.GetMouseButtonUp(0))
             {
@@ -61,7 +60,7 @@ namespace Managers.Tower
             }
 
             _previewTower = Instantiate(tower.prefab, _root).transform;
-            _visibleShapeManager.Show(tower.targetArea, _previewTower.position);
+            GameManager.VisibleShapeManager.Show(tower.targetArea, Vector2Int.zero);
         }
 
         public void StopPreview()
@@ -73,7 +72,7 @@ namespace Managers.Tower
 
             _tower = null;
             _root.gameObject.SetActive(false);
-            _visibleShapeManager.Hide();
+            GameManager.VisibleShapeManager.Hide();
         }
 
         public void SpawnAt(WorldCell cell)
@@ -87,40 +86,5 @@ namespace Managers.Tower
             GameManager.SpawnTower(_tower, cell);
             StopPreview();
         }
-
-
-        #region Needed components
-    
-        private VisibleShapeManager _visibleShapeManager;
-
-
-
-
-
-
-
-
-
-
-        VisibleShapeManager INeedsComponent<VisibleShapeManager>.Component {
-            get => _visibleShapeManager;
-            set => _visibleShapeManager = value;
-        }
-
-
-
-
-
-
-
-
-
-
-        public VisibleShapeManager GetInstance()
-        {
-            return VisibleShapeManager.Instance;
-        }
-    
-        #endregion
     }
 }

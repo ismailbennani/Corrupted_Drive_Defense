@@ -7,12 +7,13 @@ namespace Managers.Tower
 {
     public class SelectedTowerManager : MonoBehaviour
     {
+        public VisibleShapeManagerApi VisibleShapeManager;
+        
         public TowerState selectedTower;
-        public VisibleShapeManager visibleShapeManager;
         
         void Start()
         {
-            if (!visibleShapeManager)
+            if (VisibleShapeManager == null)
             {
                 throw new InvalidOperationException("could not find visible shape manager");
             }
@@ -21,7 +22,7 @@ namespace Managers.Tower
         public void Select(TowerState tower)
         {
             selectedTower = tower;
-            visibleShapeManager.Show(tower.config.targetArea, tower.cell.worldPosition);
+            VisibleShapeManager.Show(tower.config.targetArea, tower.cell.gridPosition);
         }
 
         public void Unselect(TowerState tower)
@@ -35,7 +36,7 @@ namespace Managers.Tower
         public void Clear()
         {
             selectedTower = null;
-            visibleShapeManager.Hide();
+            VisibleShapeManager.Hide();
         }
     }
 }

@@ -11,17 +11,10 @@ namespace Managers.Utils
 {
     public class VisibleShapeManager : MyMonoBehaviour
     {
-        public static VisibleShapeManager Instance { get; private set; }
-
         public SpriteRenderer cellPrefab;
 
         private Transform _root;
         private List<SpriteRenderer> _previewCells = new();
-
-        private void Awake()
-        {
-            Instance = this;
-        }
 
         void Start()
         {
@@ -36,7 +29,7 @@ namespace Managers.Utils
             _root.SetParent(transform);
         }
 
-        public void Show(Shape shape, Vector2 position, Color? color = null)
+        public void Show(Shape shape, Vector2Int position, Color? color = null)
         {
             _root.gameObject.SetActive(true);
 
@@ -82,9 +75,10 @@ namespace Managers.Utils
             }
         }
 
-        public void SetPosition(Vector2 position, bool aboveEntities = false)
+        public void SetPosition(Vector2Int position, bool aboveEntities = false)
         {
-            _root.position = position.WithDepth( aboveEntities ? GameConstants.UiLayer + 0.1f : GameConstants.EntityLayer + 0.1f);
+            _root.position = GameManager.Map.GetCellAt(position)
+                .worldPosition.WithDepth(aboveEntities ? GameConstants.UiLayer + 0.1f : GameConstants.EntityLayer + 0.1f);
         }
     }
 }
