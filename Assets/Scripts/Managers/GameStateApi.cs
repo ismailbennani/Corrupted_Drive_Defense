@@ -57,11 +57,16 @@ namespace Managers
         {
             _state.towerStates.Add(tower);
         }
-        
+
+        public void AddKills(TowerState state, int nKills)
+        {
+            state.kills += nKills;
+        }
+
         #endregion
 
         #region Enemy
-        
+
         public EnemyState GetEnemyState(long id)
         {
             return _state.enemyStates.SingleOrDefault(t => t.id == id);

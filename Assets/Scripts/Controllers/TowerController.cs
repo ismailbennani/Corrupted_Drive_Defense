@@ -72,7 +72,8 @@ namespace Controllers
             EnemyState target = targets.First();
 
             _state.ticks.Clear();
-            GameManager.EnemyDamage.Hit(target.id, 1);
+            GameManager.EnemyDamage.Hit(target.id, 1, out int kills);
+            GameManager.GameState.AddKills(_state, kills);
         }
 
         private void UpdateCharge()

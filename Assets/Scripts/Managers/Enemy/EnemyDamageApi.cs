@@ -14,8 +14,10 @@ namespace Managers.Enemy
             _enemySpawnApi = enemySpawnApi;
         }
 
-        public void Hit(long enemyId, int damage)
+        public void Hit(long enemyId, int damage, out int kill)
         {
+            kill = 0;
+
             EnemyState enemyState = _gameStateApi.GetEnemyState(enemyId);
             if (enemyState == null)
             {
@@ -26,8 +28,9 @@ namespace Managers.Enemy
             enemyState.hp -= damage;
             if (enemyState.hp <= 0)
             {
+                kill = 1;
                 _enemySpawnApi.DestroyEnemy(enemyState.id);
-                
+
                 if (enemyState.config.child != null)
                 {
                     enemyState.config = enemyState.config.child;
