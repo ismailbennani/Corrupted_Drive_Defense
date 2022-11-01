@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using GameEngine.Map;
 using GameEngine.Towers;
 using UnityEngine;
@@ -11,17 +10,9 @@ public class TowerSpawnPreviewManager : MyMonoBehaviour, INeedsComponent<Visible
 {
     public static TowerSpawnPreviewManager Instance { get; private set; }
 
-    public Transform preview;
-
-    [Header("Preview cell")]
-    public SpriteRenderer cellPrefab;
-
-    public Color okColor = Color.white;
-    public Color errorColor = Color.red;
-
+    private Transform _root;
     private TowerConfig _tower;
     private Transform _previewTower;
-    private List<SpriteRenderer> _previewCells = new();
 
     void Awake()
     {
@@ -30,13 +21,11 @@ public class TowerSpawnPreviewManager : MyMonoBehaviour, INeedsComponent<Visible
 
     void Start()
     {
-        if (!preview)
-        {
-            throw new InvalidOperationException("preview root not found");
-        }
-        
         RequireGameManager();
         this.RequireComponent<VisibleShapeManager>();
+     
+        _root = new GameObject("Root").transform;
+        _root.SetParent(transform);   
         
         StopPreview();
     }
@@ -49,9 +38,9 @@ public class TowerSpawnPreviewManager : MyMonoBehaviour, INeedsComponent<Visible
         }
 
         WorldCell cell = Mouse.GetTargetCell();
-        preview.position = cell.worldPosition.WithDepth(GameConstants.UiLayer);
+        _root.position = cell.worldPosition.WithDepth(GameConstants.UiLayer);
         _visibleShapeManager.SetPosition(cell.worldPosition, true);
-        _visibleShapeManager.SetColor(cell.type == CellType.Free ? okColor : errorColor);
+        _visibleShapeManager.SetColor(cell.type == CellType.Free ? GameManager.gameConfig.shapePreviewOkColor : GameManager.gameConfig.shapePreviewErrorColor);
 
         if (Input.GetMouseButtonUp(0))
         {
@@ -69,14 +58,14 @@ public class TowerSpawnPreviewManager : MyMonoBehaviour, INeedsComponent<Visible
         _tower = tower;
         Debug.Log($"Start preview of {tower.towerName}");
 
-        preview.gameObject.SetActive(true);
+        _root.gameObject.SetActive(true);
 
         if (_previewTower)
         {
             Destroy(_previewTower.gameObject);
         }
 
-        _previewTower = Instantiate(tower.prefab, preview).transform;
+        _previewTower = Instantiate(tower.prefab, _root).transform;
         _visibleShapeManager.Show(tower.targetArea, _previewTower.position);
     }
 
@@ -88,7 +77,7 @@ public class TowerSpawnPreviewManager : MyMonoBehaviour, INeedsComponent<Visible
         }
 
         _tower = null;
-        preview.gameObject.SetActive(false);
+        _root.gameObject.SetActive(false);
         _visibleShapeManager.Hide();
     }
 

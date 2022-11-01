@@ -16,6 +16,7 @@ public class EnemySpawnManager : MyMonoBehaviour
     public bool Ready => !Ongoing;
 
     public Transform root;
+    public Vector2Int spawn;
 
     public void Awake()
     {
@@ -48,19 +49,17 @@ public class EnemySpawnManager : MyMonoBehaviour
         }
 
         RequireGameManager();
-
-        root = GameManager.mapManager.enemiesRoot;
         
         if (!root)
         {
-            throw new InvalidOperationException("could not find enemies root");
+            throw new InvalidOperationException("enemies root not set");
         }
 
         long id = Uid.Get();
         EnemyState newEnemyState = new(id, enemy);
         GameManager.gameState.enemyStates.Add(newEnemyState);
 
-        WorldCell spawnCell = GameManager.mapManager.Spawn;
+        WorldCell spawnCell = Map.GetCellAt(spawn);
         EnemyController newEnemy = Instantiate(enemy.prefab, Vector3.zero, Quaternion.identity, root);
         newEnemy.transform.localPosition = spawnCell.worldPosition.WithDepth(GameConstants.EntityLayer);
         newEnemy.id = id;

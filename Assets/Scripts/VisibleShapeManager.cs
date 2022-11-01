@@ -4,6 +4,7 @@ using System.Linq;
 using GameEngine.Map;
 using GameEngine.Shapes;
 using UnityEngine;
+using Utils;
 using Utils.CustomComponents;
 using Utils.Extensions;
 
@@ -40,8 +41,8 @@ public class VisibleShapeManager : MyMonoBehaviour
 
         IEnumerable<Vector2Int> cells = shape != null ? shape.EvaluateAt(Vector2Int.zero) : new[] { Vector2Int.zero };
 
-        WorldCell offset = GameManager.mapManager.GetCellAt(Vector2Int.zero);
-        WorldCell[] worldCells = cells.Select(c => GameManager.mapManager.GetCellAt(c)).ToArray();
+        WorldCell offset = Map.GetCellAt(Vector2Int.zero);
+        WorldCell[] worldCells = cells.Select(Map.GetCellAt).ToArray();
 
         for (int i = _previewCells.Count; i < worldCells.Length; i++)
         {

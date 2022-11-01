@@ -26,12 +26,10 @@ public class TowerSpawnManager : MyMonoBehaviour
         }
 
         RequireGameManager();
-
-        root = GameManager.mapManager.towersRoot;
         
         if (!root)
         {
-            throw new InvalidOperationException("could not find towers root");
+            throw new InvalidOperationException("towers root not set");
         }
 
         if (!force)

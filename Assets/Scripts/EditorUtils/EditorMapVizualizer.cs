@@ -1,6 +1,7 @@
 ﻿using System.Linq;
 using GameEngine.Map;
 using UnityEngine;
+using Utils;
 using Utils.CustomComponents;
 
 namespace EditorUtils
@@ -11,7 +12,7 @@ namespace EditorUtils
 
         public void OnDrawGizmosSelected()
         {
-            if (!visualize || !TryGetGameManager() || !GameManager.mapManager)
+            if (!visualize || !TryGetGameManager())
             {
                 return;
             }
@@ -27,10 +28,10 @@ namespace EditorUtils
 
         private void DrawMapBoundaries()
         {
-            MapConfig mapConfig = GameManager.mapManager.mapConfig;
+            MapConfig mapConfig = Map.GetConfig();
 
-            WorldCell bottomLeftCorner = GameManager.mapManager.GetCellAt(mapConfig.bottomLeftCorner);
-            WorldCell topRightCorner = GameManager.mapManager.GetCellAt(mapConfig.bottomLeftCorner + mapConfig.mapSize);
+            WorldCell bottomLeftCorner = Map.GetCellAt(mapConfig.bottomLeftCorner);
+            WorldCell topRightCorner = Map.GetCellAt(mapConfig.bottomLeftCorner + mapConfig.mapSize);
 
             Vector2 center = (topRightCorner.worldPosition + bottomLeftCorner.worldPosition) / 2;
             Vector2 size = topRightCorner.worldPosition - bottomLeftCorner.worldPosition;
@@ -41,7 +42,7 @@ namespace EditorUtils
 
         private void DrawWalls()
         {
-            foreach (WorldCell cell in GameManager.mapManager.GameMap.Where(c => c.type == CellType.Wall).Select(c => GameManager.mapManager.GetCellAt(c.gridPosition)))
+            foreach (WorldCell cell in Map.GetCellsOfType(CellType.Wall))
             {
                 Gizmos.color = Color.red;
                 Gizmos.DrawWireSphere(cell.worldPosition, 0.25f);
@@ -50,18 +51,18 @@ namespace EditorUtils
 
         private void DrawPath()
         {
-            Vector2Int[] path = GameManager.mapManager.mapConfig.path;
+            WorldCell[] path = Map.GetPath().ToArray();
 
             for (int i = 0; i < path.Length - 1; i++)
             {
-                WorldCell cell = GameManager.mapManager.GetCellAt(path[i]);
-                WorldCell nextCell = GameManager.mapManager.GetCellAt(path[i + 1]);
+                WorldCell cell = path[i];
+                WorldCell nextCell = path[i + 1];
 
                 Gizmos.color = Color.blue;
                 Gizmos.DrawLine(cell.worldPosition, nextCell.worldPosition);
             }
 
-            foreach (WorldCell cell in GameManager.mapManager.GameMap.Where(c => c.type == CellType.Path).Select(c => GameManager.mapManager.GetCellAt(c.gridPosition)))
+            foreach (WorldCell cell in Map.GetCellsOfType(CellType.Path))
             {
                 Gizmos.color = Color.blue;
                 Gizmos.DrawWireSphere(cell.worldPosition, 0.25f);

@@ -4,6 +4,7 @@ using System.Linq;
 using GameEngine.Enemies;
 using GameEngine.Map;
 using UnityEngine;
+using Utils;
 using Utils.CustomComponents;
 using Utils.Extensions;
 
@@ -35,7 +36,7 @@ namespace GameComponents
                 throw new InvalidOperationException($"could not find enemy state with id {id}");
             }
             
-            _path = GameManager.mapManager.GetPath();
+            _path = Map.GetPath().ToArray();
             
             UpdateTargetPositions();
         }

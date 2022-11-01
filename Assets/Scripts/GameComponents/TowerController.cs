@@ -3,8 +3,10 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using GameEngine.Enemies;
+using GameEngine.Map;
 using GameEngine.Towers;
 using UnityEngine;
+using Utils;
 using Utils.CustomComponents;
 
 namespace GameComponents
@@ -15,6 +17,7 @@ namespace GameComponents
 
         private TowerState _state;
         private ProcessorState _processorState;
+        private WorldCell[] _path;
 
         IEnumerator Start()
         {
@@ -36,6 +39,8 @@ namespace GameComponents
             {
                 throw new InvalidOperationException($"could not find state of processor");
             }
+
+            _path = Map.GetPath().ToArray();
         }
 
         void Update()
@@ -55,9 +60,9 @@ namespace GameComponents
             {
                 return;
             }
-            
+
             IEnumerable<Vector2Int> targetCells = _state.config.targetArea.EvaluateAt(_state.cell.gridPosition);
-            int[] pathCells = targetCells.Select(c => Array.IndexOf(GameManager.mapManager.GameMap.GetPath(), c)).Where(i => i >= 0).ToArray();
+            int[] pathCells = targetCells.Select(c => Array.FindIndex(_path, w => w.gridPosition == c)).Where(i => i >= 0).ToArray();
             EnemyState[] targets = GameManager.gameState.enemyStates.Where(e => pathCells.Contains(e.pathIndex)).ToArray();
 
             if (targets.Length == 0)
@@ -67,7 +72,7 @@ namespace GameComponents
 
             // TODO: pick target according to strategy
             EnemyState target = targets.First();
-            
+
             _state.ticks.Clear();
             Debug.Log($"hit {target.config.enemyName} {target.id}");
         }

@@ -15,7 +15,7 @@ public class MapManager : MonoBehaviour
 
     public WorldCell Spawn => GetCellAt(GameMap.Spawn);
 
-    public void Initialize()
+    void Start()
     {
         if (!mapConfig || !mapConfig.gameObject)
         {
@@ -34,14 +34,6 @@ public class MapManager : MonoBehaviour
         }
 
         Debug.Log($"Instantiated map with path: {string.Join(", ", mapConfig.path.Select(p => p.ToString()))}");
-
-        towersRoot = new GameObject("TowersRoot").transform;
-        towersRoot.SetParent(transform);
-        towersRoot.position = Vector2.zero.WithDepth(GameConstants.EntityLayer);
-        
-        enemiesRoot = new GameObject("EnemiesRoot").transform;
-        enemiesRoot.SetParent(transform);
-        enemiesRoot.position = Vector2.zero.WithDepth(GameConstants.EntityLayer);
 
         GameMap = new GameMap(mapConfig);
     }
@@ -67,7 +59,7 @@ public class MapManager : MonoBehaviour
     {
         return GameMap.GetPath().Select(GetCellAt).ToArray();
     }
-    
+
     private WorldCell OfCell(Cell cell)
     {
         Vector2 localWorldPosition = GameMap.GetLocalWorldPosition(cell);

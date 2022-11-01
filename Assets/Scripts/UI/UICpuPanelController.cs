@@ -1,23 +1,27 @@
 using GameComponents;
 using GameEngine.Towers;
 using UnityEngine;
+using Utils.CustomComponents;
 
 namespace UI
 {
-    public class UICpuPanelController : MonoBehaviour
+    public class UICpuPanelController : MyMonoBehaviour
     {
         public UIGaugeController healthBar;
         public UIGaugeController ticksBar;
 
         void Update()
         {
-            GameManager gameManager = GameManager.Instance;
-            if (!gameManager)
+            if (!TryGetGameManager())
             {
                 return;
             }
 
-            ProcessorState processorState = gameManager.gameState.processorState;
+            ProcessorState processorState = GameManager.gameState?.processorState;
+            if (processorState == null)
+            {
+                return;
+            }
 
             healthBar.Set(processorState.health);
             ticksBar.Set(processorState.ticks);

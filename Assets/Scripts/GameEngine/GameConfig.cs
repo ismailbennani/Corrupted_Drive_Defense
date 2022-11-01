@@ -18,5 +18,10 @@ namespace GameEngine
 
         [Header("Waves")]
         public WaveConfig[] waves;
+
+        [Space(10)]
+        [Header("UI: shape preview")]
+        public Color shapePreviewOkColor;
+        public Color shapePreviewErrorColor;
     }
 }
