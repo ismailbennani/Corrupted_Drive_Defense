@@ -9,41 +9,22 @@ using Utils;
 using Utils.CustomComponents;
 using Utils.Extensions;
 
-namespace Managers
+namespace Managers.Enemy
 {
     public class EnemySpawnManager : MyMonoBehaviour
     {
-        public static EnemySpawnManager Instance { get; private set; }
         public bool Ongoing { get; private set; }
         public bool Ready => !Ongoing;
 
         public Transform root;
         public Vector2Int spawn;
 
-        public void Awake()
-        {
-            Instance = this;
-        }
-
         public void SpawnWave(WaveConfig wave)
         {
             StartCoroutine(SpawnWaveCoroutine(wave));
         }
 
-        private IEnumerator SpawnWaveCoroutine(WaveConfig wave)
-        {
-            Ongoing = true;
-
-            foreach (EnemyConfig enemy in wave.enemies)
-            {
-                SpawnEnemy(enemy);
-                yield return new WaitForSeconds(1f);
-            }
-
-            Ongoing = false;
-        }
-
-        private void SpawnEnemy(EnemyConfig enemy)
+        public void SpawnEnemy(EnemyConfig enemy, Vector2Int cell)
         {
             if (!enemy || !enemy.prefab)
             {
@@ -59,14 +40,27 @@ namespace Managers
 
             long id = Uid.Get();
             EnemyState newEnemyState = new(id, enemy);
-            GameManager.gameState.enemyStates.Add(newEnemyState);
+            GameManager.GameState.AddEnemy(newEnemyState);
 
-            WorldCell spawnCell = GameManager.Map.GetCellAt(spawn);
+            WorldCell spawnCell = GameManager.Map.GetCellAt(cell);
             EnemyController newEnemy = Instantiate(enemy.prefab, Vector3.zero, Quaternion.identity, root);
             newEnemy.transform.localPosition = spawnCell.worldPosition.WithDepth(GameConstants.EntityLayer);
             newEnemy.id = id;
         
             Debug.Log($"Spawn {enemy.enemyName} at {spawnCell.gridPosition}");
+        }
+
+        private IEnumerator SpawnWaveCoroutine(WaveConfig wave)
+        {
+            Ongoing = true;
+
+            foreach (EnemyConfig enemy in wave.enemies)
+            {
+                SpawnEnemy(enemy, spawn);
+                yield return new WaitForSeconds(1f);
+            }
+
+            Ongoing = false;
         }
     }
 }

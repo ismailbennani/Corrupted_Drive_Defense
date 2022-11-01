@@ -8,6 +8,7 @@ namespace UI
     {
         public UIGaugeController healthBar;
         public UIGaugeController ticksBar;
+        private ProcessorState _processorState;
 
         void Update()
         {
@@ -16,14 +17,13 @@ namespace UI
                 return;
             }
 
-            ProcessorState processorState = GameManager.gameState?.processorState;
-            if (processorState == null)
+            if ((_processorState ??= GameManager.GameState?.GetProcessorState()) == null)
             {
                 return;
             }
 
-            healthBar.Set(processorState.health);
-            ticksBar.Set(processorState.ticks);
+            healthBar.Set(_processorState.health);
+            ticksBar.Set(_processorState.ticks);
         }
     }
 }

@@ -28,7 +28,7 @@ namespace Controllers
 
             RequireGameManager();
 
-            _state = GameManager.gameState.enemyStates.SingleOrDefault(t => t.id == id);
+            _state = GameManager.GameState.GetEnemyState(id);
             if (_state == null)
             {
                 throw new InvalidOperationException($"could not find enemy state with id {id}");

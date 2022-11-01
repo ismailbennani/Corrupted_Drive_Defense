@@ -11,14 +11,7 @@ namespace Managers.Tower
 {
     public class TowerSpawnManager : MyMonoBehaviour
     {
-        public static TowerSpawnManager Instance { get; private set; }
-
         public Transform root;
-
-        void Awake()
-        {
-            Instance = this;
-        }
 
         public bool SpawnTower(TowerConfig tower, WorldCell cell, out long id, bool force = false, bool register = true)
         {
@@ -54,7 +47,7 @@ namespace Managers.Tower
             if (register)
             {
                 TowerState newTowerState = new(id, cell, tower);
-                GameManager.gameState.towerStates.Add(newTowerState);
+                GameManager.GameState.AddTower(newTowerState);
             }
 
             return true;

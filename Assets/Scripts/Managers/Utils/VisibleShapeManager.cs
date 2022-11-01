@@ -7,7 +7,7 @@ using UnityEngine;
 using Utils.CustomComponents;
 using Utils.Extensions;
 
-namespace Managers
+namespace Managers.Utils
 {
     public class VisibleShapeManager : MyMonoBehaviour
     {

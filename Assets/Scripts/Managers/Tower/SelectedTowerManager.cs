@@ -1,77 +1,41 @@
-﻿using GameEngine.Towers;
+﻿using System;
+using GameEngine.Towers;
+using Managers.Utils;
 using UnityEngine;
-using Utils.CustomComponents;
 
 namespace Managers.Tower
 {
-    public class SelectedTowerManager : MonoBehaviour, INeedsComponent<VisibleShapeManager>
+    public class SelectedTowerManager : MonoBehaviour
     {
-        public static SelectedTowerManager Instance { get; private set; }
-    
         public TowerState selectedTower;
-
-        private void Awake()
-        {
-            Instance = this;
-        }
-
+        public VisibleShapeManager visibleShapeManager;
+        
         void Start()
         {
-            this.RequireComponent<VisibleShapeManager>();
+            if (!visibleShapeManager)
+            {
+                throw new InvalidOperationException("could not find visible shape manager");
+            }
         }
 
         public void Select(TowerState tower)
         {
             selectedTower = tower;
-            _visibleShapeManager.Show(tower.config.targetArea, tower.cell.worldPosition);
+            visibleShapeManager.Show(tower.config.targetArea, tower.cell.worldPosition);
         }
 
         public void Unselect(TowerState tower)
         {
             if (selectedTower.id == tower.id)
             {
-                Unselect();
+                Clear();
             }
         }
 
-        public void Unselect()
+        public void Clear()
         {
             selectedTower = null;
-            _visibleShapeManager.Hide();
+            visibleShapeManager.Hide();
         }
-
-        #region Needed components
-
-        private VisibleShapeManager _visibleShapeManager;
-
-
-
-
-
-
-
-
-
-
-        VisibleShapeManager INeedsComponent<VisibleShapeManager>.Component {
-            get => _visibleShapeManager;
-            set => _visibleShapeManager = value;
-        }
-
-
-
-
-
-
-
-
-
-
-        public VisibleShapeManager GetInstance()
-        {
-            return VisibleShapeManager.Instance;
-        }
-
-        #endregion
     }
 }

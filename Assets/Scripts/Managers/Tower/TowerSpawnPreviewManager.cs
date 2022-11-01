@@ -1,5 +1,6 @@
 ﻿using GameEngine.Map;
 using GameEngine.Towers;
+using Managers.Utils;
 using UnityEngine;
 using Utils;
 using Utils.CustomComponents;
@@ -9,16 +10,9 @@ namespace Managers.Tower
 {
     public class TowerSpawnPreviewManager : MyMonoBehaviour, INeedsComponent<VisibleShapeManager>
     {
-        public static TowerSpawnPreviewManager Instance { get; private set; }
-
         private Transform _root;
         private TowerConfig _tower;
         private Transform _previewTower;
-
-        void Awake()
-        {
-            Instance = this;
-        }
 
         void Start()
         {

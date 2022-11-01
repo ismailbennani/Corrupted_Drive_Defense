@@ -3,7 +3,7 @@ using System.Linq;
 using GameEngine.Map;
 using UnityEngine;
 
-namespace Managers
+namespace Managers.Map
 {
     public class MapApi
     {

@@ -27,13 +27,13 @@ namespace Controllers
                 yield return null;
             }
 
-            _state = GameManager.gameState.towerStates.SingleOrDefault(t => t.id == id);
+            _state = GameManager.GameState.GetTowerState(id);
             if (_state == null)
             {
                 throw new InvalidOperationException($"could not find state of tower with id {id}");
             }
 
-            _processorState = GameManager.gameState.processorState;
+            _processorState = GameManager.GameState.GetProcessorState();
             if (_state == null)
             {
                 throw new InvalidOperationException($"could not find state of processor");
@@ -61,8 +61,7 @@ namespace Controllers
             }
 
             IEnumerable<Vector2Int> targetCells = _state.config.targetArea.EvaluateAt(_state.cell.gridPosition);
-            int[] pathCells = targetCells.Select(c => Array.FindIndex(_path, w => w.gridPosition == c)).Where(i => i >= 0).ToArray();
-            EnemyState[] targets = GameManager.gameState.enemyStates.Where(e => pathCells.Contains(e.pathIndex)).ToArray();
+            EnemyState[] targets = GameManager.GameState.GetEnemiesAt(targetCells).ToArray();
 
             if (targets.Length == 0)
             {

@@ -5,7 +5,7 @@ using UnityEngine;
 using UnityEngine.Tilemaps;
 using Utils.Extensions;
 
-namespace Managers
+namespace Managers.Map
 {
     public class MapManager : MonoBehaviour
     {

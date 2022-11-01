@@ -5,7 +5,10 @@ using GameEngine;
 using GameEngine.Map;
 using GameEngine.Towers;
 using GameEngine.Waves;
+using Managers.Enemy;
+using Managers.Map;
 using Managers.Tower;
+using Managers.Utils;
 using UnityEngine;
 using Utils.Extensions;
 
@@ -17,18 +20,15 @@ namespace Managers
 
         public GameConfig gameConfig;
 
-        [Header("Created on start")]
-        public GameState gameState;
-
+        public GameStateApi GameState { get; private set; }
         public MapApi Map { get; private set; }
+        public SelectedTowerApi SelectedTower { get; private set; }
+        public EnemySpawnApi EnemySpawn { get; private set; }
 
-        private MapManager _mapManager;
         private Transform _towersRoot;
         private TowerSpawnPreviewManager _towerSpawnPreviewManager;
         private TowerSpawnManager _towerSpawnManager;
-        private SelectedTowerManager _selectedTowerManager;
         private Transform _enemiesRoot;
-        private EnemySpawnManager _enemySpawnManager;
 
         void Awake()
         {
@@ -38,8 +38,6 @@ namespace Managers
             {
                 throw new InvalidOperationException("game config not set");
             }
-
-            gameState = new GameState();
         }
 
         IEnumerator Start()
@@ -47,9 +45,12 @@ namespace Managers
             this.RemoveAllChildren();
 
             yield return null;
-        
+
             SpawnMap();
-            Map = new MapApi(_mapManager);
+
+            yield return null;
+            
+            GameState = new GameStateApi(new GameState(), Map);
 
             yield return null;
         
@@ -70,25 +71,26 @@ namespace Managers
 
         public void StartWave()
         {
-            WaveConfig currentWave = gameConfig.waves[gameState.currentWave];
-            gameState.currentWave++;
+            WaveConfig currentWave = gameConfig.waves[GameState.GetCurrentWave()];
+            GameState.IncrementWave();
+            
 
-            _enemySpawnManager.SpawnWave(currentWave);
+            EnemySpawn.SpawnWave(currentWave);
         }
 
-        public void SetAutoWave(bool value)
+        public void SetAutoWave(bool auto)
         {
-            // TODO
+            EnemySpawn.SetAutoWave(auto);
         }
 
         public void SelectTower(TowerState state)
         {
-            _selectedTowerManager.Select(state);
+            SelectedTower.Select(state);
         }
 
         public void UnselectTower()
         {
-            _selectedTowerManager.Unselect();
+            SelectedTower.Clear();
         }
 
         private void SpawnMap()
@@ -100,8 +102,11 @@ namespace Managers
 
             Transform map = new GameObject("MapManager", typeof(MapManager)).transform;
             map.SetParent(transform);
-            _mapManager = map.GetComponent<MapManager>();
-            _mapManager.mapConfig = gameConfig.mapConfig;
+            
+            MapManager mapManager = map.GetComponent<MapManager>();
+            mapManager.mapConfig = gameConfig.mapConfig;
+            
+            Map = new MapApi(mapManager);
         }
 
         private void SpawnTowerManagers()
@@ -112,7 +117,10 @@ namespace Managers
             _towersRoot.position = Vector2.zero.WithDepth(GameConstants.EntityLayer);
 
             _towerSpawnPreviewManager = _towersRoot.GetComponent<TowerSpawnPreviewManager>();
-            _selectedTowerManager = _towersRoot.GetComponent<SelectedTowerManager>();
+            
+            SelectedTowerManager selectedTowerManager = _towersRoot.GetComponent<SelectedTowerManager>();
+            selectedTowerManager.visibleShapeManager = VisibleShapeManager.Instance;
+            SelectedTower = new SelectedTowerApi(selectedTowerManager);
 
             _towerSpawnManager = _towersRoot.GetComponent<TowerSpawnManager>();
             _towerSpawnManager.root = _towersRoot;
@@ -124,8 +132,9 @@ namespace Managers
             _enemiesRoot.SetParent(transform);
             _enemiesRoot.position = Vector2.zero.WithDepth(GameConstants.EntityLayer);
 
-            _enemySpawnManager = _enemiesRoot.GetComponent<EnemySpawnManager>();
-            _enemySpawnManager.root = _enemiesRoot;
+            EnemySpawnManager enemySpawnManager = _enemiesRoot.GetComponent<EnemySpawnManager>();
+            enemySpawnManager.root = _enemiesRoot;
+            EnemySpawn = new EnemySpawnApi(enemySpawnManager);
         }
 
         private void SpawnProcessor()
@@ -137,7 +146,7 @@ namespace Managers
             ProcessorController processor = Instantiate(processorConfig.prefab, Vector3.zero, Quaternion.identity, _towersRoot);
             processor.transform.localPosition = processorCell.worldPosition.WithDepth(GameConstants.EntityLayer);
 
-            gameState.processorState = new ProcessorState(processorCell, processorConfig);
+            GameState.SetProcessorState(new ProcessorState(processorCell, processorConfig));
         }
     }
 }

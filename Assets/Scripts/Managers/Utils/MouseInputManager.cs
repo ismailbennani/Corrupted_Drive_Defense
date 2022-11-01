@@ -4,7 +4,7 @@ using GameEngine.Towers;
 using Utils;
 using Utils.CustomComponents;
 
-namespace Managers
+namespace Managers.Utils
 {
   public class MouseInputManager: MyMonoBehaviour
   {
@@ -17,20 +17,15 @@ namespace Managers
     {
       WorldCell cell = Mouse.GetTargetCell();
 
-      GameState gameState = GameManager.gameState;
-
-      foreach (TowerState tower in gameState.towerStates)
+      TowerState tower = GameManager.GameState.GetTowerAt(cell);
+      if (tower != null)
       {
-        if (cell.gridPosition != tower.cell.gridPosition)
-        {
-          continue;
-        }
-      
         GameManager.SelectTower(tower);
-        return;
       }
-    
-      GameManager.UnselectTower();
+      else
+      {
+        GameManager.UnselectTower();
+      }
     }
   }
 }
