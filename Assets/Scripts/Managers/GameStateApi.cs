@@ -16,6 +16,7 @@ namespace Managers
     public class GameStateApi
     {
         private readonly GameState _state;
+
         private readonly MapApi _map;
 
         public GameStateApi(GameState state, MapApi map)
@@ -52,6 +53,11 @@ namespace Managers
         #endregion
 
         #region Tower
+
+        public IEnumerable<TowerState> GetTowers()
+        {
+            return _state.towerStates;
+        }
 
         public TowerState GetTowerState(long id)
         {

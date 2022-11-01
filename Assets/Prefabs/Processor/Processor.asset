@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: Processor
   m_EditorClassIdentifier: 
   size: {x: 3, y: 3}
+  offset: {x: 1, y: 1}
   maxHealth: 100
   frequency: 10
   maxCharge: 100
