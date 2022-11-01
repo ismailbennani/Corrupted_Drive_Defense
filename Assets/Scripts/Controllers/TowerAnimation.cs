@@ -1,7 +1,7 @@
 using UnityEngine;
 using Utils;
 
-namespace GameComponents
+namespace Controllers
 {
     public class TowerAnimation : MonoBehaviour
     {

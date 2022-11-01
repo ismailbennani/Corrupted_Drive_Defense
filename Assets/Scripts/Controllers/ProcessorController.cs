@@ -2,7 +2,7 @@ using GameEngine.Towers;
 using UnityEngine;
 using Utils.CustomComponents;
 
-namespace GameComponents
+namespace Controllers
 {
     public class ProcessorController : MyMonoBehaviour
     {

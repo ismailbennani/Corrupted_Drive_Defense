@@ -1,4 +1,4 @@
-﻿using GameComponents;
+﻿using Controllers;
 using UnityEngine;
 
 namespace GameEngine.Enemies

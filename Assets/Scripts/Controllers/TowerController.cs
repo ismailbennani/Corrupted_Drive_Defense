@@ -6,10 +6,9 @@ using GameEngine.Enemies;
 using GameEngine.Map;
 using GameEngine.Towers;
 using UnityEngine;
-using Utils;
 using Utils.CustomComponents;
 
-namespace GameComponents
+namespace Controllers
 {
     public class TowerController : MyMonoBehaviour
     {

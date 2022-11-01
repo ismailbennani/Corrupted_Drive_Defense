@@ -1,14 +1,12 @@
 ﻿using System;
-using System.Collections;
 using System.Linq;
 using GameEngine.Enemies;
 using GameEngine.Map;
 using UnityEngine;
-using Utils;
 using Utils.CustomComponents;
 using Utils.Extensions;
 
-namespace GameComponents
+namespace Controllers
 {
     public class EnemyController : MyMonoBehaviour
     {
