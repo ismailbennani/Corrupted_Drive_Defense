@@ -32,7 +32,7 @@ namespace UI
             
             TowerState state = GameManager.SelectedTower.Get();
 
-            if (state == null)
+            if (state?.config == null)
             {
                 Unselect();
                 return;

@@ -22,9 +22,10 @@ namespace Controllers
             }
             
             _processorState.ticks.Add(Time.deltaTime * _processorState.config.frequency);
-        
-            // use SetCharge so that we can use a TowerAnimation instead of creating a new identical ProcessorAnimation behaviour
-            gameObject.SendMessage("SetCharge", _processorState.health);
+
+            GameObject localGameObject = gameObject;
+            localGameObject.SendMessage("SetHealth", _processorState.health);
+            localGameObject.SendMessage("SetTicks", _processorState.ticks);
         }
     }
 }

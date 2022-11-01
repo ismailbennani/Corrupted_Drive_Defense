@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: WipeMaterial
+  m_Name: CPU_wipe
   m_Shader: {fileID: -6465566751694194690, guid: 9b7f60a4f262e4540bff6bb26c4b71d7, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -47,8 +47,10 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaOffset: 0
-    - _Cutoff: 0.53
-    - _Invert: 1
+    - _Cutoff: 0.162
+    - _CutoffOffset: 0.45
+    - _Cutoff_Scale: 0.1
+    - _Invert: 0
     - _Mirror_H: 0
     - _Mirror_V: 0
     m_Colors:

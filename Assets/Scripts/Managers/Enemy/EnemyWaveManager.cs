@@ -23,7 +23,6 @@ namespace Managers.Enemy
 
         void Start()
         {
-            Assert.IsFalse(Spawn == null);
             Assert.IsNotNull(EnemySpawn);
             Assert.IsNotNull(EnemyWaveApi);
         }
@@ -52,6 +51,8 @@ namespace Managers.Enemy
         
         private IEnumerator SpawnWaveCoroutine(WaveConfig wave)
         {
+            Assert.IsFalse(Spawn == null);
+            
             Spawning = true;
 
             float delay = wave.frequency == 0 ? 1 : 1 / wave.frequency;
