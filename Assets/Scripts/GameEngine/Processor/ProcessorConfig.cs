@@ -1,11 +1,16 @@
 ﻿using Controllers;
 using UnityEngine;
 
-namespace GameEngine.Towers
+namespace GameEngine.Processor
 {
     [CreateAssetMenu(menuName = "Objects/Processor config")]
     public class ProcessorConfig : ScriptableObject
     {
+        [Tooltip("Size of the processor on the board")]
+        public Vector2Int size;
+        [Tooltip("Offset of the processor on the board, relative to the bottom left corner")]
+        public Vector2Int offset;
+        
         [Header("Health")]
         public int maxHealth = 100;
 

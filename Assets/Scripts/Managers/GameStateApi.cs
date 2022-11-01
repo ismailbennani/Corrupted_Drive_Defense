@@ -4,6 +4,7 @@ using System.Linq;
 using GameEngine;
 using GameEngine.Enemies;
 using GameEngine.Map;
+using GameEngine.Processor;
 using GameEngine.Towers;
 using GameEngine.Waves;
 using Managers.Map;
@@ -21,27 +22,37 @@ namespace Managers
         {
             Assert.IsNotNull(state);
             Assert.IsNotNull(map);
-            
+
             _state = state;
             _map = map;
         }
 
         #region Processor
-        
+
         public ProcessorState GetProcessorState()
         {
             return _state.processorState;
         }
-        
+
         public void SetProcessorState(ProcessorState state)
         {
             _state.processorState = state;
         }
-        
+
+        public bool IsProcessorCell(WorldCell cell)
+        {
+            return IsProcessorCell(cell.gridPosition);
+        }
+
+        public bool IsProcessorCell(Vector2Int cell)
+        {
+            return _state.processorState.cells.Any(c => c.gridPosition == cell);
+        }
+
         #endregion
-        
+
         #region Tower
-        
+
         public TowerState GetTowerState(long id)
         {
             return _state.towerStates.SingleOrDefault(t => t.id == id);
@@ -89,13 +100,13 @@ namespace Managers
                 Debug.LogWarning($"Cannot find enemy state with id {id}");
                 return;
             }
-            
+
             _state.enemyStates.Remove(enemyState);
         }
 
         public IEnumerable<EnemyState> GetEnemiesAt(IEnumerable<Vector2Int> targetCells)
         {
-            WorldCell[] path = _map.GetPath().ToArray(); 
+            WorldCell[] path = _map.GetPath().ToArray();
             int[] pathCells = targetCells.Select(c => Array.FindIndex(path, w => w.gridPosition == c)).Where(i => i >= 0).ToArray();
             return _state.enemyStates.Where(e => pathCells.Contains(e.pathIndex)).ToArray();
         }

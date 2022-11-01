@@ -9,15 +9,15 @@ namespace Managers.Utils
   public class MouseInputApi
   {
     private readonly GameStateApi _gameStateApi;
-    private readonly SelectedTowerApi _selectedTowerApi;
+    private readonly SelectedEntityApi _selectedEntityApi;
 
-    public MouseInputApi(GameStateApi gameStateApi, SelectedTowerApi selectedTowerApi)
+    public MouseInputApi(GameStateApi gameStateApi, SelectedEntityApi selectedEntityApi)
     {
       Assert.IsNotNull(gameStateApi);
-      Assert.IsNotNull(selectedTowerApi);
+      Assert.IsNotNull(selectedEntityApi);
       
       _gameStateApi = gameStateApi;
-      _selectedTowerApi = selectedTowerApi;
+      _selectedEntityApi = selectedEntityApi;
     }
 
     public void Click()
@@ -27,11 +27,15 @@ namespace Managers.Utils
       TowerState tower = _gameStateApi.GetTowerAt(cell);
       if (tower != null)
       {
-        _selectedTowerApi.Select(tower);
+        _selectedEntityApi.Select(tower);
+      }
+      else if (_gameStateApi.IsProcessorCell(cell))
+      {
+        _selectedEntityApi.SelectProcessor();
       }
       else
       {
-        _selectedTowerApi.Clear();
+        _selectedEntityApi.Clear();
       }
     }
   }

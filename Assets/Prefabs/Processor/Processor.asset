@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8245c514496142479786b3996f33ab2d, type: 3}
   m_Name: Processor
   m_EditorClassIdentifier: 
+  size: {x: 3, y: 3}
   maxHealth: 100
   frequency: 10
   maxCharge: 100

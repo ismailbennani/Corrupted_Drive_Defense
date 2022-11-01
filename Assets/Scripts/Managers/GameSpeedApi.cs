@@ -51,12 +51,12 @@ namespace Managers
             };
         }
     }
-}
 
 
-public enum GameSpeed
-{
-    Normal,
-    Fast,
-    VeryFast,
+    public enum GameSpeed
+    {
+        Normal,
+        Fast,
+        VeryFast,
+    }
 }

@@ -1,22 +1,26 @@
 ﻿using System;
+using System.Linq;
 using GameEngine.Map;
+using GameEngine.Shapes;
+using Managers;
+using UnityEngine;
 using Utils;
 
-namespace GameEngine.Towers
+namespace GameEngine.Processor
 {
     [Serializable]
     public class ProcessorState
     {
-        public WorldCell cell;
+        public WorldCell[] cells;
         
         public GaugeState health;
         public GaugeState charge;
 
         public ProcessorConfig config;
         
-        public ProcessorState(WorldCell cell, ProcessorConfig config)
+        public ProcessorState(Vector2Int cell, ProcessorConfig config)
         {
-            this.cell = cell;
+            cells = Shape.Square(cell, config.size, config.offset).Select(GameManager.Instance.Map.GetCellAt).ToArray(); 
             this.config = config;
 
             health = new GaugeState(config.maxHealth, config.maxHealth);

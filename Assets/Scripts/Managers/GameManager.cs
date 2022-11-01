@@ -3,6 +3,7 @@ using System.Collections;
 using Controllers;
 using GameEngine;
 using GameEngine.Map;
+using GameEngine.Processor;
 using GameEngine.Towers;
 using GameEngine.Waves;
 using Managers.Enemy;
@@ -28,7 +29,7 @@ namespace Managers
         public MouseInputApi MouseInput { get; private set; }
         public TowerSpawnerApi TowerSpawner { get; private set; }
         public TowerSpawnPreviewApi TowerSpawnPreview { get; private set; }
-        public SelectedTowerApi SelectedTower { get; private set; }
+        public SelectedEntityApi SelectedEntity { get; private set; }
         public EnemySpawnApi EnemySpawn { get; private set; }
         public EnemyDamageApi EnemyDamage { get; private set; }
         public EnemyWaveApi EnemyWave { get; private set; }
@@ -138,7 +139,7 @@ namespace Managers
             towerSpawnPreviewManager.VisibleShape = VisibleShape;
             TowerSpawnPreview = new TowerSpawnPreviewApi(towerSpawnPreviewManager);
 
-            SelectedTower = new SelectedTowerApi(VisibleShape);
+            SelectedEntity = new SelectedEntityApi(VisibleShape);
         }
 
         private void SpawnProcessor()
@@ -150,12 +151,12 @@ namespace Managers
             ProcessorController processor = Instantiate(processorConfig.prefab, Vector3.zero, Quaternion.identity, _towersRoot);
             processor.transform.localPosition = processorCell.worldPosition.WithDepth(GameConstants.EntityLayer);
 
-            GameState.SetProcessorState(new ProcessorState(processorCell, processorConfig));
+            GameState.SetProcessorState(new ProcessorState(gameConfig.mapConfig.processorPosition, processorConfig));
         }
 
         private void SpawnOtherUtils()
         {
-            MouseInput = new MouseInputApi(GameState, SelectedTower);
+            MouseInput = new MouseInputApi(GameState, SelectedEntity);
         }
 
         #region Exposed APIs to inspector
