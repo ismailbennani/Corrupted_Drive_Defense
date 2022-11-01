@@ -4,7 +4,7 @@ namespace Managers.Tower
 {
     public class TowerSpawnPreviewApi
     {
-        private TowerSpawnPreviewManager _towerSpawnPreviewManager;
+        private readonly TowerSpawnPreviewManager _towerSpawnPreviewManager;
 
         public TowerSpawnPreviewApi(TowerSpawnPreviewManager towerSpawnPreviewManager)
         {

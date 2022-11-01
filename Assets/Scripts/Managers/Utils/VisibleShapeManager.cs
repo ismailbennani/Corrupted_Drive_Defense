@@ -5,6 +5,7 @@ using GameEngine.Map;
 using GameEngine.Shapes;
 using Managers.Map;
 using UnityEngine;
+using UnityEngine.Assertions;
 using Utils.Extensions;
 
 namespace Managers.Utils
@@ -13,17 +14,16 @@ namespace Managers.Utils
     {
         public MapApi Map;
         
-        public SpriteRenderer cellPrefab;
+        [NonSerialized]
+        public SpriteRenderer CellPrefab;
 
         private Transform _root;
-        private List<SpriteRenderer> _previewCells = new();
+        private readonly List<SpriteRenderer> _previewCells = new();
 
         void Start()
         {
-            if (!cellPrefab)
-            {
-                throw new InvalidOperationException("preview cell not found");
-            }
+            Assert.IsNotNull(Map);
+            Assert.IsNotNull(CellPrefab);
 
             _root = new GameObject("Root").transform;
             _root.SetParent(transform);
@@ -40,7 +40,7 @@ namespace Managers.Utils
 
             for (int i = _previewCells.Count; i < worldCells.Length; i++)
             {
-                SpriteRenderer newCell = Instantiate(cellPrefab, _root);
+                SpriteRenderer newCell = Instantiate(CellPrefab, _root);
                 _previewCells.Add(newCell);
             }
 

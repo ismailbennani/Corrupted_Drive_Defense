@@ -2,6 +2,7 @@
 using GameEngine.Towers;
 using Managers.Utils;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace Managers.Tower
 {
@@ -13,10 +14,7 @@ namespace Managers.Tower
         
         void Start()
         {
-            if (VisibleShape == null)
-            {
-                throw new InvalidOperationException("could not find visible shape manager");
-            }
+            Assert.IsNotNull(VisibleShape);
         }
 
         public void Select(TowerState tower)

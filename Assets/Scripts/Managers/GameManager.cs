@@ -99,7 +99,7 @@ namespace Managers
             map.SetParent(transform);
 
             MapManager mapManager = map.GetComponent<MapManager>();
-            mapManager.mapConfig = gameConfig.mapConfig;
+            mapManager.MapConfig = gameConfig.mapConfig;
 
             Map = new MapApi(mapManager);
         }
@@ -111,7 +111,7 @@ namespace Managers
 
             VisibleShapeManager visibleShapeManager = utilsRoot.GetComponent<VisibleShapeManager>();
             visibleShapeManager.Map = Map;
-            visibleShapeManager.cellPrefab = gameConfig.cellPrefab;
+            visibleShapeManager.CellPrefab = gameConfig.cellPrefab;
             VisibleShape = new VisibleShapeApi(visibleShapeManager);
         }
 

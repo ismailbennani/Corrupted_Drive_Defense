@@ -2,6 +2,7 @@
 using System.Linq;
 using GameEngine.Map;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.Tilemaps;
 using Utils.Extensions;
 
@@ -9,45 +10,34 @@ namespace Managers.Map
 {
     public class MapManager : MonoBehaviour
     {
-        public MapConfig mapConfig;
+        [NonSerialized]
+        public MapConfig MapConfig;
         public GameMap GameMap;
-        public Tilemap tilemap;
-        public Transform towersRoot;
-        public Transform enemiesRoot;
-
-        public WorldCell Spawn => GetCellAt(GameMap.Spawn);
+        
+        private Tilemap _tilemap;
 
         void Start()
         {
-            if (!mapConfig || !mapConfig.gameObject)
-            {
-                throw new NullReferenceException("map prefab not set");
-            }
+            Assert.IsNotNull(MapConfig);
+            Assert.IsNotNull(MapConfig.gameObject);
 
-            Vector2Int mapHalfSize = mapConfig.mapSize / 2;
-            Transform map = Instantiate(mapConfig.gameObject,
-                                        new Vector3(-mapHalfSize.x - mapConfig.bottomLeftCorner.x, -mapHalfSize.y - mapConfig.bottomLeftCorner.y, 1),
+            Vector2Int mapHalfSize = MapConfig.mapSize / 2;
+            Transform map = Instantiate(MapConfig.gameObject,
+                                        new Vector3(-mapHalfSize.x - MapConfig.bottomLeftCorner.x, -mapHalfSize.y - MapConfig.bottomLeftCorner.y, 1),
                                         Quaternion.identity,
                                         transform);
 
-            if (!map.TryGetComponentInSelfOrChildren(out tilemap))
-            {
-                throw new InvalidOperationException("could not find grid in map prefab");
-            }
+            map.TryGetComponentInSelfOrChildren(out _tilemap);
+            Assert.IsNotNull(_tilemap);
 
-            Debug.Log($"Instantiated map with path: {string.Join(", ", mapConfig.path.Select(p => p.ToString()))}");
+            Debug.Log($"Instantiated map with path: {string.Join(", ", MapConfig.path.Select(p => p.ToString()))}");
 
-            GameMap = new GameMap(mapConfig);
-        }
-
-        public Vector2 GetWorldPositionOfCell(Vector2Int cell)
-        {
-            return GetCellAt(cell).worldPosition;
+            GameMap = new GameMap(MapConfig);
         }
 
         public WorldCell GetCellFromWorldPosition(Vector2 position)
         {
-            Cell result = GameMap.GetCellFromLocalWorldPosition(position - (Vector2)tilemap.transform.position);
+            Cell result = GameMap.GetCellFromLocalWorldPosition(position - (Vector2)_tilemap.transform.position);
             return OfCell(result);
         }
 
@@ -57,15 +47,10 @@ namespace Managers.Map
             return OfCell(result);
         }
 
-        public WorldCell[] GetPath()
-        {
-            return GameMap.GetPath().Select(GetCellAt).ToArray();
-        }
-
         private WorldCell OfCell(Cell cell)
         {
             Vector2 localWorldPosition = GameMap.GetLocalWorldPosition(cell);
-            return cell.WithWorldPosition(localWorldPosition + (Vector2)tilemap.transform.position);
+            return cell.WithWorldPosition(localWorldPosition + (Vector2)_tilemap.transform.position);
         }
     }
 }

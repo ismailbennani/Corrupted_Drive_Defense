@@ -16,7 +16,7 @@ namespace Managers.Map
 
         public MapConfig GetConfig()
         {
-            return _mapManager.mapConfig;
+            return _mapManager.MapConfig;
         }
 
         public WorldCell GetCellAt(Vector2Int vector2)
