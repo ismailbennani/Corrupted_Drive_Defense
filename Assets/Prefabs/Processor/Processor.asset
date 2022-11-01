@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxHealth: 100
   frequency: 10
-  maxTicks: 1000
+  maxCharge: 100
   prefab: {fileID: 5824694017469984989, guid: 167aed16fb5ed2a409ac3c5a75f9256c, type: 3}
   sprite: {fileID: 0}
