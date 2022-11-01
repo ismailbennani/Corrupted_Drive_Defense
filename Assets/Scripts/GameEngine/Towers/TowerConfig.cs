@@ -10,9 +10,10 @@ namespace GameEngine.Towers
         public string towerName;
         public Shape targetArea;
         
-        [Header("Ticks")]
+        [Header("Charge")]
+        [Tooltip("Charge consumed from CPU per second")]
         public float frequency;
-        public int maxTicks;
+        public int maxCharge;
 
         [Space(10)]
         public TowerController prefab;

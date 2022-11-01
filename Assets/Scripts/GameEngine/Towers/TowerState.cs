@@ -11,7 +11,7 @@ namespace GameEngine.Towers
         public long id;
         public WorldCell cell;
 
-        public GaugeState ticks;
+        public GaugeState charge;
         public int kills;
 
         [Space(10)]
@@ -23,7 +23,7 @@ namespace GameEngine.Towers
             this.cell = cell;
             this.config = config;
 
-            ticks = new GaugeState(0, config.maxTicks);
+            charge = new GaugeState(0, config.maxCharge);
         }
     }
 }

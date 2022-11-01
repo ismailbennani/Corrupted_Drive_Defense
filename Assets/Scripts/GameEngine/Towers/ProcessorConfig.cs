@@ -9,10 +9,10 @@ namespace GameEngine.Towers
         [Header("Health")]
         public int maxHealth = 100;
 
-        [Header("Ticks")]
-        [Tooltip("Ticks per seconds that are replenished")]
+        [Header("Charge")]
+        [Tooltip("Charge produced per second")]
         public float frequency = 10;
-        public float maxTicks = 1000;
+        public float maxCharge = 1000;
         
         [Space(10)]
         public ProcessorController prefab;

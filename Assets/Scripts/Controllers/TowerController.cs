@@ -55,7 +55,7 @@ namespace Controllers
 
         private void TriggerIfPossible()
         {
-            if (!_state.ticks.Full)
+            if (!_state.charge.Full)
             {
                 return;
             }
@@ -71,20 +71,20 @@ namespace Controllers
             // TODO: pick target according to strategy
             EnemyState target = targets.First();
 
-            _state.ticks.Clear();
+            _state.charge.Clear();
             GameManager.EnemyDamage.Hit(target.id, 1, out int kills);
             GameManager.GameState.AddKills(_state, kills);
         }
 
         private void UpdateCharge()
         {
-            float requiredCharge = _state.ticks.GetRemaining();
+            float requiredCharge = _state.charge.GetRemaining();
             float maxCharge = Time.deltaTime * _state.config.frequency;
 
-            float consumed = _processorState.ticks.Consume(Mathf.Min(requiredCharge, maxCharge));
+            float consumed = _processorState.charge.Consume(Mathf.Min(requiredCharge, maxCharge));
 
-            _state.ticks.Add(consumed);
-            SendMessage("SetCharge", _state.ticks);
+            _state.charge.Add(consumed);
+            SendMessage("SetCharge", _state.charge);
         }
     }
 }

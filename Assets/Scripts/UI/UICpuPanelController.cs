@@ -7,7 +7,7 @@ namespace UI
     public class UICpuPanelController : MyMonoBehaviour
     {
         public UIGaugeController healthBar;
-        public UIGaugeController ticksBar;
+        public UIGaugeController chargeBar;
         private ProcessorState _processorState;
 
         void Update()
@@ -23,7 +23,7 @@ namespace UI
             }
 
             healthBar.Set(_processorState.health);
-            ticksBar.Set(_processorState.ticks);
+            chargeBar.Set(_processorState.charge);
         }
     }
 }

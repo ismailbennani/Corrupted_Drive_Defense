@@ -13,7 +13,7 @@ namespace UI
         public Transform noSelectedTowerRoot;
         public TextMeshProUGUI nameText;
         public TextMeshProUGUI kills;
-        public UIGaugeController ticks;
+        public UIGaugeController charge;
 
         void Start()
         {
@@ -61,9 +61,9 @@ namespace UI
                 kills.SetText(state.kills.ToString());
             }
 
-            if (ticks)
+            if (charge)
             {
-                ticks.Set(state.ticks);
+                charge.Set(state.charge);
             }
         }
 

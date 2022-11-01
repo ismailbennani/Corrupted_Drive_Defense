@@ -10,7 +10,7 @@ namespace GameEngine.Towers
         public WorldCell cell;
         
         public GaugeState health;
-        public GaugeState ticks;
+        public GaugeState charge;
 
         public ProcessorConfig config;
         
@@ -20,7 +20,7 @@ namespace GameEngine.Towers
             this.config = config;
 
             health = new GaugeState(config.maxHealth, config.maxHealth);
-            ticks = new GaugeState(0, config.maxTicks);
+            charge = new GaugeState(0, config.maxCharge);
         }
     }
 }

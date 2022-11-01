@@ -24,7 +24,7 @@ BlendTree:
     m_CycleOffset: 0
     m_DirectBlendParameter: Health
     m_Mirror: 0
-  m_BlendParameter: Ticks
+  m_BlendParameter: Charge
   m_BlendParameterY: Health
   m_MinThreshold: 0
   m_MaxThreshold: 1
@@ -38,7 +38,7 @@ AnimatorStateMachine:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Ticks
+  m_Name: Charge
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 2266010294657731709}
@@ -90,7 +90,7 @@ AnimatorController:
     m_DefaultInt: 0
     m_DefaultBool: 0
     m_Controller: {fileID: 9100000}
-  - m_Name: Ticks
+  - m_Name: Charge
     m_Type: 1
     m_DefaultFloat: 0
     m_DefaultInt: 0
@@ -110,7 +110,7 @@ AnimatorController:
     m_SyncedLayerAffectsTiming: 0
     m_Controller: {fileID: 9100000}
   - serializedVersion: 5
-    m_Name: Ticks
+    m_Name: Charge
     m_StateMachine: {fileID: -1807995812275183778}
     m_Mask: {fileID: 0}
     m_Motions: []
@@ -128,7 +128,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Ticks
+  m_Name: Charge
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []

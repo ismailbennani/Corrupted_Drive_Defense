@@ -47,7 +47,7 @@ Material:
     m_Ints: []
     m_Floats:
     - _AlphaOffset: 0
-    - _Cutoff: 0.821
+    - _Cutoff: 0.53
     - _CutoffOffset: 0
     - _Cutoff_Scale: 1
     - _Invert: 1

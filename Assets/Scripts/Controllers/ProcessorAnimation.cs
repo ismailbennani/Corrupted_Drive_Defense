@@ -6,7 +6,7 @@ namespace Controllers
     public class ProcessorAnimation: MonoBehaviour
     {
         private static readonly int HealthName = Animator.StringToHash("Health");
-        private static readonly int TicksName = Animator.StringToHash("Ticks");
+        private static readonly int ChargeName = Animator.StringToHash("Charge");
 
         public Animator animator;
 
@@ -15,7 +15,7 @@ namespace Controllers
         public float health = 0;
         
         [Range(0, 1)]
-        public float ticks = 0;
+        public float charge = 0;
 
         public void Start()
         {
@@ -30,7 +30,7 @@ namespace Controllers
             if (animator)
             {
                 animator.SetFloat(HealthName, health);
-                animator.SetFloat(TicksName, ticks);
+                animator.SetFloat(ChargeName, charge);
             }
         }
 
@@ -49,19 +49,19 @@ namespace Controllers
             health = Mathf.Clamp(health, 0, 1);
         }
 
-        public void SetTicks(GaugeState state)
+        public void SetCharge(GaugeState state)
         {
             if (state.max > 0)
             {
                 float range = state.max - state.min;
-                ticks = range != 0 ? (state.value - state.min) / range : 1;
+                charge = range != 0 ? (state.value - state.min) / range : 1;
             }
             else
             {
-                ticks = 1;
+                charge = 1;
             }
 
-            ticks = Mathf.Clamp(ticks, 0, 1);
+            charge = Mathf.Clamp(charge, 0, 1);
         }
     }
 }

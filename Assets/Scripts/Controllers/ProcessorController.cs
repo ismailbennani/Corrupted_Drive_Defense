@@ -6,7 +6,6 @@ namespace Controllers
 {
     public class ProcessorController : MyMonoBehaviour
     {
-        private float _currentTicks;
         private ProcessorState _processorState;
 
         void Start()
@@ -21,11 +20,11 @@ namespace Controllers
                 return;
             }
             
-            _processorState.ticks.Add(Time.deltaTime * _processorState.config.frequency);
+            _processorState.charge.Add(Time.deltaTime * _processorState.config.frequency);
 
             GameObject localGameObject = gameObject;
             localGameObject.SendMessage("SetHealth", _processorState.health);
-            localGameObject.SendMessage("SetTicks", _processorState.ticks);
+            localGameObject.SendMessage("SetCharge", _processorState.charge);
         }
     }
 }

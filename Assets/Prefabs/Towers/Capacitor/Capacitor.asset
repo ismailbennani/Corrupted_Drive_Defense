@@ -17,6 +17,6 @@ MonoBehaviour:
     type: 1
     size: 3
   frequency: 5
-  maxTicks: 10
+  maxCharge: 10
   prefab: {fileID: 2366462122132164904, guid: 68bcd4bc9d46786408e4a092c3a70803, type: 3}
   sprite: {fileID: -289229907, guid: d3ae99aa56494fe4fb3a814456dfb394, type: 3}
