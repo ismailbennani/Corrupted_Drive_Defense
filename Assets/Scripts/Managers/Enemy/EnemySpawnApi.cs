@@ -1,5 +1,4 @@
 ﻿using GameEngine.Enemies;
-using GameEngine.Waves;
 using UnityEngine;
 
 namespace Managers.Enemy
@@ -16,16 +15,6 @@ namespace Managers.Enemy
         public void SpawnEnemy(EnemyConfig enemy, Vector2Int cell)
         {
             _enemySpawnManager.SpawnEnemy(enemy, cell);
-        }
-
-        public void SpawnWave(WaveConfig wave)
-        {
-            _enemySpawnManager.SpawnWave(wave);
-        }
-
-        public void SetAutoWave(bool auto)
-        {
-            
         }
     }
 }
