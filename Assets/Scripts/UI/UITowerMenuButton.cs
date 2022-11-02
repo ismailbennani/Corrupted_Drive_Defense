@@ -1,5 +1,6 @@
-﻿using GameEngine.Towers;
-using Managers;
+﻿using System.Collections.Generic;
+using System.Linq;
+using GameEngine.Towers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -8,29 +9,50 @@ using Utils.CustomComponents;
 
 namespace UI
 {
-    public class UITowerMenuButton: MyMonoBehaviour
+    public class UITowerMenuButton : MyMonoBehaviour
     {
         public Button button;
-        public Image image;
+        public GridLayoutGroup root;
+        public Image towerImage;
+        public List<Image> cells = new();
+
+        [Header("Overlay")]
         public TextMeshProUGUI nameText;
+
         public TextMeshProUGUI costText;
 
         private TowerConfig _tower;
 
         void Start()
         {
-            Assert.IsTrue(button);
-            
+            Assert.IsNotNull(button);
+            Assert.IsNotNull(root);
+            Assert.IsNotNull(towerImage);
+            Assert.IsTrue(cells?.Count > 0);
+
             RequireGameManager();
         }
 
         void Update()
         {
             button.interactable = GameManager.GameState?.CanSpend(_tower.cost) ?? false;
+            towerImage.rectTransform.sizeDelta = towerImage.sprite.bounds.size * cells[0].rectTransform.rect.size;
         }
-        
+
         public void SetTower(TowerConfig tower)
         {
+            Assert.IsNotNull(tower);
+
+            root.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
+            root.constraintCount = tower.shape.size.x;
+            SetCellPositions(tower.shape.EvaluateAt(Vector2Int.zero).ToArray());
+
+            if (tower.sprite)
+            {
+                towerImage.sprite = tower.sprite;
+                towerImage.color = Color.white;
+            }
+
             if (nameText)
             {
                 nameText.SetText(tower.towerName);
@@ -39,12 +61,6 @@ namespace UI
             if (costText)
             {
                 costText.SetText(tower.cost.ToString());
-            }
-
-            if (image)
-            {
-                image.sprite = tower.sprite;
-                image.color = Color.white;
             }
 
             _tower = tower;
@@ -63,6 +79,28 @@ namespace UI
             }
 
             GameManager.StartSpawning(_tower);
+        }
+
+        private void SetCellPositions(Vector2Int[] positions)
+        {
+            for (int i = cells.Count; i < positions.Length; i++)
+            {
+                Image image = Instantiate(cells[0], root.transform);
+                image.transform.SetAsFirstSibling();
+                image.color = Color.white;
+                
+                cells.Add(image);
+            }
+
+            for (int i = 0; i < positions.Length; i++)
+            {
+                cells[i].gameObject.SetActive(true);
+            }
+
+            for (int i = positions.Length; i < cells.Count; i++)
+            {
+                cells[i].gameObject.SetActive(false);
+            }
         }
     }
 }

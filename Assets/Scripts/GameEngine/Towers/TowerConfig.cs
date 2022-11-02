@@ -24,6 +24,5 @@ namespace GameEngine.Towers
         [Space(10)]
         public TowerController prefab;
         public Sprite sprite;
-        public Vector2 spriteOffset;
     }
 }
