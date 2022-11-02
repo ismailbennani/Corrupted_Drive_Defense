@@ -12,13 +12,15 @@ namespace GameEngine.Shapes
 
         [Tooltip("Radius of the shape, not counting the central cell: a circle of diameter 7 would have a radius of 3")]
         public Vector2Int radius;
-        
-        public IEnumerable<Vector2Int> EvaluateAt(params Vector2Int[] positions)
+
+        public IEnumerable<Vector2Int> EvaluateAt(Vector2Int[] positions, bool rotated)
         {
+            Vector2Int actualRadius = rotated ? new Vector2Int(radius.y, radius.x) : radius;
+            
             return type switch
             {
-                ShapeType.Square => Square(positions, radius),
-                ShapeType.Circle => Circle(positions, radius),
+                ShapeType.Square => Square(positions, actualRadius),
+                ShapeType.Circle => Circle(positions, actualRadius),
                 _ => throw new ArgumentOutOfRangeException()
             };
         }

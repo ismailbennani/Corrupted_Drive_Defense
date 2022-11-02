@@ -5,6 +5,6 @@ namespace GameEngine.Shapes
 {
     public interface IShape
     {
-        IEnumerable<Vector2Int> EvaluateAt(params Vector2Int[] position);
+        IEnumerable<Vector2Int> EvaluateAt(Vector2Int[] positions, bool rotated);
     }
 }

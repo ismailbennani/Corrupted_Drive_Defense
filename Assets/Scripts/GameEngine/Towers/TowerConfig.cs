@@ -12,6 +12,7 @@ namespace GameEngine.Towers
 
         [Header("Caracteristics")]
         public Shape shape;
+        public bool canRotate;
         public int cost;
         
         [Header("Charge")]

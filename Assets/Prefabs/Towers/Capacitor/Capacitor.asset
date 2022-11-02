@@ -17,22 +17,24 @@ MonoBehaviour:
     type: 0
     size: {x: 1, y: 1}
     offset: {x: 0, y: 0}
+  canRotate: 0
   cost: 75
   frequency: 5
   maxCharge: 10
-  targetType: 1
+  targetType: 0
   range:
     type: 1
     radius: {x: 3, y: 3}
   targetShape:
     type: 0
     radius: {x: 0, y: 0}
-  baseDamage: 1
+  baseDamage: 2
   towerHitEffect:
     enabled: 0
     enemyEffect:
       name: 
       duration: 0
+      maxStacks: 0
       speedModifier: 1
   prefab: {fileID: 2366462122132164904, guid: 68bcd4bc9d46786408e4a092c3a70803, type: 3}
   sprite: {fileID: -289229907, guid: d3ae99aa56494fe4fb3a814456dfb394, type: 3}

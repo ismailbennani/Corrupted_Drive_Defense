@@ -24,9 +24,14 @@ namespace Managers.Tower
         {
             _mouseInputApi.Disable();
             _towerSpawnPreviewManager.StartPreview(tower);
-            _towerSpawnPreviewManager.OnStopPreview.AddListener(OnStopPreview);
+            _towerSpawnPreviewManager.onStopPreview.AddListener(OnStopPreview);
 
             _inPreview = true;
+        }
+
+        public void ToggleRotation()
+        {
+            _towerSpawnPreviewManager.ToggleRotated();
         }
 
         public void StopPreview()
@@ -42,7 +47,7 @@ namespace Managers.Tower
         private void OnStopPreview()
         {
             _mouseInputApi.Enable();
-            _towerSpawnPreviewManager.OnStopPreview.RemoveListener(OnStopPreview);
+            _towerSpawnPreviewManager.onStopPreview.RemoveListener(OnStopPreview);
             _inPreview = false;
         }
     }

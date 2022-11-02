@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using GameEngine.Shapes;
 using GameEngine.Towers;
 using TMPro;
 using UnityEngine;
@@ -45,7 +46,7 @@ namespace UI
 
             root.constraint = GridLayoutGroup.Constraint.FixedColumnCount;
             root.constraintCount = tower.shape.size.x;
-            SetCellPositions(tower.shape.EvaluateAt(Vector2Int.zero).ToArray());
+            SetCellPositions(tower.shape.EvaluateAt(Vector2Int.zero, false).ToArray());
 
             if (tower.sprite)
             {

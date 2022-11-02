@@ -18,14 +18,9 @@ namespace Managers.Utils
             _visibleShapeManager = visibleShapeManager;
         }
 
-        public void Show(IShape shape, Vector2Int position, Color? color = null, bool? aboveEntities = null)
+        public void Show(IShape shape, IEnumerable<Vector2Int> positions, bool rotated, Color? color = null, bool? aboveEntities = null)
         {
-            _visibleShapeManager.Show(shape, color: color, aboveEntities: aboveEntities, position);
-        }
-
-        public void Show(IShape shape, IEnumerable<Vector2Int> positions, Color? color = null, bool? aboveEntities = null)
-        {
-            _visibleShapeManager.Show(shape, color: color, aboveEntities: aboveEntities, positions.ToArray());
+            _visibleShapeManager.Show(shape, rotated, color: color, aboveEntities: aboveEntities, positions.ToArray());
         }
 
         public void Hide()

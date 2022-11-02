@@ -20,6 +20,7 @@ namespace Managers.Utils
         private Transform _root;
         private readonly List<SpriteRenderer> _previewCells = new();
         private IShape _lastShape;
+        private bool _rotated;
 
         void Start()
         {
@@ -31,9 +32,10 @@ namespace Managers.Utils
             _root.SetParent(transform);
         }
 
-        public void Show(IShape shape, Color? color = null, bool? aboveEntities = null, params Vector2Int[] positions)
+        public void Show(IShape shape, bool rotated, Color? color = null, bool? aboveEntities = null, params Vector2Int[] positions)
         {
             _lastShape = shape;
+            _rotated = rotated;
 
             _root.gameObject.SetActive(true);
             
@@ -42,7 +44,7 @@ namespace Managers.Utils
                 _root.position = Vector2.zero.WithDepth(aboveEntities.Value ? GameConstants.UiLayer + 0.1f : GameConstants.EntityLayer + 0.1f);
             }
 
-            IEnumerable<Vector2Int> cells = shape != null ? shape.EvaluateAt(positions) : positions;
+            IEnumerable<Vector2Int> cells = shape != null ? shape.EvaluateAt(positions, rotated) : positions;
 
             ShowCells(cells);
 
@@ -72,7 +74,7 @@ namespace Managers.Utils
                 return;
             }
 
-            Show(_lastShape, null, null, positions);
+            Show(_lastShape, _rotated, null, null, positions);
         }
 
         private void ShowCells(IEnumerable<Vector2Int> cells)

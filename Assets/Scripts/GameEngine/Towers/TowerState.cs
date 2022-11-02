@@ -2,6 +2,7 @@
 using System.Linq;
 using Controllers;
 using GameEngine.Map;
+using GameEngine.Shapes;
 using Managers;
 using UnityEngine;
 using Utils;
@@ -13,7 +14,9 @@ namespace GameEngine.Towers
     {
         public long id;
         public WorldCell[] cells;
+        public bool rotated;
 
+        [Space(10)]
         public GaugeState charge;
         public int kills;
 
@@ -24,10 +27,11 @@ namespace GameEngine.Towers
         public TowerConfig config;
         public TowerController controller;
 
-        public TowerState(long id, Vector2Int cell, TowerConfig config)
+        public TowerState(long id, Vector2Int cell, bool rotated, TowerConfig config)
         {
             this.id = id;
-            cells = config.shape.EvaluateAt(cell).Select(GameManager.Instance.Map.GetCellAt).ToArray();
+            cells = config.shape.EvaluateAt(cell, rotated).Select(GameManager.Instance.Map.GetCellAt).ToArray();
+            this.rotated = config.canRotate && rotated;
             this.config = config;
 
             charge = new GaugeState(0, config.maxCharge);

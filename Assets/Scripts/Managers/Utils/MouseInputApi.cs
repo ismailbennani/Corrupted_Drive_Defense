@@ -8,20 +8,21 @@ namespace Managers.Utils
 {
   public class MouseInputApi
   {
-    private readonly GameStateApi _gameStateApi;
-    private readonly SelectedEntityApi _selectedEntityApi;
+    private readonly GameManager _gameManager;
 
     private bool _disabled;
 
-    public MouseInputApi(GameStateApi gameStateApi, SelectedEntityApi selectedEntityApi)
+    public MouseInputApi(GameManager gameManager)
     {
-      Assert.IsNotNull(gameStateApi);
-      Assert.IsNotNull(selectedEntityApi);
+      Assert.IsNotNull(gameManager);
       
-      _gameStateApi = gameStateApi;
-      _selectedEntityApi = selectedEntityApi;
+      _gameManager = gameManager;
     }
 
+    public void Update()
+    {
+    }
+    
     public void Enable()
     {
       _disabled = false;
@@ -41,18 +42,18 @@ namespace Managers.Utils
       
       WorldCell cell = Mouse.GetTargetCell();
 
-      TowerState tower = _gameStateApi.GetTowerAt(cell);
+      TowerState tower = _gameManager.GameState.GetTowerAt(cell);
       if (tower != null)
       {
-        _selectedEntityApi.Select(tower);
+        _gameManager.SelectedEntity.Select(tower);
       }
-      else if (_gameStateApi.IsProcessorCell(cell))
+      else if (_gameManager.GameState.IsProcessorCell(cell))
       {
-        _selectedEntityApi.SelectProcessor();
+        _gameManager.SelectedEntity.SelectProcessor();
       }
       else
       {
-        _selectedEntityApi.Clear();
+        _gameManager.SelectedEntity.Clear();
       }
     }
   }

@@ -12,12 +12,15 @@ namespace GameEngine.Shapes
         public Vector2Int size;
         public Vector2Int offset;
 
-        public IEnumerable<Vector2Int> EvaluateAt(params Vector2Int[] positions)
+        public IEnumerable<Vector2Int> EvaluateAt(Vector2Int[] positions, bool rotated)
         {
+            Vector2Int actualSize = rotated ? new Vector2Int(size.y, size.x) : size;
+            Vector2Int actualOffset = rotated ? new Vector2Int(offset.y, offset.x) : offset;
+            
             return type switch
             {
-                ShapeType.Square => Square(positions, size, offset),
-                ShapeType.Circle => Circle(positions, size, offset),
+                ShapeType.Square => Square(positions, actualSize, actualOffset),
+                ShapeType.Circle => Circle(positions, actualSize, actualOffset),
                 _ => throw new ArgumentOutOfRangeException()
             };
         }

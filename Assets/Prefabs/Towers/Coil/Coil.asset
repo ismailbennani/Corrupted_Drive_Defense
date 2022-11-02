@@ -17,6 +17,7 @@ MonoBehaviour:
     type: 0
     size: {x: 3, y: 1}
     offset: {x: 1, y: 0}
+  canRotate: 1
   cost: 200
   frequency: 5
   maxCharge: 20

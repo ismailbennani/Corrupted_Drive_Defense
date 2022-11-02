@@ -22,7 +22,7 @@ namespace Managers.Tower
             _root.SetParent(transform);
         }
 
-        public TowerState SpawnTower(TowerConfig tower, WorldCell cell)
+        public TowerState SpawnTower(TowerConfig tower, WorldCell cell, bool rotated = false)
         {
             if (!tower || !tower.prefab)
             {
@@ -38,7 +38,12 @@ namespace Managers.Tower
             newTower.id = id;
             _towers.Add(newTower);
 
-            return new TowerState(id, cell.gridPosition, tower)
+            if (rotated)
+            {
+                newTower.transform.rotation = Quaternion.Euler(0, 0, 90);
+            }
+
+            return new TowerState(id, cell.gridPosition, rotated, tower)
             {
                 controller = newTower
             };

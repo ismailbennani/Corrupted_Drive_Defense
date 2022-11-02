@@ -29,10 +29,11 @@ namespace Managers
 
         public bool Ready { get; private set; }
         public GameStateApi GameState { get; private set; }
+        public MouseInputApi MouseInput { get; private set; }
+        public KeyboardInputApi KeyboardInput { get; private set; }
         public MapApi Map { get; private set; }
         public GameSpeedApi GameSpeed { get; private set; }
         public VisibleShapeApi VisibleShape { get; private set; }
-        public MouseInputApi MouseInput { get; private set; }
         public TowerSpawnerApi TowerSpawner { get; private set; }
         public TowerSpawnPreviewApi TowerSpawnPreview { get; private set; }
         public TowerApi Tower { get; private set; }
@@ -88,6 +89,8 @@ namespace Managers
         {
             Tower?.Update();
             Enemy?.Update();
+            MouseInput?.Update();
+            KeyboardInput?.Update();
         }
 
         private void SpawnMap()
@@ -109,6 +112,9 @@ namespace Managers
         private void SpawnLayer1()
         {
             GameSpeed = new GameSpeedApi();
+            
+            MouseInput = new MouseInputApi(this);
+            KeyboardInput = new KeyboardInputApi(this);
             
             Transform utilsRoot = new GameObject("Utils", typeof(VisibleShapeManager)).transform;
             utilsRoot.SetParent(transform);
@@ -146,8 +152,6 @@ namespace Managers
             TowerSpawnerManager towerSpawnerManager = _towersRoot.GetComponent<TowerSpawnerManager>();
             TowerSpawner = new TowerSpawnerApi(towerSpawnerManager, GameState, Map);
 
-            MouseInput = new MouseInputApi(GameState, SelectedEntity);
-
             TowerSpawnPreviewManager towerSpawnPreviewManager = _towersRoot.GetComponent<TowerSpawnPreviewManager>();
             towerSpawnPreviewManager.GameConfig = gameConfig;
             towerSpawnPreviewManager.TowerSpawner = TowerSpawner;
@@ -180,7 +184,7 @@ namespace Managers
         {
             TowerSpawnPreview?.StartPreview(tower);
         }
-        
+
         public void StopPreview()
         {
             TowerSpawnPreview?.StopPreview();
