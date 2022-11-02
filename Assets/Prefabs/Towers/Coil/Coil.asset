@@ -13,9 +13,13 @@ MonoBehaviour:
   m_Name: Coil
   m_EditorClassIdentifier: 
   towerName: Coil
+  shape:
+    type: 0
+    size: {x: 0, y: 0}
+    offset: {x: 1, y: 0}
   targetArea:
     type: 0
-    size: 1
+    radius: {x: 1, y: 1}
   frequency: 5
   maxCharge: 20
   prefab: {fileID: 2292787277387283102, guid: bd80c124bc56b3648a0b5b75ec49e466, type: 3}

@@ -5,24 +5,20 @@ using UnityEngine;
 namespace GameEngine.Shapes
 {
     [Serializable]
-    public class Shape
+    public class Shape: IShape
     {
         public ShapeType type;
-        public int size;
+        public Vector2Int size;
+        public Vector2Int offset;
 
         public IEnumerable<Vector2Int> EvaluateAt(Vector2Int position)
         {
             return type switch
             {
-                ShapeType.Square => Square(position, size),
-                ShapeType.Circle => Circle(position, size),
+                ShapeType.Square => Square(position, size, offset),
+                ShapeType.Circle => Circle(position, size, offset),
                 _ => throw new ArgumentOutOfRangeException()
             };
-        }
-
-        public static IEnumerable<Vector2Int> Square(Vector2Int position, int size)
-        {
-            return Square(position, new Vector2Int(2 * size + 1, 2 * size + 1), new Vector2Int(size, size));
         }
 
         public static IEnumerable<Vector2Int> Square(Vector2Int position, Vector2Int size, Vector2Int offset)
@@ -36,14 +32,20 @@ namespace GameEngine.Shapes
             }
         }
 
-        public static IEnumerable<Vector2Int> Circle(Vector2Int position, int size)
+        public static IEnumerable<Vector2Int> Circle(Vector2Int position, Vector2Int size, Vector2Int offset)
         {
-            for (int i = -size; i <= size; i++)
+            int halfSizeX = Mathf.FloorToInt(size.x / 2);
+            int halfSizeY = Mathf.FloorToInt(size.y / 2);
+            
+            for (int i = 0; i < size.x; i++)
             {
-                int height = size - Math.Abs(i);
-                for (int j = -height; j <= height; j++)
+                int height = halfSizeY - Mathf.CeilToInt(Math.Abs(i - halfSizeX) * halfSizeY / halfSizeX);
+                int startY = halfSizeY - height;
+                int endY = halfSizeY + height;
+                
+                for (int j = startY; j <= endY; j++)
                 {
-                    yield return new Vector2Int(i + position.x, j + position.y);
+                    yield return new Vector2Int(i + position.x - offset.x, j + position.y - offset.y);
                 }
             }
         }

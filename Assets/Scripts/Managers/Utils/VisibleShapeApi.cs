@@ -15,7 +15,7 @@ namespace Managers.Utils
             _visibleShapeManager = visibleShapeManager;
         }
 
-        public void Show(Shape shape, Vector2Int position, Color? color = null)
+        public void Show(IShape shape, Vector2Int position, Color? color = null)
         {
             _visibleShapeManager.Show(shape, position, color);
         }

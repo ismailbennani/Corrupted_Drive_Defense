@@ -8,7 +8,12 @@ namespace GameEngine.Towers
     public class TowerConfig: ScriptableObject
     {
         public string towerName;
-        public Shape targetArea;
+
+        [Header("Shape")]
+        public Shape shape;
+        
+        [Header("Target")]
+        public TargetShape targetArea;
         
         [Header("Charge")]
         [Tooltip("Charge consumed from CPU per second")]

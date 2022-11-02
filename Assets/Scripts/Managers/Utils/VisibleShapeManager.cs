@@ -29,7 +29,7 @@ namespace Managers.Utils
             _root.SetParent(transform);
         }
 
-        public void Show(Shape shape, Vector2Int position, Color? color = null)
+        public void Show(IShape shape, Vector2Int position, Color? color = null)
         {
             _root.gameObject.SetActive(true);
 
