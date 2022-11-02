@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using GameEngine.Towers;
 using Managers.Utils;
 using UnityEngine.Assertions;
@@ -38,7 +39,19 @@ namespace Managers.Tower
             Clear();
             
             _selectedTower = tower;
-            _visibleShape.Show(tower.config.range, tower.cells.Select(c => c.gridPosition), tower.rotated);
+
+            switch (tower.config.targetType)
+            {
+                case TargetType.Single:
+                case TargetType.AreaAtTarget:
+                    _visibleShape.Show(tower.config.range, tower.cells.Select(c => c.gridPosition), tower.rotated);       
+                    break;
+                case TargetType.AreaAtSelf:
+                    _visibleShape.Show(tower.config.targetShape, tower.cells.Select(c => c.gridPosition), tower.rotated);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         public void SelectProcessor()

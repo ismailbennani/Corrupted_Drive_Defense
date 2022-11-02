@@ -12,8 +12,12 @@ namespace UI
     public class UISelectedEntityDescription : MyMonoBehaviour
     {
         public Transform selectedTowerRoot;
+        public Transform inPreviewRoot;
         public Transform noSelectedTowerRoot;
+
+        [Space(10)]
         public TextMeshProUGUI nameText;
+
         public TextMeshProUGUI kills;
         public TextMeshProUGUI resell;
         public UIGaugeController health;
@@ -33,7 +37,15 @@ namespace UI
         {
             if (GameManager.SelectedEntity == null)
             {
-                Unselect();
+                if (GameManager.TowerSpawnPreview?.InPreview ?? false)
+                {
+                    ShowPreviewRoot();
+                }
+                else
+                {
+                    Unselect();
+                }
+                
                 return;
             }
 
@@ -43,7 +55,8 @@ namespace UI
                 TowerState towerState = GameManager.SelectedEntity.GetSelectedTower();
                 description = Description.From(GameManager, towerState);
                 Display(false, true);
-            } else if (GameManager.SelectedEntity.IsProcessorSelected())
+            }
+            else if (GameManager.SelectedEntity.IsProcessorSelected())
             {
                 ProcessorState processorState = GameManager.GameState.GetProcessorState();
                 description = Description.From(GameManager, processorState);
@@ -68,14 +81,14 @@ namespace UI
                 GameManager.Tower.Sell(towerState);
             }
         }
-        
+
         private void Display(bool displayProcessorSpecific, bool displayTowerSpecific)
         {
             foreach (GameObject go in processorSpecific)
             {
                 go.SetActive(displayProcessorSpecific);
             }
-            
+
             foreach (GameObject go in towerSpecific)
             {
                 go.SetActive(displayTowerSpecific);
@@ -85,6 +98,11 @@ namespace UI
         private void Select(Description state)
         {
             selectedTowerRoot.gameObject.SetActive(true);
+
+            if (inPreviewRoot)
+            {
+                selectedTowerRoot.gameObject.SetActive(false);
+            }
 
             if (noSelectedTowerRoot)
             {
@@ -117,10 +135,22 @@ namespace UI
             }
         }
 
+        private void ShowPreviewRoot()
+        {
+            if (inPreviewRoot)
+            {
+                selectedTowerRoot.gameObject.SetActive(true);
+            }
+        }
+
         private void Unselect()
         {
-
             selectedTowerRoot.gameObject.SetActive(false);
+
+            if (inPreviewRoot)
+            {
+                selectedTowerRoot.gameObject.SetActive(false);
+            }
 
             if (noSelectedTowerRoot)
             {
@@ -158,7 +188,7 @@ namespace UI
                 {
                     return null;
                 }
-                
+
                 return new Description
                 {
                     Name = "Processor",

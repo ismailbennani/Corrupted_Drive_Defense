@@ -64,7 +64,7 @@ namespace Managers.Tower
         {
             if (tower.config.targetType == TargetType.AreaAtSelf)
             {
-                return GetEnemiesInArea(tower.config.targetShape, tower.cells.Select(c => c.gridPosition).ToArray());
+                return GetEnemiesInArea(tower.config.targetShape, tower.rotated, tower.cells.Select(c => c.gridPosition).ToArray());
             }
 
             IEnumerable<Vector2Int> rangeCells = tower.config.range.EvaluateAt(tower.cells.Select(c => c.gridPosition).ToArray());
@@ -87,15 +87,15 @@ namespace Managers.Tower
 
             if (tower.config.targetType == TargetType.AreaAtTarget)
             {
-                return GetEnemiesInArea(tower.config.targetShape, targetCell.gridPosition);
+                return GetEnemiesInArea(tower.config.targetShape, tower.rotated, targetCell.gridPosition);
             }
 
             throw new ArgumentOutOfRangeException(nameof(tower.config.targetType), tower.config.targetType, "invalid target type");
         }
 
-        private IEnumerable<EnemyState> GetEnemiesInArea(IShape shape, params Vector2Int[] cells)
+        private IEnumerable<EnemyState> GetEnemiesInArea(IShape shape, bool rotated, params Vector2Int[] cells)
         {
-            IEnumerable<Vector2Int> targetCells = shape.EvaluateAt(cells);
+            IEnumerable<Vector2Int> targetCells = shape.EvaluateAt(cells, rotated);
             return _gameStateApi.GetEnemiesAt(targetCells).ToArray();
         }
 
