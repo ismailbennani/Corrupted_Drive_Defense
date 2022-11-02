@@ -76,13 +76,10 @@ namespace Managers.Tower
             reason = null;
             return true;
         }
-    }
 
-    public static class TowerSpawnerApiExtensions
-    {
-        public static bool TrySpawnTower(this TowerSpawnerApi @this, TowerConfig tower, Vector2Int cell)
+        public void DestroyTower(long id)
         {
-            return @this.TrySpawnTower(tower, cell, out _);
+            _towerSpawnerManager.DestroyTower(id);
         }
     }
 }

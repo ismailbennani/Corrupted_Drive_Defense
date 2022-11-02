@@ -148,7 +148,7 @@ namespace Managers
             towerSpawnPreviewManager.VisibleShape = VisibleShape;
             TowerSpawnPreview = new TowerSpawnPreviewApi(towerSpawnPreviewManager, MouseInput);
 
-            Tower = new TowerApi(GameState, Enemy);
+            Tower = new TowerApi(gameConfig, GameState, TowerSpawner, SelectedEntity, Enemy);
             
             WorldCell processorCell = Map.GetCellAt(gameConfig.mapConfig.processorPosition);
 

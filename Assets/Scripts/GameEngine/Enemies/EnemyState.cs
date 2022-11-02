@@ -11,7 +11,6 @@ namespace GameEngine.Enemies
     public class EnemyState
     {
         public long id;
-        public int hp;
         public int pathIndex;
         public float pathCellCompletion;
 

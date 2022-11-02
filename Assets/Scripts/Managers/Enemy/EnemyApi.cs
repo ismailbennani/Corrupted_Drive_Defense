@@ -41,25 +41,40 @@ namespace Managers.Enemy
 
         private int Hit(EnemyState enemyState, int damage)
         {
-            enemyState.hp -= damage;
-            if (enemyState.hp <= 0)
+            int kills = 0;
+            int hp = enemyState.characteristics.hp;
+            EnemyConfig newConfig = enemyState.config;
+            
+            while (damage >= hp)
             {
-                int kills = 1;
+                damage -= hp;
+                kills++;
                 
+                if (newConfig.child == null)
+                {
+                    newConfig = null;
+                    break;
+                }
+
+                newConfig = newConfig.child;
+                hp = newConfig.hp;
+            }
+
+            if (kills > 0)
+            {
                 _gameStateApi.Earn(kills);
                 Kill(enemyState.id);
 
-                if (enemyState.config.child != null)
+                if (newConfig != null)
                 {
-                    _enemySpawnApi.DestroyEnemy(enemyState.id);
-                    enemyState.config = enemyState.config.child;
+                    enemyState.SetConfig(newConfig);
                     _enemySpawnApi.SpawnEnemy(enemyState);
                 }
-
-                return kills;
             }
 
-            return 0;
+            enemyState.characteristics.hp -= damage;
+            
+            return kills;
         }
     }
 }

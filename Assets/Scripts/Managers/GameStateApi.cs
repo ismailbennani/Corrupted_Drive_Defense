@@ -108,6 +108,17 @@ namespace Managers
             _state.towerStates.Add(tower);
         }
 
+        public void RemoveTower(long id)
+        {
+            TowerState towerState = GetTowerState(id);
+            if (towerState == null)
+            {
+                throw new InvalidOperationException($"Cannot find tower state with id {id}");
+            }
+
+            _state.towerStates.Remove(towerState);
+        }
+
         public void AddKills(TowerState state, int nKills)
         {
             state.kills += nKills;
@@ -132,8 +143,7 @@ namespace Managers
             EnemyState enemyState = GetEnemyState(id);
             if (enemyState == null)
             {
-                Debug.LogWarning($"Cannot find enemy state with id {id}");
-                return;
+                throw new InvalidOperationException($"Cannot find enemy state with id {id}");
             }
 
             _state.enemyStates.Remove(enemyState);
@@ -161,7 +171,7 @@ namespace Managers
             int[] pathCells = targetCells.Select(c => Array.FindIndex(path, w => w.gridPosition == c)).Where(i => i >= 0).ToArray();
             return _state.enemyStates.Where(e => pathCells.Contains(e.pathIndex)).ToArray();
         }
-        
+
         public void ApplyEnemyEffect(IEnumerable<EnemyState> enemies, EnemyEffect effect, TowerState source)
         {
             foreach (EnemyState enemy in enemies)

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using GameEngine;
 using GameEngine.Enemies;
 using GameEngine.Map;
 using GameEngine.Shapes;
@@ -12,13 +13,41 @@ namespace Managers.Tower
 {
     public class TowerApi
     {
+        private readonly GameConfig _gameConfig;
         private readonly GameStateApi _gameStateApi;
+        private readonly TowerSpawnerApi _towerSpawnerApi;
+        private readonly SelectedEntityApi _selectedEntityApi;
         private readonly EnemyApi _enemyApi;
 
-        public TowerApi(GameStateApi gameStateApi, EnemyApi enemyApi)
+        public TowerApi(
+            GameConfig gameConfig,
+            GameStateApi gameStateApi,
+            TowerSpawnerApi towerSpawnerApi,
+            SelectedEntityApi selectedEntityApi,
+            EnemyApi enemyApi
+        )
         {
+            _gameConfig = gameConfig;
             _gameStateApi = gameStateApi;
+            _towerSpawnerApi = towerSpawnerApi;
+            _selectedEntityApi = selectedEntityApi;
             _enemyApi = enemyApi;
+        }
+
+        public int SellValue(TowerState tower)
+        {
+            return Mathf.FloorToInt(_gameConfig.towerResellCoefficient * tower.totalCost);
+        }
+
+        public void Sell(TowerState tower)
+        {
+            int value = SellValue(tower);
+
+            _gameStateApi.RemoveTower(tower.id);
+            _towerSpawnerApi.DestroyTower(tower.id);
+            _gameStateApi.Earn(value);
+            
+            _selectedEntityApi.Clear();
         }
 
         public IEnumerable<EnemyState> GetTargets(TowerState tower)

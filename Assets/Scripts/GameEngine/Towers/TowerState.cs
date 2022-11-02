@@ -17,6 +17,9 @@ namespace GameEngine.Towers
         public int kills;
 
         [Space(10)]
+        public int totalCost;
+
+        [Space(10)]
         public TowerConfig config;
 
         public TowerState(long id, Vector2Int cell, TowerConfig config)
@@ -26,6 +29,8 @@ namespace GameEngine.Towers
             this.config = config;
 
             charge = new GaugeState(0, config.maxCharge);
+
+            totalCost = config.cost;
         }
     }
 }

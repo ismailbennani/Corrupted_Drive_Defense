@@ -11,6 +11,7 @@ namespace GameEngine
     {
         public MapConfig mapConfig;
         public int startingMoney;
+        public float towerResellCoefficient = 0.8f;
 
         [Header("Processor")]
         public ProcessorConfig processor;

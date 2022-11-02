@@ -1,5 +1,6 @@
 ﻿using GameEngine.Processor;
 using GameEngine.Towers;
+using Managers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -14,6 +15,7 @@ namespace UI
         public Transform noSelectedTowerRoot;
         public TextMeshProUGUI nameText;
         public TextMeshProUGUI kills;
+        public TextMeshProUGUI resell;
         public UIGaugeController health;
         public UIGaugeController charge;
 
@@ -39,12 +41,12 @@ namespace UI
             if (GameManager.SelectedEntity.IsTowerSelected())
             {
                 TowerState towerState = GameManager.SelectedEntity.GetSelectedTower();
-                description = Description.From(towerState);
+                description = Description.From(GameManager, towerState);
                 Display(false, true);
             } else if (GameManager.SelectedEntity.IsProcessorSelected())
             {
                 ProcessorState processorState = GameManager.GameState.GetProcessorState();
-                description = Description.From(processorState);
+                description = Description.From(GameManager, processorState);
                 Display(true, false);
             }
 
@@ -58,6 +60,15 @@ namespace UI
             }
         }
 
+        public void Sell()
+        {
+            if (GameManager.SelectedEntity.IsTowerSelected())
+            {
+                TowerState towerState = GameManager.SelectedEntity.GetSelectedTower();
+                GameManager.Tower.Sell(towerState);
+            }
+        }
+        
         private void Display(bool displayProcessorSpecific, bool displayTowerSpecific)
         {
             foreach (GameObject go in processorSpecific)
@@ -73,7 +84,6 @@ namespace UI
 
         private void Select(Description state)
         {
-
             selectedTowerRoot.gameObject.SetActive(true);
 
             if (noSelectedTowerRoot)
@@ -89,6 +99,11 @@ namespace UI
             if (kills && state.Kills.HasValue)
             {
                 kills.SetText(state.Kills.Value.ToString());
+            }
+
+            if (resell && state.Resell.HasValue)
+            {
+                resell.SetText(state.Resell.Value.ToString());
             }
 
             if (health && state.Health.HasValue)
@@ -117,10 +132,11 @@ namespace UI
         {
             public string Name;
             public int? Kills;
+            public int? Resell;
             public GaugeState? Health;
             public GaugeState Charge;
 
-            public static Description From(TowerState towerState)
+            public static Description From(GameManager gameManager, TowerState towerState)
             {
                 if (towerState == null)
                 {
@@ -131,11 +147,12 @@ namespace UI
                 {
                     Name = towerState.config ? towerState.config.towerName : "__TOWER__",
                     Kills = towerState.kills,
+                    Resell = gameManager.Tower.SellValue(towerState),
                     Charge = towerState.charge,
                 };
             }
 
-            public static Description From(ProcessorState processorState)
+            public static Description From(GameManager gameManager, ProcessorState processorState)
             {
                 if (processorState == null)
                 {

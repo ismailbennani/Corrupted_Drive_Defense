@@ -59,7 +59,7 @@ namespace Managers.Enemy
             EnemyController controller = _enemies.SingleOrDefault(c => c.id == id);
             if (controller == null)
             {
-                Debug.LogWarning($"Could not find enemy controller with id {id}");
+                throw new InvalidOperationException($"Could not find enemy controller with id {id}");
             }
 
             _enemies.Remove(controller);
