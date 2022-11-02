@@ -71,7 +71,7 @@ namespace Managers
 
         public TowerState GetTowerAt(Vector2Int cell)
         {
-            return _state.towerStates.SingleOrDefault(t => t.cell.gridPosition == cell);
+            return _state.towerStates.SingleOrDefault(t => t.cells.Any(c => c.gridPosition == cell));
         }
 
         public void AddTower(TowerState tower)

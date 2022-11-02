@@ -1,4 +1,5 @@
-﻿using GameEngine.Towers;
+﻿using System.Linq;
+using GameEngine.Towers;
 using Managers.Utils;
 using UnityEngine.Assertions;
 
@@ -37,7 +38,7 @@ namespace Managers.Tower
             Clear();
             
             _selectedTower = tower;
-            _visibleShape.Show(tower.config.targetArea, tower.cell.gridPosition);
+            _visibleShape.Show(tower.config.targetArea, tower.cells.Select(c => c.gridPosition));
         }
 
         public void SelectProcessor()

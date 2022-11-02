@@ -15,7 +15,7 @@ MonoBehaviour:
   towerName: Coil
   shape:
     type: 0
-    size: {x: 0, y: 0}
+    size: {x: 3, y: 1}
     offset: {x: 1, y: 0}
   targetArea:
     type: 0

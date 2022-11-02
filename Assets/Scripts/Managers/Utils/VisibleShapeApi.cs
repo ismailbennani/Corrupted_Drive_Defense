@@ -1,4 +1,7 @@
-﻿using GameEngine.Shapes;
+﻿using System.Collections.Generic;
+using System.Linq;
+using GameEngine.Map;
+using GameEngine.Shapes;
 using UnityEngine;
 using UnityEngine.Assertions;
 
@@ -15,24 +18,34 @@ namespace Managers.Utils
             _visibleShapeManager = visibleShapeManager;
         }
 
-        public void Show(IShape shape, Vector2Int position, Color? color = null)
+        public void Show(IShape shape, Vector2Int position, Color? color = null, bool? aboveEntities = null)
         {
-            _visibleShapeManager.Show(shape, position, color);
+            _visibleShapeManager.Show(shape, color: color, aboveEntities: aboveEntities, position);
         }
-        
+
+        public void Show(IShape shape, IEnumerable<Vector2Int> positions, Color? color = null, bool? aboveEntities = null)
+        {
+            _visibleShapeManager.Show(shape, color: color, aboveEntities: aboveEntities, positions.ToArray());
+        }
+
         public void Hide()
         {
             _visibleShapeManager.Hide();
         }
-        
+
         public void SetColor(Color color)
         {
             _visibleShapeManager.SetColor(color);
         }
-        
-        public void SetPosition(Vector2Int cell, bool aboveEntities = false)
+
+        public void SetPositions(params Vector2Int[] cells)
         {
-            _visibleShapeManager.SetPosition(cell, aboveEntities);
+            _visibleShapeManager.SetPositions(cells);
+        }
+
+        public void SetPositions(IEnumerable<Vector2Int> cells)
+        {
+            SetPositions(cells.ToArray());
         }
     }
 }

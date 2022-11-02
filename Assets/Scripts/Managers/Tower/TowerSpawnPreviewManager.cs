@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using GameEngine;
 using GameEngine.Map;
 using GameEngine.Towers;
@@ -41,7 +43,7 @@ namespace Managers.Tower
 
             WorldCell cell = Mouse.GetTargetCell();
             _root.position = cell.worldPosition.WithDepth(GameConstants.UiLayer);
-            VisibleShape.SetPosition(cell.gridPosition, true);
+            VisibleShape.SetPositions(GetCells(_tower));
             VisibleShape.SetColor(cell.type == CellType.Free ? GameConfig.shapePreviewOkColor : GameConfig.shapePreviewErrorColor);
 
             if (Input.GetMouseButtonUp(0))
@@ -68,7 +70,7 @@ namespace Managers.Tower
             }
 
             _previewTower = Instantiate(tower.prefab, _root).transform;
-            VisibleShape.Show(tower.targetArea, Vector2Int.zero);
+            VisibleShape.Show(tower.targetArea, GetCells(tower), aboveEntities: true);
         }
 
         public void StopPreview()
@@ -89,6 +91,12 @@ namespace Managers.Tower
             {
                 StopPreview();
             }
+        }
+
+        private IEnumerable<Vector2Int> GetCells(TowerConfig tower)
+        {
+            WorldCell cell = Mouse.GetTargetCell();
+            return tower.shape.EvaluateAt(Vector2Int.zero).Select(c => c + cell.gridPosition);
         }
     }
 }

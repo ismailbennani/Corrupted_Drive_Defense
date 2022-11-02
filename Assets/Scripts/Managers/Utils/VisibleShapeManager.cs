@@ -13,12 +13,13 @@ namespace Managers.Utils
     public class VisibleShapeManager : MonoBehaviour
     {
         public MapApi Map;
-        
+
         [NonSerialized]
         public SpriteRenderer CellPrefab;
 
         private Transform _root;
         private readonly List<SpriteRenderer> _previewCells = new();
+        private IShape _lastShape;
 
         void Start()
         {
@@ -26,35 +27,24 @@ namespace Managers.Utils
             Assert.IsNotNull(CellPrefab);
 
             _root = new GameObject("VisibleShapeRoot").transform;
+            _root.position = Vector2.zero.WithDepth(GameConstants.UiLayer + 0.1f);
             _root.SetParent(transform);
         }
 
-        public void Show(IShape shape, Vector2Int position, Color? color = null)
+        public void Show(IShape shape, Color? color = null, bool? aboveEntities = null, params Vector2Int[] positions)
         {
+            _lastShape = shape;
+
             _root.gameObject.SetActive(true);
-
-            IEnumerable<Vector2Int> cells = shape != null ? shape.EvaluateAt(Vector2Int.zero) : new[] { Vector2Int.zero };
-
-            WorldCell offset = Map.GetCellAt(Vector2Int.zero);
-            WorldCell[] worldCells = cells.Select(Map.GetCellAt).ToArray();
-
-            for (int i = _previewCells.Count; i < worldCells.Length; i++)
+            
+            if (aboveEntities.HasValue)
             {
-                SpriteRenderer newCell = Instantiate(CellPrefab, _root);
-                _previewCells.Add(newCell);
+                _root.position = Vector2.zero.WithDepth(aboveEntities.Value ? GameConstants.UiLayer + 0.1f : GameConstants.EntityLayer + 0.1f);
             }
 
-            for (int i = 0; i < _previewCells.Count; i++)
-            {
-                _previewCells[i].gameObject.SetActive(i < worldCells.Length);
-            }
+            IEnumerable<Vector2Int> cells = shape != null ? shape.EvaluateAt(positions) : positions;
 
-            for (int i = 0; i < worldCells.Length; i++)
-            {
-                _previewCells[i].transform.localPosition = worldCells[i].worldPosition - offset.worldPosition;
-            }
-
-            SetPosition(position);
+            ShowCells(cells);
 
             if (color.HasValue)
             {
@@ -75,10 +65,35 @@ namespace Managers.Utils
             }
         }
 
-        public void SetPosition(Vector2Int position, bool aboveEntities = false)
+        public void SetPositions(params Vector2Int[] positions)
         {
-            _root.position = Map.GetCellAt(position)
-                .worldPosition.WithDepth(aboveEntities ? GameConstants.UiLayer + 0.1f : GameConstants.EntityLayer + 0.1f);
+            if (_lastShape == null)
+            {
+                return;
+            }
+
+            Show(_lastShape, null, null, positions);
+        }
+
+        private void ShowCells(IEnumerable<Vector2Int> cells)
+        {
+            WorldCell[] worldCells = cells.Select(Map.GetCellAt).ToArray();
+
+            for (int i = _previewCells.Count; i < worldCells.Length; i++)
+            {
+                SpriteRenderer newCell = Instantiate(CellPrefab, _root);
+                _previewCells.Add(newCell);
+            }
+
+            for (int i = 0; i < _previewCells.Count; i++)
+            {
+                _previewCells[i].gameObject.SetActive(i < worldCells.Length);
+            }
+
+            for (int i = 0; i < worldCells.Length; i++)
+            {
+                _previewCells[i].transform.localPosition = worldCells[i].worldPosition;
+            }
         }
     }
 }

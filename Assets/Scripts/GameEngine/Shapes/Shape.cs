@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace GameEngine.Shapes
@@ -11,12 +12,12 @@ namespace GameEngine.Shapes
         public Vector2Int size;
         public Vector2Int offset;
 
-        public IEnumerable<Vector2Int> EvaluateAt(Vector2Int position)
+        public IEnumerable<Vector2Int> EvaluateAt(params Vector2Int[] positions)
         {
             return type switch
             {
-                ShapeType.Square => Square(position, size, offset),
-                ShapeType.Circle => Circle(position, size, offset),
+                ShapeType.Square => Square(positions, size, offset),
+                ShapeType.Circle => Circle(positions, size, offset),
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
@@ -48,6 +49,16 @@ namespace GameEngine.Shapes
                     yield return new Vector2Int(i + position.x - offset.x, j + position.y - offset.y);
                 }
             }
+        }
+        
+        public static IEnumerable<Vector2Int> Circle(IEnumerable<Vector2Int> positions, Vector2Int size, Vector2Int offset)
+        {
+            return positions.SelectMany(p => Circle(p, size, offset)).Distinct();
+        }
+
+        public static IEnumerable<Vector2Int> Square(IEnumerable<Vector2Int> positions, Vector2Int size, Vector2Int offset)
+        {
+            return positions.SelectMany(p => Square(p, size, offset)).Distinct();
         }
     }
 }

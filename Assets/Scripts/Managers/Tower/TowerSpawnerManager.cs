@@ -33,7 +33,7 @@ namespace Managers.Tower
             newTower.transform.localPosition = cell.worldPosition.WithDepth(GameConstants.EntityLayer);
             newTower.id = id;
 
-            state = new TowerState(id, cell, tower);
+            state = new TowerState(id, cell.gridPosition, tower);
             return true;
         }
     }

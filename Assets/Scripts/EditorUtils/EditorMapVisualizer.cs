@@ -76,7 +76,7 @@ namespace EditorUtils
             
             foreach (TowerState towerState in towerStates)
             {
-                DrawCells(Color.gray, towerState.cell);
+                DrawCells(Color.gray, towerState.cells);
             }
         }
 

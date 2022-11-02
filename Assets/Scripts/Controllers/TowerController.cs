@@ -61,7 +61,7 @@ namespace Controllers
                 return;
             }
 
-            IEnumerable<Vector2Int> targetCells = _state.config.targetArea.EvaluateAt(_state.cell.gridPosition);
+            IEnumerable<Vector2Int> targetCells = _state.config.targetArea.EvaluateAt(_state.cells.Select(c => c.gridPosition).ToArray());
             EnemyState[] targets = GameManager.GameState.GetEnemiesAt(targetCells).ToArray();
 
             if (targets.Length == 0)
