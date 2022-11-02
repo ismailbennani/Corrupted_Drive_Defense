@@ -84,6 +84,12 @@ namespace Managers
             Ready = true;
         }
 
+        void Update()
+        {
+            Tower?.Update();
+            Enemy?.Update();
+        }
+
         private void SpawnMap()
         {
             if (!gameConfig.mapConfig)

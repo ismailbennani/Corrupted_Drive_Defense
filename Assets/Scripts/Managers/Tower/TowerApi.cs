@@ -113,6 +113,7 @@ namespace Managers.Tower
             }
 
             tower.charge.Clear();
+            tower.controller.SendMessage("SetCharge", tower.charge);
 
             if (tower.config.baseDamage > 0)
             {
@@ -134,8 +135,10 @@ namespace Managers.Tower
 
             float consumed = processorState.charge.Consume(Mathf.Min(requiredCharge, maxCharge));
 
-            tower.charge.Add(consumed);
-            tower.controller.SendMessage("SetCharge", tower.charge);
+            if (tower.charge.Add(consumed) > 0)
+            {
+                tower.controller.SendMessage("SetCharge", tower.charge);
+            }
         }
     }
 }
