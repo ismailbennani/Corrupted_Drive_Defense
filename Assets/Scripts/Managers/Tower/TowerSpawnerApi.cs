@@ -25,9 +25,9 @@ namespace Managers.Tower
             _map = map;
         }
 
-        public bool TrySpawnTower(TowerConfig tower, Vector2Int cell, out TowerState state, bool force = false, bool register = true)
+        public bool TrySpawnTower(TowerConfig tower, Vector2Int cell, out TowerState state)
         {
-            if (!force && !CanSpawnTower(tower, cell, out string reason))
+            if (!CanSpawnTowerAt(tower, cell, out string reason))
             {
                 Debug.LogWarning($"Cannot spawn tower {tower.towerName}: {reason}");
 
@@ -35,35 +35,34 @@ namespace Managers.Tower
                 return false;
             }
 
+            _gameState.Spend(tower.cost);
+
             WorldCell targetCell = _map.GetCellAt(cell);
             _towerSpawnerManager.SpawnTower(tower, targetCell, out state);
 
-            if (register)
-            {
-                _gameState.AddTower(state);
-            }
+            _gameState.AddTower(state);
 
             return true;
         }
 
-        public bool CanSpawnTower(TowerConfig tower, Vector2Int cell)
+        public bool CanSpawnTowerAt(TowerConfig tower, Vector2Int cell)
         {
-            return CanSpawnTower(tower, cell, out _);
+            return CanSpawnTowerAt(tower, cell, out _);
         }
 
-        public bool CanSpawnTower(TowerConfig tower, Vector2Int cell, out string reason)
+        public bool CanSpawnTowerAt(TowerConfig tower, Vector2Int cell, out string reason)
         {
             WorldCell[] worldCells = tower.shape.EvaluateAt(cell).Select(_map.GetCellAt).ToArray();
 
             if (worldCells.Any(c => c.type != CellType.Free))
             {
-                reason = $"tower overlaps path";
+                reason = "tower overlaps path";
                 return false;
             }
 
             if (worldCells.Intersect(_gameState.GetProcessorState().cells).Any())
             {
-                reason = $"tower overlaps processor";
+                reason = "tower overlaps processor";
                 return false;
             }
 
@@ -81,9 +80,9 @@ namespace Managers.Tower
 
     public static class TowerSpawnerApiExtensions
     {
-        public static bool TrySpawnTower(this TowerSpawnerApi @this, TowerConfig tower, Vector2Int cell, bool force = false, bool register = true)
+        public static bool TrySpawnTower(this TowerSpawnerApi @this, TowerConfig tower, Vector2Int cell)
         {
-            return @this.TrySpawnTower(tower, cell, out _, force, register);
+            return @this.TrySpawnTower(tower, cell, out _);
         }
     }
 }

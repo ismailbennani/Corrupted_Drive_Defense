@@ -23,8 +23,15 @@ namespace UI
                 return;
             }
 
-            healthBar.Set(_processorState.health);
-            chargeBar.Set(_processorState.charge);
+            if (healthBar)
+            {
+                healthBar.Set(_processorState.health);
+            }
+
+            if (chargeBar)
+            {
+                chargeBar.Set(_processorState.charge);
+            }
         }
     }
 }

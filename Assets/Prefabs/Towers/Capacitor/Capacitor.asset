@@ -13,14 +13,14 @@ MonoBehaviour:
   m_Name: Capacitor
   m_EditorClassIdentifier: 
   towerName: Capacitor
+  cost: 100
   shape:
     type: 0
     size: {x: 1, y: 1}
     offset: {x: 0, y: 0}
   targetArea:
     type: 1
-    size: {x: 5, y: 5}
-    offset: {x: 2, y: 2}
+    radius: {x: 2, y: 2}
   frequency: 5
   maxCharge: 10
   prefab: {fileID: 2366462122132164904, guid: 68bcd4bc9d46786408e4a092c3a70803, type: 3}

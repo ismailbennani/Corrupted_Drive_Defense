@@ -10,6 +10,7 @@ namespace GameEngine
     public class GameConfig : ScriptableObject
     {
         public MapConfig mapConfig;
+        public int startingMoney;
 
         [Header("Processor")]
         public ProcessorConfig processor;

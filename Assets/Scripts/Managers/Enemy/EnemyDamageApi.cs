@@ -33,6 +33,8 @@ namespace Managers.Enemy
             if (enemyState.hp <= 0)
             {
                 kills = 1;
+                
+                _gameStateApi.Earn(kills);
                 Kill(enemyId);
 
                 if (enemyState.config.child != null)

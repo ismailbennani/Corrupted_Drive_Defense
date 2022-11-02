@@ -8,6 +8,7 @@ namespace GameEngine.Towers
     public class TowerConfig: ScriptableObject
     {
         public string towerName;
+        public int cost;
 
         [Header("Shape")]
         public Shape shape;
@@ -23,5 +24,6 @@ namespace GameEngine.Towers
         [Space(10)]
         public TowerController prefab;
         public Sprite sprite;
+        public Vector2 spriteOffset;
     }
 }

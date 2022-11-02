@@ -6,7 +6,6 @@ using GameEngine.Enemies;
 using GameEngine.Map;
 using GameEngine.Processor;
 using GameEngine.Towers;
-using GameEngine.Waves;
 using Managers.Map;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -27,6 +26,35 @@ namespace Managers
             _state = state;
             _map = map;
         }
+
+        #region Money
+
+        public int GetMoney()
+        {
+            return _state.money;
+        }
+
+        public void Earn(int money)
+        {
+            _state.money += money;
+        }
+
+        public bool CanSpend(int money)
+        {
+            return _state.money >= money;
+        }
+
+        public void Spend(int money)
+        {
+            if (!CanSpend(money))
+            {
+                throw new InvalidOperationException($"Not enough money: {money} > {_state.money}");
+            }
+            
+            _state.money -= money;
+        }
+
+        #endregion
 
         #region Processor
 

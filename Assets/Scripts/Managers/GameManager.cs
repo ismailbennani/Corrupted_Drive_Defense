@@ -60,7 +60,7 @@ namespace Managers
 
             yield return null;
 
-            GameState = new GameStateApi(new GameState(), Map);
+            GameState = new GameStateApi(new GameState(gameConfig), Map);
 
             yield return null;
 
