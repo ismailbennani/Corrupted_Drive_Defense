@@ -41,13 +41,15 @@ namespace Controllers
 
         void FixedUpdate()
         {
+            _state.Update();
+            
             if (_state.pathCellCompletion > 1)
             {
                 _state.pathIndex++;
 
                 if (_state.pathIndex >= _path.Length)
                 {
-                    GameManager.EnemyDamage.Kill(_state.id);
+                    GameManager.Enemy.Kill(_state.id);
                     GameManager.ProcessorDamage.Hit(_state);
                 }
                 
@@ -60,7 +62,7 @@ namespace Controllers
                 ? Vector2.LerpUnclamped(_startPos, _middlePos, _state.pathCellCompletion * 2).WithDepth(transform.position.z)
                 : Vector2.LerpUnclamped(_middlePos, _targetPos, _state.pathCellCompletion * 2 - 1).WithDepth(transform.position.z);
 
-            _state.pathCellCompletion += Time.fixedDeltaTime * _state.config.speed;
+            _state.pathCellCompletion += Time.fixedDeltaTime * _state.characteristics.speed;
         }
 
         private void UpdateTargetPositions()

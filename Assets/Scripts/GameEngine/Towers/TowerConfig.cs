@@ -1,4 +1,5 @@
 ﻿using Controllers;
+using GameEngine.Enemies.Effects;
 using GameEngine.Shapes;
 using UnityEngine;
 
@@ -27,16 +28,10 @@ namespace GameEngine.Towers
         
         [Header("Base effect")]
         public int baseDamage;
+        public TowerHitEffect towerHitEffect;
 
         [Space(10)]
         public TowerController prefab;
         public Sprite sprite;
-    }
-
-    public enum TargetType
-    {
-        Single,
-        AreaAtTarget,
-        AreaAtSelf,
     }
 }

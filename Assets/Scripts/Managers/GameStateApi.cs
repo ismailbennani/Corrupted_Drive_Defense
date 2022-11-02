@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using GameEngine;
 using GameEngine.Enemies;
+using GameEngine.Enemies.Effects;
 using GameEngine.Map;
 using GameEngine.Processor;
 using GameEngine.Towers;
@@ -159,6 +160,14 @@ namespace Managers
             WorldCell[] path = _map.GetPath().ToArray();
             int[] pathCells = targetCells.Select(c => Array.FindIndex(path, w => w.gridPosition == c)).Where(i => i >= 0).ToArray();
             return _state.enemyStates.Where(e => pathCells.Contains(e.pathIndex)).ToArray();
+        }
+        
+        public void ApplyEnemyEffect(IEnumerable<EnemyState> enemies, EnemyEffect effect, TowerState source)
+        {
+            foreach (EnemyState enemy in enemies)
+            {
+                enemy.AddEffect(effect, source);
+            }
         }
 
         #endregion

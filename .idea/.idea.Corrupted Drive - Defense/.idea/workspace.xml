@@ -1,20 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="18cc6ff9-a968-46c1-8e5b-b5cbc6aa7b26" name="Changes" comment="change tower buttons">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Tower/TowerTriggerApi.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Tower/TowerTriggerApi.cs.meta" afterDir="false" />
+    <list default="true" id="18cc6ff9-a968-46c1-8e5b-b5cbc6aa7b26" name="Changes" comment="add multiple target types">
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Enemies/Effects.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Enemies/Effects/EnemyEffect.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Enemies/EnemyCharacteristics.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Enemies/EnemyCharacteristics.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Enemies/EnemyEffectInstance.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Enemies/EnemyEffectInstance.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Towers/TargetType.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Towers/TargetType.cs.meta" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Towers/TowerHitEffect.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Towers/TowerHitEffect.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Corrupted Drive - Defense/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Corrupted Drive - Defense/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Towers/Capacitor/Capacitor.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Capacitor/Capacitor.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Towers/Coil/Coil.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Coil/Coil.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Sample/Sample.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Sample/Sample.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controllers/EnemyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controllers/EnemyController.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controllers/TowerController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controllers/TowerController.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Enemies/EnemyState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Enemies/EnemyState.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Towers/TowerConfig.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Towers/TowerConfig.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/Enemy/EnemyDamageApi.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Enemy/EnemyDamageApi.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/Enemy/EnemyDamageApi.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Enemy/EnemyApi.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/Enemy/EnemyDamageApi.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Enemy/EnemyApi.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/GameManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/GameManager.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/GameStateApi.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/GameStateApi.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/Tower/SelectedEntityApi.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Tower/SelectedEntityApi.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/Tower/TowerSpawnPreviewManager.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Tower/TowerSpawnPreviewManager.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/Tower/TowerTriggerApi.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Tower/TowerApi.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/Tower/TowerTriggerApi.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Tower/TowerApi.cs.meta" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +43,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/88d854ea2c91426ebc464f01cd71aa85157a00/d9/7e3485d6/Component.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ee2599e9648643c4aca5e05b96a4b4fe7400/6b/f22061db/Input.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3ea01e77be99618395f448b16bd7cc2bd4248bd9e5d8474964b2d97f39c5d74/System.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/lahki/unity/Corrupted Drive - Defense/Assets/Prefabs/Towers/Capacitor/Capacitor.asset" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/lahki/unity/Corrupted Drive - Defense/Assets/Prefabs/Towers/Capacitor/Capacitor.asset" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/lahki/unity/Corrupted Drive - Defense/Assets/Prefabs/Towers/Capacitor/Capacitor.asset" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/lahki/unity/Corrupted Drive - Defense/Assets/Prefabs/Towers/Capacitor/Capacitor.asset" root0="SKIP_HIGHLIGHTING" />
@@ -123,14 +134,7 @@
       <workItem from="1667141960624" duration="19332000" />
       <workItem from="1667210169814" duration="30271000" />
       <workItem from="1667299014331" duration="24997000" />
-      <workItem from="1667386897857" duration="14972000" />
-    </task>
-    <task id="LOCAL-00012" summary="implement spawning">
-      <created>1667218327649</created>
-      <option name="number" value="00012" />
-      <option name="presentableId" value="LOCAL-00012" />
-      <option name="project" value="LOCAL" />
-      <updated>1667218327649</updated>
+      <workItem from="1667386897857" duration="17937000" />
     </task>
     <task id="LOCAL-00013" summary="add ids to towers">
       <created>1667218547243</created>
@@ -468,7 +472,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667417818795</updated>
     </task>
-    <option name="localTasksCounter" value="61" />
+    <task id="LOCAL-00061" summary="add multiple target types">
+      <created>1667421147557</created>
+      <option name="number" value="00061" />
+      <option name="presentableId" value="LOCAL-00061" />
+      <option name="project" value="LOCAL" />
+      <updated>1667421147557</updated>
+    </task>
+    <option name="localTasksCounter" value="62" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -503,7 +514,6 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="refactor" />
     <MESSAGE value="add assertions" />
     <MESSAGE value="add damage" />
     <MESSAGE value="add wave" />
@@ -528,6 +538,7 @@
     <MESSAGE value="disable selection click during preview" />
     <MESSAGE value="add money" />
     <MESSAGE value="change tower buttons" />
-    <option name="LAST_COMMIT_MESSAGE" value="change tower buttons" />
+    <MESSAGE value="add multiple target types" />
+    <option name="LAST_COMMIT_MESSAGE" value="add multiple target types" />
   </component>
 </project>

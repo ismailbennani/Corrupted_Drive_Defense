@@ -1,23 +1,24 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using GameEngine.Enemies;
 using GameEngine.Map;
 using GameEngine.Shapes;
 using GameEngine.Towers;
-using Managers.Map;
+using Managers.Enemy;
 using UnityEngine;
 
 namespace Managers.Tower
 {
-    public class TowerTriggerApi
+    public class TowerApi
     {
         private readonly GameStateApi _gameStateApi;
+        private readonly EnemyApi _enemyApi;
 
-        public TowerTriggerApi(GameStateApi gameStateApi)
+        public TowerApi(GameStateApi gameStateApi, EnemyApi enemyApi)
         {
             _gameStateApi = gameStateApi;
+            _enemyApi = enemyApi;
         }
 
         public IEnumerable<EnemyState> GetTargets(TowerState tower)
@@ -34,7 +35,7 @@ namespace Managers.Tower
             {
                 return Enumerable.Empty<EnemyState>();
             }
-            
+
             // TODO: select target based on some strategy
             EnemyState target = potentialTargets.First();
 
@@ -51,6 +52,32 @@ namespace Managers.Tower
             }
 
             throw new ArgumentOutOfRangeException(nameof(tower.config.targetType), tower.config.targetType, "invalid target type");
+        }
+
+        public void TriggerIfPossible(TowerState tower)
+        {
+            if (!tower.charge.Full)
+            {
+                return;
+            }
+
+            EnemyState[] targets = GetTargets(tower).ToArray();
+            if (targets.Length == 0)
+            {
+                return;
+            }
+
+            tower.charge.Clear();
+
+            if (tower.config.baseDamage > 0)
+            {
+                _enemyApi.Hit(targets.Select(t => t.id), tower.config.baseDamage, tower);
+            }
+
+            if (tower.config.towerHitEffect.enabled)
+            {
+                _gameStateApi.ApplyEnemyEffect(targets, tower.config.towerHitEffect.enemyEffect, tower);
+            }
         }
 
         private IEnumerable<EnemyState> GetEnemiesInArea(IShape shape, params Vector2Int[] cells)

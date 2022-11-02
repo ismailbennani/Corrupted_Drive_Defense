@@ -22,6 +22,10 @@ namespace Managers
         public static GameManager Instance { get; private set; }
 
         public GameConfig gameConfig;
+        
+        #if DEBUG
+        public GameState gameState;
+        #endif
 
         public bool Ready { get; private set; }
         public GameStateApi GameState { get; private set; }
@@ -31,10 +35,10 @@ namespace Managers
         public MouseInputApi MouseInput { get; private set; }
         public TowerSpawnerApi TowerSpawner { get; private set; }
         public TowerSpawnPreviewApi TowerSpawnPreview { get; private set; }
-        public TowerTriggerApi TowerTrigger { get; private set; }
+        public TowerApi Tower { get; private set; }
         public SelectedEntityApi SelectedEntity { get; private set; }
         public EnemySpawnApi EnemySpawn { get; private set; }
-        public EnemyDamageApi EnemyDamage { get; private set; }
+        public EnemyApi Enemy { get; private set; }
         public EnemyWaveApi EnemyWave { get; private set; }
         public ProcessorDamageApi ProcessorDamage { get; private set; }
 
@@ -61,7 +65,11 @@ namespace Managers
 
             yield return null;
 
-            GameState = new GameStateApi(new GameState(gameConfig), Map);
+            GameState gState = new(gameConfig);
+            GameState = new GameStateApi(gState, Map);
+            #if DEBUG
+            gameState = gState;
+            #endif
 
             yield return null;
 
@@ -123,7 +131,7 @@ namespace Managers
             enemyWaveManager.EnemySpawn = EnemySpawn;
             EnemyWave = new EnemyWaveApi(gameConfig, GameState, enemyWaveManager);
 
-            EnemyDamage = new EnemyDamageApi(GameState, EnemySpawn);
+            Enemy = new EnemyApi(GameState, EnemySpawn);
             
             _towersRoot = new GameObject("Towers", typeof(TowerSpawnerManager), typeof(TowerSpawnPreviewManager)).transform;
             _towersRoot.SetParent(transform);
@@ -140,7 +148,7 @@ namespace Managers
             towerSpawnPreviewManager.VisibleShape = VisibleShape;
             TowerSpawnPreview = new TowerSpawnPreviewApi(towerSpawnPreviewManager, MouseInput);
 
-            TowerTrigger = new TowerTriggerApi(GameState);
+            Tower = new TowerApi(GameState, Enemy);
             
             WorldCell processorCell = Map.GetCellAt(gameConfig.mapConfig.processorPosition);
 

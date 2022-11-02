@@ -2033,6 +2033,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameConfig: {fileID: 11400000, guid: 63878ef8794e7854ab4030ced9179086, type: 2}
+  gameState:
+    money: 0
+    processorState:
+      cells: []
+      health:
+        min: 0
+        value: 0
+        max: 0
+      charge:
+        min: 0
+        value: 0
+        max: 0
+      config: {fileID: 0}
+    towerStates: []
+    enemyStates: []
+    currentWave: 0
 --- !u!1001 &512427189
 PrefabInstance:
   m_ObjectHideFlags: 0

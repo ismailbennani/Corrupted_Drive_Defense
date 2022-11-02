@@ -1,17 +1,17 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using GameEngine.Enemies;
-using UnityEngine;
+using GameEngine.Towers;
 using UnityEngine.Assertions;
 
 namespace Managers.Enemy
 {
-    public class EnemyDamageApi
+    public class EnemyApi
     {
         private readonly GameStateApi _gameStateApi;
         private readonly EnemySpawnApi _enemySpawnApi;
 
-        public EnemyDamageApi(GameStateApi gameStateApi, EnemySpawnApi enemySpawnApi)
+        public EnemyApi(GameStateApi gameStateApi, EnemySpawnApi enemySpawnApi)
         {
             Assert.IsNotNull(gameStateApi);
             Assert.IsNotNull(enemySpawnApi);
@@ -20,20 +20,16 @@ namespace Managers.Enemy
             _enemySpawnApi = enemySpawnApi;
         }
 
-        public int Hit(long enemyId, int damage)
-        {
-            return Hit(new[] { enemyId }, damage);
-        }
-        
-        public int Hit(IEnumerable<long> enemyIds, int damage)
+        public void Hit(IEnumerable<long> enemyIds, int damage, TowerState source)
         {
             EnemyState[] enemyStates = enemyIds.Select(enemyId => _gameStateApi.GetEnemyState(enemyId)).ToArray();
             if (!enemyStates.Any())
             {
-                return 0;
+                return;
             }
 
-            return enemyStates.Aggregate(0, (kills, e) => kills + Hit(e, damage));
+            int kills = enemyStates.Aggregate(0, (kills, e) => kills + Hit(e, damage));
+            _gameStateApi.AddKills(source, kills);
         }
 
         public void Kill(long id)

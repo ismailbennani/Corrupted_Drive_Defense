@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
-using GameEngine.Enemies;
 using GameEngine.Map;
 using GameEngine.Processor;
 using GameEngine.Towers;
+using Managers.Tower;
 using UnityEngine;
 using Utils.CustomComponents;
 
@@ -50,26 +49,9 @@ namespace Controllers
                 return;
             }
 
-            TriggerIfPossible();
+            GameManager.Tower.TriggerIfPossible(_state);
+            
             UpdateCharge();
-        }
-
-        private void TriggerIfPossible()
-        {
-            if (!_state.charge.Full)
-            {
-                return;
-            }
-
-            EnemyState[] targets = GameManager.TowerTrigger.GetTargets(_state).ToArray();
-            if (targets.Length == 0)
-            {
-                return;
-            }
-
-            _state.charge.Clear();
-            int kills = GameManager.EnemyDamage.Hit(targets.Select(t => t.id), _state.config.baseDamage);
-            GameManager.GameState.AddKills(_state, kills);
         }
 
         private void UpdateCharge()
