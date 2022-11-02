@@ -44,9 +44,11 @@ namespace Managers.Tower
             WorldCell cell = Mouse.GetTargetCell();
             _root.position = cell.worldPosition.WithDepth(GameConstants.UiLayer);
             VisibleShape.SetPositions(GetCells(_tower));
-            VisibleShape.SetColor(cell.type == CellType.Free ? GameConfig.shapePreviewOkColor : GameConfig.shapePreviewErrorColor);
+            
+            bool canSpawn = TowerSpawner.CanSpawnTower(_tower, cell.gridPosition);
+            VisibleShape.SetColor(canSpawn ? GameConfig.shapePreviewOkColor : GameConfig.shapePreviewErrorColor);
 
-            if (Input.GetMouseButtonUp(0))
+            if (canSpawn && Input.GetMouseButtonUp(0))
             {
                 SpawnAt(cell);
             }

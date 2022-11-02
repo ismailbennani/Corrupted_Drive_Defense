@@ -18,7 +18,7 @@ namespace Managers.Tower
             _root.SetParent(transform);
         }
 
-        public bool SpawnTower(TowerConfig tower, WorldCell cell, out TowerState state)
+        public void SpawnTower(TowerConfig tower, WorldCell cell, out TowerState state)
         {
             if (!tower || !tower.prefab)
             {
@@ -34,7 +34,6 @@ namespace Managers.Tower
             newTower.id = id;
 
             state = new TowerState(id, cell.gridPosition, tower);
-            return true;
         }
     }
 }
