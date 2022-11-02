@@ -22,7 +22,7 @@ namespace Managers.Tower
             _root.SetParent(transform);
         }
 
-        public void SpawnTower(TowerConfig tower, WorldCell cell, out TowerState state)
+        public TowerState SpawnTower(TowerConfig tower, WorldCell cell)
         {
             if (!tower || !tower.prefab)
             {
@@ -38,7 +38,10 @@ namespace Managers.Tower
             newTower.id = id;
             _towers.Add(newTower);
 
-            state = new TowerState(id, cell.gridPosition, tower);
+            return new TowerState(id, cell.gridPosition, tower)
+            {
+                controller = newTower
+            };
         }
 
         public void DestroyTower(long id)

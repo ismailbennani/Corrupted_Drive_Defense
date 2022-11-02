@@ -38,7 +38,7 @@ namespace Managers.Tower
             _gameState.Spend(tower.cost);
 
             WorldCell targetCell = _map.GetCellAt(cell);
-            _towerSpawnerManager.SpawnTower(tower, targetCell, out state);
+            state = _towerSpawnerManager.SpawnTower(tower, targetCell);
 
             _gameState.AddTower(state);
 

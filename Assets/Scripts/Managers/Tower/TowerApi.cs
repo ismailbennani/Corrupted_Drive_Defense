@@ -4,6 +4,7 @@ using System.Linq;
 using GameEngine;
 using GameEngine.Enemies;
 using GameEngine.Map;
+using GameEngine.Processor;
 using GameEngine.Shapes;
 using GameEngine.Towers;
 using Managers.Enemy;
@@ -34,6 +35,15 @@ namespace Managers.Tower
             _enemyApi = enemyApi;
         }
 
+        public void Update()
+        {
+            foreach (TowerState tower in _gameStateApi.GetTowers())
+            {
+                TriggerIfPossible(tower);
+                UpdateCharge(tower);
+            }
+        }
+
         public int SellValue(TowerState tower)
         {
             return Mathf.FloorToInt(_gameConfig.towerResellCoefficient * tower.totalCost);
@@ -46,7 +56,7 @@ namespace Managers.Tower
             _gameStateApi.RemoveTower(tower.id);
             _towerSpawnerApi.DestroyTower(tower.id);
             _gameStateApi.Earn(value);
-            
+
             _selectedEntityApi.Clear();
         }
 
@@ -83,7 +93,13 @@ namespace Managers.Tower
             throw new ArgumentOutOfRangeException(nameof(tower.config.targetType), tower.config.targetType, "invalid target type");
         }
 
-        public void TriggerIfPossible(TowerState tower)
+        private IEnumerable<EnemyState> GetEnemiesInArea(IShape shape, params Vector2Int[] cells)
+        {
+            IEnumerable<Vector2Int> targetCells = shape.EvaluateAt(cells);
+            return _gameStateApi.GetEnemiesAt(targetCells).ToArray();
+        }
+
+        private void TriggerIfPossible(TowerState tower)
         {
             if (!tower.charge.Full)
             {
@@ -109,10 +125,17 @@ namespace Managers.Tower
             }
         }
 
-        private IEnumerable<EnemyState> GetEnemiesInArea(IShape shape, params Vector2Int[] cells)
+        private void UpdateCharge(TowerState tower)
         {
-            IEnumerable<Vector2Int> targetCells = shape.EvaluateAt(cells);
-            return _gameStateApi.GetEnemiesAt(targetCells).ToArray();
+            ProcessorState processorState = _gameStateApi.GetProcessorState();
+            
+            float requiredCharge = tower.charge.GetRemaining();
+            float maxCharge = Time.deltaTime * tower.config.frequency;
+
+            float consumed = processorState.charge.Consume(Mathf.Min(requiredCharge, maxCharge));
+
+            tower.charge.Add(consumed);
+            tower.controller.SendMessage("SetCharge", tower.charge);
         }
     }
 }

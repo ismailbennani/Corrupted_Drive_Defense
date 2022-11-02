@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Linq;
+using Controllers;
 using GameEngine.Map;
 using Managers;
 using UnityEngine;
@@ -21,6 +22,7 @@ namespace GameEngine.Towers
 
         [Space(10)]
         public TowerConfig config;
+        public TowerController controller;
 
         public TowerState(long id, Vector2Int cell, TowerConfig config)
         {
