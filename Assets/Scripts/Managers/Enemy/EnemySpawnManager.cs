@@ -27,6 +27,7 @@ namespace Managers.Enemy
             Assert.IsNotNull(Map);
 
             _root = new GameObject("SpawnRoot").transform;
+            _root.SetParent(transform);
         }
 
         public void SpawnEnemy(EnemyConfig enemy, Vector2Int cell)

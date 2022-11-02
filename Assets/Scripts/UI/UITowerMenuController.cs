@@ -22,10 +22,8 @@ namespace UI
         private void SpawnTowerIcons()
         {
             this.RemoveAllChildren();
-            
-            TowerConfig[] towers = { _gameConfig.capacitor };
 
-            foreach (TowerConfig tower in towers)
+            foreach (TowerConfig tower in _gameConfig.towers)
             {
                 UITowerMenuButton button = Instantiate(buttonPrefab, transform);
                 button.SetTower(tower);

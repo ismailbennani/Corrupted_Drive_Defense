@@ -15,6 +15,7 @@ namespace Managers.Tower
         private void Start()
         {
             _root = new GameObject("SpawnRoot").transform;
+            _root.SetParent(transform);
         }
 
         public bool SpawnTower(TowerConfig tower, WorldCell cell, out TowerState state)

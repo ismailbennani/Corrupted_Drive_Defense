@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Assertions;
 using Utils;
 
 namespace Controllers
@@ -19,23 +20,27 @@ namespace Controllers
         {
             if (!animator)
             {
-                animator = GetComponent<Animator>() ?? GetComponentInChildren<Animator>();
+                animator = GetComponent<Animator>();
             }
+            
+            if (!animator)
+            {
+                animator = GetComponentInChildren<Animator>();
+            }
+
+            Assert.IsNotNull(animator);
         }
 
         public void Update()
         {
-            if (animator)
+            animator.SetFloat(ChargeName, charge);
+
+            if (trigger)
             {
-                animator.SetFloat(ChargeName, charge);
+                animator.ResetTrigger(TriggerName);
+                animator.SetTrigger(TriggerName);
 
-                if (trigger)
-                {
-                    animator.ResetTrigger(TriggerName);
-                    animator.SetTrigger(TriggerName);
-
-                    trigger = false;
-                }
+                trigger = false;
             }
         }
 

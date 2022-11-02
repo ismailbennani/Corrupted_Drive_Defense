@@ -14,7 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mapConfig: {fileID: 11400000, guid: 0bdbdcc4e783a2d49b60fdcb39991518, type: 2}
   processor: {fileID: 11400000, guid: 9e87311ebf5bc1145bb412bbc7c0c99b, type: 2}
-  capacitor: {fileID: 11400000, guid: 13cf6272dd0843440bde1af03638844d, type: 2}
+  towers:
+  - {fileID: 11400000, guid: 13cf6272dd0843440bde1af03638844d, type: 2}
+  - {fileID: 11400000, guid: 80250b0c3163d524198c33d9f2ce89fb, type: 2}
   waves:
   - {fileID: 11400000, guid: 9b69db2051ecb814ab83dda5387f3506, type: 2}
   - {fileID: 11400000, guid: 9f9630af2c66b734d9796bb97f33afce, type: 2}

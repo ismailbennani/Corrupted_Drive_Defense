@@ -25,7 +25,7 @@ namespace Managers.Utils
             Assert.IsNotNull(Map);
             Assert.IsNotNull(CellPrefab);
 
-            _root = new GameObject("Root").transform;
+            _root = new GameObject("VisibleShapeRoot").transform;
             _root.SetParent(transform);
         }
 

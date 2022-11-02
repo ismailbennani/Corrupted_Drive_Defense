@@ -26,7 +26,7 @@ namespace Managers.Tower
             Assert.IsNotNull(GameConfig);
             Assert.IsNotNull(VisibleShape);
             
-            _root = new GameObject("Root").transform;
+            _root = new GameObject("SpawnPreviewRoot").transform;
             _root.SetParent(transform);   
         
             StopPreview();
