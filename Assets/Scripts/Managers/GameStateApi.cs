@@ -128,6 +128,11 @@ namespace Managers
 
         #region Enemy
 
+        public IEnumerable<EnemyState> GetEnemies()
+        {
+            return _state.enemyStates;
+        }
+
         public EnemyState GetEnemyState(long id)
         {
             return _state.enemyStates.SingleOrDefault(t => t.id == id);

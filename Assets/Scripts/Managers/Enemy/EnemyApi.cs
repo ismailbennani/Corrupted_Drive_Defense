@@ -20,6 +20,14 @@ namespace Managers.Enemy
             _enemySpawnApi = enemySpawnApi;
         }
 
+        public void Update()
+        {
+            foreach (EnemyState enemy in _gameStateApi.GetEnemies())
+            {
+                enemy.Update();
+            }
+        }
+        
         public void Hit(IEnumerable<long> enemyIds, int damage, TowerState source)
         {
             EnemyState[] enemyStates = enemyIds.Select(enemyId => _gameStateApi.GetEnemyState(enemyId)).ToArray();

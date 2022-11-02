@@ -41,8 +41,6 @@ namespace Controllers
 
         void FixedUpdate()
         {
-            _state.Update();
-            
             if (_state.pathCellCompletion > 1)
             {
                 _state.pathIndex++;
