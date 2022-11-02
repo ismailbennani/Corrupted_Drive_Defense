@@ -1,9 +1,11 @@
-﻿using GameEngine.Processor;
+﻿using System.Collections.Generic;
+using GameEngine.Processor;
 using GameEngine.Towers;
 using Managers;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.UI;
 using Utils;
 using Utils.CustomComponents;
 
@@ -23,19 +25,67 @@ namespace UI
         public UIGaugeController health;
         public UIGaugeController charge;
 
+        [Space(10)]
+        public int nPriorities;
+
+        public Toggle priorityToggle;
+
+        [Space(10)]
         public GameObject[] processorSpecific;
+
         public GameObject[] towerSpecific;
+
+        private readonly List<Toggle> _toggles = new();
 
         void Start()
         {
             Assert.IsNotNull(selectedTowerRoot);
+            Assert.IsNotNull(priorityToggle);
 
             RequireGameManager();
+
+            for (int i = 1; i <= nPriorities; i++)
+            {
+                Toggle toggle = Instantiate(priorityToggle, priorityToggle.transform.parent);
+                toggle.gameObject.SetActive(true);
+                _toggles.Add(toggle);
+                TextMeshProUGUI text = toggle.GetComponentInChildren<TextMeshProUGUI>();
+                text.SetText(i.ToString());
+
+                int localI = i;
+                toggle.onValueChanged.AddListener(b =>
+                {
+                    if (b)
+                    {
+                        SetPriority(localI);
+                    }
+                });
+            }
+
+            priorityToggle.gameObject.SetActive(false);
         }
 
         void Update()
         {
-            if (GameManager.SelectedEntity == null)
+            Description description = null;
+            if (GameManager.SelectedEntity != null)
+            {
+                if (GameManager.SelectedEntity.IsTowerSelected())
+                {
+                    TowerState towerState = GameManager.SelectedEntity.GetSelectedTower();
+                    description = Description.From(GameManager, towerState);
+                    Display(false, true);
+                    UpdatePriority(towerState);
+                }
+                else if (GameManager.SelectedEntity.IsProcessorSelected())
+                {
+                    ProcessorState processorState = GameManager.GameState.GetProcessorState();
+                    description = Description.From(GameManager, processorState);
+                    Display(true, false);
+                }
+            }
+
+            if (description == null)
             {
                 if (GameManager.TowerSpawnPreview?.InPreview ?? false)
                 {
@@ -45,27 +95,6 @@ namespace UI
                 {
                     Unselect();
                 }
-                
-                return;
-            }
-
-            Description description = null;
-            if (GameManager.SelectedEntity.IsTowerSelected())
-            {
-                TowerState towerState = GameManager.SelectedEntity.GetSelectedTower();
-                description = Description.From(GameManager, towerState);
-                Display(false, true);
-            }
-            else if (GameManager.SelectedEntity.IsProcessorSelected())
-            {
-                ProcessorState processorState = GameManager.GameState.GetProcessorState();
-                description = Description.From(GameManager, processorState);
-                Display(true, false);
-            }
-
-            if (description == null)
-            {
-                Unselect();
             }
             else
             {
@@ -101,7 +130,7 @@ namespace UI
 
             if (inPreviewRoot)
             {
-                selectedTowerRoot.gameObject.SetActive(false);
+                inPreviewRoot.gameObject.SetActive(false);
             }
 
             if (noSelectedTowerRoot)
@@ -137,9 +166,16 @@ namespace UI
 
         private void ShowPreviewRoot()
         {
+            selectedTowerRoot.gameObject.SetActive(false);
+
             if (inPreviewRoot)
             {
-                selectedTowerRoot.gameObject.SetActive(true);
+                inPreviewRoot.gameObject.SetActive(true);
+            }
+
+            if (noSelectedTowerRoot)
+            {
+                noSelectedTowerRoot.gameObject.SetActive(false);
             }
         }
 
@@ -149,12 +185,39 @@ namespace UI
 
             if (inPreviewRoot)
             {
-                selectedTowerRoot.gameObject.SetActive(false);
+                inPreviewRoot.gameObject.SetActive(false);
             }
 
             if (noSelectedTowerRoot)
             {
                 noSelectedTowerRoot.gameObject.SetActive(true);
+            }
+        }
+
+        private void SetPriority(int priority)
+        {
+            TowerState selectedTower = GameManager.SelectedEntity.GetSelectedTower();
+            if (selectedTower == null)
+            {
+                return;
+            }
+
+            GameManager.Tower.SetPriority(selectedTower, priority);
+        }
+
+        private void UpdatePriority(TowerState towerState)
+        {
+            if (towerState.priority >= 1 && towerState.priority <= nPriorities)
+            {
+                _toggles[towerState.priority - 1].SetIsOnWithoutNotify(true);
+            }
+            else if (towerState.priority < 1)
+            {
+                _toggles[0].SetIsOnWithoutNotify(true);
+            }
+            else
+            {
+                _toggles[^1].SetIsOnWithoutNotify(true);
             }
         }
 

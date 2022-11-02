@@ -15,10 +15,13 @@ namespace GameEngine.Towers
         public long id;
         public WorldCell[] cells;
         public bool rotated;
+        public int priority;
+
 
         [Space(10)]
         public GaugeState charge;
         public int kills;
+
 
         [Space(10)]
         public int totalCost;

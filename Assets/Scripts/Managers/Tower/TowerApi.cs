@@ -37,7 +37,7 @@ namespace Managers.Tower
 
         public void Update()
         {
-            foreach (TowerState tower in _gameStateApi.GetTowers())
+            foreach (TowerState tower in _gameStateApi.GetTowers().OrderByDescending(t => t.priority))
             {
                 TriggerIfPossible(tower);
                 UpdateCharge(tower);
@@ -58,6 +58,11 @@ namespace Managers.Tower
             _gameStateApi.Earn(value);
 
             _selectedEntityApi.Clear();
+        }
+
+        public void SetPriority(TowerState selectedTower, int priority)
+        {
+            selectedTower.priority = priority;
         }
 
         public IEnumerable<EnemyState> GetTargets(TowerState tower)
