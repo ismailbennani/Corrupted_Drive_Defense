@@ -8,21 +8,35 @@ namespace GameEngine.Towers
     public class TowerConfig: ScriptableObject
     {
         public string towerName;
-        public int cost;
 
-        [Header("Shape")]
+        [Header("Caracteristics")]
         public Shape shape;
-        
-        [Header("Target")]
-        public TargetShape targetArea;
+        public int cost;
         
         [Header("Charge")]
         [Tooltip("Charge consumed from CPU per second")]
         public float frequency;
         public int maxCharge;
+        
+        [Header("Target")]
+        public TargetType targetType;
+        [Tooltip("Ignored when targetType is AreaAtSelf ")]
+        public TargetShape range;
+        [Tooltip("Ignored when targetType is Single ")]
+        public TargetShape targetShape;
+        
+        [Header("Base effect")]
+        public int baseDamage;
 
         [Space(10)]
         public TowerController prefab;
         public Sprite sprite;
+    }
+
+    public enum TargetType
+    {
+        Single,
+        AreaAtTarget,
+        AreaAtSelf,
     }
 }

@@ -138,6 +138,22 @@ namespace Managers
             _state.enemyStates.Remove(enemyState);
         }
 
+        public WorldCell GetEnemyCell(EnemyState enemy)
+        {
+            WorldCell[] path = _map.GetPath().ToArray();
+            if (enemy.pathIndex < 0)
+            {
+                return path[0];
+            }
+
+            if (enemy.pathIndex >= path.Length)
+            {
+                return path[^1];
+            }
+
+            return path[enemy.pathIndex];
+        }
+
         public IEnumerable<EnemyState> GetEnemiesAt(IEnumerable<Vector2Int> targetCells)
         {
             WorldCell[] path = _map.GetPath().ToArray();

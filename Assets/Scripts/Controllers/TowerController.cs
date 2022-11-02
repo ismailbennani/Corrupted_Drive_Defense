@@ -61,19 +61,14 @@ namespace Controllers
                 return;
             }
 
-            IEnumerable<Vector2Int> targetCells = _state.config.targetArea.EvaluateAt(_state.cells.Select(c => c.gridPosition).ToArray());
-            EnemyState[] targets = GameManager.GameState.GetEnemiesAt(targetCells).ToArray();
-
+            EnemyState[] targets = GameManager.TowerTrigger.GetTargets(_state).ToArray();
             if (targets.Length == 0)
             {
                 return;
             }
 
-            // TODO: pick target according to strategy
-            EnemyState target = targets.First();
-
             _state.charge.Clear();
-            GameManager.EnemyDamage.Hit(target.id, 1, out int kills);
+            int kills = GameManager.EnemyDamage.Hit(targets.Select(t => t.id), _state.config.baseDamage);
             GameManager.GameState.AddKills(_state, kills);
         }
 

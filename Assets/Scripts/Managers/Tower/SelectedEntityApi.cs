@@ -38,7 +38,7 @@ namespace Managers.Tower
             Clear();
             
             _selectedTower = tower;
-            _visibleShape.Show(tower.config.targetArea, tower.cells.Select(c => c.gridPosition));
+            _visibleShape.Show(tower.config.range, tower.cells.Select(c => c.gridPosition));
         }
 
         public void SelectProcessor()

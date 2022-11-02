@@ -13,16 +13,20 @@ MonoBehaviour:
   m_Name: Coil
   m_EditorClassIdentifier: 
   towerName: Coil
-  cost: 200
   shape:
     type: 0
     size: {x: 3, y: 1}
     offset: {x: 1, y: 0}
-  targetArea:
-    type: 0
-    radius: {x: 1, y: 1}
+  cost: 200
   frequency: 5
   maxCharge: 20
+  targetType: 2
+  range:
+    type: 0
+    radius: {x: 1, y: 1}
+  targetShape:
+    type: 0
+    radius: {x: 1, y: 1}
+  baseDamage: 1
   prefab: {fileID: 2292787277387283102, guid: bd80c124bc56b3648a0b5b75ec49e466, type: 3}
   sprite: {fileID: 1304724479, guid: 1598425d7e5c68e48ab32a920f0fad64, type: 3}
-  spriteOffset: {x: 0, y: 0}

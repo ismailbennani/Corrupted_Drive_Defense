@@ -31,6 +31,7 @@ namespace Managers
         public MouseInputApi MouseInput { get; private set; }
         public TowerSpawnerApi TowerSpawner { get; private set; }
         public TowerSpawnPreviewApi TowerSpawnPreview { get; private set; }
+        public TowerTriggerApi TowerTrigger { get; private set; }
         public SelectedEntityApi SelectedEntity { get; private set; }
         public EnemySpawnApi EnemySpawn { get; private set; }
         public EnemyDamageApi EnemyDamage { get; private set; }
@@ -130,7 +131,7 @@ namespace Managers
 
             TowerSpawnerManager towerSpawnerManager = _towersRoot.GetComponent<TowerSpawnerManager>();
             TowerSpawner = new TowerSpawnerApi(towerSpawnerManager, GameState, Map);
-            
+
             MouseInput = new MouseInputApi(GameState, SelectedEntity);
 
             TowerSpawnPreviewManager towerSpawnPreviewManager = _towersRoot.GetComponent<TowerSpawnPreviewManager>();
@@ -139,6 +140,8 @@ namespace Managers
             towerSpawnPreviewManager.VisibleShape = VisibleShape;
             TowerSpawnPreview = new TowerSpawnPreviewApi(towerSpawnPreviewManager, MouseInput);
 
+            TowerTrigger = new TowerTriggerApi(GameState);
+            
             WorldCell processorCell = Map.GetCellAt(gameConfig.mapConfig.processorPosition);
 
             ProcessorConfig processorConfig = gameConfig.processor;

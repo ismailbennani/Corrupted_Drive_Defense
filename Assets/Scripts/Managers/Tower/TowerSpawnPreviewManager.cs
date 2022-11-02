@@ -75,7 +75,19 @@ namespace Managers.Tower
             }
 
             _previewTower = Instantiate(tower.prefab, _root).transform;
-            VisibleShape.Show(tower.targetArea, GetCells(tower), aboveEntities: true);
+
+            switch (tower.targetType)
+            {
+                case TargetType.Single:
+                case TargetType.AreaAtTarget:
+                    VisibleShape.Show(tower.range, GetCells(tower), aboveEntities: true);
+                    break;
+                case TargetType.AreaAtSelf:
+                    VisibleShape.Show(tower.targetShape, GetCells(tower), aboveEntities: true);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
 
         public void StopPreview()
