@@ -7,6 +7,7 @@ using GameEngine.Towers;
 using Managers.Utils;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Events;
 using Utils;
 using Utils.Extensions;
 
@@ -14,6 +15,8 @@ namespace Managers.Tower
 {
     public class TowerSpawnPreviewManager : MonoBehaviour
     {
+        public UnityEvent OnStopPreview = new UnityEvent();
+        
         [NonSerialized]
         public GameConfig GameConfig;
         public TowerSpawnerApi TowerSpawner;
@@ -85,6 +88,8 @@ namespace Managers.Tower
             _tower = null;
             _root.gameObject.SetActive(false);
             VisibleShape.Hide();
+            
+            OnStopPreview.Invoke();
         }
 
         private void SpawnAt(WorldCell cell)

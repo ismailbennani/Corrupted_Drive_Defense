@@ -64,17 +64,13 @@ namespace Managers
 
             yield return null;
 
-            SpawnUtils();
+            SpawnLayer1();
 
             yield return null;
 
-            SpawnEnemyManagers();
-            SpawnTowerManagers();
-            SpawnProcessor();
+            SpawnLayer2();
 
             yield return null;
-
-            SpawnOtherUtils();
 
             Ready = true;
         }
@@ -95,7 +91,7 @@ namespace Managers
             Map = new MapApi(mapManager);
         }
 
-        private void SpawnUtils()
+        private void SpawnLayer1()
         {
             GameSpeed = new GameSpeedApi();
             
@@ -106,9 +102,11 @@ namespace Managers
             visibleShapeManager.Map = Map;
             visibleShapeManager.CellPrefab = gameConfig.cellPrefab;
             VisibleShape = new VisibleShapeApi(visibleShapeManager);
+            
+            SelectedEntity = new SelectedEntityApi(VisibleShape);
         }
 
-        private void SpawnEnemyManagers()
+        private void SpawnLayer2()
         {
             _enemiesRoot = new GameObject("Enemies", typeof(EnemySpawnManager), typeof(EnemyWaveManager)).transform;
             _enemiesRoot.SetParent(transform);
@@ -125,28 +123,22 @@ namespace Managers
             EnemyWave = new EnemyWaveApi(gameConfig, GameState, enemyWaveManager);
 
             EnemyDamage = new EnemyDamageApi(GameState, EnemySpawn);
-        }
-
-        private void SpawnTowerManagers()
-        {
+            
             _towersRoot = new GameObject("Towers", typeof(TowerSpawnerManager), typeof(TowerSpawnPreviewManager)).transform;
             _towersRoot.SetParent(transform);
             _towersRoot.position = Vector2.zero.WithDepth(GameConstants.EntityLayer);
 
             TowerSpawnerManager towerSpawnerManager = _towersRoot.GetComponent<TowerSpawnerManager>();
             TowerSpawner = new TowerSpawnerApi(towerSpawnerManager, GameState, Map);
+            
+            MouseInput = new MouseInputApi(GameState, SelectedEntity);
 
             TowerSpawnPreviewManager towerSpawnPreviewManager = _towersRoot.GetComponent<TowerSpawnPreviewManager>();
             towerSpawnPreviewManager.GameConfig = gameConfig;
             towerSpawnPreviewManager.TowerSpawner = TowerSpawner;
             towerSpawnPreviewManager.VisibleShape = VisibleShape;
-            TowerSpawnPreview = new TowerSpawnPreviewApi(towerSpawnPreviewManager);
+            TowerSpawnPreview = new TowerSpawnPreviewApi(towerSpawnPreviewManager, MouseInput);
 
-            SelectedEntity = new SelectedEntityApi(VisibleShape);
-        }
-
-        private void SpawnProcessor()
-        {
             WorldCell processorCell = Map.GetCellAt(gameConfig.mapConfig.processorPosition);
 
             ProcessorConfig processorConfig = gameConfig.processor;
@@ -158,11 +150,6 @@ namespace Managers
 
             ProcessorDamage = new ProcessorDamageApi(GameState);
             ProcessorDamage.Lose.AddListener(Lose);
-        }
-
-        private void SpawnOtherUtils()
-        {
-            MouseInput = new MouseInputApi(GameState, SelectedEntity);
         }
 
         private void Lose()

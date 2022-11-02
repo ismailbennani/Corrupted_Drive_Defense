@@ -11,6 +11,8 @@ namespace Managers.Utils
     private readonly GameStateApi _gameStateApi;
     private readonly SelectedEntityApi _selectedEntityApi;
 
+    private bool _disabled;
+
     public MouseInputApi(GameStateApi gameStateApi, SelectedEntityApi selectedEntityApi)
     {
       Assert.IsNotNull(gameStateApi);
@@ -20,8 +22,23 @@ namespace Managers.Utils
       _selectedEntityApi = selectedEntityApi;
     }
 
+    public void Enable()
+    {
+      _disabled = false;
+    }
+    
+    public void Disable()
+    {
+      _disabled = true;
+    }
+
     public void Click()
     {
+      if (_disabled)
+      {
+        return;
+      }
+      
       WorldCell cell = Mouse.GetTargetCell();
 
       TowerState tower = _gameStateApi.GetTowerAt(cell);
