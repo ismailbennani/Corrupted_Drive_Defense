@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using GameEngine.Map;
 using GameEngine.Towers;
 using Managers.Map;
@@ -28,7 +29,7 @@ namespace Managers.Tower
         {
             if (!force && !CanSpawnTower(tower, cell, out string reason))
             {
-                Debug.LogWarning($"Cannot spawn tower: {reason}");
+                Debug.LogWarning($"Cannot spawn tower {tower.towerName}: {reason}");
 
                 state = null;
                 return false;
@@ -56,7 +57,20 @@ namespace Managers.Tower
 
             if (worldCells.Any(c => c.type != CellType.Free))
             {
-                reason = $"{tower.towerName} because one of its cells is not free";
+                reason = $"tower overlaps path";
+                return false;
+            }
+
+            if (worldCells.Intersect(_gameState.GetProcessorState().cells).Any())
+            {
+                reason = $"tower overlaps processor";
+                return false;
+            }
+
+            TowerState[] otherTowers = worldCells.Select(c => _gameState.GetTowerAt(c.gridPosition)).Where(t => t != null).ToArray();
+            if (otherTowers.Any())
+            {
+                reason = $"tower overlaps other towers: {string.Join(", ", otherTowers.Select(t => $"{t.config.towerName} ({t.id})"))}";
                 return false;
             }
 
