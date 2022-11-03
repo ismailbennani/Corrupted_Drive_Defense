@@ -28,7 +28,7 @@ MonoBehaviour:
   targetShape:
     type: 0
     radius: {x: 0, y: 0}
-  baseDamage: 2
+  baseDamage: 1
   towerHitEffect:
     enabled: 0
     enemyEffect:

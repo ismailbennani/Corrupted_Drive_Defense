@@ -8,6 +8,7 @@ using GameEngine.Processor;
 using GameEngine.Shapes;
 using GameEngine.Towers;
 using Managers.Enemy;
+using Managers.Map;
 using UnityEngine;
 
 namespace Managers.Tower
@@ -16,6 +17,7 @@ namespace Managers.Tower
     {
         private readonly GameConfig _gameConfig;
         private readonly GameStateApi _gameStateApi;
+        private readonly MapApi _mapApi;
         private readonly TowerSpawnerApi _towerSpawnerApi;
         private readonly SelectedEntityApi _selectedEntityApi;
         private readonly EnemyApi _enemyApi;
@@ -23,6 +25,7 @@ namespace Managers.Tower
         public TowerApi(
             GameConfig gameConfig,
             GameStateApi gameStateApi,
+            MapApi mapApi,
             TowerSpawnerApi towerSpawnerApi,
             SelectedEntityApi selectedEntityApi,
             EnemyApi enemyApi
@@ -30,6 +33,7 @@ namespace Managers.Tower
         {
             _gameConfig = gameConfig;
             _gameStateApi = gameStateApi;
+            _mapApi = mapApi;
             _towerSpawnerApi = towerSpawnerApi;
             _selectedEntityApi = selectedEntityApi;
             _enemyApi = enemyApi;
@@ -64,7 +68,7 @@ namespace Managers.Tower
         {
             selectedTower.priority = priority;
         }
-        
+
         public void SetTargetStrategy(TowerState selectedTower, TargetStrategy targetStrategy)
         {
             selectedTower.targetStrategy = targetStrategy;
@@ -85,15 +89,32 @@ namespace Managers.Tower
                 return Enumerable.Empty<EnemyState>();
             }
 
-            // TODO: select target based on some strategy
-            EnemyState target = potentialTargets.First();
+            IEnumerable<EnemyState> orderedTargets;
+            switch (tower.targetStrategy)
+            {
+                case TargetStrategy.First:
+                    orderedTargets = potentialTargets.OrderByDescending(t => t.pathIndex).ThenBy(t => t.pathCellCompletion);
+                    break;
+                case TargetStrategy.Last:
+                    orderedTargets = potentialTargets.OrderBy(t => t.pathIndex).ThenBy(t => t.pathCellCompletion);
+                    break;
+                case TargetStrategy.Close:
+                    orderedTargets = potentialTargets.OrderBy(t => _mapApi.ComputeDistance(_gameStateApi.GetEnemyCell(t), tower.cells))
+                        .ThenBy(t => -t.pathCellCompletion);
+                    break;
+                case TargetStrategy.Strong:
+                    orderedTargets = potentialTargets.OrderByDescending(t => t.strength);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
 
             if (tower.config.targetType == TargetType.Single)
             {
-                return new[] { target };
+                return new[] { orderedTargets.First() };
             }
 
-            WorldCell targetCell = _gameStateApi.GetEnemyCell(target);
+            WorldCell targetCell = _gameStateApi.GetEnemyCell(orderedTargets.First());
 
             if (tower.config.targetType == TargetType.AreaAtTarget)
             {
@@ -139,7 +160,7 @@ namespace Managers.Tower
         private void UpdateCharge(TowerState tower)
         {
             ProcessorState processorState = _gameStateApi.GetProcessorState();
-            
+
             float requiredCharge = tower.charge.GetRemaining();
             float maxCharge = Time.deltaTime * tower.config.frequency;
 

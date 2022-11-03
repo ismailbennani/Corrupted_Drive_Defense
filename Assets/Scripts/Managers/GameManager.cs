@@ -124,7 +124,7 @@ namespace Managers
             visibleShapeManager.CellPrefab = gameConfig.cellPrefab;
             VisibleShape = new VisibleShapeApi(visibleShapeManager);
             
-            SelectedEntity = new SelectedEntityApi(VisibleShape);
+            SelectedEntity = new SelectedEntityApi(gameConfig, VisibleShape);
         }
 
         private void SpawnLayer2()
@@ -158,7 +158,7 @@ namespace Managers
             towerSpawnPreviewManager.VisibleShape = VisibleShape;
             TowerSpawnPreview = new TowerSpawnPreviewApi(towerSpawnPreviewManager, MouseInput);
 
-            Tower = new TowerApi(gameConfig, GameState, TowerSpawner, SelectedEntity, Enemy);
+            Tower = new TowerApi(gameConfig, GameState, Map, TowerSpawner, SelectedEntity, Enemy);
             
             WorldCell processorCell = Map.GetCellAt(gameConfig.mapConfig.processorPosition);
 

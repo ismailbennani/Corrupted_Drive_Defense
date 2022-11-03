@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using GameEngine.Enemies;
 using GameEngine.Map;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -45,6 +46,16 @@ namespace Managers.Map
         public IEnumerable<WorldCell> GetCellsOfType(CellType type)
         {
             return _mapManager.GameMap.Where(c => c.type == type).Select(GetCellAt);
+        }
+
+        public float ComputeDistance(WorldCell cell, params WorldCell[] cells)
+        {
+            return cells.Select(c => ComputeDistance(cell, c)).Min();
+        }
+
+        private float ComputeDistance(WorldCell cell1, WorldCell cell2)
+        {
+            return Vector2.Distance(cell1.worldPosition, cell2.worldPosition);
         }
     }
 }

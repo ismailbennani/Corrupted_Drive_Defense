@@ -13,6 +13,7 @@ namespace GameEngine.Enemies
         public long id;
         public int pathIndex;
         public float pathCellCompletion;
+        public int strength;
 
         [Space(10)]
         public EnemyCharacteristics characteristics;
@@ -27,6 +28,8 @@ namespace GameEngine.Enemies
         {
             this.id = id;
             this.config = config;
+            
+            strength = ComputeStrength(config);
 
             UpdateCharacteristics();
         }
@@ -69,6 +72,19 @@ namespace GameEngine.Enemies
         private void UpdateCharacteristics()
         {
             characteristics = EnemyEffect.Apply(config, effects.Select(e => e.effect).ToArray());
+        }
+
+        private static int ComputeStrength(EnemyConfig config)
+        {
+            int result = 0;
+            EnemyConfig c = config;
+            while (c.child != null)
+            {
+                result++;
+                c = c.child;
+            }
+
+            return result;
         }
     }
 }
