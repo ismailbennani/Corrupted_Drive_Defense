@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="18cc6ff9-a968-46c1-8e5b-b5cbc6aa7b26" name="Changes" comment="fix target when tower is rotated">
+    <list default="true" id="18cc6ff9-a968-46c1-8e5b-b5cbc6aa7b26" name="Changes" comment="add priority">
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Towers/TargetStrategy.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Towers/TargetStrategy.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Corrupted Drive - Defense/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Corrupted Drive - Defense/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Towers/Coil/Animation/Coil.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Coil/Animation/Coil.controller" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Sample/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Sample/SampleScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Towers/TowerState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Towers/TowerState.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/Tower/TowerApi.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Tower/TowerApi.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/UISelectedEntityDescription.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/UISelectedEntityDescription.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" beforeDir="false" afterPath="$PROJECT_DIR$/UserSettings/Layouts/CurrentMaximizeLayout.dwlt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -131,14 +131,7 @@
       <workItem from="1667141960624" duration="19332000" />
       <workItem from="1667210169814" duration="30271000" />
       <workItem from="1667299014331" duration="24997000" />
-      <workItem from="1667386897857" duration="27333000" />
-    </task>
-    <task id="LOCAL-00021" summary="fix enemy movement">
-      <created>1667241873566</created>
-      <option name="number" value="00021" />
-      <option name="presentableId" value="LOCAL-00021" />
-      <option name="project" value="LOCAL" />
-      <updated>1667241873566</updated>
+      <workItem from="1667386897857" duration="28620000" />
     </task>
     <task id="LOCAL-00022" summary="add tower charge">
       <created>1667243580172</created>
@@ -476,7 +469,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667430762610</updated>
     </task>
-    <option name="localTasksCounter" value="70" />
+    <task id="LOCAL-00070" summary="add priority">
+      <created>1667433343523</created>
+      <option name="number" value="00070" />
+      <option name="presentableId" value="LOCAL-00070" />
+      <option name="project" value="LOCAL" />
+      <updated>1667433343523</updated>
+    </task>
+    <option name="localTasksCounter" value="71" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -511,7 +511,6 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="add ticks gauge to processor sprite" />
     <MESSAGE value="update color scheme" />
     <MESSAGE value="minor" />
     <MESSAGE value="rename" />
@@ -536,6 +535,7 @@
     <MESSAGE value="call new update methods" />
     <MESSAGE value="add rotation" />
     <MESSAGE value="fix target when tower is rotated" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix target when tower is rotated" />
+    <MESSAGE value="add priority" />
+    <option name="LAST_COMMIT_MESSAGE" value="add priority" />
   </component>
 </project>

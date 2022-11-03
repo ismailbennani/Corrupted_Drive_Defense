@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using GameEngine.Processor;
 using GameEngine.Towers;
 using Managers;
@@ -31,16 +33,22 @@ namespace UI
         public Toggle priorityToggle;
 
         [Space(10)]
+        public TMP_Dropdown strategiesDropdown;
+
+        [Space(10)]
         public GameObject[] processorSpecific;
 
         public GameObject[] towerSpecific;
+        public GameObject[] strategySpecific;
 
+        private TargetStrategy[] _lastStrategies = Array.Empty<TargetStrategy>();
         private readonly List<Toggle> _toggles = new();
 
         void Start()
         {
             Assert.IsNotNull(selectedTowerRoot);
             Assert.IsNotNull(priorityToggle);
+            Assert.IsNotNull(strategiesDropdown);
 
             RequireGameManager();
 
@@ -63,6 +71,7 @@ namespace UI
             }
 
             priorityToggle.gameObject.SetActive(false);
+            strategiesDropdown.onValueChanged.AddListener(i => SetStrategy(i));
         }
 
         void Update()
@@ -74,14 +83,19 @@ namespace UI
                 {
                     TowerState towerState = GameManager.SelectedEntity.GetSelectedTower();
                     description = Description.From(GameManager, towerState);
-                    Display(false, true);
+                    Display(false, true, towerState.availableStrategies.Any());
                     UpdatePriority(towerState);
+
+                    if (towerState.availableStrategies.Any())
+                    {
+                        UpdateStrategy(towerState);
+                    }
                 }
                 else if (GameManager.SelectedEntity.IsProcessorSelected())
                 {
                     ProcessorState processorState = GameManager.GameState.GetProcessorState();
                     description = Description.From(GameManager, processorState);
-                    Display(true, false);
+                    Display(true, false, false);
                 }
             }
 
@@ -111,7 +125,7 @@ namespace UI
             }
         }
 
-        private void Display(bool displayProcessorSpecific, bool displayTowerSpecific)
+        private void Display(bool displayProcessorSpecific, bool displayTowerSpecific, bool displayStrategySpecific)
         {
             foreach (GameObject go in processorSpecific)
             {
@@ -121,6 +135,11 @@ namespace UI
             foreach (GameObject go in towerSpecific)
             {
                 go.SetActive(displayTowerSpecific);
+            }
+
+            foreach (GameObject go in strategySpecific)
+            {
+                go.SetActive(displayStrategySpecific);
             }
         }
 
@@ -218,6 +237,36 @@ namespace UI
             else
             {
                 _toggles[^1].SetIsOnWithoutNotify(true);
+            }
+        }
+
+        private void SetStrategy(int index)
+        {
+            TowerState selectedTower = GameManager.SelectedEntity.GetSelectedTower();
+            if (selectedTower == null)
+            {
+                return;
+            }
+
+            GameManager.Tower.SetTargetStrategy(selectedTower, selectedTower.availableStrategies[index]);
+        }
+
+        private void UpdateStrategy(TowerState towerState)
+        {
+            if (!towerState.availableStrategies.OrderBy(s => s).SequenceEqual(_lastStrategies.OrderBy(s => s)))
+            {
+                strategiesDropdown.options = towerState.availableStrategies.Select(s => new TMP_Dropdown.OptionData(s.GetDescription())).ToList();
+                _lastStrategies = towerState.availableStrategies;
+            }
+
+            int index = Array.IndexOf(towerState.availableStrategies, towerState.targetStrategy);
+            if (index > 0)
+            {
+                strategiesDropdown.SetValueWithoutNotify(index);
+            }
+            else
+            {
+                strategiesDropdown.SetValueWithoutNotify(0);
             }
         }
 

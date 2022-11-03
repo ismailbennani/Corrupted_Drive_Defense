@@ -1623,11 +1623,7 @@ MonoBehaviour:
   m_Value: 0
   m_Options:
     m_Options:
-    - m_Text: Option A
-      m_Image: {fileID: 0}
-    - m_Text: Option B
-      m_Image: {fileID: 0}
-    - m_Text: Option C
+    - m_Text: First
       m_Image: {fileID: 0}
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5362,6 +5358,7 @@ MonoBehaviour:
   charge: {fileID: 512427192}
   nPriorities: 10
   priorityToggle: {fileID: 1048714011}
+  strategiesDropdown: {fileID: 288873044}
   processorSpecific:
   - {fileID: 39434340}
   - {fileID: 851764977}
@@ -5371,6 +5368,10 @@ MonoBehaviour:
   - {fileID: 340748773}
   - {fileID: 831529021}
   - {fileID: 1415213203}
+  strategySpecific:
+  - {fileID: 1489130039}
+  - {fileID: 22579200}
+  - {fileID: 288873041}
 --- !u!114 &966834964
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -8400,7 +8401,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Option A
+  m_text: First
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

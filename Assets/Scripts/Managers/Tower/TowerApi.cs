@@ -64,6 +64,11 @@ namespace Managers.Tower
         {
             selectedTower.priority = priority;
         }
+        
+        public void SetTargetStrategy(TowerState selectedTower, TargetStrategy targetStrategy)
+        {
+            selectedTower.targetStrategy = targetStrategy;
+        }
 
         public IEnumerable<EnemyState> GetTargets(TowerState tower)
         {
