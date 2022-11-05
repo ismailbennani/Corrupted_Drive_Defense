@@ -68,5 +68,11 @@ namespace Utils
         {
             value = max > 0 ? Mathf.Clamp(newValue, min, max) : Mathf.Max(newValue, min);
         }
+
+        public void SetMax(int max)
+        {
+            this.max = max;
+            value = Mathf.Min(value, max);
+        }
     }
 }

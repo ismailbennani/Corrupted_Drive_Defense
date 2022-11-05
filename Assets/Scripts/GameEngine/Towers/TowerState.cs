@@ -19,6 +19,9 @@ namespace GameEngine.Towers
         public int priority;
 
         [Space(10)]
+        public int upgradePath1;
+        public int upgradePath2;
+        public TowerUpgrade aggregatedUpgrade;
         public TowerDescription description;
 
         [Space(10)]
@@ -46,8 +49,43 @@ namespace GameEngine.Towers
             this.rotated = config.canRotate && rotated;
             this.config = config;
 
-            description = config.naked;
+            Refresh();
+        }
 
+        public void Refresh()
+        {
+            RecomputeDescription();
+            RecomputeAvailableStrategies();
+
+            charge.SetMax(description.maxCharge);
+
+            totalCost = config.cost;
+            if (aggregatedUpgrade)
+            {
+                totalCost += aggregatedUpgrade.cost;
+            }
+        }
+
+        private void RecomputeDescription()
+        {
+            IEnumerable<TowerUpgrade> upgrades1 = config.upgradePath1.Take(upgradePath1);
+            IEnumerable<TowerUpgrade> upgrades2 = config.upgradePath1.Take(upgradePath2);
+            TowerUpgrade[] upgrades = upgrades1.Concat(upgrades2).ToArray();
+
+            if (upgrades.Any())
+            {
+                aggregatedUpgrade = upgrades.Aggregate(TowerUpgrade.CombineInPlace);
+                description = TowerDescription.Apply((TowerDescription)config.naked.Clone(), aggregatedUpgrade);
+            }
+            else
+            {
+                aggregatedUpgrade = null;
+                description = config.naked;
+            }
+        }
+
+        private void RecomputeAvailableStrategies()
+        {
             availableStrategies = description.targetType switch
             {
                 TargetType.None => Array.Empty<TargetStrategy>(),
@@ -56,10 +94,6 @@ namespace GameEngine.Towers
                 TargetType.AreaAtTarget => Enum.GetValues(typeof(TargetStrategy)).OfType<TargetStrategy>().ToArray(),
                 _ => throw new ArgumentOutOfRangeException()
             };
-
-            charge = new GaugeState(0, description.maxCharge);
-
-            totalCost = config.cost;
         }
     }
 }

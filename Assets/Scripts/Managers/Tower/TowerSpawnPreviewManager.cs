@@ -134,7 +134,7 @@ namespace Managers.Tower
             switch (_tower.naked.targetType)
             {
                 case TargetType.None:
-                    VisibleShape.Show(Shape.None, GetCells(_tower), _rotated, aboveEntities: true);
+                    VisibleShape.Show(null, GetCells(_tower), _rotated, aboveEntities: true);
                     break;
                 case TargetType.Single:
                 case TargetType.AreaAtTarget:

@@ -10,13 +10,15 @@ namespace GameEngine.Towers
         public EnemyPassiveEffectModifier passiveEffectModifier;
         public int additionalRicochet;
 
-        public static void CombineInPlace(TowerEffectModifier @this, TowerEffectModifier other)
+        public static TowerEffectModifier CombineInPlace(TowerEffectModifier @this, TowerEffectModifier other)
         {
             @this.additionalDamage += other.additionalDamage;
 
             EnemyPassiveEffectModifier.CombineInPlace(@this.passiveEffectModifier, other.passiveEffectModifier);
 
             @this.additionalRicochet += other.additionalRicochet;
+
+            return @this;
         }
     }
 }

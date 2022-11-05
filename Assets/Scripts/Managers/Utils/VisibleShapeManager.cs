@@ -69,11 +69,6 @@ namespace Managers.Utils
 
         public void SetPositions(params Vector2Int[] positions)
         {
-            if (_lastShape == null)
-            {
-                return;
-            }
-
             Show(_lastShape, _rotated, null, null, positions);
         }
 

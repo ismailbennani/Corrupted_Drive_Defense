@@ -8,8 +8,6 @@ namespace GameEngine.Shapes
     [Serializable]
     public class Shape : IShape
     {
-        public static Shape None => new();
-        
         public ShapeType type;
         public Vector2Int size;
         public Vector2Int offset;

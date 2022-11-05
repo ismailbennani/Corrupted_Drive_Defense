@@ -9,11 +9,13 @@ namespace GameEngine.Enemies.Effects
         public int maxStacksModifier = 0;
         public float speedModifier = 1;
 
-        public static void CombineInPlace(EnemyPassiveEffectModifier @this, EnemyPassiveEffectModifier other)
+        public static EnemyPassiveEffectModifier CombineInPlace(EnemyPassiveEffectModifier @this, EnemyPassiveEffectModifier other)
         {
             @this.durationModifier *= other.durationModifier;
             @this.maxStacksModifier += other.maxStacksModifier;
             @this.speedModifier *= other.speedModifier;
+
+            return @this;
         }
     }
 }

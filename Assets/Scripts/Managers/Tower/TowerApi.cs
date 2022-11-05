@@ -48,6 +48,44 @@ namespace Managers.Tower
             }
         }
 
+        public void BuyUpgrade(TowerState state, int path)
+        {
+            if (path != 1 && path != 2)
+            {
+                throw new InvalidOperationException($"Unknown path {path}");
+            }
+
+            int currentUpgradeInPath = path == 1 ? state.upgradePath1 : state.upgradePath2;
+            TowerUpgrade[] upgradePath = path == 1 ? state.config.upgradePath1 : state.config.upgradePath2;
+
+            if (currentUpgradeInPath < 0 || currentUpgradeInPath >= upgradePath.Length)
+            {
+                Debug.LogWarning($"{state.config.towerName}: cannot buy upgrade in path {path} because current upgrade is {currentUpgradeInPath}");
+                return;
+            }
+
+            TowerUpgrade upgrade = upgradePath[currentUpgradeInPath];
+
+            if (!_gameStateApi.CanSpend(upgrade.cost))
+            {
+                Debug.LogWarning($"{state.config.towerName}: not enough money to buy upgrade {upgrade.upgradeName}");
+                return;
+            }
+
+            _gameStateApi.Spend(upgrade.cost);
+
+            if (path == 1)
+            {
+                state.upgradePath1++;
+            }
+            else
+            {
+                state.upgradePath2++;
+            }
+
+            state.Refresh();
+        }
+
         public int SellValue(TowerState tower)
         {
             return Mathf.FloorToInt(_gameConfig.towerResellCoefficient * tower.totalCost);

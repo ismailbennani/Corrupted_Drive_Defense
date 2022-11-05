@@ -19,22 +19,26 @@ MonoBehaviour:
     offset: {x: 1, y: 0}
   canRotate: 1
   cost: 200
-  frequency: 5
-  maxCharge: 20
-  targetType: 2
-  range:
-    type: 0
-    radius: {x: 1, y: 1}
-  targetShape:
-    type: 0
-    radius: {x: 1, y: 1}
-  baseDamage: 0
-  towerHitEffect:
-    enabled: 1
-    enemyEffect:
-      name: Slow - Coil
-      duration: 2.5
-      maxStacks: 1
-      speedModifier: 0.65
+  naked:
+    frequency: 10
+    maxCharge: 20
+    targetType: 3
+    range:
+      type: 0
+      radius: {x: 0, y: 0}
+    targetShape:
+      type: 0
+      radius: {x: 1, y: 1}
+    effect:
+      damage: 0
+      applyPassiveEffect: 0
+      passiveEffect:
+        name: 
+        duration: 0
+        maxStacks: 0
+        speedModifier: 1
+      ricochet: 0
+  upgradePath1: []
+  upgradePath2: []
   prefab: {fileID: 2292787277387283102, guid: bd80c124bc56b3648a0b5b75ec49e466, type: 3}
   sprite: {fileID: 1304724479, guid: 1598425d7e5c68e48ab32a920f0fad64, type: 3}

@@ -48,7 +48,7 @@ namespace Managers.Tower
             switch (tower.description.targetType)
             {
                 case TargetType.None:
-                    _visibleShape.Show(Shape.None,
+                    _visibleShape.Show(null,
                                        tower.cells.Select(c => c.gridPosition),
                                        tower.rotated,
                                        _gameConfig.shapePreviewOkColor,

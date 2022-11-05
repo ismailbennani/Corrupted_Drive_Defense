@@ -1,5 +1,4 @@
 ﻿using GameEngine.Shapes;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace GameEngine.Towers
@@ -25,7 +24,7 @@ namespace GameEngine.Towers
         [Tooltip("Modifiy existing effect")]
         public TowerEffectModifier effectModifier;
 
-        public static void CombineInPlace(TowerUpgrade @this, TowerUpgrade other)
+        public static TowerUpgrade CombineInPlace(TowerUpgrade @this, TowerUpgrade other)
         {
             @this.cost += other.cost;
             @this.frequencyMultiplier *= other.frequencyMultiplier;
@@ -47,6 +46,8 @@ namespace GameEngine.Towers
             TargetShapeModifier.CombineInPlace(@this.targetShapeModifier, other.targetShapeModifier);
 
             TowerEffectModifier.CombineInPlace(@this.effectModifier, other.effectModifier);
+
+            return @this;
         }
     }
 }

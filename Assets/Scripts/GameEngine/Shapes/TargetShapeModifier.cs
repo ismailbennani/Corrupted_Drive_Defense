@@ -10,7 +10,7 @@ namespace GameEngine.Shapes
         public ShapeType newShape;
         public Vector2Int additionalRadius;
 
-        public static void CombineInPlace(TargetShapeModifier @this, TargetShapeModifier other)
+        public static TargetShapeModifier CombineInPlace(TargetShapeModifier @this, TargetShapeModifier other)
         {
             @this.changeShape = @this.changeShape || other.changeShape;
 
@@ -24,6 +24,8 @@ namespace GameEngine.Shapes
             }
 
             @this.additionalRadius += other.additionalRadius;
+
+            return @this;
         }
     }
 }
