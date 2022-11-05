@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Linq;
 using GameEngine;
+using GameEngine.Shapes;
 using GameEngine.Towers;
 using Managers.Utils;
+using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace Managers.Tower
@@ -43,18 +45,25 @@ namespace Managers.Tower
 
             _selectedTower = tower;
 
-            switch (tower.config.targetType)
+            switch (tower.description.targetType)
             {
+                case TargetType.None:
+                    _visibleShape.Show(Shape.None,
+                                       tower.cells.Select(c => c.gridPosition),
+                                       tower.rotated,
+                                       _gameConfig.shapePreviewOkColor,
+                                       aboveEntities: false);
+                    break;
                 case TargetType.Single:
                 case TargetType.AreaAtTarget:
-                    _visibleShape.Show(tower.config.range,
+                    _visibleShape.Show(tower.description.range,
                                        tower.cells.Select(c => c.gridPosition),
                                        tower.rotated,
                                        _gameConfig.shapePreviewOkColor,
                                        aboveEntities: false);
                     break;
                 case TargetType.AreaAtSelf:
-                    _visibleShape.Show(tower.config.targetShape,
+                    _visibleShape.Show(tower.description.targetShape,
                                        tower.cells.Select(c => c.gridPosition),
                                        tower.rotated,
                                        _gameConfig.shapePreviewOkColor,

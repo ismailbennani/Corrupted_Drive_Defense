@@ -1,0 +1,34 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: daad6b1993f0415f8ed7a408266fa611, type: 3}
+  m_Name: Upgrade_2_1
+  m_EditorClassIdentifier: 
+  cost: 35
+  frequencyMultiplier: 1
+  additionalMaxCharge: 0
+  overrideTargetType: 0
+  rangeModifier:
+    changeShape: 0
+    newShape: 0
+    additionalRadius: {x: 2, y: 2}
+  targetShapeModifier:
+    changeShape: 0
+    newShape: 0
+    additionalRadius: {x: 0, y: 0}
+  additionalDamage: -1
+  additionalEffect:
+    enabled: 0
+    enemyEffect:
+      name: 
+      duration: 0
+      maxStacks: 0
+      speedModifier: 1

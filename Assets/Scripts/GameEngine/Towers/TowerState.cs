@@ -17,21 +17,26 @@ namespace GameEngine.Towers
         public WorldCell[] cells;
         public bool rotated;
         public int priority;
-        
+
+        [Space(10)]
+        public TowerDescription description;
+
         [Space(10)]
         public TargetStrategy targetStrategy;
+
         public TargetStrategy[] availableStrategies;
 
         [Space(10)]
         public GaugeState charge;
-        public int kills;
 
+        public int kills;
 
         [Space(10)]
         public int totalCost;
 
         [Space(10)]
         public TowerConfig config;
+
         public TowerController controller;
 
         public TowerState(long id, Vector2Int cell, bool rotated, TowerConfig config)
@@ -41,15 +46,18 @@ namespace GameEngine.Towers
             this.rotated = config.canRotate && rotated;
             this.config = config;
 
-            availableStrategies = config.targetType switch
+            description = config.naked;
+
+            availableStrategies = description.targetType switch
             {
+                TargetType.None => Array.Empty<TargetStrategy>(),
                 TargetType.AreaAtSelf => Array.Empty<TargetStrategy>(),
                 TargetType.Single => Enum.GetValues(typeof(TargetStrategy)).OfType<TargetStrategy>().ToArray(),
                 TargetType.AreaAtTarget => Enum.GetValues(typeof(TargetStrategy)).OfType<TargetStrategy>().ToArray(),
                 _ => throw new ArgumentOutOfRangeException()
             };
 
-            charge = new GaugeState(0, config.maxCharge);
+            charge = new GaugeState(0, description.maxCharge);
 
             totalCost = config.cost;
         }

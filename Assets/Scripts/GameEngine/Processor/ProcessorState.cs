@@ -20,7 +20,7 @@ namespace GameEngine.Processor
         
         public ProcessorState(Vector2Int cell, ProcessorConfig config)
         {
-            cells = Shape.Square(cell, config.size, config.offset).Select(GameManager.Instance.Map.GetCellAt).ToArray(); 
+            cells = Shape.CellsInSquare(cell, config.size, config.offset).Select(GameManager.Instance.Map.GetCellAt).ToArray(); 
             this.config = config;
 
             health = new GaugeState(config.maxHealth, config.maxHealth);

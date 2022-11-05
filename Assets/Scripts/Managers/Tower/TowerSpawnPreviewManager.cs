@@ -131,14 +131,17 @@ namespace Managers.Tower
 
         private void ShowVisibleShape()
         {
-            switch (_tower.targetType)
+            switch (_tower.naked.targetType)
             {
+                case TargetType.None:
+                    VisibleShape.Show(Shape.None, GetCells(_tower), _rotated, aboveEntities: true);
+                    break;
                 case TargetType.Single:
                 case TargetType.AreaAtTarget:
-                    VisibleShape.Show(_tower.range, GetCells(_tower), _rotated, aboveEntities: true);
+                    VisibleShape.Show(_tower.naked.range, GetCells(_tower), _rotated, aboveEntities: true);
                     break;
                 case TargetType.AreaAtSelf:
-                    VisibleShape.Show(_tower.targetShape, GetCells(_tower), _rotated, aboveEntities: true);
+                    VisibleShape.Show(_tower.naked.targetShape, GetCells(_tower), _rotated, aboveEntities: true);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

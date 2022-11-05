@@ -28,7 +28,7 @@ namespace GameEngine.Enemies
         {
             this.id = id;
             this.config = config;
-            
+
             strength = ComputeStrength(config);
 
             UpdateCharacteristics();
@@ -40,15 +40,15 @@ namespace GameEngine.Enemies
             UpdateCharacteristics();
         }
 
-        public void AddEffect(EnemyEffect effect, TowerState source)
+        public void AddEffect(EnemyPassiveEffect passiveEffect, TowerState source)
         {
-            if (effect.maxStacks > 0)
+            if (passiveEffect.maxStacks > 0)
             {
-                EnemyEffectInstance[] stacks = effects.Where(e => e.effect.name == effect.name).OrderBy(e => e.creationTime).ToArray();
+                EnemyEffectInstance[] stacks = effects.Where(e => e.passiveEffect.name == passiveEffect.name).OrderBy(e => e.creationTime).ToArray();
 
-                if (stacks.Length >= effect.maxStacks)
+                if (stacks.Length >= passiveEffect.maxStacks)
                 {
-                    int toRemove = stacks.Length - effect.maxStacks + 1;
+                    int toRemove = stacks.Length - passiveEffect.maxStacks + 1;
                     foreach (EnemyEffectInstance stack in stacks.Take(toRemove))
                     {
                         effects.Remove(stack);
@@ -56,7 +56,7 @@ namespace GameEngine.Enemies
                 }
             }
 
-            effects.Add(new EnemyEffectInstance(effect, source));
+            effects.Add(new EnemyEffectInstance(passiveEffect, source));
             UpdateCharacteristics();
         }
 
@@ -71,7 +71,8 @@ namespace GameEngine.Enemies
 
         private void UpdateCharacteristics()
         {
-            characteristics = EnemyEffect.Apply(config, effects.Select(e => e.effect).ToArray());
+            characteristics = new EnemyCharacteristics(config);
+            characteristics.Apply(effects.Select(e => e.passiveEffect).ToArray());
         }
 
         private static int ComputeStrength(EnemyConfig config)

@@ -8,6 +8,8 @@ namespace GameEngine.Shapes
     [Serializable]
     public class Shape : IShape
     {
+        public static Shape None => new();
+        
         public ShapeType type;
         public Vector2Int size;
         public Vector2Int offset;
@@ -16,16 +18,16 @@ namespace GameEngine.Shapes
         {
             Vector2Int actualSize = rotated ? new Vector2Int(size.y, size.x) : size;
             Vector2Int actualOffset = rotated ? new Vector2Int(offset.y, offset.x) : offset;
-            
+
             return type switch
             {
-                ShapeType.Square => Square(positions, actualSize, actualOffset),
-                ShapeType.Circle => Circle(positions, actualSize, actualOffset),
+                ShapeType.Square => CellsInSquare(positions, actualSize, actualOffset),
+                ShapeType.Circle => CellsInCircle(positions, actualSize, actualOffset),
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
 
-        public static IEnumerable<Vector2Int> Square(Vector2Int position, Vector2Int size, Vector2Int offset)
+        public static IEnumerable<Vector2Int> CellsInSquare(Vector2Int position, Vector2Int size, Vector2Int offset)
         {
             if (size.x == 0 || size.y == 0)
             {
@@ -41,7 +43,7 @@ namespace GameEngine.Shapes
             }
         }
 
-        public static IEnumerable<Vector2Int> Circle(Vector2Int position, Vector2Int size, Vector2Int offset)
+        public static IEnumerable<Vector2Int> CellsInCircle(Vector2Int position, Vector2Int size, Vector2Int offset)
         {
             if (size.x == 0 || size.y == 0)
             {
@@ -64,14 +66,14 @@ namespace GameEngine.Shapes
             }
         }
 
-        public static IEnumerable<Vector2Int> Circle(IEnumerable<Vector2Int> positions, Vector2Int size, Vector2Int offset)
+        public static IEnumerable<Vector2Int> CellsInCircle(IEnumerable<Vector2Int> positions, Vector2Int size, Vector2Int offset)
         {
-            return positions.SelectMany(p => Circle(p, size, offset)).Distinct();
+            return positions.SelectMany(p => CellsInCircle(p, size, offset)).Distinct();
         }
 
-        public static IEnumerable<Vector2Int> Square(IEnumerable<Vector2Int> positions, Vector2Int size, Vector2Int offset)
+        public static IEnumerable<Vector2Int> CellsInSquare(IEnumerable<Vector2Int> positions, Vector2Int size, Vector2Int offset)
         {
-            return positions.SelectMany(p => Square(p, size, offset)).Distinct();
+            return positions.SelectMany(p => CellsInSquare(p, size, offset)).Distinct();
         }
     }
 }

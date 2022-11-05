@@ -76,12 +76,19 @@ namespace Managers.Tower
 
         public IEnumerable<EnemyState> GetTargets(TowerState tower)
         {
-            if (tower.config.targetType == TargetType.AreaAtSelf)
+            switch (tower.description.targetType)
             {
-                return GetEnemiesInArea(tower.config.targetShape, tower.rotated, tower.cells.Select(c => c.gridPosition).ToArray());
+                case TargetType.None:
+                    return Enumerable.Empty<EnemyState>();
+                case TargetType.AreaAtSelf:
+                    return GetEnemiesInArea(tower.description.targetShape, tower.rotated, tower.cells.Select(c => c.gridPosition).ToArray());
+                case TargetType.Single:
+                case TargetType.AreaAtTarget:
+                default:
+                    break;
             }
 
-            IEnumerable<Vector2Int> rangeCells = tower.config.range.EvaluateAt(tower.cells.Select(c => c.gridPosition).ToArray());
+            IEnumerable<Vector2Int> rangeCells = tower.description.range.EvaluateAt(tower.cells.Select(c => c.gridPosition).ToArray());
             EnemyState[] potentialTargets = _gameStateApi.GetEnemiesAt(rangeCells).ToArray();
 
             if (!potentialTargets.Any())
@@ -109,19 +116,19 @@ namespace Managers.Tower
                     throw new ArgumentOutOfRangeException();
             }
 
-            if (tower.config.targetType == TargetType.Single)
+            if (tower.description.targetType == TargetType.Single)
             {
                 return new[] { orderedTargets.First() };
             }
 
             WorldCell targetCell = _gameStateApi.GetEnemyCell(orderedTargets.First());
 
-            if (tower.config.targetType == TargetType.AreaAtTarget)
+            if (tower.description.targetType == TargetType.AreaAtTarget)
             {
-                return GetEnemiesInArea(tower.config.targetShape, tower.rotated, targetCell.gridPosition);
+                return GetEnemiesInArea(tower.description.targetShape, tower.rotated, targetCell.gridPosition);
             }
 
-            throw new ArgumentOutOfRangeException(nameof(tower.config.targetType), tower.config.targetType, "invalid target type");
+            throw new ArgumentOutOfRangeException(nameof(tower.description.targetType), tower.description.targetType, "invalid target type");
         }
 
         private IEnumerable<EnemyState> GetEnemiesInArea(IShape shape, bool rotated, params Vector2Int[] cells)
@@ -146,14 +153,14 @@ namespace Managers.Tower
             tower.charge.Clear();
             tower.controller.SendMessage("SetCharge", tower.charge);
 
-            if (tower.config.baseDamage > 0)
+            if (tower.description.effect.damage > 0)
             {
-                _enemyApi.Hit(targets.Select(t => t.id), tower.config.baseDamage, tower);
+                _enemyApi.Hit(targets.Select(t => t.id), tower.description.effect.damage, tower);
             }
 
-            if (tower.config.towerHitEffect.enabled)
+            if (tower.description.effect.applyPassiveEffect)
             {
-                _gameStateApi.ApplyEnemyEffect(targets, tower.config.towerHitEffect.enemyEffect, tower);
+                _gameStateApi.ApplyEnemyEffect(targets, tower.description.effect.passiveEffect, tower);
             }
         }
 
@@ -162,7 +169,7 @@ namespace Managers.Tower
             ProcessorState processorState = _gameStateApi.GetProcessorState();
 
             float requiredCharge = tower.charge.GetRemaining();
-            float maxCharge = Time.deltaTime * tower.config.frequency;
+            float maxCharge = Time.deltaTime * tower.description.frequency;
 
             float consumed = processorState.charge.Consume(Mathf.Min(requiredCharge, maxCharge));
 

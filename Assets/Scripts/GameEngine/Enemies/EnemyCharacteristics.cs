@@ -1,4 +1,5 @@
 ﻿using System;
+using GameEngine.Enemies.Effects;
 
 namespace GameEngine.Enemies
 {
@@ -12,6 +13,14 @@ namespace GameEngine.Enemies
         {
             hp = config.hp;
             speed = config.speed;
+        }
+
+        public void Apply(params EnemyPassiveEffect[] effects)
+        {
+            foreach (EnemyPassiveEffect effect in effects)
+            {
+                speed *= effect.speedModifier;
+            }
         }
     }
 }

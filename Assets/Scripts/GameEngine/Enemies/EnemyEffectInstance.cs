@@ -8,16 +8,16 @@ namespace GameEngine.Enemies
     [Serializable]
     public class EnemyEffectInstance
     {
-        public EnemyEffect effect;
-        public TowerState source;
+        public EnemyPassiveEffect passiveEffect;
+        public long sourceId;
         public float creationTime;
 
-        public bool Over => !(effect.duration <= 0) && Time.time >= creationTime + effect.duration;
+        public bool Over => !(passiveEffect.duration <= 0) && Time.time >= creationTime + passiveEffect.duration;
         
-        public EnemyEffectInstance(EnemyEffect effect, TowerState source)
+        public EnemyEffectInstance(EnemyPassiveEffect passiveEffect, TowerState source)
         {
-            this.effect = effect;
-            this.source = source;
+            this.passiveEffect = passiveEffect;
+            sourceId = source.id;
             creationTime = Time.time;
         }
     }

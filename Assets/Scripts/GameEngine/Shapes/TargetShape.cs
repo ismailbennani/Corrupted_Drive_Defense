@@ -6,7 +6,7 @@ using UnityEngine;
 namespace GameEngine.Shapes
 {
     [Serializable]
-    public class TargetShape: IShape
+    public class TargetShape: IShape, ICloneable
     {
         public ShapeType type;
 
@@ -19,30 +19,45 @@ namespace GameEngine.Shapes
             
             return type switch
             {
-                ShapeType.Square => Square(positions, actualRadius),
-                ShapeType.Circle => Circle(positions, actualRadius),
+                ShapeType.Square => CellsInSquare(positions, actualRadius),
+                ShapeType.Circle => CellsInCircle(positions, actualRadius),
                 _ => throw new ArgumentOutOfRangeException()
             };
         }
 
-        public static IEnumerable<Vector2Int> Circle(Vector2Int position, Vector2Int radius)
+        public object Clone()
         {
-            return Shape.Circle(position, 2 * radius + Vector2Int.one, radius);
+            return MemberwiseClone();
         }
 
-        public static IEnumerable<Vector2Int> Square(Vector2Int position, Vector2Int radius)
+        public static void Apply(TargetShape shape, TargetShapeModifier modifier)
         {
-            return Shape.Square(position, 2 * radius + Vector2Int.one, radius);
+            if (modifier.changeShape)
+            {
+                shape.type = modifier.newShape;
+            }
+
+            shape.radius += modifier.additionalRadius;
         }
 
-        public static IEnumerable<Vector2Int> Circle(IEnumerable<Vector2Int> positions, Vector2Int radius)
+        public static IEnumerable<Vector2Int> CellsInCircle(Vector2Int position, Vector2Int radius)
         {
-            return positions.SelectMany(p => Circle(p, radius)).Distinct();
+            return Shape.CellsInCircle(position, 2 * radius + Vector2Int.one, radius);
         }
 
-        public static IEnumerable<Vector2Int> Square(IEnumerable<Vector2Int> positions, Vector2Int radius)
+        public static IEnumerable<Vector2Int> CellsInSquare(Vector2Int position, Vector2Int radius)
         {
-            return positions.SelectMany(p => Square(p, radius)).Distinct();
+            return Shape.CellsInSquare(position, 2 * radius + Vector2Int.one, radius);
+        }
+
+        public static IEnumerable<Vector2Int> CellsInCircle(IEnumerable<Vector2Int> positions, Vector2Int radius)
+        {
+            return positions.SelectMany(p => CellsInCircle(p, radius)).Distinct();
+        }
+
+        public static IEnumerable<Vector2Int> CellsInSquare(IEnumerable<Vector2Int> positions, Vector2Int radius)
+        {
+            return positions.SelectMany(p => CellsInSquare(p, radius)).Distinct();
         }
     }
 }

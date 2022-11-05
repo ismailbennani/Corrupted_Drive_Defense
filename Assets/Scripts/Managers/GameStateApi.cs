@@ -177,11 +177,11 @@ namespace Managers
             return _state.enemyStates.Where(e => pathCells.Contains(e.pathIndex)).ToArray();
         }
 
-        public void ApplyEnemyEffect(IEnumerable<EnemyState> enemies, EnemyEffect effect, TowerState source)
+        public void ApplyEnemyEffect(IEnumerable<EnemyState> enemies, EnemyPassiveEffect passiveEffect, TowerState source)
         {
             foreach (EnemyState enemy in enemies)
             {
-                enemy.AddEffect(effect, source);
+                enemy.AddEffect(passiveEffect, source);
             }
         }
 
