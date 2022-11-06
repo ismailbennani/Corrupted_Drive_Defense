@@ -9,8 +9,7 @@ namespace GameEngine.Towers
     {
         [Header("Charge")]
         [Tooltip("Charge consumed from CPU per second")]
-        public float frequency;
-
+        public float chargeRate;
         public int maxCharge;
 
         [Header("Target")]
@@ -38,7 +37,7 @@ namespace GameEngine.Towers
 
         public static TowerDescription Apply(TowerDescription towerDescription, TowerUpgrade upgrade)
         {
-            towerDescription.frequency *= upgrade.frequencyMultiplier;
+            towerDescription.chargeRate *= upgrade.chargeRateMultiplier;
             towerDescription.maxCharge += upgrade.additionalMaxCharge;
 
             if (upgrade.overrideTargetType != TargetType.None)

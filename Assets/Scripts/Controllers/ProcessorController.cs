@@ -21,7 +21,7 @@ namespace Controllers
                 return;
             }
             
-            _processorState.charge.Add(Time.deltaTime * _processorState.config.frequency);
+            _processorState.charge.Add(Time.deltaTime * _processorState.config.chargeRate);
 
             GameObject localGameObject = gameObject;
             localGameObject.SendMessage("SetHealth", _processorState.health);

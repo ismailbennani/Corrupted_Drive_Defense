@@ -16,7 +16,7 @@ namespace GameEngine.Processor
 
         [Header("Charge")]
         [Tooltip("Charge produced per second")]
-        public float frequency = 10;
+        public float chargeRate = 10;
         public float maxCharge = 1000;
         
         [Space(10)]

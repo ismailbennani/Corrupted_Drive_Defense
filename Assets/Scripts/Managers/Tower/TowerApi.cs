@@ -214,7 +214,7 @@ namespace Managers.Tower
             ProcessorState processorState = _gameStateApi.GetProcessorState();
 
             float requiredCharge = tower.charge.GetRemaining();
-            float maxCharge = Time.deltaTime * tower.description.frequency;
+            float maxCharge = Time.deltaTime * tower.description.chargeRate;
 
             float consumed = processorState.charge.Consume(Mathf.Min(requiredCharge, maxCharge));
 
