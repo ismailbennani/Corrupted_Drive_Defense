@@ -69,7 +69,7 @@ namespace Managers.Tower
             TowerState[] otherTowers = worldCells.Select(c => _gameState.GetTowerAt(c.gridPosition)).Where(t => t != null).ToArray();
             if (otherTowers.Any())
             {
-                reason = $"tower overlaps other towers: {string.Join(", ", otherTowers.Select(t => $"{t.config.towerName} ({t.id})"))}";
+                reason = $"tower overlaps other towers: {string.Join(", ", otherTowers.Select(t => $"{t.name} ({t.id})"))}";
                 return false;
             }
 

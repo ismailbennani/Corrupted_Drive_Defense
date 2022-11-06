@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Linq;
+using System.Collections.Generic;
 using GameEngine.Towers;
 using UnityEngine;
 
@@ -27,103 +27,45 @@ namespace Managers.Tower
                 throw new InvalidOperationException($"Unknown path {path}");
             }
 
-            int currentUpgradeInPath = path == 0 ? state.nextUpgradePath1 : state.nextUpgradePath2;
-            TowerUpgrade[] upgradePath = path == 0 ? state.config.upgradePath1 : state.config.upgradePath2;
+            int nextUpgradeInPath = state.GetNextUpgradeInPath(path);
+            IReadOnlyList<TowerUpgrade> upgradePath = state.GetUpgradePath(path);
 
-            if (currentUpgradeInPath < 0 || currentUpgradeInPath >= upgradePath.Length)
+            if (nextUpgradeInPath < 0 || nextUpgradeInPath >= upgradePath.Count)
             {
-                Debug.LogWarning($"{state.config.towerName}: cannot buy upgrade in path {path} because current upgrade is {currentUpgradeInPath}");
+                Debug.LogWarning($"{state.name}: cannot buy upgrade in path {path} because current upgrade is {nextUpgradeInPath}");
                 return;
             }
 
-            TowerUpgrade upgrade = upgradePath[currentUpgradeInPath];
+            TowerUpgrade upgrade = upgradePath[nextUpgradeInPath];
 
-            if (!CanUpgradeBeBought(state, upgrade))
+            if (!CanBuy(state, upgrade))
             {
-                Debug.LogWarning($"{state.config.towerName}: cannot buy {upgrade.upgradeName}");
+                Debug.LogWarning($"{state.name}: cannot buy {upgrade.upgradeName}");
                 return;
             }
 
             _gameStateApi.Spend(upgrade.cost);
 
-            if (path == 0)
-            {
-                state.nextUpgradePath1++;
-            }
-            else
-            {
-                state.nextUpgradePath2++;
-            }
+            state.BuyNextUpgrade(path);
 
-            Debug.Log($"Bought upgrade {upgrade.upgradeName} (path {path}) of tower {state.config.towerName}");
+            Debug.Log($"Bought upgrade {upgrade.upgradeName} (path {path}) of tower {state.name}");
 
             state.Refresh();
         }
 
-        public void RequireUpgradePathAndIndex(TowerState tower, TowerUpgrade towerUpgrade, out int upgradePath, out int upgradeIndex)
+        public bool CanBuy(TowerState tower, TowerUpgrade towerUpgrade)
         {
-            if (!GetUpgradePathAndIndex(tower, towerUpgrade, out upgradePath, out upgradeIndex))
-            {
-                throw new InvalidOperationException($"Invalid upgrade {towerUpgrade.upgradeName} for tower {tower.config.towerName}");
-            }
-        }
-
-        public bool GetUpgradePathAndIndex(TowerState tower, TowerUpgrade towerUpgrade, out int upgradePath, out int upgradeIndex)
-        {
-            upgradePath = -1;
-            upgradeIndex = -1;
-
-            if (tower == null || !towerUpgrade)
+            if (tower.IsUpgradeLocked(towerUpgrade))
             {
                 return false;
             }
 
-            int[] findUpgrade = tower.config.UpgradePaths.Select(path => Array.FindIndex(path, u => u.upgradeName == towerUpgrade.upgradeName)).ToArray();
-
-            upgradePath = Array.FindIndex(findUpgrade, i => i >= 0);
-            if (upgradePath < 0)
+            if (!tower.GetUpgradePathAndIndex(towerUpgrade, out int path, out int index))
             {
                 return false;
             }
 
-            upgradeIndex = findUpgrade.First(i => i >= 0);
-
-            return true;
-        }
-
-        public bool IsUpgradeBought(TowerState tower, TowerUpgrade towerUpgrade)
-        {
-            if (!GetUpgradePathAndIndex(tower, towerUpgrade, out int path, out int index))
-            {
-                return false;
-            }
-
-            return path switch
-            {
-                0 => index < tower.nextUpgradePath1,
-                1 => index < tower.nextUpgradePath2,
-                _ => throw new ArgumentOutOfRangeException()
-            };
-        }
-
-        public bool CanUpgradeBeBought(TowerState tower, TowerUpgrade towerUpgrade)
-        {
-            if (IsUpgradeLocked(tower, towerUpgrade))
-            {
-                return false;
-            }
-
-            if (!GetUpgradePathAndIndex(tower, towerUpgrade, out int path, out int index))
-            {
-                return false;
-            }
-
-            int nextUpgrade = path switch
-            {
-                0 => tower.nextUpgradePath1,
-                1 => tower.nextUpgradePath2,
-                _ => throw new ArgumentOutOfRangeException()
-            };
+            int nextUpgrade = tower.GetNextUpgradeInPath(path);
 
             if (index != nextUpgrade)
             {
@@ -131,16 +73,6 @@ namespace Managers.Tower
             }
 
             return _gameStateApi.CanSpend(towerUpgrade.cost);
-        }
-
-        public bool IsUpgradeLocked(TowerState tower, TowerUpgrade towerUpgrade)
-        {
-            if (!GetUpgradePathAndIndex(tower, towerUpgrade, out int path, out int index))
-            {
-                return true;
-            }
-
-            return false;
         }
     }
 }

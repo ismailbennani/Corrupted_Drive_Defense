@@ -335,18 +335,14 @@ namespace UI
 
                 return new Description
                 {
-                    Name = towerState.config ? towerState.config.towerName : "__TOWER__",
+                    Name = towerState.name ?? "__TOWER__",
                     Kills = towerState.kills,
                     Resell = gameManager.Tower.SellValue(towerState),
                     Charge = towerState.charge,
                     Priority = towerState.priority,
                     AvailableStrategies = towerState.availableStrategies,
                     Strategy = towerState.targetStrategy,
-                    Upgrades = new[]
-                    {
-                        towerState.config.upgradePath1.Select((u, i) => UIUpgradeDescription.From(towerState, u)).ToArray(),
-                        towerState.config.upgradePath2.Select((u, i) => UIUpgradeDescription.From(towerState, u)).ToArray()
-                    }
+                    Upgrades = towerState.GetUpgradePaths().Select(p => p.Select(u => UIUpgradeDescription.From(towerState, u)).ToArray()).ToArray(),
                 };
             }
 
