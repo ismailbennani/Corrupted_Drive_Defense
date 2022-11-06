@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using GameEngine.Enemies.Effects;
 using UnityEngine;
 
@@ -9,11 +11,8 @@ namespace GameEngine.Towers
     {
         public int damage;
 
-        [Header("Passive effect")]
-        public bool applyPassiveEffect;
-
         [Tooltip("Effect applied to all enemies when they are hit")]
-        public EnemyPassiveEffect passiveEffect;
+        public EnemyPassiveEffect[] passiveEffects = Array.Empty<EnemyPassiveEffect>();
 
         [Header("Special effects")]
         [Tooltip("Number of additional enemies targeted by a hit, only used when target type is Single")]
@@ -23,7 +22,7 @@ namespace GameEngine.Towers
         {
             TowerEffect result = (TowerEffect)MemberwiseClone();
 
-            result.passiveEffect = (EnemyPassiveEffect)passiveEffect.Clone();
+            result.passiveEffects = result.passiveEffects.Select(e => (EnemyPassiveEffect)e.Clone()).ToArray();
 
             return result;
         }
@@ -32,9 +31,15 @@ namespace GameEngine.Towers
         {
             effect.damage += modifier.additionalDamage;
 
-            if (effect.applyPassiveEffect)
+            effect.passiveEffects = effect.passiveEffects.Concat(modifier.additionalEffects).ToArray();
+
+            foreach (EnemyPassiveEffect passiveEffect in effect.passiveEffects)
             {
-                EnemyPassiveEffect.Apply(effect.passiveEffect, modifier.passiveEffectModifier);
+                IEnumerable<EnemyPassiveEffectModifier> modifiers = modifier.passiveEffectModifiers.Where(m => m.effectName == passiveEffect.name);
+                foreach (EnemyPassiveEffectModifier effectModifier in modifiers)
+                {
+                    EnemyPassiveEffect.Apply(passiveEffect, effectModifier);
+                }
             }
 
             effect.ricochet += modifier.additionalRicochet;

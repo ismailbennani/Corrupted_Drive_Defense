@@ -1,10 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="18cc6ff9-a968-46c1-8e5b-b5cbc6aa7b26" name="Changes" comment="add coil upgrades">
+    <list default="true" id="18cc6ff9-a968-46c1-8e5b-b5cbc6aa7b26" name="Changes" comment="implement ricochet">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Corrupted Drive - Defense/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Corrupted Drive - Defense/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Towers/Coil/Coil.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Coil/Coil.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Towers/Coil/Upgrade_1_1.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Coil/Upgrade_1_1.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Towers/Coil/Upgrade_2_1.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Coil/Upgrade_2_1.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Towers/Coil/Upgrade_2_2.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Coil/Upgrade_2_2.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Enemies/Effects/EnemyPassiveEffectModifier.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Enemies/Effects/EnemyPassiveEffectModifier.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Towers/TowerEffect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Towers/TowerEffect.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/GameStateApi.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/GameStateApi.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Towers/TowerEffectModifier.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Towers/TowerEffectModifier.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Towers/TowerUpgrade.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Towers/TowerUpgrade.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/Tower/TowerTriggerApi.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Tower/TowerTriggerApi.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -52,6 +58,7 @@
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Managers/GameManager.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="mock://C:/Users/lahki/unity/Corrupted Drive - Defense/Assets/Scripts/Managers/GameManager.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/lahki/unity/Corrupted Drive - Defense/Assets/Scripts/Managers/GameSpeedApi.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/lahki/unity/Corrupted Drive - Defense/Assets/Scripts/Managers/GameStateApi.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/lahki/unity/Corrupted Drive - Defense/Assets/Scripts/Managers/GameStateApi.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/lahki/unity/Corrupted Drive - Defense/Assets/Scripts/Managers/Map/MapApi.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/lahki/unity/Corrupted Drive - Defense/Assets/Scripts/Managers/Map/MapManager.cs" root0="SKIP_HIGHLIGHTING" />
@@ -154,14 +161,7 @@
       <workItem from="1667299014331" duration="24997000" />
       <workItem from="1667386897857" duration="30366000" />
       <workItem from="1667676257900" duration="15938000" />
-      <workItem from="1667731208419" duration="9294000" />
-    </task>
-    <task id="LOCAL-00038" summary="add damage">
-      <created>1667313671627</created>
-      <option name="number" value="00038" />
-      <option name="presentableId" value="LOCAL-00038" />
-      <option name="project" value="LOCAL" />
-      <updated>1667313671627</updated>
+      <workItem from="1667731208419" duration="10554000" />
     </task>
     <task id="LOCAL-00039" summary="add wave">
       <created>1667314040161</created>
@@ -499,7 +499,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667739931413</updated>
     </task>
-    <option name="localTasksCounter" value="87" />
+    <task id="LOCAL-00087" summary="implement ricochet">
+      <created>1667740912871</created>
+      <option name="number" value="00087" />
+      <option name="presentableId" value="LOCAL-00087" />
+      <option name="project" value="LOCAL" />
+      <updated>1667740912871</updated>
+    </task>
+    <option name="localTasksCounter" value="88" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -534,7 +541,6 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="change tower buttons" />
     <MESSAGE value="add multiple target types" />
     <MESSAGE value="add slow" />
     <MESSAGE value="add sell button" />
@@ -559,7 +565,8 @@
     <MESSAGE value="refactor processor state" />
     <MESSAGE value="refactor tower state" />
     <MESSAGE value="add coil upgrades" />
-    <option name="LAST_COMMIT_MESSAGE" value="add coil upgrades" />
+    <MESSAGE value="implement ricochet" />
+    <option name="LAST_COMMIT_MESSAGE" value="implement ricochet" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
 </project>

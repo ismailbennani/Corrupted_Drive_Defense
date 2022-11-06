@@ -1,4 +1,5 @@
-﻿using GameEngine.Enemies.Effects;
+﻿using System;
+using GameEngine.Enemies.Effects;
 using GameEngine.Shapes;
 using UnityEngine;
 
@@ -64,8 +65,7 @@ namespace GameEngine.Towers
             result.overrideTargetType = TargetType.None;
             result.rangeModifier = new TargetShapeModifier();
             result.targetShapeModifier = new TargetShapeModifier();
-            result.effectModifier = new TowerEffectModifier
-                { passiveEffectModifier = new EnemyPassiveEffectModifier { durationModifier = 1, speedModifier = 1, maxStacksModifier = 0 } };
+            result.effectModifier = new TowerEffectModifier { passiveEffectModifiers = Array.Empty<EnemyPassiveEffectModifier>() };
 
             return result;
         }

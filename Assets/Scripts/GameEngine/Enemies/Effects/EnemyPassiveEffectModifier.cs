@@ -5,6 +5,7 @@ namespace GameEngine.Enemies.Effects
     [Serializable]
     public class EnemyPassiveEffectModifier
     {
+        public string effectName;
         public float durationModifier = 1;
         public int maxStacksModifier;
         public float speedModifier = 1;

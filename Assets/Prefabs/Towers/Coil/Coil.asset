@@ -31,9 +31,8 @@ MonoBehaviour:
       radius: {x: 1, y: 1}
     effect:
       damage: 0
-      applyPassiveEffect: 1
-      passiveEffect:
-        name: Slow
+      passiveEffects:
+      - name: Slow
         duration: 2
         maxStacks: 1
         speedModifier: 0.75

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using GameEngine.Enemies;
+using GameEngine.Enemies.Effects;
 using GameEngine.Map;
 using GameEngine.Shapes;
 using GameEngine.Towers;
@@ -108,9 +109,9 @@ namespace Managers.Tower
                 _enemyApi.Hit(targets.Select(t => t.id), tower.description.effect.damage, tower);
             }
 
-            if (tower.description.effect.applyPassiveEffect)
+            foreach (EnemyPassiveEffect effect in tower.description.effect.passiveEffects)
             {
-                _gameStateApi.ApplyEnemyEffect(targets, tower.description.effect.passiveEffect, tower);
+                _gameStateApi.ApplyEnemyEffect(targets, effect, tower);
             }
         }
     }

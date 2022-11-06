@@ -15,7 +15,7 @@ MonoBehaviour:
   upgradeName: Permanent
   cost: 300
   sprite: {fileID: 0}
-  fullChargeDelayMultiplier: 1.5
+  fullChargeDelayMultiplier: 1
   additionalMaxCharge: 20
   overrideTargetType: 0
   rangeModifier:
@@ -28,8 +28,10 @@ MonoBehaviour:
     additionalRadius: {x: 0, y: 0}
   effectModifier:
     additionalDamage: 0
-    passiveEffectModifier:
-      durationModifier: 0
-      maxStacksModifier: 0
-      speedModifier: 1
+    passiveEffectModifiers: []
+    additionalEffects:
+    - name: Permanent slow
+      duration: 0
+      maxStacks: 1
+      speedModifier: 0.8
     additionalRicochet: 0

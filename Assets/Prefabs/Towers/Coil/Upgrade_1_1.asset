@@ -28,8 +28,10 @@ MonoBehaviour:
     additionalRadius: {x: 0, y: 0}
   effectModifier:
     additionalDamage: 0
-    passiveEffectModifier:
+    passiveEffectModifiers:
+    - effectName: Slow
       durationModifier: 2
       maxStacksModifier: 0
       speedModifier: 0.8
+    additionalEffects: []
     additionalRicochet: 0
