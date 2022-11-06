@@ -1,5 +1,4 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 
@@ -7,24 +6,34 @@ namespace Utils.Wipes
 {
     public class WipeSpriteRenderer : MonoBehaviour
     {
-        [Tooltip("The sprite renderer to which the WipeMaterial is attached. WipeMaterial should be the first instantiated material (the one returned by spriteRenderer.material)")]
-        [SerializeField] SpriteRenderer spriteRenderer;
-        [SerializeField] Texture2D wipeSprite;
+        [Tooltip(
+            "The sprite renderer to which the WipeMaterial is attached. WipeMaterial should be the first instantiated material (the one returned by spriteRenderer.material)"
+        )]
+        [SerializeField]
+        private SpriteRenderer spriteRenderer;
+        [SerializeField]
+        private Texture2D wipeSprite;
 
         [Tooltip("The time it takes to play the full transition, in seconds. A negative value makes it instantaneous")]
-        [SerializeField] float transitionDuration;
+        [SerializeField]
+        private float transitionDuration;
 
         [Header("Play on start")]
-        [SerializeField] bool fadeInOnStart;
-        [SerializeField] bool fadeOutOnStart;
-        [SerializeField] bool disableOnDoneFading;
+        [SerializeField]
+        private bool fadeInOnStart;
+        [SerializeField]
+        private bool fadeOutOnStart;
+        [SerializeField]
+        private bool disableOnDoneFading;
 
-        void Start()
+        private void Start()
         {
             if (fadeInOnStart)
             {
                 if (fadeOutOnStart)
+                {
                     Debug.LogWarning("Fade in/out on start both set to true, fading in.");
+                }
                 FadeIn(disableOnDoneFading);
             }
             else if (fadeOutOnStart)
@@ -43,7 +52,7 @@ namespace Utils.Wipes
             StartCoroutine(PlayCoroutine(1, 0, disableOnOver));
         }
 
-        IEnumerator PlayCoroutine(float cutoffFrom, float cutoffTo, bool diableOnOver = false)
+        private IEnumerator PlayCoroutine(float cutoffFrom, float cutoffTo, bool diableOnOver = false)
         {
             spriteRenderer.gameObject.SetActive(true);
             spriteRenderer.material.SetTexture("_WipeTex", wipeSprite);
@@ -88,9 +97,13 @@ namespace Utils.Wipes
             EditorGUILayout.Space();
 
             if (GUILayout.Button("Fade In"))
+            {
                 renderer.FadeIn();
+            }
             if (GUILayout.Button("Fade Out"))
+            {
                 renderer.FadeOut();
+            }
         }
     }
 #endif

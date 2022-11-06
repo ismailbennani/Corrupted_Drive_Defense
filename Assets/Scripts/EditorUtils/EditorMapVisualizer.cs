@@ -62,10 +62,10 @@ namespace EditorUtils
             {
                 return;
             }
-            
+
             DrawCells(Color.gray, processorState.cells);
         }
-        
+
         private void DrawTowers()
         {
             IEnumerable<TowerState> towerStates = GameManager.GameState?.GetTowers();
@@ -73,7 +73,7 @@ namespace EditorUtils
             {
                 return;
             }
-            
+
             foreach (TowerState towerState in towerStates)
             {
                 DrawCells(Color.gray, towerState.cells);

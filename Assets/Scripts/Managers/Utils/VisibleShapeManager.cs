@@ -22,7 +22,7 @@ namespace Managers.Utils
         private IShape _lastShape;
         private bool _rotated;
 
-        void Start()
+        private void Start()
         {
             Assert.IsNotNull(Map);
             Assert.IsNotNull(CellPrefab);
@@ -38,7 +38,7 @@ namespace Managers.Utils
             _rotated = rotated;
 
             _root.gameObject.SetActive(true);
-            
+
             if (aboveEntities.HasValue)
             {
                 _root.position = Vector2.zero.WithDepth(aboveEntities.Value ? GameConstants.UiLayer + 0.1f : GameConstants.EntityLayer + 0.1f);

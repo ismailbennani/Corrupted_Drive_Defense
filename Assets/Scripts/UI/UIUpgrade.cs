@@ -1,5 +1,4 @@
-﻿using GameEngine.Processor;
-using Managers;
+﻿using Managers;
 using TMPro;
 using UI.DataStructures;
 using UnityEngine;
@@ -29,7 +28,7 @@ namespace UI
 
         private bool _tooltipVisible;
 
-        void Awake()
+        private void Awake()
         {
             if (tooltip)
             {
@@ -42,23 +41,23 @@ namespace UI
             }
         }
 
-        void Update()
+        private void Update()
         {
             if (_tooltipVisible)
             {
                 tooltip.anchoredPosition = Input.mousePosition;
             }
         }
-        
+
         public void SetParams(UIUpgradeDescription upgrade)
         {
             this.upgrade = upgrade;
-            
+
             if (nameText)
             {
                 nameText.SetText(upgrade.name);
             }
-            
+
             if (costText)
             {
                 costText.SetText(upgrade.cost.ToString());
@@ -86,7 +85,7 @@ namespace UI
             if (tooltip)
             {
                 tooltip.gameObject.SetActive(true);
-                
+
                 if (tooltipNameText)
                 {
                     tooltipNameText.SetText(upgrade.name);
@@ -101,7 +100,7 @@ namespace UI
                 {
                     tooltipDescriptionText.SetText(upgrade.description);
                 }
-                
+
                 _tooltipVisible = true;
             }
         }
@@ -112,7 +111,7 @@ namespace UI
             {
                 tooltip.gameObject.SetActive(false);
             }
-            
+
             _tooltipVisible = false;
         }
 

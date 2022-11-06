@@ -20,8 +20,8 @@ namespace Managers.Enemy
 
         private Transform _root;
         private readonly List<EnemyController> _enemies = new();
-        
-        void Start()
+
+        private void Start()
         {
             Assert.IsNotNull(GameState);
             Assert.IsNotNull(Map);
@@ -34,7 +34,7 @@ namespace Managers.Enemy
         {
             long id = Uid.Get();
             EnemyState newEnemyState = new(id, enemy);
-            
+
             SpawnEnemy(newEnemyState);
 
             Debug.Log($"Spawn {enemy.enemyName} at spawn");
@@ -48,7 +48,7 @@ namespace Managers.Enemy
             }
 
             GameState.AddEnemy(state);
-            
+
             EnemyController newEnemy = Instantiate(state.config.prefab, Vector3.zero, Quaternion.identity, _root);
             newEnemy.id = state.id;
             _enemies.Add(newEnemy);
@@ -63,7 +63,7 @@ namespace Managers.Enemy
             }
 
             _enemies.Remove(controller);
-            
+
             Destroy(controller.GameObject());
         }
     }

@@ -1,11 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Linq;
 using GameEngine;
-using GameEngine.Enemies;
-using GameEngine.Map;
 using GameEngine.Processor;
-using GameEngine.Shapes;
 using GameEngine.Towers;
 using Managers.Enemy;
 using Managers.Map;
@@ -40,7 +35,7 @@ namespace Managers.Tower
             _towerSpawnerApi = towerSpawnerApi;
             _selectedEntityApi = selectedEntityApi;
             _enemyApi = enemyApi;
-            
+
             Upgrade = new TowerUpgradeApi(_gameStateApi);
             TowerTrigger = new TowerTriggerApi(_gameStateApi, _mapApi, _enemyApi);
         }

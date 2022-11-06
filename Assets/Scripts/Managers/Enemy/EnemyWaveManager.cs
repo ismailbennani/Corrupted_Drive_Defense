@@ -7,7 +7,7 @@ using UnityEngine.Assertions;
 
 namespace Managers.Enemy
 {
-    public class EnemyWaveManager: MonoBehaviour
+    public class EnemyWaveManager : MonoBehaviour
     {
         public bool Spawning { get; private set; }
         public bool Ready => !Spawning && EnemySpawn.GetRemaining() == 0;
@@ -21,7 +21,7 @@ namespace Managers.Enemy
 
         private Coroutine _autoWaveCoroutine;
 
-        void Start()
+        private void Start()
         {
             Assert.IsNotNull(EnemySpawn);
             Assert.IsNotNull(EnemyWaveApi);
@@ -35,7 +35,7 @@ namespace Managers.Enemy
         public void SetAutoWave(bool auto)
         {
             AutoWave = auto;
-            
+
             if (AutoWave)
             {
                 _autoWaveCoroutine = StartCoroutine(AutoTriggerWave());
@@ -48,11 +48,11 @@ namespace Managers.Enemy
                 }
             }
         }
-        
+
         private IEnumerator SpawnWaveCoroutine(WaveConfig wave)
         {
             Assert.IsFalse(Spawn == null);
-            
+
             Spawning = true;
 
             float delay = wave.frequency == 0 ? 1 : 1 / wave.frequency;

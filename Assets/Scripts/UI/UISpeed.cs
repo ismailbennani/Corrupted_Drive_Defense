@@ -10,14 +10,14 @@ namespace UI
     {
         public TextMeshProUGUI text;
 
-        void Start()
+        private void Start()
         {
             Assert.IsNotNull(text);
 
             RequireGameManager();
         }
 
-        void Update()
+        private void Update()
         {
             if (GameManager.GameSpeed == null)
             {

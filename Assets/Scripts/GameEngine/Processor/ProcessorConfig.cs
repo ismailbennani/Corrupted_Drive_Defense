@@ -10,7 +10,7 @@ namespace GameEngine.Processor
         public Vector2Int size;
         [Tooltip("Offset of the processor on the board, relative to the bottom left corner")]
         public Vector2Int offset;
-        
+
         [Header("Health")]
         public int maxHealth = 100;
 
@@ -22,7 +22,7 @@ namespace GameEngine.Processor
         [Header("Upgrades")]
         public ProcessorUpgradeConfig chargeRateUpgrade;
         public ProcessorUpgradeConfig maxChargeUpgrade;
-        
+
         [Space(10)]
         public ProcessorController prefab;
         public Sprite sprite;

@@ -1,5 +1,4 @@
-﻿using System;
-using Managers;
+﻿using Managers;
 using UnityEngine;
 
 namespace Utils.CustomComponents
@@ -38,12 +37,12 @@ namespace Utils.CustomComponents
 
         protected bool TryGetGameManager()
         {
-            return this.TryGetNeededComponent<GameManager>();
+            return this.TryGetNeededComponent();
         }
 
         protected void RequireGameManager()
         {
-            this.RequireComponent<GameManager>();
+            this.RequireComponent();
         }
     }
 }

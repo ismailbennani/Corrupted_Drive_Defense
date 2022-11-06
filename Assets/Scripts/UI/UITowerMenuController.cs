@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using GameEngine;
+﻿using GameEngine;
 using GameEngine.Towers;
 using Managers;
 using UnityEngine;
@@ -7,13 +6,13 @@ using Utils.Extensions;
 
 namespace UI
 {
-    public class UITowerMenuController: MonoBehaviour
+    public class UITowerMenuController : MonoBehaviour
     {
         public UITowerMenuButton buttonPrefab;
-        
+
         private GameConfig _gameConfig;
 
-        void Start()
+        private void Start()
         {
             _gameConfig = GameManager.Instance.gameConfig;
 

@@ -10,10 +10,10 @@ namespace Managers.Utils
         public KeyboardInputApi(GameManager gameManager)
         {
             Assert.IsNotNull(gameManager);
-            
+
             _gameManager = gameManager;
         }
-        
+
         public void Update()
         {
             if (Input.GetButtonUp("Rotate"))

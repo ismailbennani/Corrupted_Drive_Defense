@@ -3,9 +3,9 @@ using Utils.CustomComponents;
 
 namespace UI
 {
-    public class UIClickInterceptor: MyMonoBehaviour, IPointerClickHandler
+    public class UIClickInterceptor : MyMonoBehaviour, IPointerClickHandler
     {
-        void Start()
+        private void Start()
         {
             RequireGameManager();
         }
@@ -17,7 +17,7 @@ namespace UI
             {
                 return;
             }
-            
+
             GameManager.MouseInput.Click();
         }
     }

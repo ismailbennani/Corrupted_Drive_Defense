@@ -19,7 +19,7 @@ namespace Controllers
         private Vector2 _middlePos;
         private Vector2 _targetPos;
 
-        void Start()
+        private void Start()
         {
             if (id <= 0)
             {
@@ -33,13 +33,13 @@ namespace Controllers
             {
                 throw new InvalidOperationException($"could not find enemy state with id {id}");
             }
-            
+
             _path = GameManager.Map.GetPath().ToArray();
-            
+
             UpdateTargetPositions();
         }
 
-        void FixedUpdate()
+        private void FixedUpdate()
         {
             if (_state.pathCellCompletion > 1)
             {
@@ -50,12 +50,12 @@ namespace Controllers
                     GameManager.Enemy.Kill(_state.id);
                     GameManager.Processor.Hit(_state);
                 }
-                
+
                 _state.pathCellCompletion -= 1;
-                
+
                 UpdateTargetPositions();
             }
-            
+
             transform.position = _state.pathCellCompletion < 0.5
                 ? Vector2.LerpUnclamped(_startPos, _middlePos, _state.pathCellCompletion * 2).WithDepth(transform.position.z)
                 : Vector2.LerpUnclamped(_middlePos, _targetPos, _state.pathCellCompletion * 2 - 1).WithDepth(transform.position.z);

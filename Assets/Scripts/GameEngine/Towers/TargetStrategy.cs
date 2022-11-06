@@ -7,7 +7,7 @@ namespace GameEngine.Towers
         First,
         Last,
         Close,
-        Strong,
+        Strong
     }
 
     public static class TargetStrategyExtensions

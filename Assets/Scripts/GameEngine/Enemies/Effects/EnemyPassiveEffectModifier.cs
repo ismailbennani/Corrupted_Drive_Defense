@@ -6,7 +6,7 @@ namespace GameEngine.Enemies.Effects
     public class EnemyPassiveEffectModifier
     {
         public float durationModifier = 1;
-        public int maxStacksModifier = 0;
+        public int maxStacksModifier;
         public float speedModifier = 1;
 
         public static EnemyPassiveEffectModifier CombineInPlace(EnemyPassiveEffectModifier @this, EnemyPassiveEffectModifier other)

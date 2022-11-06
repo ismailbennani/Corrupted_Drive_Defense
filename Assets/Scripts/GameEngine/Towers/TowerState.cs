@@ -75,7 +75,7 @@ namespace GameEngine.Towers
             if (upgrades.Any())
             {
                 TowerUpgrade emptyUpgrade = TowerUpgrade.GetEmpty();
-                
+
                 aggregatedUpgrade = upgrades.Aggregate(emptyUpgrade, TowerUpgrade.CombineInPlace);
                 description = TowerDescription.Apply((TowerDescription)config.naked.Clone(), aggregatedUpgrade);
             }

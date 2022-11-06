@@ -5,7 +5,7 @@ using UnityEngine;
 namespace GameEngine.Towers
 {
     [Serializable]
-    public class TowerDescription: ICloneable
+    public class TowerDescription : ICloneable
     {
         [Header("Charge")]
         [Tooltip("Time it takes to fully charge this tower")]
@@ -31,7 +31,7 @@ namespace GameEngine.Towers
             result.range = (TargetShape)range.Clone();
             result.targetShape = (TargetShape)targetShape.Clone();
             result.effect = (TowerEffect)effect.Clone();
-            
+
             return result;
         }
 
@@ -48,7 +48,7 @@ namespace GameEngine.Towers
             TargetShape.Apply(towerDescription.range, upgrade.rangeModifier);
             TargetShape.Apply(towerDescription.targetShape, upgrade.targetShapeModifier);
             TowerEffect.Apply(towerDescription.effect, upgrade.effectModifier);
-            
+
             return towerDescription;
         }
     }

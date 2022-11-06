@@ -5,6 +5,6 @@
         None,
         Single,
         AreaAtTarget,
-        AreaAtSelf,
+        AreaAtSelf
     }
 }

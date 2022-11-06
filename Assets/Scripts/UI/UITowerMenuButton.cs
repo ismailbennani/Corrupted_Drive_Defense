@@ -24,7 +24,7 @@ namespace UI
 
         private TowerConfig _tower;
 
-        void Start()
+        private void Start()
         {
             Assert.IsNotNull(button);
             Assert.IsNotNull(root);
@@ -34,7 +34,7 @@ namespace UI
             RequireGameManager();
         }
 
-        void Update()
+        private void Update()
         {
             button.interactable = GameManager.GameState?.CanSpend(_tower.cost) ?? false;
             towerImage.rectTransform.sizeDelta = towerImage.sprite.bounds.size * cells[0].rectTransform.rect.size;
@@ -89,7 +89,7 @@ namespace UI
                 Image image = Instantiate(cells[0], root.transform);
                 image.transform.SetAsFirstSibling();
                 image.color = Color.white;
-                
+
                 cells.Add(image);
             }
 

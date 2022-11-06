@@ -15,7 +15,7 @@ namespace GameEngine
 
         [Header("Processor")]
         public ProcessorConfig processor;
-        
+
         [Header("Towers")]
         public TowerConfig[] towers;
 

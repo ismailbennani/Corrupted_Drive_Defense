@@ -21,7 +21,7 @@ namespace Managers.Tower
         private TowerApi _towerApi;
         private readonly GameStateApi _gameStateApi;
         private readonly MapApi _mapApi;
-        private readonly EnemyApi _enemyApi;   
+        private readonly EnemyApi _enemyApi;
 
         public TowerTriggerApi(GameStateApi gameStateApi, MapApi mapApi, EnemyApi enemyApi)
         {

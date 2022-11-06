@@ -13,7 +13,7 @@ namespace GameEngine.Towers
 
         [Header("Charge")]
         public float fullChargeDelayMultiplier = 1;
-        public int additionalMaxCharge = 0;
+        public int additionalMaxCharge;
 
         [Header("Target")]
         public TargetType overrideTargetType;

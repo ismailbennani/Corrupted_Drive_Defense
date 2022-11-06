@@ -27,7 +27,7 @@ namespace Managers.Enemy
                 enemy.Update();
             }
         }
-        
+
         public void Hit(IEnumerable<long> enemyIds, int damage, TowerState source)
         {
             EnemyState[] enemyStates = enemyIds.Select(enemyId => _gameStateApi.GetEnemyState(enemyId)).ToArray();
@@ -52,12 +52,12 @@ namespace Managers.Enemy
             int kills = 0;
             int hp = enemyState.characteristics.hp;
             EnemyConfig newConfig = enemyState.config;
-            
+
             while (damage >= hp)
             {
                 damage -= hp;
                 kills++;
-                
+
                 if (newConfig.child == null)
                 {
                     newConfig = null;
@@ -81,7 +81,7 @@ namespace Managers.Enemy
             }
 
             enemyState.characteristics.hp -= damage;
-            
+
             return kills;
         }
     }

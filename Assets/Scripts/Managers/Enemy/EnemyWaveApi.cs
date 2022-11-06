@@ -16,7 +16,7 @@ namespace Managers.Enemy
             Assert.IsNotNull(gameConfig);
             Assert.IsNotNull(gameStateApi);
             Assert.IsNotNull(enemyWaveManager);
-            
+
             _gameConfig = gameConfig;
             _gameStateApi = gameStateApi;
             _enemyWaveManager = enemyWaveManager;
@@ -31,7 +31,7 @@ namespace Managers.Enemy
                 Debug.LogWarning("Next wave not ready");
                 return;
             }
-            
+
             int nextWaveIndex = _gameStateApi.GetCurrentWave();
             if (nextWaveIndex >= _gameConfig.waves.Length)
             {
@@ -40,7 +40,7 @@ namespace Managers.Enemy
 
             WaveConfig wave = _gameConfig.waves[nextWaveIndex];
             _enemyWaveManager.SpawnWave(wave);
-            
+
             _gameStateApi.IncrementWave();
         }
 

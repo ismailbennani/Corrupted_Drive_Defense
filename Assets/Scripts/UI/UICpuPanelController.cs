@@ -1,6 +1,4 @@
 using GameEngine.Processor;
-using GameEngine.Towers;
-using UnityEngine;
 using Utils.CustomComponents;
 
 namespace UI
@@ -11,7 +9,7 @@ namespace UI
         public UIGaugeController chargeBar;
         private ProcessorState _processorState;
 
-        void Update()
+        private void Update()
         {
             if (!TryGetGameManager())
             {

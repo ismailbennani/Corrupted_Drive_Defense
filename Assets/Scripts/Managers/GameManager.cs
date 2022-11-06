@@ -5,14 +5,12 @@ using GameEngine;
 using GameEngine.Map;
 using GameEngine.Processor;
 using GameEngine.Towers;
-using GameEngine.Waves;
 using Managers.Enemy;
 using Managers.Map;
 using Managers.Processor;
 using Managers.Tower;
 using Managers.Utils;
 using UnityEngine;
-using UnityEngine.Events;
 using Utils.Extensions;
 
 namespace Managers
@@ -22,7 +20,7 @@ namespace Managers
         public static GameManager Instance { get; private set; }
 
         public GameConfig gameConfig;
-        
+
         #if DEBUG
         public GameState gameState;
         #endif
@@ -46,7 +44,7 @@ namespace Managers
         private Transform _towersRoot;
         private Transform _enemiesRoot;
 
-        void Awake()
+        private void Awake()
         {
             Instance = this;
 
@@ -56,7 +54,7 @@ namespace Managers
             }
         }
 
-        IEnumerator Start()
+        private IEnumerator Start()
         {
             this.RemoveAllChildren();
 
@@ -85,7 +83,7 @@ namespace Managers
             Ready = true;
         }
 
-        void Update()
+        private void Update()
         {
             Tower?.Update();
             Enemy?.Update();
@@ -112,10 +110,10 @@ namespace Managers
         private void SpawnLayer1()
         {
             GameSpeed = new GameSpeedApi();
-            
+
             MouseInput = new MouseInputApi(this);
             KeyboardInput = new KeyboardInputApi(this);
-            
+
             Transform utilsRoot = new GameObject("Utils", typeof(VisibleShapeManager)).transform;
             utilsRoot.SetParent(transform);
 
@@ -123,7 +121,7 @@ namespace Managers
             visibleShapeManager.Map = Map;
             visibleShapeManager.CellPrefab = gameConfig.cellPrefab;
             VisibleShape = new VisibleShapeApi(visibleShapeManager);
-            
+
             SelectedEntity = new SelectedEntityApi(gameConfig, VisibleShape);
         }
 
@@ -144,7 +142,7 @@ namespace Managers
             EnemyWave = new EnemyWaveApi(gameConfig, GameState, enemyWaveManager);
 
             Enemy = new EnemyApi(GameState, EnemySpawn);
-            
+
             _towersRoot = new GameObject("Towers", typeof(TowerSpawnerManager), typeof(TowerSpawnPreviewManager)).transform;
             _towersRoot.SetParent(transform);
             _towersRoot.position = Vector2.zero.WithDepth(GameConstants.EntityLayer);
@@ -159,7 +157,7 @@ namespace Managers
             TowerSpawnPreview = new TowerSpawnPreviewApi(towerSpawnPreviewManager, MouseInput);
 
             Tower = new TowerApi(gameConfig, GameState, Map, TowerSpawner, SelectedEntity, Enemy);
-            
+
             WorldCell processorCell = Map.GetCellAt(gameConfig.mapConfig.processorPosition);
 
             ProcessorConfig processorConfig = gameConfig.processor;

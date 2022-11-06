@@ -12,9 +12,9 @@ namespace Controllers
         public Animator animator;
 
         [Range(0, 1)]
-        public float charge = 0;
+        public float charge;
 
-        public bool trigger = false;
+        public bool trigger;
 
         public void Start()
         {
@@ -22,7 +22,7 @@ namespace Controllers
             {
                 animator = GetComponent<Animator>();
             }
-            
+
             if (!animator)
             {
                 animator = GetComponentInChildren<Animator>();

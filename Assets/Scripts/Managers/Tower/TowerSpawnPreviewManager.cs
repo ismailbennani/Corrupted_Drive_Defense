@@ -30,7 +30,7 @@ namespace Managers.Tower
         private Transform _previewTower;
         private bool _rotated;
 
-        void Start()
+        private void Start()
         {
             Assert.IsNotNull(GameConfig);
             Assert.IsNotNull(VisibleShape);
@@ -41,7 +41,7 @@ namespace Managers.Tower
             StopPreview();
         }
 
-        void Update()
+        private void Update()
         {
             if (!_tower)
             {

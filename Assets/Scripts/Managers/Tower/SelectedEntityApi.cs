@@ -1,10 +1,8 @@
 ﻿using System;
 using System.Linq;
 using GameEngine;
-using GameEngine.Shapes;
 using GameEngine.Towers;
 using Managers.Utils;
-using UnityEngine;
 using UnityEngine.Assertions;
 
 namespace Managers.Tower
@@ -48,26 +46,20 @@ namespace Managers.Tower
             switch (tower.description.targetType)
             {
                 case TargetType.None:
-                    _visibleShape.Show(null,
-                                       tower.cells.Select(c => c.gridPosition),
-                                       tower.rotated,
-                                       _gameConfig.shapePreviewOkColor,
-                                       aboveEntities: false);
+                    _visibleShape.Show(null, tower.cells.Select(c => c.gridPosition), tower.rotated, _gameConfig.shapePreviewOkColor, false);
                     break;
                 case TargetType.Single:
                 case TargetType.AreaAtTarget:
-                    _visibleShape.Show(tower.description.range,
-                                       tower.cells.Select(c => c.gridPosition),
-                                       tower.rotated,
-                                       _gameConfig.shapePreviewOkColor,
-                                       aboveEntities: false);
+                    _visibleShape.Show(tower.description.range, tower.cells.Select(c => c.gridPosition), tower.rotated, _gameConfig.shapePreviewOkColor, false);
                     break;
                 case TargetType.AreaAtSelf:
-                    _visibleShape.Show(tower.description.targetShape,
-                                       tower.cells.Select(c => c.gridPosition),
-                                       tower.rotated,
-                                       _gameConfig.shapePreviewOkColor,
-                                       aboveEntities: false);
+                    _visibleShape.Show(
+                        tower.description.targetShape,
+                        tower.cells.Select(c => c.gridPosition),
+                        tower.rotated,
+                        _gameConfig.shapePreviewOkColor,
+                        false
+                    );
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

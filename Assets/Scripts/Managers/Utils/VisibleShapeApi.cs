@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using GameEngine.Map;
 using GameEngine.Shapes;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -14,13 +13,13 @@ namespace Managers.Utils
         public VisibleShapeApi(VisibleShapeManager visibleShapeManager)
         {
             Assert.IsNotNull(visibleShapeManager);
-            
+
             _visibleShapeManager = visibleShapeManager;
         }
 
         public void Show(IShape shape, IEnumerable<Vector2Int> positions, bool rotated, Color? color = null, bool? aboveEntities = null)
         {
-            _visibleShapeManager.Show(shape, rotated, color: color, aboveEntities: aboveEntities, positions.ToArray());
+            _visibleShapeManager.Show(shape, rotated, color, aboveEntities, positions.ToArray());
         }
 
         public void Hide()

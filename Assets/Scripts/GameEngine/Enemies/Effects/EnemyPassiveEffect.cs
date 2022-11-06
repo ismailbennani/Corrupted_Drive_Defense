@@ -4,14 +4,14 @@ using UnityEngine;
 namespace GameEngine.Enemies.Effects
 {
     [Serializable]
-    public class EnemyPassiveEffect: ICloneable
+    public class EnemyPassiveEffect : ICloneable
     {
         [Tooltip("Unique name for this effect")]
         public string name;
         [Tooltip("in seconds")]
         public float duration;
         public int maxStacks;
-        
+
         [Header("Modifiers")]
         public float speedModifier = 1;
 

@@ -13,7 +13,7 @@ namespace Utils.Extensions
         {
             return new Vector3(v.x, v.y, z);
         }
-        
+
         public static Vector2Int WithoutDepth(this Vector3Int v)
         {
             return new Vector2Int(v.x, v.y);

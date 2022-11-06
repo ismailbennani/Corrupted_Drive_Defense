@@ -8,14 +8,14 @@ namespace UI
     {
         public Toggle toggle;
 
-        void Start()
+        private void Start()
         {
             Assert.IsNotNull(toggle);
 
             RequireGameManager();
         }
 
-        void Update()
+        private void Update()
         {
             if (GameManager.EnemyWave == null)
             {

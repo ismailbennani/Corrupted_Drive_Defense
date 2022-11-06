@@ -17,7 +17,7 @@ namespace GameEngine.Towers
 
         [Header("Special effects")]
         [Tooltip("Number of additional enemies targeted by a hit")]
-        public int ricochet = 0;
+        public int ricochet;
 
         public object Clone()
         {

@@ -1,10 +1,9 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
 namespace UI
 {
-    public class UIShowTooltip: MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+    public class UIShowTooltip : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
     {
         public string content;
         public UITooltip tooltip;
@@ -20,7 +19,7 @@ namespace UI
             {
                 return;
             }
-            
+
             tooltip.Show();
         }
 
@@ -30,7 +29,7 @@ namespace UI
             {
                 return;
             }
-            
+
             tooltip.Hide();
         }
     }

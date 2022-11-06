@@ -15,7 +15,7 @@ namespace Managers.Tower
     {
         private Transform _root;
         private readonly List<TowerController> _towers = new();
-        
+
         private void Start()
         {
             _root = new GameObject("SpawnRoot").transform;
@@ -58,7 +58,7 @@ namespace Managers.Tower
             }
 
             _towers.Remove(controller);
-            
+
             Destroy(controller.GameObject());
         }
     }

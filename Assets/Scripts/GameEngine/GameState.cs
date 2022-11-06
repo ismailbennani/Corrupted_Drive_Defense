@@ -11,7 +11,7 @@ namespace GameEngine
     public class GameState
     {
         public int money;
-        
+
         public ProcessorState processorState;
         public List<TowerState> towerStates = new();
         public List<EnemyState> enemyStates = new();
@@ -24,7 +24,7 @@ namespace GameEngine
                 money = gameConfig.startingMoney;
             }
         }
-        
+
         public GameState Clone()
         {
             return new GameState
@@ -33,7 +33,7 @@ namespace GameEngine
                 processorState = processorState,
                 towerStates = towerStates.ToList(),
                 enemyStates = enemyStates.ToList(),
-                currentWave = currentWave,
+                currentWave = currentWave
             };
         }
     }

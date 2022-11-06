@@ -4,7 +4,7 @@ using UnityEngine;
 namespace GameEngine.Enemies
 {
     [CreateAssetMenu(menuName = "Objects/Enemy config")]
-    public class EnemyConfig: ScriptableObject
+    public class EnemyConfig : ScriptableObject
     {
         public string enemyName;
         public EnemyController prefab;

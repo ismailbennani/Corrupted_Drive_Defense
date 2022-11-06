@@ -3,6 +3,6 @@
     public enum ShapeType
     {
         Square,
-        Circle,
+        Circle
     }
 }

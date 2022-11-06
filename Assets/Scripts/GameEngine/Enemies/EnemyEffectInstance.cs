@@ -13,7 +13,7 @@ namespace GameEngine.Enemies
         public float creationTime;
 
         public bool Over => !(passiveEffect.duration <= 0) && Time.time >= creationTime + passiveEffect.duration;
-        
+
         public EnemyEffectInstance(EnemyPassiveEffect passiveEffect, TowerState source)
         {
             this.passiveEffect = passiveEffect;

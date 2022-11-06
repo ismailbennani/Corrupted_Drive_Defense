@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="18cc6ff9-a968-46c1-8e5b-b5cbc6aa7b26" name="Changes" comment="add processor upgrades">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Tower/TowerTriggerApi.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Tower/TowerTriggerApi.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Tower/TowerUpgradeApi.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Tower/TowerUpgradeApi.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.Corrupted Drive - Defense/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Corrupted Drive - Defense/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/Tower/TowerApi.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Tower/TowerApi.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/DataStructures/UIUpgradeDescription.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/DataStructures/UIUpgradeDescription.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/UIUpgrade.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/UIUpgrade.cs" afterDir="false" />
-    </list>
+    <list default="true" id="18cc6ff9-a968-46c1-8e5b-b5cbc6aa7b26" name="Changes" comment="refactor tower api" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -29,11 +20,18 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ee2599e9648643c4aca5e05b96a4b4fe7400/6b/f22061db/Input.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3ea01e77be99618395f448b16bd7cc2bd4248bd9e5d8474964b2d97f39c5d74/System.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/lahki/unity/Corrupted Drive - Defense/Assets/Prefabs/Towers/Capacitor/Capacitor.asset" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/lahki/unity/Corrupted Drive - Defense/Assets/Scripts/Controllers/EnemyController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Controllers/TowerAnimation.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/lahki/unity/Corrupted Drive - Defense/Assets/Scripts/EditorUtils/EditorMapVisualizer.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/lahki/unity/Corrupted Drive - Defense/Assets/Scripts/GameEngine/Enemies/EnemyConfig.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/lahki/unity/Corrupted Drive - Defense/Assets/Scripts/GameEngine/Enemies/EnemyEffectInstance.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/GameEngine/GameConfig.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/lahki/unity/Corrupted Drive - Defense/Assets/Scripts/Managers/Enemy/EnemyApi.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Managers/GameManager.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/lahki/unity/Corrupted Drive - Defense/Assets/Scripts/Managers/Tower/TowerApi.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/UICpuPanelController.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/UI/UIGaugeController.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/lahki/unity/Corrupted Drive - Defense/Assets/Scripts/Utils/Extensions/ColorExtensions.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Assets/Scripts/Utils/Wipes/WipeSpriteRenderer.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.2d.pixel-perfect@5.0.1/Samples~/Scenes and Extras/Scenes/Scripts/HeroMover.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Library/PackageCache/com.unity.render-pipelines.universal@12.1.7/Runtime/RendererFeatures/ScreenSpaceAmbientOcclusion.cs" root0="SKIP_HIGHLIGHTING" />
@@ -121,14 +119,7 @@
       <workItem from="1667299014331" duration="24997000" />
       <workItem from="1667386897857" duration="30366000" />
       <workItem from="1667676257900" duration="15938000" />
-      <workItem from="1667731208419" duration="5598000" />
-    </task>
-    <task id="LOCAL-00031" summary="refactor">
-      <created>1667306844205</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1667306844205</updated>
+      <workItem from="1667731208419" duration="5796000" />
     </task>
     <task id="LOCAL-00032" summary="refactor">
       <created>1667310852138</created>
@@ -466,7 +457,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667736606045</updated>
     </task>
-    <option name="localTasksCounter" value="80" />
+    <task id="LOCAL-00080" summary="refactor tower api">
+      <created>1667737110451</created>
+      <option name="number" value="00080" />
+      <option name="presentableId" value="LOCAL-00080" />
+      <option name="project" value="LOCAL" />
+      <updated>1667737110451</updated>
+    </task>
+    <option name="localTasksCounter" value="81" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -501,7 +499,6 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="add more shpes" />
     <MESSAGE value="add tower shape" />
     <MESSAGE value="take shape into account during spawn" />
     <MESSAGE value="take other towers and processor into account during spawn" />
@@ -526,6 +523,8 @@
     <MESSAGE value="implement upgrade in ui" />
     <MESSAGE value="minor" />
     <MESSAGE value="add processor upgrades" />
-    <option name="LAST_COMMIT_MESSAGE" value="add processor upgrades" />
+    <MESSAGE value="refactor tower api" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor tower api" />
+    <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
 </project>

@@ -45,10 +45,10 @@ namespace UI
 
         private TargetStrategy[] _lastStrategies = Array.Empty<TargetStrategy>();
         private readonly List<Toggle> _toggles = new();
-        private List<UIUpgradePath> _upgradePaths = new();
+        private readonly List<UIUpgradePath> _upgradePaths = new();
         private List<List<UIUpgrade>> _upgrades = new();
 
-        void Start()
+        private void Start()
         {
             Assert.IsNotNull(selectedTowerRoot);
             Assert.IsNotNull(priorityToggle);
@@ -81,7 +81,7 @@ namespace UI
             strategiesDropdown.onValueChanged.AddListener(SetStrategy);
         }
 
-        void Update()
+        private void Update()
         {
             if (GameManager.SelectedEntity == null)
             {
@@ -346,7 +346,7 @@ namespace UI
                     {
                         towerState.config.upgradePath1.Select((u, i) => UIUpgradeDescription.From(towerState, u)).ToArray(),
                         towerState.config.upgradePath2.Select((u, i) => UIUpgradeDescription.From(towerState, u)).ToArray()
-                    },
+                    }
                 };
             }
 
@@ -362,7 +362,7 @@ namespace UI
                     Name = "Processor",
                     Health = processorState.health,
                     Charge = processorState.charge,
-                    Upgrades = processorState.availableUpgrades.Select(u => new [] { UIUpgradeDescription.From(processorState, u) }).ToArray()
+                    Upgrades = processorState.availableUpgrades.Select(u => new[] { UIUpgradeDescription.From(processorState, u) }).ToArray()
                 };
             }
         }

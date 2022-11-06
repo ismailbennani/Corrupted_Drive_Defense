@@ -3,7 +3,7 @@ using Utils;
 
 namespace Controllers
 {
-    public class ProcessorAnimation: MonoBehaviour
+    public class ProcessorAnimation : MonoBehaviour
     {
         private static readonly int HealthName = Animator.StringToHash("Health");
         private static readonly int ChargeName = Animator.StringToHash("Charge");
@@ -12,10 +12,10 @@ namespace Controllers
 
 
         [Range(0, 1)]
-        public float health = 0;
-        
+        public float health;
+
         [Range(0, 1)]
-        public float charge = 0;
+        public float charge;
 
         public void Start()
         {

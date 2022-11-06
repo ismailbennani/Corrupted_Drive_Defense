@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Linq;
 using GameEngine.Processor;
 using GameEngine.Towers;
 using Managers;
@@ -47,7 +46,7 @@ namespace UI.DataStructures
                 isTowerUpgrade = true,
                 towerId = tower.id,
                 upgradePath = upgradePath,
-                upgradeIndex = upgradeIndex,
+                upgradeIndex = upgradeIndex
             };
         }
 
@@ -87,7 +86,7 @@ namespace UI.DataStructures
 
                 isTowerUpgrade = false,
                 upgradePath = upgradePath,
-                upgradeIndex = 0,
+                upgradeIndex = 0
             };
         }
     }

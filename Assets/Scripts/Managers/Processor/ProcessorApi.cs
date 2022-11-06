@@ -15,7 +15,7 @@ namespace Managers.Processor
         public ProcessorApi(GameStateApi gameStateApi)
         {
             Assert.IsNotNull(gameStateApi);
-            
+
             _gameStateApi = gameStateApi;
         }
 
@@ -40,11 +40,11 @@ namespace Managers.Processor
             {
                 throw new InvalidOperationException($"Cannot upgrade {upgrade}: not enough money");
             }
-            
+
             _gameStateApi.Spend(cost);
 
             state.AddUpgrade(upgrade);
-            
+
             state.Refresh();
         }
 
@@ -54,7 +54,7 @@ namespace Managers.Processor
             int damage = 1;
 
             ProcessorState state = _gameStateApi.GetProcessorState();
-            
+
             state.health.Consume(damage);
 
             if (state.health.Empty && Lose != null)

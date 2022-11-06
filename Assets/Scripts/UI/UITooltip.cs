@@ -9,12 +9,12 @@ namespace UI
 
         private RectTransform _rectTransform;
 
-        void Start()
+        private void Start()
         {
             _rectTransform = GetComponent<RectTransform>();
         }
 
-        void Update()
+        private void Update()
         {
             _rectTransform.anchoredPosition = Input.mousePosition;
         }

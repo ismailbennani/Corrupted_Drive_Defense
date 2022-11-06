@@ -35,7 +35,7 @@ namespace Managers.Tower
                 Debug.LogWarning($"{state.config.towerName}: cannot buy upgrade in path {path} because current upgrade is {currentUpgradeInPath}");
                 return;
             }
-            
+
             TowerUpgrade upgrade = upgradePath[currentUpgradeInPath];
 
             if (!CanUpgradeBeBought(state, upgrade))
@@ -78,7 +78,7 @@ namespace Managers.Tower
                 return false;
             }
 
-            int[] findUpgrade = tower.config.UpgradePaths.Select(path => Array.FindIndex<TowerUpgrade>(path, u => u.upgradeName == towerUpgrade.upgradeName)).ToArray();
+            int[] findUpgrade = tower.config.UpgradePaths.Select(path => Array.FindIndex(path, u => u.upgradeName == towerUpgrade.upgradeName)).ToArray();
 
             upgradePath = Array.FindIndex(findUpgrade, i => i >= 0);
             if (upgradePath < 0)
@@ -112,12 +112,12 @@ namespace Managers.Tower
             {
                 return false;
             }
-            
+
             if (!GetUpgradePathAndIndex(tower, towerUpgrade, out int path, out int index))
             {
                 return false;
             }
-            
+
             int nextUpgrade = path switch
             {
                 0 => tower.nextUpgradePath1,

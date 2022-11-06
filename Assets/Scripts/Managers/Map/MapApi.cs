@@ -1,6 +1,5 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using GameEngine.Enemies;
 using GameEngine.Map;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -14,7 +13,7 @@ namespace Managers.Map
         public MapApi(MapManager mapManager)
         {
             Assert.IsNotNull(mapManager);
-            
+
             _mapManager = mapManager;
         }
 
@@ -27,7 +26,7 @@ namespace Managers.Map
         {
             return _mapManager.GetCellAt(vector2);
         }
-        
+
         public WorldCell GetCellAt(Cell cell)
         {
             return GetCellAt(cell.gridPosition);

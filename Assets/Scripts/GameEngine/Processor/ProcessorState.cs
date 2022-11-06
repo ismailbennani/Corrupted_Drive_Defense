@@ -32,7 +32,7 @@ namespace GameEngine.Processor
 
             availableUpgrades = Enum.GetValues(typeof(ProcessorUpgradeType)).OfType<ProcessorUpgradeType>().ToArray();
             upgrades = availableUpgrades.Select(_ => 0).ToArray();
-            
+
             Refresh();
         }
 
@@ -42,7 +42,7 @@ namespace GameEngine.Processor
 
             charge.SetMax(description.maxCharge);
         }
-        
+
         public int GetUpgrade(ProcessorUpgradeType upgradeType)
         {
             int index = Array.IndexOf(availableUpgrades, upgradeType);
@@ -82,25 +82,25 @@ namespace GameEngine.Processor
             {
                 throw new InvalidOperationException($"Cannot upgrade {upgradeType}");
             }
-            
+
             int index = Array.IndexOf(availableUpgrades, upgradeType);
             if (index < 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(upgradeType), upgradeType, "invalid upgrade type");
             }
-                
+
             return ++upgrades[index];
         }
-        
+
         private ProcessorDescription RefreshDescription()
         {
             int chargeRateUpgrade = Mathf.Min(GetUpgrade(ProcessorUpgradeType.ChargeRate), config.chargeRateUpgrade.max);
             int maxChargeUpgrade = Mathf.Min(GetUpgrade(ProcessorUpgradeType.MaxCharge), config.maxChargeUpgrade.max);
-            
+
             return new ProcessorDescription
             {
                 chargeRate = config.chargeRate + chargeRateUpgrade * config.chargeRateUpgrade.upgrade,
-                maxCharge = config.maxCharge + maxChargeUpgrade * config.maxChargeUpgrade.upgrade,
+                maxCharge = config.maxCharge + maxChargeUpgrade * config.maxChargeUpgrade.upgrade
             };
         }
     }

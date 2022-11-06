@@ -15,7 +15,7 @@ namespace Managers.Tower
         {
             Assert.IsNotNull(towerSpawnPreviewManager);
             Assert.IsNotNull(mouseInputApi);
-            
+
             _towerSpawnPreviewManager = towerSpawnPreviewManager;
             _mouseInputApi = mouseInputApi;
         }
@@ -40,7 +40,7 @@ namespace Managers.Tower
             {
                 return;
             }
-            
+
             _towerSpawnPreviewManager.StopPreview();
         }
 

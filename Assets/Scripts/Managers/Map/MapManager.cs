@@ -13,19 +13,21 @@ namespace Managers.Map
         [NonSerialized]
         public MapConfig MapConfig;
         public GameMap GameMap;
-        
+
         private Tilemap _tilemap;
 
-        void Start()
+        private void Start()
         {
             Assert.IsNotNull(MapConfig);
             Assert.IsNotNull(MapConfig.gameObject);
 
             Vector2Int mapHalfSize = MapConfig.mapSize / 2;
-            Transform map = Instantiate(MapConfig.gameObject,
-                                        new Vector3(-mapHalfSize.x - MapConfig.bottomLeftCorner.x, -mapHalfSize.y - MapConfig.bottomLeftCorner.y, 1),
-                                        Quaternion.identity,
-                                        transform);
+            Transform map = Instantiate(
+                MapConfig.gameObject,
+                new Vector3(-mapHalfSize.x - MapConfig.bottomLeftCorner.x, -mapHalfSize.y - MapConfig.bottomLeftCorner.y, 1),
+                Quaternion.identity,
+                transform
+            );
 
             map.TryGetComponentInSelfOrChildren(out _tilemap);
             Assert.IsNotNull(_tilemap);

@@ -11,7 +11,7 @@ namespace Managers.Enemy
         public EnemySpawnApi(EnemySpawnManager enemySpawnManager)
         {
             Assert.IsNotNull(enemySpawnManager);
-            
+
             _enemySpawnManager = enemySpawnManager;
         }
 
@@ -19,7 +19,7 @@ namespace Managers.Enemy
         {
             return _enemySpawnManager.Remaining;
         }
-        
+
         public void SpawnEnemy(EnemyConfig enemy, Vector2Int cell)
         {
             _enemySpawnManager.SpawnEnemy(enemy, cell);

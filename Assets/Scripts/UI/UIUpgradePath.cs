@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UI.DataStructures;
@@ -17,7 +16,7 @@ namespace UI
         [Space(10)]
         public TextMeshProUGUI titleText;
         public Image background;
-        
+
         private readonly List<UIUpgrade> _upgrades = new();
 
         private void Awake()
@@ -49,7 +48,7 @@ namespace UI
                 {
                     _upgrades[i].SetParams(upgrades[i]);
                 }
-                
+
                 _upgrades[i].gameObject.SetActive(i < upgrades.Length);
             }
         }

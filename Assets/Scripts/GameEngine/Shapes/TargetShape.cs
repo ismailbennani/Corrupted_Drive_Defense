@@ -6,7 +6,7 @@ using UnityEngine;
 namespace GameEngine.Shapes
 {
     [Serializable]
-    public class TargetShape: IShape, ICloneable
+    public class TargetShape : IShape, ICloneable
     {
         public ShapeType type;
 
@@ -16,7 +16,7 @@ namespace GameEngine.Shapes
         public IEnumerable<Vector2Int> EvaluateAt(Vector2Int[] positions, bool rotated)
         {
             Vector2Int actualRadius = rotated ? new Vector2Int(radius.y, radius.x) : radius;
-            
+
             return type switch
             {
                 ShapeType.Square => CellsInSquare(positions, actualRadius),

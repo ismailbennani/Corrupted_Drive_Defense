@@ -7,11 +7,11 @@ namespace GameEngine.Map
     {
         [Header("Description")]
         public Transform gameObject;
-        
+
         [Space(10)]
         public Vector2Int bottomLeftCorner;
         public Vector2Int mapSize;
-        
+
         [Space(10)]
         public Vector2Int[] path;
         public BoundsInt[] walls;

@@ -3,11 +3,11 @@ using Utils.CustomComponents;
 
 namespace UI
 {
-    public class UIMoney: MyMonoBehaviour
+    public class UIMoney : MyMonoBehaviour
     {
         public TextMeshProUGUI moneyText;
 
-        void Update()
+        private void Update()
         {
             RequireGameManager();
 

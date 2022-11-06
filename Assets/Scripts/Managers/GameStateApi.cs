@@ -51,7 +51,7 @@ namespace Managers
             {
                 throw new InvalidOperationException($"Not enough money: {money} > {_state.money}");
             }
-            
+
             _state.money -= money;
         }
 

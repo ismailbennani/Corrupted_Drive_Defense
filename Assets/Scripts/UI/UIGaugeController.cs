@@ -41,7 +41,7 @@ namespace UI
                 {
                     ratio = 1;
                 }
-                
+
                 foreground.fillAmount = ratio;
             }
 
@@ -64,7 +64,7 @@ namespace UI
                 {
                     topText.text = str;
                 }
-                
+
                 if (bottomText)
                 {
                     bottomText.text = str;

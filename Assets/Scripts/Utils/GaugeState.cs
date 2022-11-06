@@ -9,7 +9,7 @@ namespace Utils
         public float min;
         public float value;
         public float max;
-        
+
         public bool Full => value >= max;
         public bool Empty => value <= min;
 
@@ -36,7 +36,7 @@ namespace Utils
             {
                 return 0;
             }
-            
+
             float newValue = max > 0 ? Mathf.Min(value + charge, max) : value + charge;
             float added = newValue - value;
             Set(newValue);
@@ -49,7 +49,7 @@ namespace Utils
             {
                 return 0;
             }
-            
+
             float actualConsumption = Mathf.Min(charge, value);
             Set(value - actualConsumption);
             return actualConsumption;
@@ -61,7 +61,7 @@ namespace Utils
             {
                 return max - value;
             }
-            
+
             return float.PositiveInfinity;
         }
 
