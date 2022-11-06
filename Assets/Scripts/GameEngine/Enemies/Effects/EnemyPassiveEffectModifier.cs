@@ -28,7 +28,7 @@ namespace GameEngine.Enemies.Effects
             if (speedModifierModifier != 1)
             {
                 int value = MathUtils.ToSignedPercent(speedModifierModifier);
-                builder.AppendLine($"{value:+#;-#;0}% movement speed decrease");
+                builder.AppendLine($"{-value:+#;-#;0}% movement speed decrease");
             }
 
             if (durationModifier != 1)
