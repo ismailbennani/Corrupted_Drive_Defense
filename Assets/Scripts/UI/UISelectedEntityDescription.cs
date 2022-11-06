@@ -77,7 +77,8 @@ namespace UI
             }
 
             priorityToggle.gameObject.SetActive(false);
-            strategiesDropdown.onValueChanged.AddListener(i => SetStrategy(i));
+            upgradePathPrefab.gameObject.SetActive(false);
+            strategiesDropdown.onValueChanged.AddListener(SetStrategy);
         }
 
         void Update()
@@ -194,10 +195,7 @@ namespace UI
                 UpdateStrategy(description.Strategy.Value, description.AvailableStrategies);
             }
 
-            if (description.Upgrades != null)
-            {
-                UpdateUpgrades(description.Upgrades, description.NextUpgrades, description.UpgradePathLocked);
-            }
+            UpdateUpgrades(description.Upgrades, description.NextUpgrades, description.UpgradePathLocked);
         }
 
         private void ShowPreviewRoot()
@@ -289,28 +287,36 @@ namespace UI
 
         private void UpdateUpgrades(IReadOnlyList<UIUpgradeDescription[]> upgrades, IReadOnlyList<int> nextUpgrades, IReadOnlyList<bool> upgradePathLocked)
         {
-            for (int i = _upgradePaths.Count; i < upgrades.Count; i++)
+            if (upgrades != null)
             {
-                UIUpgradePath upgradePath = Instantiate(upgradePathPrefab, upgradePathRoot);
-                _upgradePaths.Add(upgradePath);
-            }
-
-            for (int i = 0; i < _upgradePaths.Count; i++)
-            {
-                _upgradePaths[i].gameObject.SetActive(i < upgrades.Count);
-
-                if (i < upgrades.Count)
+                for (int i = _upgradePaths.Count; i < upgrades.Count; i++)
                 {
-                    _upgradePaths[i].SetUpgrades(
-                        i,
-                        upgrades[i],
-                        nextUpgrades == null ? -1 : nextUpgrades[i],
-                        upgradePathLocked != null && upgradePathLocked[i]
-                    );
+                    UIUpgradePath upgradePath = Instantiate(upgradePathPrefab, upgradePathRoot);
+                    _upgradePaths.Add(upgradePath);
+                }
+
+                for (int i = 0; i < _upgradePaths.Count; i++)
+                {
+                    _upgradePaths[i].gameObject.SetActive(i < upgrades.Count);
+
+                    if (i < upgrades.Count)
+                    {
+                        _upgradePaths[i].SetUpgrades(
+                            i,
+                            upgrades[i],
+                            nextUpgrades == null ? -1 : nextUpgrades[i],
+                            upgradePathLocked != null && upgradePathLocked[i]
+                        );
+                    }
                 }
             }
-
-            upgradePathPrefab.gameObject.SetActive(false);
+            else
+            {
+                foreach (UIUpgradePath t in _upgradePaths)
+                {
+                    t.gameObject.SetActive(false);
+                }
+            }
         }
 
         private class Description
