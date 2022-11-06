@@ -87,6 +87,8 @@ namespace Managers.Tower
             {
                 state.nextUpgradePath2++;
             }
+            
+            Debug.Log($"Bought upgrade {upgrade.upgradeName} (path {path}) of tower {state.config.towerName}");
 
             state.Refresh();
         }

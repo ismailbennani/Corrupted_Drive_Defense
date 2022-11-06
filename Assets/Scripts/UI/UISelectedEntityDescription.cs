@@ -65,13 +65,15 @@ namespace UI
                 text.SetText(i.ToString());
 
                 int localI = i;
-                toggle.onValueChanged.AddListener(b =>
-                {
-                    if (b)
+                toggle.onValueChanged.AddListener(
+                    b =>
                     {
-                        SetPriority(localI);
+                        if (b)
+                        {
+                            SetPriority(localI);
+                        }
                     }
-                });
+                );
             }
 
             priorityToggle.gameObject.SetActive(false);
@@ -299,8 +301,12 @@ namespace UI
 
                 if (i < upgrades.Count)
                 {
-                    _upgradePaths[i]
-                        .SetUpgrades(upgrades[i], nextUpgrades == null ? -1 : nextUpgrades[i], upgradePathLocked != null && upgradePathLocked[i]);
+                    _upgradePaths[i].SetUpgrades(
+                        i,
+                        upgrades[i],
+                        nextUpgrades == null ? -1 : nextUpgrades[i],
+                        upgradePathLocked != null && upgradePathLocked[i]
+                    );
                 }
             }
 

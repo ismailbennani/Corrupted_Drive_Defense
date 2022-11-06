@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Upgrade_1_1
   m_EditorClassIdentifier: 
   upgradeName: Faster
-  cost: 50
+  cost: 35
   sprite: {fileID: 0}
   frequencyMultiplier: 4
   additionalMaxCharge: 10

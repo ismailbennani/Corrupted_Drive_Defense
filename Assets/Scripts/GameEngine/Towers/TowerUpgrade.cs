@@ -1,4 +1,5 @@
-﻿using GameEngine.Shapes;
+﻿using GameEngine.Enemies.Effects;
+using GameEngine.Shapes;
 using UnityEngine;
 
 namespace GameEngine.Towers
@@ -36,7 +37,8 @@ namespace GameEngine.Towers
                 && @this.overrideTargetType != other.overrideTargetType)
             {
                 Debug.LogWarning(
-                    $"Conflict between upgrades {@this.upgradeName} and {other.upgradeName}: target shape {@this.overrideTargetType} != {other.overrideTargetType}");
+                    $"Conflict between upgrades {@this.upgradeName} and {other.upgradeName}: target shape {@this.overrideTargetType} != {other.overrideTargetType}"
+                );
             }
             else if (other.overrideTargetType != TargetType.None)
             {
@@ -49,6 +51,24 @@ namespace GameEngine.Towers
             TowerEffectModifier.CombineInPlace(@this.effectModifier, other.effectModifier);
 
             return @this;
+        }
+
+        public static TowerUpgrade GetEmpty()
+        {
+            TowerUpgrade result = CreateInstance<TowerUpgrade>();
+
+            result.upgradeName = "Aggregated upgrade";
+            result.cost = 0;
+            result.sprite = null;
+            result.frequencyMultiplier = 1;
+            result.additionalMaxCharge = 0;
+            result.overrideTargetType = TargetType.None;
+            result.rangeModifier = new TargetShapeModifier();
+            result.targetShapeModifier = new TargetShapeModifier();
+            result.effectModifier = new TowerEffectModifier
+                { passiveEffectModifier = new EnemyPassiveEffectModifier { durationModifier = 1, speedModifier = 1, maxStacksModifier = 0 } };
+
+            return result;
         }
     }
 }

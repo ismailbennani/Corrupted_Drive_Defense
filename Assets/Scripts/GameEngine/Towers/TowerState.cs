@@ -69,12 +69,14 @@ namespace GameEngine.Towers
         private void RecomputeDescription()
         {
             IEnumerable<TowerUpgrade> upgrades1 = config.upgradePath1.Take(nextUpgradePath1);
-            IEnumerable<TowerUpgrade> upgrades2 = config.upgradePath1.Take(nextUpgradePath2);
+            IEnumerable<TowerUpgrade> upgrades2 = config.upgradePath2.Take(nextUpgradePath2);
             TowerUpgrade[] upgrades = upgrades1.Concat(upgrades2).ToArray();
 
             if (upgrades.Any())
             {
-                aggregatedUpgrade = upgrades.Aggregate(TowerUpgrade.CombineInPlace);
+                TowerUpgrade emptyUpgrade = TowerUpgrade.GetEmpty();
+                
+                aggregatedUpgrade = upgrades.Aggregate(emptyUpgrade, TowerUpgrade.CombineInPlace);
                 description = TowerDescription.Apply((TowerDescription)config.naked.Clone(), aggregatedUpgrade);
             }
             else

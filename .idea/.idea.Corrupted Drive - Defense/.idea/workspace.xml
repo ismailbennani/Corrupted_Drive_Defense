@@ -1,22 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="18cc6ff9-a968-46c1-8e5b-b5cbc6aa7b26" name="Changes" comment="add buy upgrade">
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/locked.png" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Prefabs/UI/locked.png.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/UI/DataStructures.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/UI/DataStructures/UIUpgradeDescription.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/UI/DataStructures/UIUpgradeDescription.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/UI/UIUpgrade.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/UI/UIUpgrade.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/UI/UIUpgradePath.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/UI/UIUpgradePath.cs.meta" afterDir="false" />
+    <list default="true" id="18cc6ff9-a968-46c1-8e5b-b5cbc6aa7b26" name="Changes" comment="add upgrade ui">
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Utils/Extensions/ColorExtensions.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Utils/Extensions/ColorExtensions.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Corrupted Drive - Defense/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Corrupted Drive - Defense/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Towers/Capacitor/Upgrade_1_1.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Capacitor/Upgrade_1_1.asset" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scenes/Sample/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Sample/SampleScene.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Towers/TowerState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Towers/TowerState.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Towers/TowerUpgrade.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Towers/TowerUpgrade.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/Tower/TowerApi.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Tower/TowerApi.cs" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/UISelectedEntityDescription.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/UISelectedEntityDescription.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/UITooltip.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/UITooltip.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/UIUpgrade.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/UIUpgrade.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/UIUpgradePath.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/UIUpgradePath.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -75,7 +72,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "WebServerToolWindowFactoryState": "false",
     "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "preferences.pluginManager",
+    "settings.editor.selected.configurable": "preferences.sourceCode.C#",
     "vue.rearranger.settings.migration": "true"
   }
 }]]></component>
@@ -98,10 +95,10 @@
       </option>
       <method v="2" />
     </configuration>
-    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost">
+    <configuration name="Attach to Unity Editor" type="UNITY_DEBUG_RUN_CONFIGURATION" factoryName="Unity Debug" show_console_on_std_err="false" show_console_on_std_out="false" port="50000" address="localhost" ignored-value-for-modified-check="6328">
       <option name="allowRunningInParallel" value="false" />
       <option name="listenPortForConnections" value="false" />
-      <option name="pid" />
+      <option name="pid" value="6328" />
       <option name="projectPathOnTarget" />
       <option name="selectedOptions">
         <list />
@@ -122,14 +119,7 @@
       <workItem from="1667210169814" duration="30271000" />
       <workItem from="1667299014331" duration="24997000" />
       <workItem from="1667386897857" duration="30366000" />
-      <workItem from="1667676257900" duration="12772000" />
-    </task>
-    <task id="LOCAL-00026" summary="refactor">
-      <created>1667260675128</created>
-      <option name="number" value="00026" />
-      <option name="presentableId" value="LOCAL-00026" />
-      <option name="project" value="LOCAL" />
-      <updated>1667260675128</updated>
+      <workItem from="1667676257900" duration="15690000" />
     </task>
     <task id="LOCAL-00027" summary="refactor">
       <created>1667301029917</created>
@@ -467,7 +457,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667690254293</updated>
     </task>
-    <option name="localTasksCounter" value="75" />
+    <task id="LOCAL-00075" summary="add upgrade ui">
+      <created>1667695590060</created>
+      <option name="number" value="00075" />
+      <option name="presentableId" value="LOCAL-00075" />
+      <option name="project" value="LOCAL" />
+      <updated>1667695590060</updated>
+    </task>
+    <option name="localTasksCounter" value="76" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -502,7 +499,6 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="fix processor animation" />
     <MESSAGE value="add processor selection" />
     <MESSAGE value="add processor damage" />
     <MESSAGE value="visualize processor and towers" />
@@ -527,6 +523,7 @@
     <MESSAGE value="implement strategies" />
     <MESSAGE value="add upgrades" />
     <MESSAGE value="add buy upgrade" />
-    <option name="LAST_COMMIT_MESSAGE" value="add buy upgrade" />
+    <MESSAGE value="add upgrade ui" />
+    <option name="LAST_COMMIT_MESSAGE" value="add upgrade ui" />
   </component>
 </project>

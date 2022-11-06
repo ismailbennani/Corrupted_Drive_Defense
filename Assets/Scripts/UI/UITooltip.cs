@@ -16,7 +16,7 @@ namespace UI
 
         void Update()
         {
-            _rectTransform.anchoredPosition = (Vector2)Input.mousePosition - new Vector2(Screen.currentResolution.width, Screen.currentResolution.height) / 2;
+            _rectTransform.anchoredPosition = Input.mousePosition;
         }
 
         public void SetText(string str)
