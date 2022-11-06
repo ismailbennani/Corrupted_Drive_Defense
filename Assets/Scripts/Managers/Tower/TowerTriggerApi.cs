@@ -44,40 +44,34 @@ namespace Managers.Tower
                     break;
             }
 
+            IEnumerable<EnemyState> enemies = _gameStateApi.GetEnemies();
+
+            IEnumerable<EnemyState> orderedEnemies = tower.targetStrategy switch
+            {
+                TargetStrategy.First => enemies.OrderByDescending(t => t.pathIndex).ThenByDescending(t => t.pathCellCompletion),
+                TargetStrategy.Last => enemies.OrderBy(t => t.pathIndex).ThenBy(t => t.pathCellCompletion),
+                TargetStrategy.Close => enemies.OrderBy(t => _mapApi.ComputeDistance(_gameStateApi.GetEnemyCell(t), tower.cells))
+                    .ThenBy(t => -t.pathCellCompletion),
+                TargetStrategy.Strong => enemies.OrderByDescending(t => t.strength),
+                _ => throw new ArgumentOutOfRangeException()
+            };
+
             IEnumerable<Vector2Int> rangeCells = tower.description.range.EvaluateAt(tower.cells.Select(c => c.gridPosition).ToArray());
-            EnemyState[] potentialTargets = _gameStateApi.GetEnemiesAt(rangeCells).ToArray();
+            IEnumerable<EnemyState> potentialTargets = _gameStateApi.FilterEnemiesInRange(orderedEnemies, rangeCells);
 
             if (!potentialTargets.Any())
             {
                 return Enumerable.Empty<EnemyState>();
             }
 
-            IEnumerable<EnemyState> orderedTargets;
-            switch (tower.targetStrategy)
-            {
-                case TargetStrategy.First:
-                    orderedTargets = potentialTargets.OrderByDescending(t => t.pathIndex).ThenBy(t => t.pathCellCompletion);
-                    break;
-                case TargetStrategy.Last:
-                    orderedTargets = potentialTargets.OrderBy(t => t.pathIndex).ThenBy(t => t.pathCellCompletion);
-                    break;
-                case TargetStrategy.Close:
-                    orderedTargets = potentialTargets.OrderBy(t => _mapApi.ComputeDistance(_gameStateApi.GetEnemyCell(t), tower.cells))
-                        .ThenBy(t => -t.pathCellCompletion);
-                    break;
-                case TargetStrategy.Strong:
-                    orderedTargets = potentialTargets.OrderByDescending(t => t.strength);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-
+            EnemyState target = potentialTargets.First();
+            WorldCell targetCell = _gameStateApi.GetEnemyCell(target);
+            
             if (tower.description.targetType == TargetType.Single)
             {
-                return new[] { orderedTargets.First() };
+                int nTargets = tower.description.effect.ricochet + 1;
+                return enemies.OrderBy(e => _mapApi.ComputeDistance(_gameStateApi.GetEnemyCell(e), targetCell)).Take(nTargets);
             }
-
-            WorldCell targetCell = _gameStateApi.GetEnemyCell(orderedTargets.First());
 
             if (tower.description.targetType == TargetType.AreaAtTarget)
             {

@@ -16,7 +16,7 @@ namespace GameEngine.Towers
         public EnemyPassiveEffect passiveEffect;
 
         [Header("Special effects")]
-        [Tooltip("Number of additional enemies targeted by a hit")]
+        [Tooltip("Number of additional enemies targeted by a hit, only used when target type is Single")]
         public int ricochet;
 
         public object Clone()

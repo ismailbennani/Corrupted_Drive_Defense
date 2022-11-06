@@ -172,9 +172,14 @@ namespace Managers
 
         public IEnumerable<EnemyState> GetEnemiesAt(IEnumerable<Vector2Int> targetCells)
         {
+            return FilterEnemiesInRange(GetEnemies(), targetCells);
+        }
+
+        public IEnumerable<EnemyState> FilterEnemiesInRange(IEnumerable<EnemyState> orderedEnemies, IEnumerable<Vector2Int> targetCells)
+        {
             WorldCell[] path = _map.GetPath().ToArray();
             int[] pathCells = targetCells.Select(c => Array.FindIndex(path, w => w.gridPosition == c)).Where(i => i >= 0).ToArray();
-            return _state.enemyStates.Where(e => pathCells.Contains(e.pathIndex)).ToArray();
+            return orderedEnemies.Where(e => pathCells.Contains(e.pathIndex)).ToArray();
         }
 
         public void ApplyEnemyEffect(IEnumerable<EnemyState> enemies, EnemyPassiveEffect passiveEffect, TowerState source)
