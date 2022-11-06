@@ -33,8 +33,8 @@ namespace GameEngine.Enemies.Effects
             effect.duration *= modifier.durationModifier;
             effect.maxStacks += modifier.maxStacksModifier;
             effect.speedModifier *= modifier.speedModifierModifier;
-            effect.poisonDamage += modifier.additionalDamage;
-            effect.poisonPeriod *= modifier.periodModifier;
+            effect.poisonDamage += modifier.additionalPoisonDamage;
+            effect.poisonPeriod *= modifier.poisonPeriodModifier;
         }
 
         public string GetTechnicalDescription()
@@ -45,6 +45,11 @@ namespace GameEngine.Enemies.Effects
             {
                 int value = MathUtils.ToSignedPercent(speedModifier);
                 builder.AppendLine($"{value:+#;-#;0}% movement speed");
+            }
+            
+            if (poisonDamage > 0)
+            {
+                builder.AppendLine($"{poisonDamage} damage every {poisonPeriod:0.00}s");
             }
             
             builder.AppendLine($"Duration: {(duration == 0 ? '∞' : $"{duration:0.00}s")}");

@@ -16,8 +16,8 @@ namespace GameEngine.Enemies.Effects
         public float speedModifierModifier = 1;
 
         [Header("Poison damage modifiers")]
-        public int additionalDamage;
-        public float periodModifier = 1;
+        public int additionalPoisonDamage;
+        public float poisonPeriodModifier = 1;
 
         public static EnemyPassiveEffectModifier CombineInPlace(EnemyPassiveEffectModifier @this, EnemyPassiveEffectModifier other)
         {
@@ -36,6 +36,17 @@ namespace GameEngine.Enemies.Effects
             {
                 int value = MathUtils.ToSignedPercent(speedModifierModifier);
                 builder.AppendLine($"{-value:+#;-#;0}% movement speed decrease");
+            }
+            
+            if (additionalPoisonDamage != 0)
+            {
+                builder.AppendLine($"{-additionalPoisonDamage:+#;-#;0} damage");
+            }
+            
+            if (poisonPeriodModifier != 1)
+            {
+                int value = MathUtils.ToSignedPercent(poisonPeriodModifier);
+                builder.AppendLine($"{value:+#;-#;0}% damage period");
             }
 
             if (durationModifier != 1)

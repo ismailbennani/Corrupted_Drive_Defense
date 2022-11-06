@@ -37,5 +37,5 @@ MonoBehaviour:
       replaceOld: 1
       speedModifier: 1
       poisonDamage: 1
-      poisonPeriod: 0.9
+      poisonPeriod: 1
     additionalRicochet: 0

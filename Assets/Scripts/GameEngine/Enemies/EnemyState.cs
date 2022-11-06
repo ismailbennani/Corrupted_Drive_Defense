@@ -64,12 +64,6 @@ namespace GameEngine.Enemies
 
         public void Update()
         {
-            if (effects.Any(e => e.Over))
-            {
-                effects.RemoveAll(e => e.Over);
-                UpdateCharacteristics();
-            }
-            
             // poison
             foreach (EnemyEffectInstance effect in effects)
             {
@@ -83,6 +77,12 @@ namespace GameEngine.Enemies
                     effect.lastPoisonTime += effect.passiveEffect.poisonPeriod;
                     GameManager.Instance.Enemy.Hit(new [] { id }, effect.passiveEffect.poisonDamage, effect.sourceId);
                 }
+            }
+            
+            if (effects.Any(e => e.Over))
+            {
+                effects.RemoveAll(e => e.Over);
+                UpdateCharacteristics();
             }
         }
 
