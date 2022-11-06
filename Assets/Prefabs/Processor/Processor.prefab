@@ -74,7 +74,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 0b7b9362bb6c2d348bfcaeadd3b14b2b, type: 3}
-  m_Color: {r: 0.9019608, g: 0, b: 0, a: 1}
+  m_Color: {r: 0.003921569, g: 0.3882353, b: 0.7764706, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -251,7 +251,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   animator: {fileID: 4749691020279484823}
   health: 0
-  ticks: 0
+  charge: 0
 --- !u!1 &8465549003231420667
 GameObject:
   m_ObjectHideFlags: 0
