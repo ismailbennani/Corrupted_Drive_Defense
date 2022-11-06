@@ -5,12 +5,6 @@ namespace UI
 {
     public class UIClickInterceptor : MyMonoBehaviour, IPointerClickHandler
     {
-        private void Start()
-        {
-            RequireGameManager();
-        }
-
-
         public void OnPointerClick(PointerEventData eventData)
         {
             if (!GameManager.Ready)

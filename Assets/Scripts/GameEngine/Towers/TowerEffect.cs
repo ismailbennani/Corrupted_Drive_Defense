@@ -31,7 +31,7 @@ namespace GameEngine.Towers
         {
             effect.damage += modifier.additionalDamage;
 
-            effect.passiveEffects = effect.passiveEffects.Concat(modifier.additionalEffects).ToArray();
+            effect.passiveEffects = effect.passiveEffects.Concat(modifier.additionalPassiveEffects).ToArray();
 
             foreach (EnemyPassiveEffect passiveEffect in effect.passiveEffects)
             {

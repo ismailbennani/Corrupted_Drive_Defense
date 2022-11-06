@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using UnityEngine;
 
 namespace GameEngine.Shapes
@@ -26,6 +27,28 @@ namespace GameEngine.Shapes
             @this.additionalRadius += other.additionalRadius;
 
             return @this;
+        }
+
+        public string GetTechnicalDescription()
+        {
+            if (!changeShape && additionalRadius == Vector2Int.zero)
+            {
+                return null;
+            }
+
+            StringBuilder builder = new();
+
+            if (changeShape)
+            {
+                builder.AppendLine(newShape.ToString());
+            }
+
+            if (additionalRadius != Vector2Int.zero)
+            {
+                builder.AppendFormat($"Radius: {additionalRadius.x:+#;-#;0}, {additionalRadius.y:+#;-#;0}");
+            }
+
+            return builder.ToString();
         }
     }
 }

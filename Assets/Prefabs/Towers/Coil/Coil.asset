@@ -35,7 +35,7 @@ MonoBehaviour:
       - name: Slow
         duration: 2
         maxStacks: 1
-        speedModifier: 0.75
+        speedModifier: 0.8
       ricochet: 0
   upgradePath1:
   - {fileID: 11400000, guid: a4028a576c334da47ac8f6306361a4b1, type: 2}

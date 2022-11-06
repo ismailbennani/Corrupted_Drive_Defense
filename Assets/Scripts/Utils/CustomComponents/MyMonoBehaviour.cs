@@ -5,7 +5,23 @@ namespace Utils.CustomComponents
 {
     public class MyMonoBehaviour : MonoBehaviour, INeedsComponent<GameManager>
     {
-        public GameManager GameManager { get; set; }
+        public GameManager GameManager {
+            get {
+                this.RequireComponent();
+                return _gameManager;
+            }
+        }
+
+
+
+
+
+
+
+
+
+
+        private GameManager _gameManager;
 
 
 
@@ -17,8 +33,8 @@ namespace Utils.CustomComponents
 
 
         GameManager INeedsComponent<GameManager>.Component {
-            get => GameManager;
-            set => GameManager = value;
+            get => _gameManager;
+            set => _gameManager = value;
         }
 
 
@@ -38,11 +54,6 @@ namespace Utils.CustomComponents
         protected bool TryGetGameManager()
         {
             return this.TryGetNeededComponent();
-        }
-
-        protected void RequireGameManager()
-        {
-            this.RequireComponent();
         }
     }
 }

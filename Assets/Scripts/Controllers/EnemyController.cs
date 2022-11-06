@@ -26,8 +26,6 @@ namespace Controllers
                 throw new InvalidOperationException($"enemy with invalid id {id}");
             }
 
-            RequireGameManager();
-
             _state = GameManager.GameState.GetEnemyState(id);
             if (_state == null)
             {

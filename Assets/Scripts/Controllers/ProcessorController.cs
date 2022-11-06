@@ -8,11 +8,6 @@ namespace Controllers
     {
         private ProcessorState _processorState;
 
-        private void Start()
-        {
-            RequireGameManager();
-        }
-
         private void Update()
         {
             if ((_processorState ??= GameManager.GameState.GetProcessorState()) == null)

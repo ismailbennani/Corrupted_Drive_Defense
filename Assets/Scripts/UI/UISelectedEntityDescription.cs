@@ -54,8 +54,6 @@ namespace UI
             Assert.IsNotNull(priorityToggle);
             Assert.IsNotNull(strategiesDropdown);
 
-            RequireGameManager();
-
             for (int i = 1; i <= nPriorities; i++)
             {
                 Toggle toggle = Instantiate(priorityToggle, priorityToggle.transform.parent);

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeName: Stronger
   cost: 75
+  description: 
   sprite: {fileID: 0}
   fullChargeDelayMultiplier: 1
   additionalMaxCharge: 5
@@ -32,6 +33,6 @@ MonoBehaviour:
     - effectName: Slow
       durationModifier: 2
       maxStacksModifier: 0
-      speedModifier: 0.8
-    additionalEffects: []
+      speedModifierModifier: 0.8
+    additionalPassiveEffects: []
     additionalRicochet: 0

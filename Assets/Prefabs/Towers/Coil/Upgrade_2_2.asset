@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeName: Permanent
   cost: 300
+  description: 
   sprite: {fileID: 0}
   fullChargeDelayMultiplier: 1
   additionalMaxCharge: 20
@@ -29,7 +30,7 @@ MonoBehaviour:
   effectModifier:
     additionalDamage: 0
     passiveEffectModifiers: []
-    additionalEffects:
+    additionalPassiveEffects:
     - name: Permanent slow
       duration: 0
       maxStacks: 1

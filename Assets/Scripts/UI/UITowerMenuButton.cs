@@ -30,8 +30,6 @@ namespace UI
             Assert.IsNotNull(root);
             Assert.IsNotNull(towerImage);
             Assert.IsTrue(cells?.Count > 0);
-
-            RequireGameManager();
         }
 
         private void Update()

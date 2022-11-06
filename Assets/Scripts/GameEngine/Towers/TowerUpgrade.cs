@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Text;
 using GameEngine.Enemies.Effects;
 using GameEngine.Shapes;
 using UnityEngine;
+using Utils;
 
 namespace GameEngine.Towers
 {
@@ -10,6 +12,8 @@ namespace GameEngine.Towers
     {
         public string upgradeName;
         public int cost;
+        [TextArea]
+        public string description;
         public Sprite sprite;
 
         [Header("Charge")]
@@ -68,6 +72,55 @@ namespace GameEngine.Towers
             result.effectModifier = new TowerEffectModifier { passiveEffectModifiers = Array.Empty<EnemyPassiveEffectModifier>() };
 
             return result;
+        }
+
+        public string GetTechnicalDescription()
+        {
+            StringBuilder builder = new();
+
+            if (fullChargeDelayMultiplier != 1)
+            {
+                float value = MathUtils.ToSignedPercent(1 / fullChargeDelayMultiplier);
+                builder.AppendLine($"{value:+#;-#;0}% charge rate");
+            }
+            
+            if (additionalMaxCharge != 0)
+            {
+                builder.AppendLine($"{additionalMaxCharge:+#;-#;0} max charge");
+            }
+            
+            if (overrideTargetType != TargetType.None)
+            {
+                builder.AppendLine();
+                builder.AppendLine("Target type");
+                builder.AppendLine($"{overrideTargetType}");
+            }
+
+            string rangeTechnicalDescription = rangeModifier.GetTechnicalDescription();
+            if (!string.IsNullOrEmpty(rangeTechnicalDescription))
+            {
+                builder.AppendLine();
+                builder.AppendLine("Range");
+                builder.AppendLine(rangeTechnicalDescription);
+            }
+
+            string targetShapeTechnicalDescription = targetShapeModifier.GetTechnicalDescription();
+            if (!string.IsNullOrEmpty(targetShapeTechnicalDescription))
+            {
+                builder.AppendLine();
+                builder.AppendLine("Target shape");
+                builder.AppendLine(targetShapeTechnicalDescription);
+            }
+
+            string effectModifierTechnicalDescription = effectModifier.GetTechnicalDescription();
+            if (!string.IsNullOrEmpty(effectModifierTechnicalDescription))
+            {
+                builder.AppendLine();
+                builder.AppendLine("Effects");
+                builder.AppendLine(effectModifierTechnicalDescription);
+            }
+
+            return builder.ToString();
         }
     }
 }

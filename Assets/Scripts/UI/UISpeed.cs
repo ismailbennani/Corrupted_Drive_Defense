@@ -13,8 +13,6 @@ namespace UI
         private void Start()
         {
             Assert.IsNotNull(text);
-
-            RequireGameManager();
         }
 
         private void Update()

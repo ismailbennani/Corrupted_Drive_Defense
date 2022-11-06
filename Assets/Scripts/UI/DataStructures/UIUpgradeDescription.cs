@@ -37,7 +37,7 @@ namespace UI.DataStructures
                 name = towerUpgrade.upgradeName,
                 cost = towerUpgrade.cost,
                 sprite = towerUpgrade.sprite,
-                description = towerUpgrade.upgradeName,
+                description = $"{towerUpgrade.description}{Environment.NewLine}{Environment.NewLine}{towerUpgrade.GetTechnicalDescription()}",
 
                 bought = tower.IsUpgradeBought(towerUpgrade),
                 canBeBought = GameManager.Instance.Tower.Upgrade.CanBuy(tower, towerUpgrade),

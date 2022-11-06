@@ -11,8 +11,6 @@ namespace UI
         private void Start()
         {
             Assert.IsNotNull(toggle);
-
-            RequireGameManager();
         }
 
         private void Update()

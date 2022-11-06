@@ -9,8 +9,6 @@ namespace UI
 
         private void Update()
         {
-            RequireGameManager();
-
             if (moneyText)
             {
                 int money = GameManager.GameState?.GetMoney() ?? 0;
