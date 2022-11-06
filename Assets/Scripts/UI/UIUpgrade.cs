@@ -71,12 +71,7 @@ namespace UI
             if (image)
             {
                 image.color = upgrade.bought ? Color.green : Color.white;
-
-                Sprite sprite = upgrade.isLocked ? pathLockedImage : upgrade.sprite;
-                if (sprite)
-                {
-                    image.sprite = sprite;
-                }
+                image.sprite = upgrade.isLocked ? pathLockedImage : upgrade.sprite;
             }
         }
 

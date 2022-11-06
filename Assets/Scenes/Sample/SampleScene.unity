@@ -457,7 +457,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8fb412e917004d78a969e54ec0213b84, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pathLockedImage: {fileID: 21300000, guid: f2ec6adb7d19a7c499e0faf9d3d1d7b1, type: 3}
+  pathLockedImage: {fileID: 21300000, guid: d8ce43798ac2d634183fbc7c35078ffc, type: 3}
   image: {fileID: 798034169}
   button: {fileID: 798034168}
   nameText: {fileID: 1352027227}

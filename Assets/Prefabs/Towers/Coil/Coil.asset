@@ -31,14 +31,18 @@ MonoBehaviour:
       radius: {x: 1, y: 1}
     effect:
       damage: 0
-      applyPassiveEffect: 0
+      applyPassiveEffect: 1
       passiveEffect:
-        name: 
-        duration: 0
-        maxStacks: 0
-        speedModifier: 1
+        name: Slow
+        duration: 2
+        maxStacks: 1
+        speedModifier: 0.75
       ricochet: 0
-  upgradePath1: []
-  upgradePath2: []
+  upgradePath1:
+  - {fileID: 11400000, guid: a4028a576c334da47ac8f6306361a4b1, type: 2}
+  - {fileID: 11400000, guid: 12e9fc48586127945baa1cbb04604f50, type: 2}
+  upgradePath2:
+  - {fileID: 11400000, guid: 34a66d2f7fc7fa14a8be9e6eb6333c39, type: 2}
+  - {fileID: 11400000, guid: ce629aaf1b7158945a6846432ead799b, type: 2}
   prefab: {fileID: 2292787277387283102, guid: bd80c124bc56b3648a0b5b75ec49e466, type: 3}
   sprite: {fileID: 1304724479, guid: 1598425d7e5c68e48ab32a920f0fad64, type: 3}

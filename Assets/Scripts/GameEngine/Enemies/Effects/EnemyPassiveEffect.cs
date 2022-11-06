@@ -10,7 +10,7 @@ namespace GameEngine.Enemies.Effects
         public string name;
         [Tooltip("in seconds")]
         public float duration;
-        public int maxStacks;
+        public int maxStacks = 1;
 
         [Header("Modifiers")]
         public float speedModifier = 1;
