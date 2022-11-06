@@ -1,5 +1,4 @@
-﻿using System;
-using GameEngine.Enemies;
+﻿using GameEngine.Enemies;
 using GameEngine.Processor;
 using UnityEngine.Assertions;
 using UnityEngine.Events;
@@ -9,6 +8,8 @@ namespace Managers.Processor
     public class ProcessorApi
     {
         public readonly UnityEvent Lose = new();
+        
+        public readonly ProcessorUpdateApi Update;
 
         private readonly GameStateApi _gameStateApi;
 
@@ -17,35 +18,7 @@ namespace Managers.Processor
             Assert.IsNotNull(gameStateApi);
 
             _gameStateApi = gameStateApi;
-        }
-
-        public void BuyUpgrade(int path)
-        {
-            ProcessorState state = _gameStateApi.GetProcessorState();
-            BuyUpgrade(state.availableUpgrades[path]);
-        }
-
-        public void BuyUpgrade(ProcessorUpgradeType upgrade)
-        {
-            ProcessorState state = _gameStateApi.GetProcessorState();
-
-            if (!state.CanUpgrade(upgrade))
-            {
-                throw new InvalidOperationException($"Cannot upgrade {upgrade}");
-            }
-
-            int cost = state.UpgradeCost(upgrade);
-
-            if (!_gameStateApi.CanSpend(cost))
-            {
-                throw new InvalidOperationException($"Cannot upgrade {upgrade}: not enough money");
-            }
-
-            _gameStateApi.Spend(cost);
-
-            state.AddUpgrade(upgrade);
-
-            state.Refresh();
+            Update = new ProcessorUpdateApi(_gameStateApi);
         }
 
         public int Hit(EnemyState enemy)

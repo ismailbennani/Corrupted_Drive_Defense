@@ -123,7 +123,7 @@ namespace UI
             }
             else
             {
-                GameManager.Instance.Processor.BuyUpgrade(upgrade.upgradePath);
+                GameManager.Instance.Processor.Update.BuyUpgrade(upgrade.upgradePath);
             }
         }
     }

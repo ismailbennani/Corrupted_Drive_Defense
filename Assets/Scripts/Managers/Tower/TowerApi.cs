@@ -11,14 +11,12 @@ namespace Managers.Tower
     public class TowerApi
     {
         public readonly TowerUpgradeApi Upgrade;
-        public readonly TowerTriggerApi TowerTrigger;
+        public readonly TowerTriggerApi Trigger;
 
         private readonly GameConfig _gameConfig;
         private readonly GameStateApi _gameStateApi;
-        private readonly MapApi _mapApi;
         private readonly TowerSpawnerApi _towerSpawnerApi;
         private readonly SelectedEntityApi _selectedEntityApi;
-        private readonly EnemyApi _enemyApi;
 
         public TowerApi(
             GameConfig gameConfig,
@@ -31,20 +29,18 @@ namespace Managers.Tower
         {
             _gameConfig = gameConfig;
             _gameStateApi = gameStateApi;
-            _mapApi = mapApi;
             _towerSpawnerApi = towerSpawnerApi;
             _selectedEntityApi = selectedEntityApi;
-            _enemyApi = enemyApi;
 
             Upgrade = new TowerUpgradeApi(_gameStateApi);
-            TowerTrigger = new TowerTriggerApi(_gameStateApi, _mapApi, _enemyApi);
+            Trigger = new TowerTriggerApi(_gameStateApi, mapApi, enemyApi);
         }
 
         public void Update()
         {
             foreach (TowerState tower in _gameStateApi.GetTowers().OrderByDescending(t => t.priority))
             {
-                TowerTrigger.Update(tower);
+                Trigger.Update(tower);
                 UpdateCharge(tower);
             }
         }
