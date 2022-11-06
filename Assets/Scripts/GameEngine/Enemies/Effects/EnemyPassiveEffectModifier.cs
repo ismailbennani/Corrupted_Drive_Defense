@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Text;
+using UnityEngine;
 using Utils;
 
 namespace GameEngine.Enemies.Effects
@@ -10,7 +11,13 @@ namespace GameEngine.Enemies.Effects
         public string effectName;
         public float durationModifier = 1;
         public int maxStacksModifier;
+        
+        [Header("Modifiers modifiers")]
         public float speedModifierModifier = 1;
+
+        [Header("Poison damage modifiers")]
+        public int additionalDamage;
+        public float periodModifier = 1;
 
         public static EnemyPassiveEffectModifier CombineInPlace(EnemyPassiveEffectModifier @this, EnemyPassiveEffectModifier other)
         {

@@ -22,12 +22,17 @@ namespace Managers.Enemy
 
         public void Update()
         {
-            foreach (EnemyState enemy in _gameStateApi.GetEnemies())
+            foreach (EnemyState enemy in _gameStateApi.GetEnemies().ToArray())
             {
                 enemy.Update();
             }
         }
 
+        public void Hit(IEnumerable<long> enemyIds, int damage, long sourceId)
+        {
+            Hit(enemyIds, damage, _gameStateApi.GetTowerState(sourceId));
+        }
+        
         public void Hit(IEnumerable<long> enemyIds, int damage, TowerState source)
         {
             EnemyState[] enemyStates = enemyIds.Select(enemyId => _gameStateApi.GetEnemyState(enemyId)).ToArray();

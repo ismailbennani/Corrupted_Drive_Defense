@@ -13,9 +13,15 @@ namespace GameEngine.Enemies.Effects
         [Tooltip("in seconds")]
         public float duration = 1;
         public int maxStacks = 1;
+        [Tooltip("when max stacks is reached, should replace the old stacks with the new ones or keep the old ones")]
+        public bool replaceOld = true;
 
         [Header("Modifiers")]
         public float speedModifier = 1;
+
+        [Header("Poison damage")]
+        public int poisonDamage;
+        public float poisonPeriod;
 
         public object Clone()
         {
@@ -27,6 +33,8 @@ namespace GameEngine.Enemies.Effects
             effect.duration *= modifier.durationModifier;
             effect.maxStacks += modifier.maxStacksModifier;
             effect.speedModifier *= modifier.speedModifierModifier;
+            effect.poisonDamage += modifier.additionalDamage;
+            effect.poisonPeriod *= modifier.periodModifier;
         }
 
         public string GetTechnicalDescription()

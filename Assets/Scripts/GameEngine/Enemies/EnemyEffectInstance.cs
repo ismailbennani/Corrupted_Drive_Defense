@@ -12,6 +12,8 @@ namespace GameEngine.Enemies
         public long sourceId;
         public float creationTime;
 
+        public float lastPoisonTime;
+        
         public bool Over => !(passiveEffect.duration <= 0) && Time.time >= creationTime + passiveEffect.duration;
 
         public EnemyEffectInstance(EnemyPassiveEffect passiveEffect, TowerState source)
@@ -19,6 +21,7 @@ namespace GameEngine.Enemies
             this.passiveEffect = passiveEffect;
             sourceId = source.id;
             creationTime = Time.time;
+            lastPoisonTime = Time.time;
         }
     }
 }

@@ -14,6 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   upgradeName: Harder
   cost: 150
+  description: 
   sprite: {fileID: 0}
   fullChargeDelayMultiplier: 1
   additionalMaxCharge: 20
@@ -27,9 +28,14 @@ MonoBehaviour:
     newShape: 0
     additionalRadius: {x: 0, y: 0}
   effectModifier:
-    additionalDamage: 1
-    passiveEffectModifier:
-      durationModifier: 1
-      maxStacksModifier: 0
+    additionalDamage: 0
+    passiveEffectModifiers: []
+    additionalPassiveEffects:
+    - name: Cold bite
+      duration: 2
+      maxStacks: 1
+      replaceOld: 1
       speedModifier: 1
+      poisonDamage: 1
+      poisonPeriod: 0.9
     additionalRicochet: 0

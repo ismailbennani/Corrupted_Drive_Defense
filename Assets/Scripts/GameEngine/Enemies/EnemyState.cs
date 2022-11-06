@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using GameEngine.Enemies.Effects;
 using GameEngine.Towers;
+using Managers;
 using UnityEngine;
 
 namespace GameEngine.Enemies
@@ -48,8 +49,9 @@ namespace GameEngine.Enemies
 
                 if (stacks.Length >= passiveEffect.maxStacks)
                 {
-                    int toRemove = stacks.Length - passiveEffect.maxStacks + 1;
-                    foreach (EnemyEffectInstance stack in stacks.Take(toRemove))
+                    int nToRemove = stacks.Length - passiveEffect.maxStacks + 1;
+                    IEnumerable<EnemyEffectInstance> toRemove = passiveEffect.replaceOld ? stacks.Take(nToRemove) : stacks.TakeLast(nToRemove); 
+                    foreach (EnemyEffectInstance stack in toRemove)
                     {
                         effects.Remove(stack);
                     }
@@ -66,6 +68,21 @@ namespace GameEngine.Enemies
             {
                 effects.RemoveAll(e => e.Over);
                 UpdateCharacteristics();
+            }
+            
+            // poison
+            foreach (EnemyEffectInstance effect in effects)
+            {
+                if (effect.passiveEffect.poisonDamage <= 0)
+                {
+                    continue;
+                }
+
+                if (Time.time >= effect.lastPoisonTime + effect.passiveEffect.poisonPeriod)
+                {
+                    effect.lastPoisonTime += effect.passiveEffect.poisonPeriod;
+                    GameManager.Instance.Enemy.Hit(new [] { id }, effect.passiveEffect.poisonDamage, effect.sourceId);
+                }
             }
         }
 
