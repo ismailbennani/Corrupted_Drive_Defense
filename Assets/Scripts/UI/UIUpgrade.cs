@@ -120,7 +120,7 @@ namespace UI
         {
             if (upgrade.isTowerUpgrade)
             {
-                GameManager.Instance.Tower.BuyUpgrade(upgrade.towerId, upgrade.upgradePath);
+                GameManager.Instance.Tower.Upgrade.BuyUpgrade(upgrade.towerId, upgrade.upgradePath);
             }
             else
             {

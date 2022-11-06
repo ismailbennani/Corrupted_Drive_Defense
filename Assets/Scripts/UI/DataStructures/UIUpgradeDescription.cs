@@ -31,7 +31,7 @@ namespace UI.DataStructures
                 return null;
             }
 
-            GameManager.Instance.Tower.RequireUpgradePathAndIndex(tower, towerUpgrade, out int upgradePath, out int upgradeIndex);
+            GameManager.Instance.Tower.Upgrade.RequireUpgradePathAndIndex(tower, towerUpgrade, out int upgradePath, out int upgradeIndex);
 
             return new UIUpgradeDescription
             {
@@ -40,9 +40,9 @@ namespace UI.DataStructures
                 sprite = towerUpgrade.sprite,
                 description = towerUpgrade.upgradeName,
 
-                bought = GameManager.Instance.Tower.IsUpgradeBought(tower, towerUpgrade),
-                canBeBought = GameManager.Instance.Tower.CanUpgradeBeBought(tower, towerUpgrade),
-                isLocked = GameManager.Instance.Tower.IsUpgradeLocked(tower, towerUpgrade),
+                bought = GameManager.Instance.Tower.Upgrade.IsUpgradeBought(tower, towerUpgrade),
+                canBeBought = GameManager.Instance.Tower.Upgrade.CanUpgradeBeBought(tower, towerUpgrade),
+                isLocked = GameManager.Instance.Tower.Upgrade.IsUpgradeLocked(tower, towerUpgrade),
 
                 isTowerUpgrade = true,
                 towerId = tower.id,
