@@ -12,7 +12,6 @@ namespace Managers.Tower
         public TowerUpgradeApi(GameStateApi gameStateApi)
         {
             _gameStateApi = gameStateApi;
-
         }
 
         public void BuyUpgrade(long id, int path)
@@ -49,8 +48,6 @@ namespace Managers.Tower
             state.BuyNextUpgrade(path);
 
             Debug.Log($"Bought upgrade {upgrade.upgradeName} (path {path}) of tower {state.name}");
-
-            state.Refresh();
         }
 
         public bool CanBuy(TowerState tower, TowerUpgrade towerUpgrade)

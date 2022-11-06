@@ -42,28 +42,9 @@ namespace Managers.Tower
             Clear();
 
             _selectedTower = tower;
+            tower.onUpgrade.AddListener(RefreshVisibleShapeOnUpgrade);
 
-            switch (tower.description.targetType)
-            {
-                case TargetType.None:
-                    _visibleShape.Show(null, tower.cells.Select(c => c.gridPosition), tower.rotated, _gameConfig.shapePreviewOkColor, false);
-                    break;
-                case TargetType.Single:
-                case TargetType.AreaAtTarget:
-                    _visibleShape.Show(tower.description.range, tower.cells.Select(c => c.gridPosition), tower.rotated, _gameConfig.shapePreviewOkColor, false);
-                    break;
-                case TargetType.AreaAtSelf:
-                    _visibleShape.Show(
-                        tower.description.targetShape,
-                        tower.cells.Select(c => c.gridPosition),
-                        tower.rotated,
-                        _gameConfig.shapePreviewOkColor,
-                        false
-                    );
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
+            ShowVisibleShape(tower);
         }
 
         public void SelectProcessor()
@@ -75,9 +56,35 @@ namespace Managers.Tower
 
         public void Clear()
         {
+            _selectedTower?.onUpgrade.RemoveListener(RefreshVisibleShapeOnUpgrade);
+            
             _selectedTower = null;
             _processorIsSelected = false;
             _visibleShape.Hide();
+        }
+
+        private void RefreshVisibleShapeOnUpgrade(int _)
+        {
+            ShowVisibleShape(_selectedTower);
+        }
+
+        private void ShowVisibleShape(TowerState tower)
+        {
+            switch (tower.description.targetType)
+            {
+                case TargetType.None:
+                    _visibleShape.Show(null, tower.cells.Select(c => c.gridPosition), tower.rotated, _gameConfig.shapePreviewOkColor, false);
+                    break;
+                case TargetType.Single:
+                case TargetType.AreaAtTarget:
+                    _visibleShape.Show(tower.description.range, tower.cells.Select(c => c.gridPosition), tower.rotated, _gameConfig.shapePreviewOkColor, false);
+                    break;
+                case TargetType.AreaAtSelf:
+                    _visibleShape.Show(tower.description.targetShape, tower.cells.Select(c => c.gridPosition), tower.rotated, _gameConfig.shapePreviewOkColor, false);
+                    break;
+                default:
+                    throw new ArgumentOutOfRangeException();
+            }
         }
     }
 }

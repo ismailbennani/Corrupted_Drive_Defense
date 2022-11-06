@@ -1,30 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="18cc6ff9-a968-46c1-8e5b-b5cbc6aa7b26" name="Changes" comment="allow multiple enemy passive effects for each tower">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Utils/MathUtils.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Utils/MathUtils.cs.meta" afterDir="false" />
+    <list default="true" id="18cc6ff9-a968-46c1-8e5b-b5cbc6aa7b26" name="Changes" comment="add description to tower upgrades">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Corrupted Drive - Defense/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Corrupted Drive - Defense/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Towers/Coil/Coil.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Coil/Coil.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Towers/Coil/Upgrade_1_1.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Coil/Upgrade_1_1.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Prefabs/Towers/Coil/Upgrade_2_2.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Prefabs/Towers/Coil/Upgrade_2_2.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scenes/Sample/SampleScene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scenes/Sample/SampleScene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controllers/EnemyController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controllers/EnemyController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Controllers/ProcessorController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Controllers/ProcessorController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Enemies/Effects/EnemyPassiveEffect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Enemies/Effects/EnemyPassiveEffect.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Enemies/Effects/EnemyPassiveEffectModifier.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Enemies/Effects/EnemyPassiveEffectModifier.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Shapes/TargetShapeModifier.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Shapes/TargetShapeModifier.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Towers/TowerEffect.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Towers/TowerEffect.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Towers/TowerEffectModifier.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Towers/TowerEffectModifier.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Towers/TowerUpgrade.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Towers/TowerUpgrade.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/DataStructures/UIUpgradeDescription.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/DataStructures/UIUpgradeDescription.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/UIAutoWave.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/UIAutoWave.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/UIClickInterceptor.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/UIClickInterceptor.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/UIMoney.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/UIMoney.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/UISelectedEntityDescription.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/UISelectedEntityDescription.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/UISpeed.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/UISpeed.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/UITowerMenuButton.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/UITowerMenuButton.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Utils/CustomComponents/MyMonoBehaviour.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Utils/CustomComponents/MyMonoBehaviour.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Towers/TowerState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Towers/TowerState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/Tower/SelectedEntityApi.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Tower/SelectedEntityApi.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/Tower/TowerUpgradeApi.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Tower/TowerUpgradeApi.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +25,7 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/ee2599e9648643c4aca5e05b96a4b4fe7400/6b/f22061db/Input.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/3ea01e77be99618395f448b16bd7cc2bd4248bd9e5d8474964b2d97f39c5d74/System.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/lahki/unity/Corrupted Drive - Defense/Assets/Prefabs/Towers/Capacitor/Capacitor.asset" root0="SKIP_HIGHLIGHTING" />
+    <setting file="mock://C:/Users/lahki/unity/Corrupted Drive - Defense/Assets/Prefabs/Towers/Coil/Coil.asset" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/lahki/unity/Corrupted Drive - Defense/Assets/Prefabs/Towers/Coil/Coil.asset" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/lahki/unity/Corrupted Drive - Defense/Assets/Scripts/Controllers/EnemyController.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="mock://C:/Users/lahki/unity/Corrupted Drive - Defense/Assets/Scripts/Controllers/ProcessorAnimation.cs" root0="SKIP_HIGHLIGHTING" />
@@ -181,14 +163,7 @@
       <workItem from="1667299014331" duration="24997000" />
       <workItem from="1667386897857" duration="30366000" />
       <workItem from="1667676257900" duration="15938000" />
-      <workItem from="1667731208419" duration="13643000" />
-    </task>
-    <task id="LOCAL-00040" summary="add selected tower ui">
-      <created>1667317107398</created>
-      <option name="number" value="00040" />
-      <option name="presentableId" value="LOCAL-00040" />
-      <option name="project" value="LOCAL" />
-      <updated>1667317107398</updated>
+      <workItem from="1667731208419" duration="14356000" />
     </task>
     <task id="LOCAL-00041" summary="add kills">
       <created>1667317371142</created>
@@ -526,7 +501,14 @@
       <option name="project" value="LOCAL" />
       <updated>1667742168426</updated>
     </task>
-    <option name="localTasksCounter" value="89" />
+    <task id="LOCAL-00089" summary="add description to tower upgrades">
+      <created>1667745267125</created>
+      <option name="number" value="00089" />
+      <option name="presentableId" value="LOCAL-00089" />
+      <option name="project" value="LOCAL" />
+      <updated>1667745267125</updated>
+    </task>
+    <option name="localTasksCounter" value="90" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -561,7 +543,6 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="add slow" />
     <MESSAGE value="add sell button" />
     <MESSAGE value="centralize tower update" />
     <MESSAGE value="refactor enemies update" />
@@ -586,7 +567,8 @@
     <MESSAGE value="add coil upgrades" />
     <MESSAGE value="implement ricochet" />
     <MESSAGE value="allow multiple enemy passive effects for each tower" />
-    <option name="LAST_COMMIT_MESSAGE" value="allow multiple enemy passive effects for each tower" />
+    <MESSAGE value="add description to tower upgrades" />
+    <option name="LAST_COMMIT_MESSAGE" value="add description to tower upgrades" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
 </project>

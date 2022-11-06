@@ -6,6 +6,7 @@ using GameEngine.Map;
 using GameEngine.Shapes;
 using Managers;
 using UnityEngine;
+using UnityEngine.Events;
 using Utils;
 
 namespace GameEngine.Towers
@@ -13,6 +14,8 @@ namespace GameEngine.Towers
     [Serializable]
     public class TowerState
     {
+        public UnityEvent<int> onUpgrade = new();
+        
         public long id;
         public string name;
         public WorldCell[] cells;
@@ -57,20 +60,6 @@ namespace GameEngine.Towers
             Refresh();
         }
 
-        public void Refresh()
-        {
-            RecomputeDescription();
-            RecomputeAvailableStrategies();
-
-            charge.SetMax(description.maxCharge);
-
-            totalCost = config.cost;
-            if (aggregatedUpgrade)
-            {
-                totalCost += aggregatedUpgrade.cost;
-            }
-        }
-
         public int GetNextUpgradeInPath(int path)
         {
             return nextUpgradeInPath[path];
@@ -88,7 +77,13 @@ namespace GameEngine.Towers
 
         public int BuyNextUpgrade(int path)
         {
-            return ++nextUpgradeInPath[path];
+            nextUpgradeInPath[path]++;
+            
+            Refresh();
+            
+            onUpgrade?.Invoke(path);
+
+            return nextUpgradeInPath[path];
         }
 
         public bool IsUpgradeBought(TowerUpgrade towerUpgrade)
@@ -146,6 +141,20 @@ namespace GameEngine.Towers
             upgradeIndex = findUpgrade.First(i => i >= 0);
 
             return true;
+        }
+
+        private void Refresh()
+        {
+            RecomputeDescription();
+            RecomputeAvailableStrategies();
+
+            charge.SetMax(description.maxCharge);
+
+            totalCost = config.cost;
+            if (aggregatedUpgrade)
+            {
+                totalCost += aggregatedUpgrade.cost;
+            }
         }
 
         private void RecomputeDescription()
