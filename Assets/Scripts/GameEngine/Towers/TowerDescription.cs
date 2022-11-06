@@ -8,8 +8,8 @@ namespace GameEngine.Towers
     public class TowerDescription: ICloneable
     {
         [Header("Charge")]
-        [Tooltip("Charge consumed from CPU per second")]
-        public float chargeRate;
+        [Tooltip("Time it takes to fully charge this tower")]
+        public float fullChargeDelay;
         public int maxCharge;
 
         [Header("Target")]
@@ -37,7 +37,7 @@ namespace GameEngine.Towers
 
         public static TowerDescription Apply(TowerDescription towerDescription, TowerUpgrade upgrade)
         {
-            towerDescription.chargeRate *= upgrade.chargeRateMultiplier;
+            towerDescription.fullChargeDelay *= upgrade.fullChargeDelayMultiplier;
             towerDescription.maxCharge += upgrade.additionalMaxCharge;
 
             if (upgrade.overrideTargetType != TargetType.None)

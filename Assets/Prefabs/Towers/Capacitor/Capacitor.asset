@@ -20,7 +20,7 @@ MonoBehaviour:
   canRotate: 0
   cost: 75
   naked:
-    frequency: 5
+    fullChargeDelay: 2
     maxCharge: 10
     targetType: 1
     range:

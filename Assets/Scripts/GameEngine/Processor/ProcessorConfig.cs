@@ -18,6 +18,10 @@ namespace GameEngine.Processor
         [Tooltip("Charge produced per second")]
         public float chargeRate = 10;
         public float maxCharge = 1000;
+
+        [Header("Upgrades")]
+        public ProcessorUpgradeConfig chargeRateUpgrade;
+        public ProcessorUpgradeConfig maxChargeUpgrade;
         
         [Space(10)]
         public ProcessorController prefab;

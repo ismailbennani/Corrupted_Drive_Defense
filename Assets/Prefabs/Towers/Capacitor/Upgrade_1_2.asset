@@ -15,8 +15,8 @@ MonoBehaviour:
   upgradeName: Stronger
   cost: 100
   sprite: {fileID: 0}
-  frequencyMultiplier: 1
-  additionalMaxCharge: 0
+  fullChargeDelayMultiplier: 1
+  additionalMaxCharge: 5
   overrideTargetType: 0
   rangeModifier:
     changeShape: 0

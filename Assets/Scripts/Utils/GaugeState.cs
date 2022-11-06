@@ -24,6 +24,12 @@ namespace Utils
             this.value = value;
         }
 
+        public float Set(float newValue)
+        {
+            value = max > 0 ? Mathf.Clamp(newValue, min, max) : Mathf.Max(newValue, min);
+            return value;
+        }
+
         public float Add(float charge)
         {
             if (charge < 0)
@@ -64,12 +70,7 @@ namespace Utils
             Set(min);
         }
 
-        private void Set(float newValue)
-        {
-            value = max > 0 ? Mathf.Clamp(newValue, min, max) : Mathf.Max(newValue, min);
-        }
-
-        public void SetMax(int max)
+        public void SetMax(float max)
         {
             this.max = max;
             value = Mathf.Min(value, max);

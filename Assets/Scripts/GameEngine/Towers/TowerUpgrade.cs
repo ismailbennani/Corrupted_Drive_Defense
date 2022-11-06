@@ -12,7 +12,7 @@ namespace GameEngine.Towers
         public Sprite sprite;
 
         [Header("Charge")]
-        public float chargeRateMultiplier = 1;
+        public float fullChargeDelayMultiplier = 1;
         public int additionalMaxCharge = 0;
 
         [Header("Target")]
@@ -28,7 +28,7 @@ namespace GameEngine.Towers
         public static TowerUpgrade CombineInPlace(TowerUpgrade @this, TowerUpgrade other)
         {
             @this.cost += other.cost;
-            @this.chargeRateMultiplier *= other.chargeRateMultiplier;
+            @this.fullChargeDelayMultiplier *= other.fullChargeDelayMultiplier;
             @this.additionalMaxCharge += other.additionalMaxCharge;
 
             if (@this.overrideTargetType != TargetType.None
@@ -59,7 +59,7 @@ namespace GameEngine.Towers
             result.upgradeName = "Aggregated upgrade";
             result.cost = 0;
             result.sprite = null;
-            result.chargeRateMultiplier = 1;
+            result.fullChargeDelayMultiplier = 1;
             result.additionalMaxCharge = 0;
             result.overrideTargetType = TargetType.None;
             result.rangeModifier = new TargetShapeModifier();

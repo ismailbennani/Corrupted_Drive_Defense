@@ -41,7 +41,7 @@ namespace Managers
         public EnemySpawnApi EnemySpawn { get; private set; }
         public EnemyApi Enemy { get; private set; }
         public EnemyWaveApi EnemyWave { get; private set; }
-        public ProcessorDamageApi ProcessorDamage { get; private set; }
+        public ProcessorApi Processor { get; private set; }
 
         private Transform _towersRoot;
         private Transform _enemiesRoot;
@@ -169,8 +169,8 @@ namespace Managers
 
             GameState.SetProcessorState(new ProcessorState(gameConfig.mapConfig.processorPosition, processorConfig));
 
-            ProcessorDamage = new ProcessorDamageApi(GameState);
-            ProcessorDamage.Lose.AddListener(Lose);
+            Processor = new ProcessorApi(GameState);
+            Processor.Lose.AddListener(Lose);
         }
 
         private void Lose()

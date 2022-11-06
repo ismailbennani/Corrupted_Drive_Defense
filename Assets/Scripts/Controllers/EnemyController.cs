@@ -48,7 +48,7 @@ namespace Controllers
                 if (_state.pathIndex >= _path.Length)
                 {
                     GameManager.Enemy.Kill(_state.id);
-                    GameManager.ProcessorDamage.Hit(_state);
+                    GameManager.Processor.Hit(_state);
                 }
                 
                 _state.pathCellCompletion -= 1;

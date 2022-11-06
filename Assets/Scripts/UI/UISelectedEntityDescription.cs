@@ -195,7 +195,7 @@ namespace UI
                 UpdateStrategy(description.Strategy.Value, description.AvailableStrategies);
             }
 
-            UpdateUpgrades(description.Upgrades, description.NextUpgrades, description.UpgradePathLocked);
+            UpdateUpgrades(description.Upgrades);
         }
 
         private void ShowPreviewRoot()
@@ -285,7 +285,7 @@ namespace UI
             }
         }
 
-        private void UpdateUpgrades(IReadOnlyList<UIUpgradeDescription[]> upgrades, IReadOnlyList<int> nextUpgrades, IReadOnlyList<bool> upgradePathLocked)
+        private void UpdateUpgrades(IReadOnlyList<UIUpgradeDescription[]> upgrades)
         {
             if (upgrades != null)
             {
@@ -301,12 +301,7 @@ namespace UI
 
                     if (i < upgrades.Count)
                     {
-                        _upgradePaths[i].SetUpgrades(
-                            i,
-                            upgrades[i],
-                            nextUpgrades == null ? -1 : nextUpgrades[i],
-                            upgradePathLocked != null && upgradePathLocked[i]
-                        );
+                        _upgradePaths[i].SetUpgrades(i, upgrades[i]);
                     }
                 }
             }
@@ -330,8 +325,6 @@ namespace UI
             public TargetStrategy[] AvailableStrategies;
             public TargetStrategy? Strategy;
             public UIUpgradeDescription[][] Upgrades;
-            public int[] NextUpgrades;
-            public bool[] UpgradePathLocked;
 
             public static Description From(GameManager gameManager, TowerState towerState)
             {
@@ -351,11 +344,9 @@ namespace UI
                     Strategy = towerState.targetStrategy,
                     Upgrades = new[]
                     {
-                        towerState.config.upgradePath1.Select((u, i) => UIUpgradeDescription.From(u, towerState.id, 1, i)).ToArray(),
-                        towerState.config.upgradePath2.Select((u, i) => UIUpgradeDescription.From(u, towerState.id, 2, i)).ToArray()
+                        towerState.config.upgradePath1.Select((u, i) => UIUpgradeDescription.From(towerState, u)).ToArray(),
+                        towerState.config.upgradePath2.Select((u, i) => UIUpgradeDescription.From(towerState, u)).ToArray()
                     },
-                    NextUpgrades = new[] { towerState.nextUpgradePath1, towerState.nextUpgradePath2 },
-                    UpgradePathLocked = new[] { false, false },
                 };
             }
 
@@ -371,6 +362,7 @@ namespace UI
                     Name = "Processor",
                     Health = processorState.health,
                     Charge = processorState.charge,
+                    Upgrades = processorState.availableUpgrades.Select(u => new [] { UIUpgradeDescription.From(processorState, u) }).ToArray()
                 };
             }
         }

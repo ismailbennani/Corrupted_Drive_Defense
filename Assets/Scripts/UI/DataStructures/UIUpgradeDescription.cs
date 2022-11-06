@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Linq;
+using GameEngine.Processor;
 using GameEngine.Towers;
+using Managers;
 using UnityEngine;
 
 namespace UI.DataStructures
@@ -12,17 +15,23 @@ namespace UI.DataStructures
         public Sprite sprite;
         public string description;
 
+        public bool bought;
+        public bool canBeBought;
+        public bool isLocked;
+
         public bool isTowerUpgrade;
         public long towerId;
         public int upgradePath;
         public int upgradeIndex;
 
-        public static UIUpgradeDescription From(TowerUpgrade towerUpgrade, long towerId, int path, int index)
+        public static UIUpgradeDescription From(TowerState tower, TowerUpgrade towerUpgrade)
         {
             if (towerUpgrade == null)
             {
                 return null;
             }
+
+            GameManager.Instance.Tower.RequireUpgradePathAndIndex(tower, towerUpgrade, out int upgradePath, out int upgradeIndex);
 
             return new UIUpgradeDescription
             {
@@ -30,11 +39,55 @@ namespace UI.DataStructures
                 cost = towerUpgrade.cost,
                 sprite = towerUpgrade.sprite,
                 description = towerUpgrade.upgradeName,
-                
+
+                bought = GameManager.Instance.Tower.IsUpgradeBought(tower, towerUpgrade),
+                canBeBought = GameManager.Instance.Tower.CanUpgradeBeBought(tower, towerUpgrade),
+                isLocked = GameManager.Instance.Tower.IsUpgradeLocked(tower, towerUpgrade),
+
                 isTowerUpgrade = true,
-                towerId = towerId,
-                upgradePath = path,
-                upgradeIndex = index,
+                towerId = tower.id,
+                upgradePath = upgradePath,
+                upgradeIndex = upgradeIndex,
+            };
+        }
+
+        public static UIUpgradeDescription From(ProcessorState processorState, ProcessorUpgradeType processorUpgrade)
+        {
+            if (processorState == null)
+            {
+                return null;
+            }
+
+            ProcessorUpgradeConfig config = processorUpgrade switch
+            {
+                ProcessorUpgradeType.ChargeRate => processorState.config.chargeRateUpgrade,
+                ProcessorUpgradeType.MaxCharge => processorState.config.maxChargeUpgrade,
+                _ => throw new ArgumentOutOfRangeException(nameof(processorUpgrade), processorUpgrade, null)
+            };
+
+            int upgradePath = processorUpgrade switch
+            {
+                ProcessorUpgradeType.ChargeRate => 0,
+                ProcessorUpgradeType.MaxCharge => 1,
+                _ => throw new ArgumentOutOfRangeException(nameof(processorUpgrade), processorUpgrade, null)
+            };
+
+            int alreadyBought = processorState.GetUpgrade(processorUpgrade);
+
+            return new UIUpgradeDescription
+            {
+                name = config.upgradeName,
+                cost = config.cost,
+                sprite = config.sprite,
+                description = $"+{config.upgrade} {processorUpgrade.GetDisplayName()}{Environment.NewLine}{alreadyBought}/{config.max}",
+
+                bought = false,
+                canBeBought = true,
+                isLocked = false,
+
+                isTowerUpgrade = false,
+                upgradePath = upgradePath,
+                upgradeIndex = 0,
             };
         }
     }

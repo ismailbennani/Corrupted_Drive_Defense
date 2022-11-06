@@ -15,7 +15,19 @@ MonoBehaviour:
   size: {x: 3, y: 3}
   offset: {x: 1, y: 1}
   maxHealth: 100
-  frequency: 10
+  chargeRate: 10
   maxCharge: 100
+  chargeRateUpgrade:
+    upgradeName: Faster
+    cost: 20
+    upgrade: 10
+    max: 1000
+    sprite: {fileID: 0}
+  maxChargeUpgrade:
+    upgradeName: More
+    cost: 20
+    upgrade: 100
+    max: 1000
+    sprite: {fileID: 0}
   prefab: {fileID: 5824694017469984989, guid: 167aed16fb5ed2a409ac3c5a75f9256c, type: 3}
-  sprite: {fileID: 0}
+  sprite: {fileID: 21300000, guid: 88934e448c71e4c4eb54fd22243c0df8, type: 3}

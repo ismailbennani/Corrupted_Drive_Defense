@@ -15,7 +15,7 @@ MonoBehaviour:
   upgradeName: Faster
   cost: 35
   sprite: {fileID: 0}
-  frequencyMultiplier: 4
+  fullChargeDelayMultiplier: 0.5
   additionalMaxCharge: 10
   overrideTargetType: 0
   rangeModifier:

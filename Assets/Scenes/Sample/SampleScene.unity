@@ -471,13 +471,13 @@ MonoBehaviour:
     cost: 0
     sprite: {fileID: 0}
     description: 
+    bought: 0
+    canBeBought: 0
+    isLocked: 0
     isTowerUpgrade: 0
     towerId: 0
     upgradePath: 0
     upgradeIndex: 0
-  bought: 0
-  isNextUpgrade: 0
-  displayLock: 0
 --- !u!114 &31730325
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3367,6 +3367,11 @@ MonoBehaviour:
         min: 0
         value: 0
         max: 0
+      availableUpgrades: 
+      upgrades: 
+      description:
+        chargeRate: 0
+        maxCharge: 0
       config: {fileID: 0}
     towerStates: []
     enemyStates: []

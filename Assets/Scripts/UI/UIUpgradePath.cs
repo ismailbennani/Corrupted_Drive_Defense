@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UI.DataStructures;
 using Unity.VisualScripting;
@@ -18,7 +20,12 @@ namespace UI
         
         private readonly List<UIUpgrade> _upgrades = new();
 
-        public void SetUpgrades(int path, UIUpgradeDescription[] upgrades, int nextUpgrade, bool upgradePathLocked)
+        private void Awake()
+        {
+            upgradePrefab.gameObject.SetActive(false);
+        }
+
+        public void SetUpgrades(int path, UIUpgradeDescription[] upgrades)
         {
             if (titleText)
             {
@@ -27,7 +34,7 @@ namespace UI
 
             if (background)
             {
-                background.color = upgradePathLocked ? Color.gray.WithAlpha(0.2f) : Color.white.WithAlpha(0.2f);
+                background.color = upgrades.Any(u => u.isLocked) ? Color.gray.WithAlpha(0.2f) : Color.white.WithAlpha(0.2f);
             }
 
             for (int i = _upgrades.Count; i < upgrades.Length; i++)
@@ -38,11 +45,13 @@ namespace UI
 
             for (int i = 0; i < _upgrades.Count; i++)
             {
-                _upgrades[i].SetParams(upgrades[i], i < nextUpgrade, i == nextUpgrade, i >= nextUpgrade && upgradePathLocked);
+                if (i < upgrades.Length)
+                {
+                    _upgrades[i].SetParams(upgrades[i]);
+                }
+                
                 _upgrades[i].gameObject.SetActive(i < upgrades.Length);
             }
-            
-            upgradePrefab.gameObject.SetActive(false);
         }
     }
 }

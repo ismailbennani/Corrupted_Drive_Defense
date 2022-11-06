@@ -1,4 +1,5 @@
-﻿using Managers;
+﻿using GameEngine.Processor;
+using Managers;
 using TMPro;
 using UI.DataStructures;
 using UnityEngine;
@@ -25,9 +26,6 @@ namespace UI
 
         [Space(10)]
         public UIUpgradeDescription upgrade;
-        public bool bought;
-        public bool isNextUpgrade;
-        public bool displayLock;
 
         private bool _tooltipVisible;
 
@@ -52,12 +50,9 @@ namespace UI
             }
         }
         
-        public void SetParams(UIUpgradeDescription upgrade, bool bought, bool isNextUpgrade, bool displayLock)
+        public void SetParams(UIUpgradeDescription upgrade)
         {
             this.upgrade = upgrade;
-            this.bought = bought;
-            this.isNextUpgrade = isNextUpgrade;
-            this.displayLock = displayLock;
             
             if (nameText)
             {
@@ -71,14 +66,14 @@ namespace UI
 
             if (button)
             {
-                button.interactable = isNextUpgrade && !displayLock;
+                button.interactable = upgrade.canBeBought && !upgrade.isLocked;
             }
 
             if (image)
             {
-                image.color = bought ? Color.green : Color.white;
+                image.color = upgrade.bought ? Color.green : Color.white;
 
-                Sprite sprite = displayLock ? pathLockedImage : upgrade.sprite;
+                Sprite sprite = upgrade.isLocked ? pathLockedImage : upgrade.sprite;
                 if (sprite)
                 {
                     image.sprite = sprite;
@@ -126,6 +121,10 @@ namespace UI
             if (upgrade.isTowerUpgrade)
             {
                 GameManager.Instance.Tower.BuyUpgrade(upgrade.towerId, upgrade.upgradePath);
+            }
+            else
+            {
+                GameManager.Instance.Processor.BuyUpgrade(upgrade.upgradePath);
             }
         }
     }
