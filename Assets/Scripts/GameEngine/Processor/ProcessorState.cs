@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using GameEngine.Map;
 using GameEngine.Shapes;
@@ -20,7 +21,11 @@ namespace GameEngine.Processor
         public int[] upgrades;
         public ProcessorDescription description;
 
-        public ProcessorConfig config;
+        [SerializeField]
+        private ProcessorConfig config;
+
+        private Dictionary<ProcessorUpgradeType, int> _upgradeLevel;
+        private Dictionary<ProcessorUpgradeType, ProcessorUpgradeConfig> _upgradePaths;
 
         public ProcessorState(Vector2Int cell, ProcessorConfig config)
         {
@@ -38,42 +43,36 @@ namespace GameEngine.Processor
 
         public void Refresh()
         {
+            _upgradePaths = new Dictionary<ProcessorUpgradeType, ProcessorUpgradeConfig>
+            {
+                { ProcessorUpgradeType.ChargeRate, config.chargeRateUpgrade },
+                { ProcessorUpgradeType.MaxCharge, config.maxChargeUpgrade },
+            };
+
+            _upgradeLevel = new Dictionary<ProcessorUpgradeType, int>
+            {
+                { ProcessorUpgradeType.ChargeRate, upgrades[Array.IndexOf(availableUpgrades, ProcessorUpgradeType.ChargeRate)] },
+                { ProcessorUpgradeType.MaxCharge, upgrades[Array.IndexOf(availableUpgrades, ProcessorUpgradeType.MaxCharge)] },
+            };
+            
             description = RefreshDescription();
 
             charge.SetMax(description.maxCharge);
         }
 
-        public int GetUpgrade(ProcessorUpgradeType upgradeType)
+        public int GetUpgradeLevel(ProcessorUpgradeType upgradeType)
         {
-            int index = Array.IndexOf(availableUpgrades, upgradeType);
-            if (index < 0)
-            {
-                throw new ArgumentOutOfRangeException(nameof(upgradeType), upgradeType, "invalid upgrade type");
-            }
-
-            return upgrades[index];
+            return _upgradeLevel?[upgradeType] ?? 0;
         }
 
         public bool CanUpgrade(ProcessorUpgradeType upgradeType)
         {
-            int max = upgradeType switch
-            {
-                ProcessorUpgradeType.ChargeRate => config.chargeRateUpgrade.max,
-                ProcessorUpgradeType.MaxCharge => config.maxChargeUpgrade.max,
-                _ => throw new ArgumentOutOfRangeException(nameof(upgradeType), upgradeType, null)
-            };
-
-            return GetUpgrade(upgradeType) < max;
+            return GetUpgradeLevel(upgradeType) < _upgradePaths[upgradeType].max;
         }
 
         public int UpgradeCost(ProcessorUpgradeType upgradeType)
         {
-            return upgradeType switch
-            {
-                ProcessorUpgradeType.ChargeRate => config.chargeRateUpgrade.cost,
-                ProcessorUpgradeType.MaxCharge => config.maxChargeUpgrade.cost,
-                _ => throw new ArgumentOutOfRangeException(nameof(upgradeType), upgradeType, null)
-            };
+            return _upgradePaths?[upgradeType].cost ?? -1;
         }
 
         public int AddUpgrade(ProcessorUpgradeType upgradeType)
@@ -83,19 +82,30 @@ namespace GameEngine.Processor
                 throw new InvalidOperationException($"Cannot upgrade {upgradeType}");
             }
 
+            int index = GetUpgradePath(upgradeType);
+            return ++upgrades[index];
+        }
+
+        public ProcessorUpgradeConfig GetUpgradeConfig(ProcessorUpgradeType upgradeType)
+        {
+            return _upgradePaths?[upgradeType];
+        }
+
+        public int GetUpgradePath(ProcessorUpgradeType upgradeType)
+        {
             int index = Array.IndexOf(availableUpgrades, upgradeType);
             if (index < 0)
             {
                 throw new ArgumentOutOfRangeException(nameof(upgradeType), upgradeType, "invalid upgrade type");
             }
 
-            return ++upgrades[index];
+            return index;
         }
 
         private ProcessorDescription RefreshDescription()
         {
-            int chargeRateUpgrade = Mathf.Min(GetUpgrade(ProcessorUpgradeType.ChargeRate), config.chargeRateUpgrade.max);
-            int maxChargeUpgrade = Mathf.Min(GetUpgrade(ProcessorUpgradeType.MaxCharge), config.maxChargeUpgrade.max);
+            int chargeRateUpgrade = Mathf.Min(GetUpgradeLevel(ProcessorUpgradeType.ChargeRate), _upgradePaths[ProcessorUpgradeType.ChargeRate].max);
+            int maxChargeUpgrade = Mathf.Min(GetUpgradeLevel(ProcessorUpgradeType.MaxCharge), _upgradePaths[ProcessorUpgradeType.MaxCharge].max);
 
             return new ProcessorDescription
             {

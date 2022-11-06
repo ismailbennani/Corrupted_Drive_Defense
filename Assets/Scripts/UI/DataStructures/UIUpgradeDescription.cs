@@ -57,21 +57,9 @@ namespace UI.DataStructures
                 return null;
             }
 
-            ProcessorUpgradeConfig config = processorUpgrade switch
-            {
-                ProcessorUpgradeType.ChargeRate => processorState.config.chargeRateUpgrade,
-                ProcessorUpgradeType.MaxCharge => processorState.config.maxChargeUpgrade,
-                _ => throw new ArgumentOutOfRangeException(nameof(processorUpgrade), processorUpgrade, null)
-            };
-
-            int upgradePath = processorUpgrade switch
-            {
-                ProcessorUpgradeType.ChargeRate => 0,
-                ProcessorUpgradeType.MaxCharge => 1,
-                _ => throw new ArgumentOutOfRangeException(nameof(processorUpgrade), processorUpgrade, null)
-            };
-
-            int alreadyBought = processorState.GetUpgrade(processorUpgrade);
+            ProcessorUpgradeConfig config = processorState.GetUpgradeConfig(processorUpgrade);
+            int path = processorState.GetUpgradePath(processorUpgrade);
+            int alreadyBought = processorState.GetUpgradeLevel(processorUpgrade);
 
             return new UIUpgradeDescription
             {
@@ -85,7 +73,7 @@ namespace UI.DataStructures
                 isLocked = false,
 
                 isTowerUpgrade = false,
-                upgradePath = upgradePath,
+                upgradePath = path,
                 upgradeIndex = 0
             };
         }

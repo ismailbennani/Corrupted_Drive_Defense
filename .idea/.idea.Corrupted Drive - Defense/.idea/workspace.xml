@@ -1,13 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="18cc6ff9-a968-46c1-8e5b-b5cbc6aa7b26" name="Changes" comment="reformat">
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Processor/ProcessorUpdateApi.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Processor/ProcessorUpdateApi.cs.meta" afterDir="false" />
+    <list default="true" id="18cc6ff9-a968-46c1-8e5b-b5cbc6aa7b26" name="Changes" comment="refactor processor state">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.Corrupted Drive - Defense/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.Corrupted Drive - Defense/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/Processor/ProcessorApi.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Processor/ProcessorApi.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/Managers/Tower/TowerApi.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/Managers/Tower/TowerApi.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/Scripts/UI/UIUpgrade.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/UI/UIUpgrade.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Processor/ProcessorState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/Scripts/GameEngine/Processor/ProcessorState.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -155,21 +151,7 @@
       <workItem from="1667299014331" duration="24997000" />
       <workItem from="1667386897857" duration="30366000" />
       <workItem from="1667676257900" duration="15938000" />
-      <workItem from="1667731208419" duration="6011000" />
-    </task>
-    <task id="LOCAL-00033" summary="refactor">
-      <created>1667311164147</created>
-      <option name="number" value="00033" />
-      <option name="presentableId" value="LOCAL-00033" />
-      <option name="project" value="LOCAL" />
-      <updated>1667311164147</updated>
-    </task>
-    <task id="LOCAL-00034" summary="refactor">
-      <created>1667312112203</created>
-      <option name="number" value="00034" />
-      <option name="presentableId" value="LOCAL-00034" />
-      <option name="project" value="LOCAL" />
-      <updated>1667312112203</updated>
+      <workItem from="1667731208419" duration="6729000" />
     </task>
     <task id="LOCAL-00035" summary="refactor">
       <created>1667312525330</created>
@@ -500,7 +482,21 @@
       <option name="project" value="LOCAL" />
       <updated>1667737346771</updated>
     </task>
-    <option name="localTasksCounter" value="82" />
+    <task id="LOCAL-00082" summary="refactor">
+      <created>1667737470175</created>
+      <option name="number" value="00082" />
+      <option name="presentableId" value="LOCAL-00082" />
+      <option name="project" value="LOCAL" />
+      <updated>1667737470175</updated>
+    </task>
+    <task id="LOCAL-00083" summary="refactor processor state">
+      <created>1667738055245</created>
+      <option name="number" value="00083" />
+      <option name="presentableId" value="LOCAL-00083" />
+      <option name="project" value="LOCAL" />
+      <updated>1667738055245</updated>
+    </task>
+    <option name="localTasksCounter" value="84" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -535,8 +531,6 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="true" />
-    <MESSAGE value="take shape into account during spawn" />
-    <MESSAGE value="take other towers and processor into account during spawn" />
     <MESSAGE value="disable selection click during preview" />
     <MESSAGE value="add money" />
     <MESSAGE value="change tower buttons" />
@@ -560,7 +554,9 @@
     <MESSAGE value="add processor upgrades" />
     <MESSAGE value="refactor tower api" />
     <MESSAGE value="reformat" />
-    <option name="LAST_COMMIT_MESSAGE" value="reformat" />
+    <MESSAGE value="refactor" />
+    <MESSAGE value="refactor processor state" />
+    <option name="LAST_COMMIT_MESSAGE" value="refactor processor state" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
   </component>
 </project>
