@@ -8,6 +8,7 @@ namespace GameEngine.Towers
     {
         public string upgradeName;
         public int cost;
+        public Sprite sprite;
 
         [Header("Charge")]
         public float frequencyMultiplier = 1;

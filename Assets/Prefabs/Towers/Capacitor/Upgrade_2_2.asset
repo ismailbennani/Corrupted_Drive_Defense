@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: daad6b1993f0415f8ed7a408266fa611, type: 3}
   m_Name: Upgrade_2_2
   m_EditorClassIdentifier: 
-  cost: 35
+  upgradeName: Better
+  cost: 100
+  sprite: {fileID: 0}
   frequencyMultiplier: 1
   additionalMaxCharge: 0
   overrideTargetType: 0

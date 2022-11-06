@@ -48,6 +48,11 @@ namespace Managers.Tower
             }
         }
 
+        public void BuyUpgrade(long id, int path)
+        {
+            BuyUpgrade(_gameStateApi.GetTowerState(id), path);
+        }
+        
         public void BuyUpgrade(TowerState state, int path)
         {
             if (path != 1 && path != 2)
@@ -55,7 +60,7 @@ namespace Managers.Tower
                 throw new InvalidOperationException($"Unknown path {path}");
             }
 
-            int currentUpgradeInPath = path == 1 ? state.upgradePath1 : state.upgradePath2;
+            int currentUpgradeInPath = path == 1 ? state.nextUpgradePath1 : state.nextUpgradePath2;
             TowerUpgrade[] upgradePath = path == 1 ? state.config.upgradePath1 : state.config.upgradePath2;
 
             if (currentUpgradeInPath < 0 || currentUpgradeInPath >= upgradePath.Length)
@@ -76,11 +81,11 @@ namespace Managers.Tower
 
             if (path == 1)
             {
-                state.upgradePath1++;
+                state.nextUpgradePath1++;
             }
             else
             {
-                state.upgradePath2++;
+                state.nextUpgradePath2++;
             }
 
             state.Refresh();

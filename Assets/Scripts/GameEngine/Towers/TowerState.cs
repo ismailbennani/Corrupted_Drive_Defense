@@ -19,8 +19,8 @@ namespace GameEngine.Towers
         public int priority;
 
         [Space(10)]
-        public int upgradePath1;
-        public int upgradePath2;
+        public int nextUpgradePath1;
+        public int nextUpgradePath2;
         public TowerUpgrade aggregatedUpgrade;
         public TowerDescription description;
 
@@ -68,8 +68,8 @@ namespace GameEngine.Towers
 
         private void RecomputeDescription()
         {
-            IEnumerable<TowerUpgrade> upgrades1 = config.upgradePath1.Take(upgradePath1);
-            IEnumerable<TowerUpgrade> upgrades2 = config.upgradePath1.Take(upgradePath2);
+            IEnumerable<TowerUpgrade> upgrades1 = config.upgradePath1.Take(nextUpgradePath1);
+            IEnumerable<TowerUpgrade> upgrades2 = config.upgradePath1.Take(nextUpgradePath2);
             TowerUpgrade[] upgrades = upgrades1.Concat(upgrades2).ToArray();
 
             if (upgrades.Any())

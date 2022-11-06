@@ -5,6 +5,7 @@ using GameEngine.Processor;
 using GameEngine.Towers;
 using Managers;
 using TMPro;
+using UI.DataStructures;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.UI;
@@ -21,7 +22,6 @@ namespace UI
 
         [Space(10)]
         public TextMeshProUGUI nameText;
-
         public TextMeshProUGUI kills;
         public TextMeshProUGUI resell;
         public UIGaugeController health;
@@ -29,20 +29,24 @@ namespace UI
 
         [Space(10)]
         public int nPriorities;
-
         public Toggle priorityToggle;
 
         [Space(10)]
         public TMP_Dropdown strategiesDropdown;
 
         [Space(10)]
-        public GameObject[] processorSpecific;
+        public Transform upgradePathRoot;
+        public UIUpgradePath upgradePathPrefab;
 
+        [Space(10)]
+        public GameObject[] processorSpecific;
         public GameObject[] towerSpecific;
         public GameObject[] strategySpecific;
 
         private TargetStrategy[] _lastStrategies = Array.Empty<TargetStrategy>();
         private readonly List<Toggle> _toggles = new();
+        private List<UIUpgradePath> _upgradePaths = new();
+        private List<List<UIUpgrade>> _upgrades = new();
 
         void Start()
         {
@@ -76,27 +80,23 @@ namespace UI
 
         void Update()
         {
-            Description description = null;
-            if (GameManager.SelectedEntity != null)
+            if (GameManager.SelectedEntity == null)
             {
-                if (GameManager.SelectedEntity.IsTowerSelected())
-                {
-                    TowerState towerState = GameManager.SelectedEntity.GetSelectedTower();
-                    description = Description.From(GameManager, towerState);
-                    Display(false, true, towerState.availableStrategies.Any());
-                    UpdatePriority(towerState);
+                return;
+            }
 
-                    if (towerState.availableStrategies.Any())
-                    {
-                        UpdateStrategy(towerState);
-                    }
-                }
-                else if (GameManager.SelectedEntity.IsProcessorSelected())
-                {
-                    ProcessorState processorState = GameManager.GameState.GetProcessorState();
-                    description = Description.From(GameManager, processorState);
-                    Display(true, false, false);
-                }
+            Description description = null;
+            if (GameManager.SelectedEntity.IsTowerSelected())
+            {
+                TowerState towerState = GameManager.SelectedEntity.GetSelectedTower();
+                description = Description.From(GameManager, towerState);
+                Display(false, true, towerState.availableStrategies.Any());
+            }
+            else if (GameManager.SelectedEntity.IsProcessorSelected())
+            {
+                ProcessorState processorState = GameManager.GameState.GetProcessorState();
+                description = Description.From(GameManager, processorState);
+                Display(true, false, false);
             }
 
             if (description == null)
@@ -143,7 +143,7 @@ namespace UI
             }
         }
 
-        private void Select(Description state)
+        private void Select(Description description)
         {
             selectedTowerRoot.gameObject.SetActive(true);
 
@@ -159,27 +159,42 @@ namespace UI
 
             if (nameText)
             {
-                nameText.SetText(state.Name);
+                nameText.SetText(description.Name);
             }
 
-            if (kills && state.Kills.HasValue)
+            if (kills && description.Kills.HasValue)
             {
-                kills.SetText(state.Kills.Value.ToString());
+                kills.SetText(description.Kills.Value.ToString());
             }
 
-            if (resell && state.Resell.HasValue)
+            if (resell && description.Resell.HasValue)
             {
-                resell.SetText(state.Resell.Value.ToString());
+                resell.SetText(description.Resell.Value.ToString());
             }
 
-            if (health && state.Health.HasValue)
+            if (health && description.Health.HasValue)
             {
-                health.Set(state.Health.Value);
+                health.Set(description.Health.Value);
             }
 
             if (charge)
             {
-                charge.Set(state.Charge);
+                charge.Set(description.Charge);
+            }
+
+            if (description.Priority.HasValue)
+            {
+                UpdatePriority(description.Priority.Value);
+            }
+
+            if (description.Strategy.HasValue)
+            {
+                UpdateStrategy(description.Strategy.Value, description.AvailableStrategies);
+            }
+
+            if (description.Upgrades != null)
+            {
+                UpdateUpgrades(description.Upgrades, description.NextUpgrades, description.UpgradePathLocked);
             }
         }
 
@@ -224,13 +239,13 @@ namespace UI
             GameManager.Tower.SetPriority(selectedTower, priority);
         }
 
-        private void UpdatePriority(TowerState towerState)
+        private void UpdatePriority(int priority)
         {
-            if (towerState.priority >= 1 && towerState.priority <= nPriorities)
+            if (priority >= 1 && priority <= nPriorities)
             {
-                _toggles[towerState.priority - 1].SetIsOnWithoutNotify(true);
+                _toggles[priority - 1].SetIsOnWithoutNotify(true);
             }
-            else if (towerState.priority < 1)
+            else if (priority < 1)
             {
                 _toggles[0].SetIsOnWithoutNotify(true);
             }
@@ -251,15 +266,15 @@ namespace UI
             GameManager.Tower.SetTargetStrategy(selectedTower, selectedTower.availableStrategies[index]);
         }
 
-        private void UpdateStrategy(TowerState towerState)
+        private void UpdateStrategy(TargetStrategy strategy, TargetStrategy[] availableStrategies)
         {
-            if (!towerState.availableStrategies.OrderBy(s => s).SequenceEqual(_lastStrategies.OrderBy(s => s)))
+            if (!availableStrategies.OrderBy(s => s).SequenceEqual(_lastStrategies.OrderBy(s => s)))
             {
-                strategiesDropdown.options = towerState.availableStrategies.Select(s => new TMP_Dropdown.OptionData(s.GetDescription())).ToList();
-                _lastStrategies = towerState.availableStrategies;
+                strategiesDropdown.options = availableStrategies.Select(s => new TMP_Dropdown.OptionData(s.GetDescription())).ToList();
+                _lastStrategies = availableStrategies;
             }
 
-            int index = Array.IndexOf(towerState.availableStrategies, towerState.targetStrategy);
+            int index = Array.IndexOf(availableStrategies, strategy);
             if (index > 0)
             {
                 strategiesDropdown.SetValueWithoutNotify(index);
@@ -270,6 +285,28 @@ namespace UI
             }
         }
 
+        private void UpdateUpgrades(IReadOnlyList<UIUpgradeDescription[]> upgrades, IReadOnlyList<int> nextUpgrades, IReadOnlyList<bool> upgradePathLocked)
+        {
+            for (int i = _upgradePaths.Count; i < upgrades.Count; i++)
+            {
+                UIUpgradePath upgradePath = Instantiate(upgradePathPrefab, upgradePathRoot);
+                _upgradePaths.Add(upgradePath);
+            }
+
+            for (int i = 0; i < _upgradePaths.Count; i++)
+            {
+                _upgradePaths[i].gameObject.SetActive(i < upgrades.Count);
+
+                if (i < upgrades.Count)
+                {
+                    _upgradePaths[i]
+                        .SetUpgrades(upgrades[i], nextUpgrades == null ? -1 : nextUpgrades[i], upgradePathLocked != null && upgradePathLocked[i]);
+                }
+            }
+
+            upgradePathPrefab.gameObject.SetActive(false);
+        }
+
         private class Description
         {
             public string Name;
@@ -277,6 +314,12 @@ namespace UI
             public int? Resell;
             public GaugeState? Health;
             public GaugeState Charge;
+            public int? Priority;
+            public TargetStrategy[] AvailableStrategies;
+            public TargetStrategy? Strategy;
+            public UIUpgradeDescription[][] Upgrades;
+            public int[] NextUpgrades;
+            public bool[] UpgradePathLocked;
 
             public static Description From(GameManager gameManager, TowerState towerState)
             {
@@ -291,6 +334,16 @@ namespace UI
                     Kills = towerState.kills,
                     Resell = gameManager.Tower.SellValue(towerState),
                     Charge = towerState.charge,
+                    Priority = towerState.priority,
+                    AvailableStrategies = towerState.availableStrategies,
+                    Strategy = towerState.targetStrategy,
+                    Upgrades = new[]
+                    {
+                        towerState.config.upgradePath1.Select((u, i) => UIUpgradeDescription.From(u, towerState.id, 1, i)).ToArray(),
+                        towerState.config.upgradePath2.Select((u, i) => UIUpgradeDescription.From(u, towerState.id, 2, i)).ToArray()
+                    },
+                    NextUpgrades = new[] { towerState.nextUpgradePath1, towerState.nextUpgradePath2 },
+                    UpgradePathLocked = new[] { false, false },
                 };
             }
 
